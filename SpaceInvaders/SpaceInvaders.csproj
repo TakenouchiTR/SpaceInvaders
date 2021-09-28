@@ -121,8 +121,10 @@
     </Compile>
     <Compile Include="Model\GameManager.cs" />
     <Compile Include="Model\Entities\GameObject.cs" />
+    <Compile Include="Model\Input.cs" />
     <Compile Include="Model\PhysicsLayer.cs" />
     <Compile Include="Model\Entities\PlayerShip.cs" />
+    <Compile Include="Model\Vector2.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
