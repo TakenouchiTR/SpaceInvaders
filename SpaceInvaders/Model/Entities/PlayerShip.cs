@@ -31,5 +31,37 @@ namespace SpaceInvaders.Model.Entities
 
         #endregion
 
+
+        #region Methods
+
+        public override void Update(double delta)
+        {
+            handleMovement(delta);
+        }
+
+        private void handleMovement(double delta)
+        {
+            double moveDistance = 0;
+
+            if (Input.IsKeyPressed(VirtualKey.Left))
+            {
+                moveDistance -= 1;
+            }
+
+            if (Input.IsKeyPressed(VirtualKey.Right))
+            {
+                moveDistance += 1;
+            }
+
+            if (moveDistance != 0)
+            {
+                moveDistance *= this.moveSpeed * delta;
+                this.velocity.X = moveDistance;
+
+                this.Move(velocity);
+            }
+        }
+
+        #endregion
     }
 }
