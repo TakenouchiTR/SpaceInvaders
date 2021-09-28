@@ -2,7 +2,7 @@
 using Windows.Foundation;
 using SpaceInvaders.View.Sprites;
 
-namespace SpaceInvaders.Model
+namespace SpaceInvaders.Model.Entities
 {
     /// <summary>
     ///     Defines basics of every game object.
@@ -88,6 +88,7 @@ namespace SpaceInvaders.Model
         ///     The sprite.
         /// </value>
         public BaseSprite Sprite { get; protected set; }
+
 
         #endregion
 

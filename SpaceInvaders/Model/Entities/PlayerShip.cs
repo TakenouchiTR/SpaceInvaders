@@ -1,6 +1,6 @@
 ﻿using SpaceInvaders.View.Sprites;
 
-namespace SpaceInvaders.Model
+namespace SpaceInvaders.Model.Entities
 {
     /// <summary>
     ///     Manages the player ship.
