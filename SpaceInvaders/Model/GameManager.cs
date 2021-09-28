@@ -76,27 +76,6 @@ namespace SpaceInvaders.Model
             this.playerShip.X = this.backgroundWidth / 2 - this.playerShip.Width / 2.0;
             this.playerShip.Y = this.backgroundHeight - this.playerShip.Height - PlayerShipBottomOffset;
         }
-
-        /// <summary>
-        ///     Moves the player ship to the left.
-        ///     Precondition: none
-        ///     Postcondition: The player ship has moved left.
-        /// </summary>
-        public void MovePlayerShipLeft()
-        {
-            this.playerShip.MoveLeft();
-        }
-
-        /// <summary>
-        ///     Moves the player ship to the right.
-        ///     Precondition: none
-        ///     Postcondition: The player ship has moved right.
-        /// </summary>
-        public void MovePlayerShipRight()
-        {
-            this.playerShip.MoveRight();
-        }
-
         #endregion
 
 
