@@ -89,6 +89,9 @@ namespace SpaceInvaders.Model.Entities
         /// </value>
         public BaseSprite Sprite { get; protected set; }
 
+        public byte CollisionLayer { get; set; }
+
+        public byte CollisionMask { get; set; }
 
         #endregion
 

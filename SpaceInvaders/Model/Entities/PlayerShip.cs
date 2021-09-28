@@ -23,6 +23,8 @@ namespace SpaceInvaders.Model.Entities
         public PlayerShip()
         {
             Sprite = new PlayerShipSprite();
+            this.CollisionLayer = (int) PhysicsLayer.Player;
+            this.CollisionMask = (int) PhysicsLayer.EnemyHitbox;
             SetSpeed(SpeedXDirection, SpeedYDirection);
         }
 
