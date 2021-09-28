@@ -11,8 +11,8 @@ namespace SpaceInvaders.Model.Entities
     {
         #region Data members
 
+        private readonly Vector2 velocity;
         private int moveSpeed = 100;
-        private Vector2 velocity;
 
         #endregion
 
