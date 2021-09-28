@@ -11,6 +11,10 @@ namespace SpaceInvaders.Model.Entities
     {
         #region Data members
 
+        private const VirtualKey LeftKey = VirtualKey.Left;
+        private const VirtualKey RightKey = VirtualKey.Right;
+        private const VirtualKey ShootKey = VirtualKey.Space;
+
         private readonly Vector2 velocity;
         private int moveSpeed = 100;
 
@@ -43,12 +47,12 @@ namespace SpaceInvaders.Model.Entities
         {
             double moveDistance = 0;
 
-            if (Input.IsKeyPressed(VirtualKey.Left))
+            if (Input.IsKeyPressed(LeftKey))
             {
                 moveDistance -= 1;
             }
 
-            if (Input.IsKeyPressed(VirtualKey.Right))
+            if (Input.IsKeyPressed(RightKey))
             {
                 moveDistance += 1;
             }
