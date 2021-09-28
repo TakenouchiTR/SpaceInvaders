@@ -19,7 +19,6 @@ namespace SpaceInvaders.Model
         private readonly double backgroundHeight;
         private readonly double backgroundWidth;
 
-        private PlayerShip playerShip;
         private readonly DispatcherTimer updateTimer;
         private readonly HashSet<GameObject> gameObjects;
         private long prevUpdateTime;
@@ -56,6 +55,7 @@ namespace SpaceInvaders.Model
             this.updateTimer.Tick += this.onUpdateTimerTick;
             this.updateTimer.Start();
 
+            this.gameObjects = new HashSet<GameObject>();
         }
 
         private void onUpdateTimerTick(object sender, object e)
@@ -93,16 +93,18 @@ namespace SpaceInvaders.Model
 
         private void createAndPlacePlayerShip(Canvas background)
         {
-            this.playerShip = new PlayerShip();
-            background.Children.Add(this.playerShip.Sprite);
+            PlayerShip playerShip = new PlayerShip();
 
-            this.placePlayerShipNearBottomOfBackgroundCentered();
+            background.Children.Add(playerShip.Sprite);
+            this.gameObjects.Add(playerShip);
+
+            this.placePlayerShipNearBottomOfBackgroundCentered(playerShip);
         }
 
-        private void placePlayerShipNearBottomOfBackgroundCentered()
+        private void placePlayerShipNearBottomOfBackgroundCentered(PlayerShip playerShip)
         {
-            this.playerShip.X = this.backgroundWidth / 2 - this.playerShip.Width / 2.0;
-            this.playerShip.Y = this.backgroundHeight - this.playerShip.Height - PlayerShipBottomOffset;
+            playerShip.X = this.backgroundWidth / 2 - playerShip.Width / 2.0;
+            playerShip.Y = this.backgroundHeight - playerShip.Height - PlayerShipBottomOffset;
         }
         #endregion
 
