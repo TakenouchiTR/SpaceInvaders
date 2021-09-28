@@ -36,24 +36,12 @@ namespace SpaceInvaders.View
             ApplicationView.PreferredLaunchViewSize = new Size { Width = ApplicationWidth, Height = ApplicationHeight };
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(ApplicationWidth, ApplicationHeight));
-
-            Window.Current.CoreWindow.KeyDown += this.coreWindowOnKeyDown;
+            
+            Window.Current.CoreWindow.KeyDown += Input.OnKeyDown;
+            Window.Current.CoreWindow.KeyUp += Input.OnKeyUp;
 
             this.gameManager = new GameManager(ApplicationHeight, ApplicationWidth);
             this.gameManager.InitializeGame(this.theCanvas);
-        }
-
-        private void coreWindowOnKeyDown(CoreWindow sender, KeyEventArgs args)
-        {
-            switch (args.VirtualKey)
-            {
-                case VirtualKey.Left:
-                    this.gameManager.MovePlayerShipLeft();
-                    break;
-                case VirtualKey.Right:
-                    this.gameManager.MovePlayerShipRight();
-                    break;
-            }
         }
     }
 }
