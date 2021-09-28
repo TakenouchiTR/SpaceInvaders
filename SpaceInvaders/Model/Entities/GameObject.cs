@@ -77,7 +77,9 @@ namespace SpaceInvaders.Model.Entities
 
         public byte CollisionMask { get; set; }
 
+        public bool Monitorable { get; set; }
 
+        public bool Monitoring { get; set; }
 
         #endregion
 
