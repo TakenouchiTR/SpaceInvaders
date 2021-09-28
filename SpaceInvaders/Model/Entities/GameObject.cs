@@ -99,30 +99,7 @@ namespace SpaceInvaders.Model.Entities
 
             render?.RenderAt(this.X, this.Y);
         }
-
-        /// <summary>
-        ///     Sets the speed of the game object.
-        ///     Precondition: speedX >= 0 AND speedY >=0
-        ///     Postcondition: SpeedX == speedX AND SpeedY == speedY
-        /// </summary>
-        /// <param name="speedX">The speed x.</param>
-        /// <param name="speedY">The speed y.</param>
-        protected void SetSpeed(int speedX, int speedY)
-        {
-            if (speedX < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(speedX));
-            }
-
-            if (speedY < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(speedY));
-            }
-
-            this.SpeedX = speedX;
-            this.SpeedY = speedY;
-        }
-
+        
         #endregion
     }
 }
