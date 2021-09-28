@@ -10,8 +10,8 @@ namespace SpaceInvaders.Model.Entities
     {
         #region Data members
 
-        private const int SpeedXDirection = 3;
-        private const int SpeedYDirection = 0;
+        private int moveSpeed = 100;
+        private Vector2 velocity;
 
         #endregion
 
@@ -23,9 +23,9 @@ namespace SpaceInvaders.Model.Entities
         public PlayerShip()
         {
             Sprite = new PlayerShipSprite();
+            this.velocity = new Vector2();
             this.CollisionLayer = (int) PhysicsLayer.Player;
             this.CollisionMask = (int) PhysicsLayer.EnemyHitbox;
-            SetSpeed(SpeedXDirection, SpeedYDirection);
         }
 
         #endregion

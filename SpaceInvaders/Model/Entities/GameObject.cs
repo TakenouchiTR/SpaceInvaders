@@ -48,23 +48,7 @@ namespace SpaceInvaders.Model.Entities
                 this.render();
             }
         }
-
-        /// <summary>
-        ///     Gets the x speed of the game object.
-        /// </summary>
-        /// <value>
-        ///     The speed x.
-        /// </value>
-        public int SpeedX { get; private set; }
-
-        /// <summary>
-        ///     Gets the y speed of the game object.
-        /// </summary>
-        /// <value>
-        ///     The speed y.
-        /// </value>
-        public int SpeedY { get; private set; }
-
+        
         /// <summary>
         ///     Gets the width of the game object.
         /// </summary>
@@ -93,58 +77,18 @@ namespace SpaceInvaders.Model.Entities
 
         public byte CollisionMask { get; set; }
 
+
+
         #endregion
 
         #region Methods
 
-        /// <summary>
-        ///     Moves the game object right.
-        ///     Precondition: None
-        ///     Postcondition: X == X@prev + SpeedX
-        /// </summary>
-        public void MoveRight()
-        {
-            this.moveX(this.SpeedX);
-        }
+        public abstract void Update(double delta);
 
-        /// <summary>
-        ///     Moves the game object left.
-        ///     Precondition: None
-        ///     Postcondition: X == X@prev + SpeedX
-        /// </summary>
-        public void MoveLeft()
+        public void Move(Vector2 distance)
         {
-            this.moveX(-this.SpeedX);
-        }
-
-        /// <summary>
-        ///     Moves the game object up.
-        ///     Precondition: None
-        ///     Postcondition: Y == Y@prev - SpeedY
-        /// </summary>
-        public void MoveUp()
-        {
-            this.moveY(-this.SpeedY);
-        }
-
-        /// <summary>
-        ///     Moves the game object down.
-        ///     Precondition: None
-        ///     Postcondition: Y == Y@prev + SpeedY
-        /// </summary>
-        public void MoveDown()
-        {
-            this.moveY(this.SpeedY);
-        }
-
-        private void moveX(int x)
-        {
-            this.X += x;
-        }
-
-        private void moveY(int y)
-        {
-            this.Y += y;
+            this.X += distance.X;
+            this.Y += distance.Y;
         }
 
         private void render()
