@@ -1,5 +1,6 @@
 ﻿using System;
 using Windows.UI.Xaml.Controls;
+using SpaceInvaders.Model.Entities;
 
 namespace SpaceInvaders.Model
 {

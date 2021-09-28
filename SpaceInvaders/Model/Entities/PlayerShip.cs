@@ -1,11 +1,12 @@
-﻿using SpaceInvaders.View.Sprites;
+﻿using Windows.System;
+using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Entities
 {
     /// <summary>
     ///     Manages the player ship.
     /// </summary>
-    /// <seealso cref="SpaceInvaders.Model.GameObject" />
+    /// <seealso cref="SpaceInvaders.Model.Entities.GameObject" />
     public class PlayerShip : GameObject
     {
         #region Data members
