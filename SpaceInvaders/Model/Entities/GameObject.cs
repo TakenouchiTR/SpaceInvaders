@@ -73,9 +73,9 @@ namespace SpaceInvaders.Model.Entities
         /// </value>
         public BaseSprite Sprite { get; protected set; }
 
-        public byte CollisionLayer { get; set; }
+        public byte CollisionLayers { get; set; }
 
-        public byte CollisionMask { get; set; }
+        public byte CollisionMasks { get; set; }
 
         public bool Monitorable { get; set; }
 
