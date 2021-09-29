@@ -49,6 +49,31 @@ namespace SpaceInvaders.Model.Entities
             }
         }
         
+
+        /// <summary>
+        ///     Gets or sets the right edge of the GameObject.
+        /// </summary>
+        /// <value>
+        ///     The right.
+        /// </value>
+        public double Right
+        {
+            get => this.X + this.Width;
+            set => this.X = value - this.Width;
+        }
+
+        /// <summary>
+        ///     Gets or sets the bottom edge of the GameObject.
+        /// </summary>
+        /// <value>
+        ///     The bottom edge.
+        /// </value>
+        public double Bottom
+        {
+            get => this.Y + this.Height;
+            set => this.Y = value - this.Height;
+        }
+
         /// <summary>
         ///     Gets the width of the game object.
         /// </summary>
