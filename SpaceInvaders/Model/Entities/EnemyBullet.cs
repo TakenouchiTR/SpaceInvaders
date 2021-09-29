@@ -1,19 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SpaceInvaders.View.Sprites;
-
-namespace SpaceInvaders.Model.Entities
+﻿namespace SpaceInvaders.Model.Entities
 {
+    /// <summary>
+    ///     A bullet with the default values set if fired by an enemy
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.Model.Entities.Bullet" />
     public class EnemyBullet : Bullet
     {
+        #region Constructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="EnemyBullet" /> class.
+        /// </summary>
+        /// <param name="parent">The parent.</param>
         public EnemyBullet(GameManager parent) : base(parent)
         {
-            this.Speed.Y = 500;
-            this.CollisionMasks = (int)PhysicsLayer.Player;
-            this.CollisionLayers = (int)PhysicsLayer.EnemyHitbox;
+            Speed.Y = 500;
+            CollisionMasks = (int) PhysicsLayer.Player;
+            CollisionLayers = (int) PhysicsLayer.EnemyHitbox;
         }
+
+        #endregion
     }
 }

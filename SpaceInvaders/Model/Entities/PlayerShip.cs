@@ -33,8 +33,8 @@ namespace SpaceInvaders.Model.Entities
         {
             this.canShoot = true;
             this.velocity = new Vector2();
-            this.Monitorable = true;
-            this.Monitoring = true;
+            Monitorable = true;
+            Monitoring = true;
 
             CollisionLayers = (int) PhysicsLayer.Player;
             CollisionMasks = (int) PhysicsLayer.EnemyHitbox;
@@ -53,7 +53,7 @@ namespace SpaceInvaders.Model.Entities
         private void handleMovement(double delta)
         {
             double moveDistance = 0;
-            
+
             if (Input.IsKeyPressed(LeftKey))
             {
                 moveDistance -= 1;
@@ -88,7 +88,7 @@ namespace SpaceInvaders.Model.Entities
             if (this.canShoot && Input.IsKeyPressed(ShootKey))
             {
                 var bullet = new PlayerBullet(parent) {
-                    Position = this.Position + this.bulletSpawnLocation
+                    Position = Position + this.bulletSpawnLocation
                 };
                 bullet.Removed += this.onBulletRemoval;
 

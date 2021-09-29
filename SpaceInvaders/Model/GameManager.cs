@@ -17,9 +17,6 @@ namespace SpaceInvaders.Model
         private const double PlayerShipBottomOffset = 30;
         private const double MillisecondsInSecond = 1000;
 
-        private readonly double backgroundHeight;
-        private readonly double backgroundWidth;
-
         private Canvas background;
         private readonly DispatcherTimer updateTimer;
         private readonly HashSet<GameObject> gameObjects;
@@ -37,7 +34,7 @@ namespace SpaceInvaders.Model
         /// <value>
         ///     The width of the screen.
         /// </value>
-        public double ScreenWidth => this.backgroundWidth;
+        public double ScreenWidth { get; }
 
         /// <summary>
         ///     Gets the height of the screen.
@@ -45,7 +42,8 @@ namespace SpaceInvaders.Model
         /// <value>
         ///     The height of the screen.
         /// </value>
-        public double ScreenHeight => this.backgroundHeight;
+        public double ScreenHeight { get; }
+
         #endregion
 
         #region Constructors
@@ -68,11 +66,10 @@ namespace SpaceInvaders.Model
                 throw new ArgumentOutOfRangeException(nameof(backgroundWidth));
             }
 
-            this.backgroundHeight = backgroundHeight;
-            this.backgroundWidth = backgroundWidth;
+            this.ScreenHeight = backgroundHeight;
+            this.ScreenWidth = backgroundWidth;
 
-            this.updateTimer = new DispatcherTimer
-            {
+            this.updateTimer = new DispatcherTimer {
                 Interval = TimeSpan.FromMilliseconds(.1)
             };
             this.updateTimer.Tick += this.onUpdateTimerTick;
@@ -107,46 +104,43 @@ namespace SpaceInvaders.Model
 
         private void createAndPlacePlayerShip(Canvas background)
         {
-            PlayerShip playerShip = new PlayerShip(this);
+            var playerShip = new PlayerShip(this);
 
             this.placePlayerShipNearBottomOfBackgroundCentered(playerShip);
         }
 
         private void placePlayerShipNearBottomOfBackgroundCentered(PlayerShip playerShip)
         {
-            playerShip.Center = new Vector2(this.backgroundWidth / 2,
-                this.backgroundHeight - playerShip.Height - PlayerShipBottomOffset);
-            QueueGameObjectForAddition(playerShip);
+            playerShip.Center = new Vector2(this.ScreenWidth / 2,
+                this.ScreenHeight - playerShip.Height - PlayerShipBottomOffset);
+            this.QueueGameObjectForAddition(playerShip);
         }
 
         private void createAndPlaceEnemyShips()
         {
-            QueueGameObjectForAddition(new AggresiveEnemy(this) {
+            this.QueueGameObjectForAddition(new AggresiveEnemy(this) {
                 X = 200,
                 Y = 32
             });
-            QueueGameObjectForAddition(new AggresiveEnemy(this)
-            {
+            this.QueueGameObjectForAddition(new AggresiveEnemy(this) {
                 X = 200 + 64 * 1,
                 Y = 32
             });
-            QueueGameObjectForAddition(new AggresiveEnemy(this)
-            {
+            this.QueueGameObjectForAddition(new AggresiveEnemy(this) {
                 X = 200 + 64 * 2,
                 Y = 32
             });
-            QueueGameObjectForAddition(new AggresiveEnemy(this)
-            {
+            this.QueueGameObjectForAddition(new AggresiveEnemy(this) {
                 X = 200 + 64 * 3,
                 Y = 32
             });
         }
-        
+
         private void onUpdateTimerTick(object sender, object e)
         {
-            long curTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-            long timeSinceLastTick = curTime - this.prevUpdateTime;
-            double delta = timeSinceLastTick / MillisecondsInSecond;
+            var curTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+            var timeSinceLastTick = curTime - this.prevUpdateTime;
+            var delta = timeSinceLastTick / MillisecondsInSecond;
             this.prevUpdateTime = curTime;
 
             foreach (var gameObject in this.gameObjects)
@@ -158,11 +152,9 @@ namespace SpaceInvaders.Model
             this.removeObjectsInQueue();
         }
 
-
         /// <summary>
         ///     Queues the specified game object for removal at the end of the update tick.
         ///     Removal is deferred in case the object is needed for other purposes during the update tick.
-        ///
         ///     Precondition: obj != null
         ///     Postcondition: obj is removed at the end of the update tick
         /// </summary>
@@ -174,6 +166,7 @@ namespace SpaceInvaders.Model
             {
                 throw new ArgumentException("obj must not be null");
             }
+
             this.removalQueue.Add(obj);
         }
 
@@ -201,7 +194,6 @@ namespace SpaceInvaders.Model
         /// <summary>
         ///     Queues the specified game object for adding at the end of the update tick.
         ///     Addition is deferred to prevent errors with updating the set of game objects while iterating over it.
-        ///
         ///     Precondition: obj != null
         ///     Postcondition: obj is added at the end of the update tick
         /// </summary>
@@ -213,6 +205,7 @@ namespace SpaceInvaders.Model
             {
                 throw new ArgumentException("obj must not be null");
             }
+
             this.additionQueue.Add(obj);
         }
 
@@ -222,7 +215,7 @@ namespace SpaceInvaders.Model
             {
                 this.gameObjects.Add(gameObject);
                 gameObject.Moved += this.onGameObjectMoved;
-                background.Children.Add(gameObject.Sprite);
+                this.background.Children.Add(gameObject.Sprite);
             }
 
             this.additionQueue.Clear();
@@ -250,7 +243,5 @@ namespace SpaceInvaders.Model
         }
 
         #endregion
-
-
     }
 }

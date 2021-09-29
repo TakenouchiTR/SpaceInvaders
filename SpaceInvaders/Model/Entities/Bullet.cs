@@ -1,22 +1,31 @@
-﻿using System;
-using SpaceInvaders.View.Sprites;
+﻿using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Entities
 {
     public class Bullet : GameObject
     {
+        #region Properties
+
         public Vector2 Speed { get; set; }
+
+        #endregion
+
+        #region Constructors
 
         public Bullet(GameManager parent) : base(parent, new PlayerBulletSprite())
         {
-            this.Monitoring = true;
+            Monitoring = true;
             this.Speed = new Vector2();
         }
 
+        #endregion
+
+        #region Methods
+
         public override void Update(double delta)
         {
-            this.Move(this.Speed * delta);
-            if (this.IsOffScreen())
+            Move(this.Speed * delta);
+            if (IsOffScreen())
             {
                 QueueRemoval();
             }
@@ -27,7 +36,9 @@ namespace SpaceInvaders.Model.Entities
             base.HandleCollision(target);
 
             target.QueueRemoval();
-            this.QueueRemoval();
+            QueueRemoval();
         }
+
+        #endregion
     }
 }

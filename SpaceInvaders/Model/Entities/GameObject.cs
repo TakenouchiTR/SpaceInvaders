@@ -68,7 +68,7 @@ namespace SpaceInvaders.Model.Entities
         ///     Gets or sets the position of the top-left corner.
         /// </summary>
         /// <value>
-        /// The position of the top-left corner.
+        ///     The position of the top-left corner.
         /// </value>
         public Vector2 Position
         {
@@ -324,11 +324,12 @@ namespace SpaceInvaders.Model.Entities
         ///     Postcondition: None
         /// </summary>
         /// <returns>
-        ///   <c>true</c> if [is off screen]; otherwise, <c>false</c>.
+        ///     <c>true</c> if [is off screen]; otherwise, <c>false</c>.
         /// </returns>
         public bool IsOffScreen()
         {
-            return (this.X > this.parent.ScreenWidth || this.Right < 0 || this.Y > this.parent.ScreenHeight || this.Bottom < 0);
+            return this.X > this.parent.ScreenWidth || this.Right < 0 || this.Y > this.parent.ScreenHeight ||
+                   this.Bottom < 0;
         }
 
         /// <summary>
@@ -337,7 +338,7 @@ namespace SpaceInvaders.Model.Entities
         ///     Postcondition: None
         /// </summary>
         /// <returns>
-        ///   <c>true</c> if [is on screen]; otherwise, <c>false</c>.
+        ///     <c>true</c> if [is on screen]; otherwise, <c>false</c>.
         /// </returns>
         public bool IsOnScreen()
         {
