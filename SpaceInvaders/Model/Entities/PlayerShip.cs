@@ -16,6 +16,8 @@ namespace SpaceInvaders.Model.Entities
         private const VirtualKey RightKey = VirtualKey.Right;
         private const VirtualKey ShootKey = VirtualKey.Space;
 
+        private readonly Vector2 bulletSpawnLocation = new Vector2(22, -8);
+
         private readonly Vector2 velocity;
         private readonly int moveSpeed = 200;
         private bool canShoot;
@@ -86,8 +88,7 @@ namespace SpaceInvaders.Model.Entities
             if (this.canShoot && Input.IsKeyPressed(ShootKey))
             {
                 var bullet = new PlayerBullet(parent) {
-                    X = X,
-                    Y = Y
+                    Position = this.Position + this.bulletSpawnLocation
                 };
                 bullet.Removed += this.onBulletRemoval;
 

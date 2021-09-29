@@ -17,6 +17,7 @@ namespace SpaceInvaders.Model.Entities
 
         private DispatcherTimer shootTimer;
 
+        private readonly Vector2 bulletSpawnLocation = new Vector2(22, 40);
         public AggresiveEnemy(GameManager parent) : base(parent, new BasicEnemySprite())
         {
             Score = 30;
@@ -35,10 +36,8 @@ namespace SpaceInvaders.Model.Entities
         private void onShootTimerTick(object sender, object e)
         {
             this.shootTimer.Interval = TimeSpan.FromSeconds(getNextShotDelay());
-            var bullet = new EnemyBullet(parent)
-            {
-                X = X,
-                Y = Y
+            var bullet = new EnemyBullet(parent) {
+                Position = this.Position + this.bulletSpawnLocation
             };
 
 
