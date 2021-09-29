@@ -7,7 +7,7 @@ namespace SpaceInvaders.Model.Entities
     {
         private Vector2 velocity;
 
-        public PlayerBullet(GameManager parent) : base(parent, new PlayerShipSprite())
+        public PlayerBullet(GameManager parent) : base(parent, new PlayerBulletSprite())
         {
             this.velocity = new Vector2(0, -100);
             this.Monitoring = true;
