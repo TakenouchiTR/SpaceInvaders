@@ -100,8 +100,8 @@ namespace SpaceInvaders.Model
 
         private void placePlayerShipNearBottomOfBackgroundCentered(PlayerShip playerShip)
         {
-            playerShip.X = this.backgroundWidth / 2 - playerShip.Width / 2.0;
-            playerShip.Y = this.backgroundHeight - playerShip.Height - PlayerShipBottomOffset;
+            playerShip.Center = new Vector2(this.backgroundWidth / 2,
+                this.backgroundHeight - playerShip.Height - PlayerShipBottomOffset);
             QueueGameObjectForAddition(playerShip);
         }
         

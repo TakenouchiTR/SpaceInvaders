@@ -88,6 +88,23 @@ namespace SpaceInvaders.Model.Entities
             set => this.Y = value - this.Height;
         }
 
+        public Vector2 Center
+        {
+            get
+            {
+                var center = new Vector2 {
+                    X = this.X + this.Width / 2,
+                    Y = this.Y + this.Height / 2
+                };
+                return center;
+            }
+            set
+            {
+                this.X = value.X - this.Width / 2;
+                this.Y = value.Y - this.Height / 2;
+            }
+        }
+
         /// <summary>
         ///     Gets the width of the game object.
         /// </summary>
