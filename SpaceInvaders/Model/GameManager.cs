@@ -31,7 +31,20 @@ namespace SpaceInvaders.Model
 
         #region Properties
 
+        /// <summary>
+        ///     Gets the width of the screen.
+        /// </summary>
+        /// <value>
+        ///     The width of the screen.
+        /// </value>
         public double ScreenWidth => this.backgroundWidth;
+
+        /// <summary>
+        ///     Gets the height of the screen.
+        /// </summary>
+        /// <value>
+        ///     The height of the screen.
+        /// </value>
         public double ScreenHeight => this.backgroundHeight;
         #endregion
 
@@ -123,12 +136,20 @@ namespace SpaceInvaders.Model
 
 
         /// <summary>
-        ///     Queues the game object for removal at the end of the update tick.
+        ///     Queues the specified game object for removal at the end of the update tick.
         ///     Removal is deferred in case the object is needed for other purposes during the update tick.
+        ///
+        ///     Precondition: obj != null
+        ///     Postcondition: obj is removed at the end of the update tick
         /// </summary>
         /// <param name="obj">The object.</param>
+        /// <exception cref="System.ArgumentException">obj must not be null</exception>
         public void QueueGameObjectForRemoval(GameObject obj)
         {
+            if (obj == null)
+            {
+                throw new ArgumentException("obj must not be null");
+            }
             this.removalQueue.Add(obj);
         }
 
@@ -153,8 +174,21 @@ namespace SpaceInvaders.Model
             this.background.Children.Remove(sprite);
         }
 
+        /// <summary>
+        ///     Queues the specified game object for adding at the end of the update tick.
+        ///     Addition is deferred to prevent errors with updating the set of game objects while iterating over it.
+        ///
+        ///     Precondition: obj != null
+        ///     Postcondition: obj is added at the end of the update tick
+        /// </summary>
+        /// <param name="obj">The object to add.</param>
+        /// <exception cref="System.ArgumentException">obj must not be null</exception>
         public void QueueGameObjectForAddition(GameObject obj)
         {
+            if (obj == null)
+            {
+                throw new ArgumentException("obj must not be null");
+            }
             this.additionQueue.Add(obj);
         }
 

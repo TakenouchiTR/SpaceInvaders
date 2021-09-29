@@ -8,6 +8,10 @@ using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Entities
 {
+    /// <summary>
+    ///     Defines the basic properties of all Enemy objects
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.Model.Entities.GameObject" />
     public abstract class Enemy : GameObject
     {
         public delegate void MovementTickHandler(Vector2 moveDistance);
@@ -23,6 +27,12 @@ namespace SpaceInvaders.Model.Entities
         private static int curMovementStep = 10;
         private static int movementDirection = 1;
 
+        /// <summary>
+        ///     Gets or sets how many points is awarded when the enemy is killed.
+        /// </summary>
+        /// <value>
+        ///     The score.
+        /// </value>
         public int Score { get; protected set; }
 
         static Enemy()
@@ -33,12 +43,24 @@ namespace SpaceInvaders.Model.Entities
             moveTimer.Start();
         }
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Enemy" /> class.
+        /// </summary>
+        /// <param name="parent">The parent.</param>
+        /// <param name="sprite">The sprite.</param>
         protected Enemy(GameManager parent, BaseSprite sprite) : base(parent, sprite)
         {
             Monitorable = true;
             CollisionLayers = (int) PhysicsLayer.Enemy;
             MovementTick += this.OnMovementTick;
         }
+
+        #endregion
+
+        #region Methods
+
+        public static event MovementTickHandler MovementTick;
+
         protected virtual void OnMovementTick(Vector2 moveDistance)
         {
             Move(moveDistance);

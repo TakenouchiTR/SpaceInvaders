@@ -184,11 +184,22 @@ namespace SpaceInvaders.Model.Entities
         public bool Monitoring { get; set; }
 
         public Rectangle CollisionBox { get => this.collisionBox; protected set => this.collisionBox = value; }
+        /// <summary>
+        ///     Gets or sets the collision box.
+        /// </summary>
+        /// <value>
+        ///     The collision box.
+        /// </value>
 
         #endregion
 
         #region Constructors
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="GameObject" /> class.
+        /// </summary>
+        /// <param name="parent">The parent.</param>
+        /// <param name="sprite">The sprite.</param>
         protected GameObject(GameManager parent, BaseSprite sprite)
         {
             this.Sprite = sprite;
@@ -219,11 +230,21 @@ namespace SpaceInvaders.Model.Entities
             this.collisionBox.Y = (int) this.Y;
         }
 
+        /// <summary>
+        ///     Queues the objects removal at the end of the update tick.
+        ///     Precondition: None
+        ///     Postcondition: None
+        /// </summary>
         public void QueueRemoval()
         {
             this.parent.QueueGameObjectForRemoval(this);
         }
 
+        /// <summary>
+        ///     Runs cleanup code and invokes the Removed event when removed from the game.
+        ///     Precondition: None
+        ///     Postcondition: Removed event is invoked
+        /// </summary>
         public void CompleteRemoval()
         {
             this.Removed?.Invoke(this, EventArgs.Empty);
@@ -235,9 +256,25 @@ namespace SpaceInvaders.Model.Entities
 
             render?.RenderAt(this.X, this.Y);
         }
-        
+
+        /// <summary>
+        ///     Determines whether the object is colliding with another object.
+        ///     The object checks if the target has at least one CollisionLayer that matches the object's CollisionMasks
+        ///     Precondition: target != null
+        ///     Postcondition: None
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <exception cref="System.ArgumentException">target must not be null</exception>
+        /// <returns>
+        ///     <c>true</c> if [is colliding with] [the specified target]; otherwise, <c>false</c>.
+        /// </returns>
         public bool IsCollidingWith(GameObject target)
         {
+            if (target == null)
+            {
+                throw new ArgumentException("target must not be null");
+            }
+
             if (!this.Monitoring || !target.Monitorable)
             {
                 return false;
@@ -256,8 +293,18 @@ namespace SpaceInvaders.Model.Entities
             return (this.CollisionMasks & target.CollisionLayers) != 0;
         }
 
+        /// <summary>
+        ///     Handles when the object collides with the target object.
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <exception cref="System.ArgumentException">target must not be null</exception>
         public virtual void HandleCollision(GameObject target)
         {
+            if (target == null)
+            {
+                throw new ArgumentException("target must not be null");
+            }
+        }
 
         /// <summary>
         ///     Determines whether [is off screen].

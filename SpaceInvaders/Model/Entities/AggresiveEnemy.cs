@@ -9,6 +9,10 @@ using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Entities
 {
+    /// <summary>
+    ///     A basic enemy with the ability to shoot at random intervals
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.Model.Entities.Enemy" />
     public class AggresiveEnemy : Enemy
     {
         private static double minShotDelay = 1;
@@ -18,6 +22,10 @@ namespace SpaceInvaders.Model.Entities
         private DispatcherTimer shootTimer;
 
         private readonly Vector2 bulletSpawnLocation = new Vector2(22, 40);
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="AggresiveEnemy" /> class.
+        /// </summary>
+        /// <param name="parent">The parent.</param>
         public AggresiveEnemy(GameManager parent) : base(parent, new BasicEnemySprite())
         {
             Score = 30;
