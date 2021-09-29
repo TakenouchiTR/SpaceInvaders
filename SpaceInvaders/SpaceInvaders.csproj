@@ -119,6 +119,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Entities\AggresiveEnemy.cs" />
+    <Compile Include="Model\Entities\BasicEnemy.cs" />
+    <Compile Include="Model\Entities\Enemy.cs" />
+    <Compile Include="Model\Entities\EnemyBullet.cs" />
     <Compile Include="Model\Entities\PlayerBullet.cs" />
     <Compile Include="Model\GameManager.cs" />
     <Compile Include="Model\Entities\GameObject.cs" />
@@ -132,6 +136,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\Sprites\BaseSprite.xaml.cs">
       <DependentUpon>BaseSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\BasicEnemySprite.xaml.cs">
+      <DependentUpon>BasicEnemySprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\ISpriteRender.cs" />
     <Compile Include="View\Sprites\PlayerBulletSprite.xaml.cs">
@@ -166,6 +173,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Sprites\BaseSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\BasicEnemySprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
