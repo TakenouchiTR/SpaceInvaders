@@ -102,11 +102,6 @@ namespace SpaceInvaders.Model.Entities
             sender.Removed -= this.onBulletRemoval;
         }
 
-        public override void HandleCollision(GameObject target)
-        {
-            this.QueueRemoval();
-        }
-
         #endregion
     }
 }
