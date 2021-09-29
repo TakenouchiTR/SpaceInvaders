@@ -102,6 +102,7 @@ namespace SpaceInvaders.Model
 
             this.background = background;
             this.createAndPlacePlayerShip(background);
+            this.createAndPlaceEnemyShips();
         }
 
         private void createAndPlacePlayerShip(Canvas background)
@@ -116,6 +117,29 @@ namespace SpaceInvaders.Model
             playerShip.Center = new Vector2(this.backgroundWidth / 2,
                 this.backgroundHeight - playerShip.Height - PlayerShipBottomOffset);
             QueueGameObjectForAddition(playerShip);
+        }
+
+        private void createAndPlaceEnemyShips()
+        {
+            QueueGameObjectForAddition(new AggresiveEnemy(this) {
+                X = 200,
+                Y = 32
+            });
+            QueueGameObjectForAddition(new AggresiveEnemy(this)
+            {
+                X = 200 + 64 * 1,
+                Y = 32
+            });
+            QueueGameObjectForAddition(new AggresiveEnemy(this)
+            {
+                X = 200 + 64 * 2,
+                Y = 32
+            });
+            QueueGameObjectForAddition(new AggresiveEnemy(this)
+            {
+                X = 200 + 64 * 3,
+                Y = 32
+            });
         }
         
         private void onUpdateTimerTick(object sender, object e)

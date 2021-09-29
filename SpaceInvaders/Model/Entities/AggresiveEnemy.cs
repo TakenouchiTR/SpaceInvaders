@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.ApplicationModel;
 using Windows.UI.Xaml;
 using SpaceInvaders.View.Sprites;
 
@@ -15,13 +10,20 @@ namespace SpaceInvaders.Model.Entities
     /// <seealso cref="SpaceInvaders.Model.Entities.Enemy" />
     public class AggresiveEnemy : Enemy
     {
-        private static double minShotDelay = 1;
-        private static double maxShotDelay = 3;
-        private static Random shootRandom = new Random();
+        #region Data members
 
-        private DispatcherTimer shootTimer;
+        private const double MinShotDelay = 1;
+        private const double MaxShotDelay = 3;
+        private static readonly Random ShootRandom = new Random();
 
         private readonly Vector2 bulletSpawnLocation = new Vector2(22, 40);
+
+        private readonly DispatcherTimer shootTimer;
+
+        #endregion
+
+        #region Constructors
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="AggresiveEnemy" /> class.
         /// </summary>
@@ -33,8 +35,12 @@ namespace SpaceInvaders.Model.Entities
             this.shootTimer.Interval = TimeSpan.FromSeconds(getNextShotDelay());
             this.shootTimer.Tick += this.onShootTimerTick;
             this.shootTimer.Start();
-            this.Removed += this.onRemoved;
+            Removed += this.onRemoved;
         }
+
+        #endregion
+
+        #region Methods
 
         private void onRemoved(GameObject sender, EventArgs e)
         {
@@ -48,22 +54,22 @@ namespace SpaceInvaders.Model.Entities
                 Position = this.Position + this.bulletSpawnLocation
             };
 
-
             parent.QueueGameObjectForAddition(bullet);
         }
 
         public override void Update(double delta)
         {
-            
         }
 
         private static double getNextShotDelay()
         {
-            double result = shootRandom.NextDouble();
-            result *= maxShotDelay - minShotDelay;
-            result += minShotDelay;
+            var result = ShootRandom.NextDouble();
+            result *= MaxShotDelay - MinShotDelay;
+            result += MinShotDelay;
 
             return result;
         }
+
+        #endregion
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SpaceInvaders.View.Sprites;
+﻿using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Entities
 {
@@ -24,9 +19,14 @@ namespace SpaceInvaders.Model.Entities
             Score = 10;
         }
 
+        #endregion
+
+        #region Methods
+
         public override void Update(double delta)
         {
-
         }
+
+        #endregion
     }
 }

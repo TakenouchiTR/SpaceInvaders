@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using SpaceInvaders.View.Sprites;
 
@@ -14,10 +10,14 @@ namespace SpaceInvaders.Model.Entities
     /// <seealso cref="SpaceInvaders.Model.Entities.GameObject" />
     public abstract class Enemy : GameObject
     {
+        #region Types and Delegates
+
         public delegate void MovementTickHandler(Vector2 moveDistance);
 
-        public static event MovementTickHandler MovementTick;
-        
+        #endregion
+
+        #region Data members
+
         private const int TotalMovementSteps = 20;
         private const int XMoveAmount = 15;
         private const int YMoveAmount = 32;
@@ -27,6 +27,10 @@ namespace SpaceInvaders.Model.Entities
         private static int curMovementStep = 10;
         private static int movementDirection = 1;
 
+        #endregion
+
+        #region Properties
+
         /// <summary>
         ///     Gets or sets how many points is awarded when the enemy is killed.
         /// </summary>
@@ -34,6 +38,10 @@ namespace SpaceInvaders.Model.Entities
         ///     The score.
         /// </value>
         public int Score { get; protected set; }
+
+        #endregion
+
+        #region Constructors
 
         static Enemy()
         {
@@ -68,7 +76,7 @@ namespace SpaceInvaders.Model.Entities
 
         private static void onMoveTimerTick(object sender, object e)
         {
-            Vector2 moveDistance = new Vector2();
+            var moveDistance = new Vector2();
 
             curMovementStep += movementDirection;
 
@@ -81,9 +89,10 @@ namespace SpaceInvaders.Model.Entities
             {
                 moveDistance.X = XMoveAmount * movementDirection;
             }
-            
+
             MovementTick?.Invoke(moveDistance);
         }
 
+        #endregion
     }
 }

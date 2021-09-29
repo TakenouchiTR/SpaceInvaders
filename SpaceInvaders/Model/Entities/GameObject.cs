@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Xml.Serialization;
 using SpaceInvaders.View.Sprites;
 using Point = Windows.Foundation.Point;
 
@@ -11,12 +10,13 @@ namespace SpaceInvaders.Model.Entities
     /// </summary>
     public abstract class GameObject
     {
-        public delegate void RemovedEventHandler(GameObject sender, EventArgs e);
+        #region Types and Delegates
 
         public delegate void MovedEventHandler(GameObject sender, EventArgs e);
 
-        public event RemovedEventHandler Removed;
-        public event MovedEventHandler Moved;
+        public delegate void RemovedEventHandler(GameObject sender, EventArgs e);
+
+        #endregion
 
         #region Data members
 
@@ -58,7 +58,7 @@ namespace SpaceInvaders.Model.Entities
             set
             {
                 this.location.Y = value;
-                this.collisionBox.Y = (int)value;
+                this.collisionBox.Y = (int) value;
                 this.render();
                 this.Moved?.Invoke(this, EventArgs.Empty);
             }
@@ -104,6 +104,12 @@ namespace SpaceInvaders.Model.Entities
             set => this.Y = value - this.Height;
         }
 
+        /// <summary>
+        ///     Gets or sets the center of the GameObject.
+        /// </summary>
+        /// <value>
+        ///     The center of the GameObject.
+        /// </value>
         public Vector2 Center
         {
             get
@@ -148,7 +154,6 @@ namespace SpaceInvaders.Model.Entities
         /// <summary>
         ///     Gets or sets the collision layers.
         ///     Each bit of CollisionLayers represents a different layer, for a total of 32 layers.
-        /// 
         ///     If Monitorable is set to true, other GameObjects will check if any of their flagged
         ///     CollisionMask bits match this object's CollisionLayer when their bounding boxes overlap.
         /// </summary>
@@ -160,7 +165,6 @@ namespace SpaceInvaders.Model.Entities
         /// <summary>
         ///     Gets or sets the collision masks.
         ///     Each bit of CollisionMasks represents a different layer, for a total of 32 layers.
-        /// 
         /// </summary>
         /// <value>
         ///     The collision masks.
@@ -168,7 +172,7 @@ namespace SpaceInvaders.Model.Entities
         public int CollisionMasks { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether this <see cref="GameObject"/> is monitorable.
+        ///     Gets or sets a value indicating whether this <see cref="GameObject" /> is monitorable.
         /// </summary>
         /// <value>
         ///     <c>true</c> if monitorable; otherwise, <c>false</c>.
@@ -176,20 +180,24 @@ namespace SpaceInvaders.Model.Entities
         public bool Monitorable { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether this <see cref="GameObject"/> is monitoring for collisions.
+        ///     Gets or sets a value indicating whether this <see cref="GameObject" /> is monitoring for collisions.
         /// </summary>
         /// <value>
         ///     <c>true</c> if monitoring; otherwise, <c>false</c>.
         /// </value>
         public bool Monitoring { get; set; }
 
-        public Rectangle CollisionBox { get => this.collisionBox; protected set => this.collisionBox = value; }
         /// <summary>
         ///     Gets or sets the collision box.
         /// </summary>
         /// <value>
         ///     The collision box.
         /// </value>
+        public Rectangle CollisionBox
+        {
+            get => this.collisionBox;
+            protected set => this.collisionBox = value;
+        }
 
         #endregion
 
@@ -208,9 +216,13 @@ namespace SpaceInvaders.Model.Entities
             this.collisionBox.Width = (int) this.Width;
             this.collisionBox.Height = (int) this.Height;
         }
+
         #endregion
 
         #region Methods
+
+        public event RemovedEventHandler Removed;
+        public event MovedEventHandler Moved;
 
         /// <summary>
         ///     The update loop for the GameObject.
@@ -280,7 +292,7 @@ namespace SpaceInvaders.Model.Entities
                 return false;
             }
 
-            if (isMaskingTargetCollisionLayers(target))
+            if (this.isMaskingTargetCollisionLayers(target))
             {
                 return this.collisionBox.IntersectsWith(target.CollisionBox);
             }
