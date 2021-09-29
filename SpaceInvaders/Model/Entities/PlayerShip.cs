@@ -1,5 +1,6 @@
 ﻿using Windows.System;
 using SpaceInvaders.View.Sprites;
+using System;
 
 namespace SpaceInvaders.Model.Entities
 {
@@ -29,24 +30,20 @@ namespace SpaceInvaders.Model.Entities
         public PlayerShip(GameManager parent) : base(parent)
         {
             Sprite = new PlayerShipSprite();
+            this.canShoot = true;
             this.velocity = new Vector2();
             this.CollisionLayers = (int) PhysicsLayer.Player;
             this.CollisionMasks = (int) PhysicsLayer.EnemyHitbox;
         }
 
         #endregion
-
-
+        
         #region Methods
 
         public override void Update(double delta)
         {
             this.handleMovement(delta);
-            if (Input.IsKeyPressed(ShootKey))
-            {
-                this.QueueRemoval();
-            }
-
+            this.handleShooting();
         }
 
         private void handleMovement(double delta)
@@ -70,6 +67,26 @@ namespace SpaceInvaders.Model.Entities
 
                 this.Move(velocity);
             }
+        }
+
+        private void handleShooting()
+        {
+            if (this.canShoot && Input.IsKeyPressed(ShootKey))
+            {
+                var bullet = new PlayerBullet(parent) 
+                {
+                    X = this.X,
+                    Y = this.Y
+                };
+                bullet.Removed += onBulletRemoval;
+                this.canShoot = false;
+            }
+        }
+
+        private void onBulletRemoval(GameObject sender, EventArgs e)
+        {
+            this.canShoot = true;
+            sender.Removed -= this.onBulletRemoval;
         }
 
         #endregion
