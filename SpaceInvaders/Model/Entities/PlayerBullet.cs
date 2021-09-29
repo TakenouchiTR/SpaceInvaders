@@ -27,5 +27,10 @@ namespace SpaceInvaders.Model.Entities
             }
         }
 
+        public override void HandleCollision(GameObject target)
+        {
+            target.QueueRemoval();
+            this.QueueRemoval();
+        }
     }
 }
