@@ -65,6 +65,22 @@ namespace SpaceInvaders.Model.Entities
         }
 
         /// <summary>
+        ///     Gets or sets the position of the top-left corner.
+        /// </summary>
+        /// <value>
+        /// The position of the top-left corner.
+        /// </value>
+        public Vector2 Position
+        {
+            get => new Vector2(this.X, this.Y);
+            set
+            {
+                this.X = value.X;
+                this.Y = value.Y;
+            }
+        }
+
+        /// <summary>
         ///     Gets or sets the right edge of the GameObject.
         /// </summary>
         /// <value>
