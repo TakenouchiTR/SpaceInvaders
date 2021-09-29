@@ -1,0 +1,67 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using SpaceInvaders.View.Sprites;
+
+namespace SpaceInvaders.Model.Entities
+{
+    public abstract class Enemy : GameObject
+    {
+        public delegate void MovementTickHandler(Vector2 moveDistance);
+
+        public static event MovementTickHandler MovementTick;
+        
+        private const int TotalMovementSteps = 20;
+        private const int XMoveAmount = 15;
+        private const int YMoveAmount = 32;
+
+        private static readonly DispatcherTimer moveTimer;
+
+        private static int curMovementStep = 10;
+        private static int movementDirection = 1;
+
+        public int Score { get; protected set; }
+
+        static Enemy()
+        {
+            moveTimer = new DispatcherTimer();
+            moveTimer.Interval = TimeSpan.FromSeconds(1);
+            moveTimer.Tick += onMoveTimerTick;
+            moveTimer.Start();
+        }
+
+        protected Enemy(GameManager parent, BaseSprite sprite) : base(parent, sprite)
+        {
+            Monitorable = true;
+            CollisionLayers = (int) PhysicsLayer.Enemy;
+            MovementTick += this.OnMovementTick;
+        }
+        protected virtual void OnMovementTick(Vector2 moveDistance)
+        {
+            Move(moveDistance);
+        }
+
+        private static void onMoveTimerTick(object sender, object e)
+        {
+            Vector2 moveDistance = new Vector2();
+
+            curMovementStep += movementDirection;
+
+            if (curMovementStep > TotalMovementSteps || curMovementStep < 0)
+            {
+                movementDirection *= -1;
+                moveDistance.Y = YMoveAmount;
+            }
+            else
+            {
+                moveDistance.X = XMoveAmount * movementDirection;
+            }
+            
+            MovementTick?.Invoke(moveDistance);
+        }
+
+    }
+}
