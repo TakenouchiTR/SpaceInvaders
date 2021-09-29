@@ -102,6 +102,7 @@ namespace SpaceInvaders.Model
         {
             playerShip.X = this.backgroundWidth / 2 - playerShip.Width / 2.0;
             playerShip.Y = this.backgroundHeight - playerShip.Height - PlayerShipBottomOffset;
+            QueueGameObjectForAddition(playerShip);
         }
         
         private void onUpdateTimerTick(object sender, object e)
