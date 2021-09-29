@@ -24,6 +24,7 @@ namespace SpaceInvaders.Model
         private readonly DispatcherTimer updateTimer;
         private readonly HashSet<GameObject> gameObjects;
         private readonly HashSet<GameObject> removalQueue;
+        private readonly HashSet<GameObject> additionQueue;
         private long prevUpdateTime;
 
         #endregion
@@ -60,21 +61,7 @@ namespace SpaceInvaders.Model
 
             this.gameObjects = new HashSet<GameObject>();
             this.removalQueue = new HashSet<GameObject>();
-        }
-
-        private void onUpdateTimerTick(object sender, object e)
-        {
-            long curTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-            long timeSinceLastTick = curTime - this.prevUpdateTime;
-            double delta = timeSinceLastTick / MillisecondsInSecond;
-            this.prevUpdateTime = curTime;
-
-            foreach (var gameObject in this.gameObjects)
-            {
-                gameObject.Update(delta);
-            }
-
-            this.removeObjectsInQueue();
+            this.additionQueue = new HashSet<GameObject>();
         }
 
         #endregion
@@ -102,9 +89,6 @@ namespace SpaceInvaders.Model
         {
             PlayerShip playerShip = new PlayerShip(this);
 
-            background.Children.Add(playerShip.Sprite);
-            this.gameObjects.Add(playerShip);
-
             this.placePlayerShipNearBottomOfBackgroundCentered(playerShip);
         }
 
@@ -113,6 +97,23 @@ namespace SpaceInvaders.Model
             playerShip.X = this.backgroundWidth / 2 - playerShip.Width / 2.0;
             playerShip.Y = this.backgroundHeight - playerShip.Height - PlayerShipBottomOffset;
         }
+        
+        private void onUpdateTimerTick(object sender, object e)
+        {
+            long curTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+            long timeSinceLastTick = curTime - this.prevUpdateTime;
+            double delta = timeSinceLastTick / MillisecondsInSecond;
+            this.prevUpdateTime = curTime;
+
+            foreach (var gameObject in this.gameObjects)
+            {
+                gameObject.Update(delta);
+            }
+
+            this.addObjectsInQueue();
+            this.removeObjectsInQueue();
+        }
+
 
         /// <summary>
         ///     Queues the game object for removal at the end of the update tick.
@@ -135,11 +136,29 @@ namespace SpaceInvaders.Model
                     gameObject.CompleteRemoval();
                 }
             }
+
+            this.removalQueue.Clear();
         }
 
         private void removeSpriteFromBackground(BaseSprite sprite)
         {
             this.background.Children.Remove(sprite);
+        }
+
+        public void QueueGameObjectForAddition(GameObject obj)
+        {
+            this.additionQueue.Add(obj);
+        }
+
+        private void addObjectsInQueue()
+        {
+            foreach (var gameObject in this.additionQueue)
+            {
+                this.gameObjects.Add(gameObject);
+                background.Children.Add(gameObject.Sprite);
+            }
+
+            this.additionQueue.Clear();
         }
         #endregion
 

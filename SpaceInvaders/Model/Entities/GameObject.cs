@@ -16,7 +16,7 @@ namespace SpaceInvaders.Model.Entities
 
         #region Data members
 
-        private GameManager parent;
+        protected GameManager parent;
         private Point location;
 
         #endregion
@@ -147,6 +147,7 @@ namespace SpaceInvaders.Model.Entities
 
         public GameObject(GameManager parent)
         {
+            parent.QueueGameObjectForAddition(this);
             this.parent = parent;
         }
         #endregion
