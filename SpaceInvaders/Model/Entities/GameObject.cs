@@ -114,7 +114,7 @@ namespace SpaceInvaders.Model.Entities
 
         /// <summary>
         ///     Gets or sets the collision layers.
-        ///     Each bit of CollisionLayers represents a different layer, for a total of eight layers.
+        ///     Each bit of CollisionLayers represents a different layer, for a total of 32 layers.
         /// 
         ///     If Monitorable is set to true, other GameObjects will check if any of their flagged
         ///     CollisionMask bits match this object's CollisionLayer when their bounding boxes overlap.
@@ -122,17 +122,17 @@ namespace SpaceInvaders.Model.Entities
         /// <value>
         ///     The collision layers.
         /// </value>
-        public byte CollisionLayers { get; set; }
+        public int CollisionLayers { get; set; }
 
         /// <summary>
         ///     Gets or sets the collision masks.
-        ///     Each bit of CollisionMasks represents a different layer, for a total of eight layers.
+        ///     Each bit of CollisionMasks represents a different layer, for a total of 32 layers.
         /// 
         /// </summary>
         /// <value>
         ///     The collision masks.
         /// </value>
-        public byte CollisionMasks { get; set; }
+        public int CollisionMasks { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this <see cref="GameObject"/> is monitorable.
