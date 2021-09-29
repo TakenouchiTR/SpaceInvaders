@@ -29,8 +29,8 @@ namespace SpaceInvaders.Model.Entities
         {
             Sprite = new PlayerShipSprite();
             this.velocity = new Vector2();
-            this.CollisionLayer = (int) PhysicsLayer.Player;
-            this.CollisionMask = (int) PhysicsLayer.EnemyHitbox;
+            this.CollisionLayers = (int) PhysicsLayer.Player;
+            this.CollisionMasks = (int) PhysicsLayer.EnemyHitbox;
         }
 
         #endregion
