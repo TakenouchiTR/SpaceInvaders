@@ -17,6 +17,7 @@ namespace SpaceInvaders.Model.Entities
 
         private readonly Vector2 velocity;
         private int moveSpeed = 100;
+        private bool canShoot;
 
         #endregion
 
@@ -25,7 +26,7 @@ namespace SpaceInvaders.Model.Entities
         /// <summary>
         ///     Initializes a new instance of the <see cref="PlayerShip" /> class.
         /// </summary>
-        public PlayerShip()
+        public PlayerShip(GameManager parent) : base(parent)
         {
             Sprite = new PlayerShipSprite();
             this.velocity = new Vector2();
@@ -40,7 +41,12 @@ namespace SpaceInvaders.Model.Entities
 
         public override void Update(double delta)
         {
-            handleMovement(delta);
+            this.handleMovement(delta);
+            if (Input.IsKeyPressed(ShootKey))
+            {
+                this.QueueRemoval();
+            }
+
         }
 
         private void handleMovement(double delta)

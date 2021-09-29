@@ -13,7 +13,8 @@ namespace SpaceInvaders.Model
     {
         private static Dictionary<VirtualKey, bool> keyStates = new Dictionary<VirtualKey, bool>() {
             { VirtualKey.Left, false },
-            { VirtualKey.Right, false }
+            { VirtualKey.Right, false },
+            { VirtualKey.Space, false },
         };
 
         public static void OnKeyDown(CoreWindow sender, KeyEventArgs args)

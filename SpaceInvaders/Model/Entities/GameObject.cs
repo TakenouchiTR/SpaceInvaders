@@ -1,5 +1,6 @@
 ﻿using System;
 using Windows.Foundation;
+using Windows.UI.Xaml.Controls;
 using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Entities
@@ -9,8 +10,13 @@ namespace SpaceInvaders.Model.Entities
     /// </summary>
     public abstract class GameObject
     {
+        public delegate void RemovedEventHandler(GameObject sender, EventArgs e);
+
+        public event RemovedEventHandler Removed;
+
         #region Data members
 
+        private GameManager parent;
         private Point location;
 
         #endregion
@@ -137,6 +143,14 @@ namespace SpaceInvaders.Model.Entities
 
         #endregion
 
+        #region Constructors
+
+        public GameObject(GameManager parent)
+        {
+            this.parent = parent;
+        }
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -153,6 +167,16 @@ namespace SpaceInvaders.Model.Entities
         {
             this.X += distance.X;
             this.Y += distance.Y;
+        }
+
+        public void QueueRemoval()
+        {
+            this.parent.QueueGameObjectForRemoval(this);
+        }
+
+        public void CompleteRemoval()
+        {
+            this.Removed?.Invoke(this, EventArgs.Empty);
         }
 
         private void render()

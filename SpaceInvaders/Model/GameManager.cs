@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model.Entities;
+using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model
 {
@@ -19,8 +20,10 @@ namespace SpaceInvaders.Model
         private readonly double backgroundHeight;
         private readonly double backgroundWidth;
 
+        private Canvas background;
         private readonly DispatcherTimer updateTimer;
         private readonly HashSet<GameObject> gameObjects;
+        private readonly HashSet<GameObject> removalQueue;
         private long prevUpdateTime;
 
         #endregion
@@ -56,6 +59,7 @@ namespace SpaceInvaders.Model
             this.updateTimer.Start();
 
             this.gameObjects = new HashSet<GameObject>();
+            this.removalQueue = new HashSet<GameObject>();
         }
 
         private void onUpdateTimerTick(object sender, object e)
@@ -69,6 +73,8 @@ namespace SpaceInvaders.Model
             {
                 gameObject.Update(delta);
             }
+
+            this.removeObjectsInQueue();
         }
 
         #endregion
@@ -88,12 +94,13 @@ namespace SpaceInvaders.Model
                 throw new ArgumentNullException(nameof(background));
             }
 
+            this.background = background;
             this.createAndPlacePlayerShip(background);
         }
 
         private void createAndPlacePlayerShip(Canvas background)
         {
-            PlayerShip playerShip = new PlayerShip();
+            PlayerShip playerShip = new PlayerShip(this);
 
             background.Children.Add(playerShip.Sprite);
             this.gameObjects.Add(playerShip);
@@ -105,6 +112,34 @@ namespace SpaceInvaders.Model
         {
             playerShip.X = this.backgroundWidth / 2 - playerShip.Width / 2.0;
             playerShip.Y = this.backgroundHeight - playerShip.Height - PlayerShipBottomOffset;
+        }
+
+        /// <summary>
+        ///     Queues the game object for removal at the end of the update tick.
+        ///     Removal is deferred in case the object is needed for other purposes during the update tick.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        public void QueueGameObjectForRemoval(GameObject obj)
+        {
+            this.removalQueue.Add(obj);
+        }
+
+        private void removeObjectsInQueue()
+        {
+            foreach (var gameObject in this.removalQueue)
+            {
+                if (this.gameObjects.Contains(gameObject))
+                {
+                    this.gameObjects.Remove(gameObject);
+                    this.removeSpriteFromBackground(gameObject.Sprite);
+                    gameObject.CompleteRemoval();
+                }
+            }
+        }
+
+        private void removeSpriteFromBackground(BaseSprite sprite)
+        {
+            this.background.Children.Remove(sprite);
         }
         #endregion
 
