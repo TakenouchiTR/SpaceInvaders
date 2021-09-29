@@ -259,6 +259,30 @@ namespace SpaceInvaders.Model.Entities
         public virtual void HandleCollision(GameObject target)
         {
 
+        /// <summary>
+        ///     Determines whether [is off screen].
+        ///     Precondition: None
+        ///     Postcondition: None
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if [is off screen]; otherwise, <c>false</c>.
+        /// </returns>
+        public bool IsOffScreen()
+        {
+            return (this.X > this.parent.ScreenWidth || this.Right < 0 || this.Y > this.parent.ScreenHeight || this.Bottom < 0);
+        }
+
+        /// <summary>
+        ///     Determines whether [is on screen].
+        ///     Precondition: None
+        ///     Postcondition: None
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if [is on screen]; otherwise, <c>false</c>.
+        /// </returns>
+        public bool IsOnScreen()
+        {
+            return !this.IsOffScreen();
         }
 
         #endregion
