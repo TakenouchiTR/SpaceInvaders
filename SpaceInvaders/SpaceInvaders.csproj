@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="Model\Entities\AggresiveEnemy.cs" />
     <Compile Include="Model\Entities\BasicEnemy.cs" />
+    <Compile Include="Model\Entities\Bullet.cs" />
     <Compile Include="Model\Entities\Enemy.cs" />
     <Compile Include="Model\Entities\EnemyBullet.cs" />
     <Compile Include="Model\Entities\PlayerBullet.cs" />
