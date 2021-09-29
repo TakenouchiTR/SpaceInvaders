@@ -163,8 +163,6 @@ namespace SpaceInvaders.Model.Entities
 
             this.collisionBox.Width = (int) this.Width;
             this.collisionBox.Height = (int) this.Height;
-
-            parent.QueueGameObjectForAddition(this);
         }
         #endregion
 

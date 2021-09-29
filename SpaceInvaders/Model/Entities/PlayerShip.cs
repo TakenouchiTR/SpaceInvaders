@@ -90,6 +90,8 @@ namespace SpaceInvaders.Model.Entities
                     Y = Y
                 };
                 bullet.Removed += this.onBulletRemoval;
+
+                parent.QueueGameObjectForAddition(bullet);
                 this.canShoot = false;
             }
         }
