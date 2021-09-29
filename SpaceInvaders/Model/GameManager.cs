@@ -29,6 +29,12 @@ namespace SpaceInvaders.Model
 
         #endregion
 
+        #region Properties
+
+        public double ScreenWidth => this.backgroundWidth;
+        public double ScreenHeight => this.backgroundHeight;
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -132,6 +138,7 @@ namespace SpaceInvaders.Model
                 if (this.gameObjects.Contains(gameObject))
                 {
                     this.gameObjects.Remove(gameObject);
+                    gameObject.Moved -= this.onGameObjectMoved;
                     this.removeSpriteFromBackground(gameObject.Sprite);
                     gameObject.CompleteRemoval();
                 }
@@ -155,11 +162,34 @@ namespace SpaceInvaders.Model
             foreach (var gameObject in this.additionQueue)
             {
                 this.gameObjects.Add(gameObject);
+                gameObject.Moved += this.onGameObjectMoved;
                 background.Children.Add(gameObject.Sprite);
             }
 
             this.additionQueue.Clear();
         }
+
+        private void onGameObjectMoved(GameObject sender, EventArgs e)
+        {
+            foreach (var target in this.gameObjects)
+            {
+                if (sender == target)
+                {
+                    continue;
+                }
+
+                if (sender.IsCollidingWith(target))
+                {
+                    sender.HandleCollision(target);
+                }
+
+                if (target.IsCollidingWith(sender))
+                {
+                    target.HandleCollision(sender);
+                }
+            }
+        }
+
         #endregion
 
 

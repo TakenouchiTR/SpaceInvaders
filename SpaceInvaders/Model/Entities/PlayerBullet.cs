@@ -7,10 +7,13 @@ namespace SpaceInvaders.Model.Entities
     {
         private Vector2 velocity;
 
-        public PlayerBullet(GameManager parent) : base(parent)
+        public PlayerBullet(GameManager parent) : base(parent, new PlayerShipSprite())
         {
-            this.Sprite = new PlayerShipSprite();
             this.velocity = new Vector2(0, -100);
+            this.Monitoring = true;
+            this.Monitorable = true;
+            this.CollisionMasks = (int) PhysicsLayer.Enemy;
+            this.CollisionLayers = (int) PhysicsLayer.PlayerHitbox;
         }
 
         public override void Update(double delta)

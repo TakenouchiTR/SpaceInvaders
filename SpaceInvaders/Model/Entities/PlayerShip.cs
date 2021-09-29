@@ -1,6 +1,6 @@
-﻿using Windows.System;
+﻿using System;
+using Windows.System;
 using SpaceInvaders.View.Sprites;
-using System;
 
 namespace SpaceInvaders.Model.Entities
 {
@@ -17,7 +17,7 @@ namespace SpaceInvaders.Model.Entities
         private const VirtualKey ShootKey = VirtualKey.Space;
 
         private readonly Vector2 velocity;
-        private int moveSpeed = 100;
+        private readonly int moveSpeed = 200;
         private bool canShoot;
 
         #endregion
@@ -27,17 +27,19 @@ namespace SpaceInvaders.Model.Entities
         /// <summary>
         ///     Initializes a new instance of the <see cref="PlayerShip" /> class.
         /// </summary>
-        public PlayerShip(GameManager parent) : base(parent)
+        public PlayerShip(GameManager parent) : base(parent, new PlayerShipSprite())
         {
-            Sprite = new PlayerShipSprite();
             this.canShoot = true;
             this.velocity = new Vector2();
-            this.CollisionLayers = (int) PhysicsLayer.Player;
-            this.CollisionMasks = (int) PhysicsLayer.EnemyHitbox;
+            this.Monitorable = true;
+            this.Monitoring = true;
+
+            CollisionLayers = (int) PhysicsLayer.Player;
+            CollisionMasks = (int) PhysicsLayer.EnemyHitbox;
         }
 
         #endregion
-        
+
         #region Methods
 
         public override void Update(double delta)
@@ -49,7 +51,7 @@ namespace SpaceInvaders.Model.Entities
         private void handleMovement(double delta)
         {
             double moveDistance = 0;
-
+            
             if (Input.IsKeyPressed(LeftKey))
             {
                 moveDistance -= 1;
@@ -63,9 +65,19 @@ namespace SpaceInvaders.Model.Entities
             if (moveDistance != 0)
             {
                 moveDistance *= this.moveSpeed * delta;
+
+                if (X + moveDistance < 0)
+                {
+                    moveDistance = -X;
+                }
+                else if (Right + moveDistance > parent.ScreenWidth)
+                {
+                    moveDistance = parent.ScreenWidth - Right;
+                }
+
                 this.velocity.X = moveDistance;
 
-                this.Move(velocity);
+                Move(this.velocity);
             }
         }
 
@@ -73,12 +85,11 @@ namespace SpaceInvaders.Model.Entities
         {
             if (this.canShoot && Input.IsKeyPressed(ShootKey))
             {
-                var bullet = new PlayerBullet(parent) 
-                {
-                    X = this.X,
-                    Y = this.Y
+                var bullet = new PlayerBullet(parent) {
+                    X = X,
+                    Y = Y
                 };
-                bullet.Removed += onBulletRemoval;
+                bullet.Removed += this.onBulletRemoval;
                 this.canShoot = false;
             }
         }
@@ -87,6 +98,11 @@ namespace SpaceInvaders.Model.Entities
         {
             this.canShoot = true;
             sender.Removed -= this.onBulletRemoval;
+        }
+
+        public override void HandleCollision(GameObject target)
+        {
+            this.QueueRemoval();
         }
 
         #endregion

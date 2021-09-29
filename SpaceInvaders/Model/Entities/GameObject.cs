@@ -1,7 +1,8 @@
 ﻿using System;
-using Windows.Foundation;
-using Windows.UI.Xaml.Controls;
+using System.Drawing;
+using System.Xml.Serialization;
 using SpaceInvaders.View.Sprites;
+using Point = Windows.Foundation.Point;
 
 namespace SpaceInvaders.Model.Entities
 {
@@ -12,11 +13,15 @@ namespace SpaceInvaders.Model.Entities
     {
         public delegate void RemovedEventHandler(GameObject sender, EventArgs e);
 
+        public delegate void MovedEventHandler(GameObject sender, EventArgs e);
+
         public event RemovedEventHandler Removed;
+        public event MovedEventHandler Moved;
 
         #region Data members
 
         protected GameManager parent;
+        private Rectangle collisionBox;
         private Point location;
 
         #endregion
@@ -35,7 +40,9 @@ namespace SpaceInvaders.Model.Entities
             set
             {
                 this.location.X = value;
+                this.collisionBox.X = (int) value;
                 this.render();
+                this.Moved?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -51,7 +58,9 @@ namespace SpaceInvaders.Model.Entities
             set
             {
                 this.location.Y = value;
+                this.collisionBox.Y = (int)value;
                 this.render();
+                this.Moved?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -141,14 +150,21 @@ namespace SpaceInvaders.Model.Entities
         /// </value>
         public bool Monitoring { get; set; }
 
+        public Rectangle CollisionBox { get => this.collisionBox; protected set => this.collisionBox = value; }
+
         #endregion
 
         #region Constructors
 
-        public GameObject(GameManager parent)
+        protected GameObject(GameManager parent, BaseSprite sprite)
         {
-            parent.QueueGameObjectForAddition(this);
+            this.Sprite = sprite;
             this.parent = parent;
+
+            this.collisionBox.Width = (int) this.Width;
+            this.collisionBox.Height = (int) this.Height;
+
+            parent.QueueGameObjectForAddition(this);
         }
         #endregion
 
@@ -168,6 +184,8 @@ namespace SpaceInvaders.Model.Entities
         {
             this.X += distance.X;
             this.Y += distance.Y;
+            this.collisionBox.X = (int) this.X;
+            this.collisionBox.Y = (int) this.Y;
         }
 
         public void QueueRemoval()
@@ -187,6 +205,31 @@ namespace SpaceInvaders.Model.Entities
             render?.RenderAt(this.X, this.Y);
         }
         
+        public bool IsCollidingWith(GameObject target)
+        {
+            if (!this.Monitoring || !target.Monitorable)
+            {
+                return false;
+            }
+
+            if (isMaskingTargetCollisionLayers(target))
+            {
+                return this.collisionBox.IntersectsWith(target.CollisionBox);
+            }
+
+            return false;
+        }
+
+        private bool isMaskingTargetCollisionLayers(GameObject target)
+        {
+            return (this.CollisionMasks & target.CollisionLayers) != 0;
+        }
+
+        public virtual void HandleCollision(GameObject target)
+        {
+
+        }
+
         #endregion
     }
 }
