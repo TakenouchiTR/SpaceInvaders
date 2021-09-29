@@ -48,7 +48,6 @@ namespace SpaceInvaders.Model.Entities
                 this.render();
             }
         }
-        
 
         /// <summary>
         ///     Gets or sets the right edge of the GameObject.
@@ -98,20 +97,58 @@ namespace SpaceInvaders.Model.Entities
         /// </value>
         public BaseSprite Sprite { get; protected set; }
 
+        /// <summary>
+        ///     Gets or sets the collision layers.
+        ///     Each bit of CollisionLayers represents a different layer, for a total of eight layers.
+        /// 
+        ///     If Monitorable is set to true, other GameObjects will check if any of their flagged
+        ///     CollisionMask bits match this object's CollisionLayer when their bounding boxes overlap.
+        /// </summary>
+        /// <value>
+        ///     The collision layers.
+        /// </value>
         public byte CollisionLayers { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the collision masks.
+        ///     Each bit of CollisionMasks represents a different layer, for a total of eight layers.
+        /// 
+        /// </summary>
+        /// <value>
+        ///     The collision masks.
+        /// </value>
         public byte CollisionMasks { get; set; }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether this <see cref="GameObject"/> is monitorable.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if monitorable; otherwise, <c>false</c>.
+        /// </value>
         public bool Monitorable { get; set; }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether this <see cref="GameObject"/> is monitoring for collisions.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if monitoring; otherwise, <c>false</c>.
+        /// </value>
         public bool Monitoring { get; set; }
 
         #endregion
 
         #region Methods
 
+        /// <summary>
+        ///     The update loop for the GameObject.
+        /// </summary>
+        /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public abstract void Update(double delta);
 
+        /// <summary>
+        ///     Moves the specified distance.
+        /// </summary>
+        /// <param name="distance">The distance to move.</param>
         public void Move(Vector2 distance)
         {
             this.X += distance.X;
