@@ -259,23 +259,31 @@ namespace SpaceInvaders.Model
             this.additionQueue.Clear();
         }
 
-        private void onGameObjectMoved(GameObject sender, EventArgs e)
+        private void onGameObjectMoved(object sender, EventArgs e)
+        {
+            if (sender is GameObject movedObject)
+            {
+                checkObjectCollisions(movedObject);
+            }
+        }
+
+        private void checkObjectCollisions(GameObject movedObject)
         {
             foreach (var target in this.gameObjects)
             {
-                if (sender == target)
+                if (movedObject == target)
                 {
                     continue;
                 }
 
-                if (sender.IsCollidingWith(target))
+                if (movedObject.IsCollidingWith(target))
                 {
-                    sender.HandleCollision(target);
+                    movedObject.HandleCollision(target);
                 }
 
-                if (target.IsCollidingWith(sender))
+                if (target.IsCollidingWith(movedObject))
                 {
-                    target.HandleCollision(sender);
+                    target.HandleCollision(movedObject);
                 }
             }
         }
