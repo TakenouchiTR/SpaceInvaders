@@ -18,7 +18,7 @@ namespace SpaceInvaders.Model.Entities
 
         #region Data members
 
-        private const int TotalMovementSteps = 20;
+        private const int TotalMovementSteps = 19;
         private const int XMoveAmount = 15;
         private const int YMoveAmount = 32;
 
