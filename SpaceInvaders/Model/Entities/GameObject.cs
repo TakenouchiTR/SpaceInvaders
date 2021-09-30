@@ -224,10 +224,17 @@ namespace SpaceInvaders.Model.Entities
 
         /// <summary>
         ///     Moves the specified distance.
+        ///     TODO conditions
         /// </summary>
         /// <param name="distance">The distance to move.</param>
+        /// <exception cref="System.ArgumentException">distance must not be null</exception>
         public void Move(Vector2 distance)
         {
+            if (distance == null)
+            {
+                throw new ArgumentException("distance must not be null.");
+            }
+            
             this.X += distance.X;
             this.Y += distance.Y;
             this.collisionBox.X = (int) this.X;
