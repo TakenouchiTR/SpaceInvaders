@@ -1,4 +1,5 @@
-﻿using Windows.Foundation;
+﻿using System;
+using Windows.Foundation;
 using Windows.System;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
@@ -42,6 +43,12 @@ namespace SpaceInvaders.View
 
             this.gameManager = new GameManager(ApplicationHeight, ApplicationWidth);
             this.gameManager.InitializeGame(this.theCanvas);
+            this.gameManager.ScoreUpdated += onGameManagerScoreUpdated;
+        }
+
+        private void onGameManagerScoreUpdated(object sender, EventArgs e)
+        {
+            this.scoreText.Text = $"Score: {this.gameManager.Score}";
         }
     }
 }

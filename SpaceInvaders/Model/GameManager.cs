@@ -4,6 +4,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model.Entities;
 using SpaceInvaders.View.Sprites;
+using EventArgs = System.EventArgs;
 
 namespace SpaceInvaders.Model
 {
@@ -12,6 +13,8 @@ namespace SpaceInvaders.Model
     /// </summary>
     public class GameManager
     {
+        public event EventHandler ScoreUpdated;
+
         #region Data members
 
         private const double PlayerShipBottomOffset = 30;
@@ -22,7 +25,9 @@ namespace SpaceInvaders.Model
         private readonly HashSet<GameObject> gameObjects;
         private readonly HashSet<GameObject> removalQueue;
         private readonly HashSet<GameObject> additionQueue;
+
         private long prevUpdateTime;
+        private int score;
 
         #endregion
 
@@ -43,6 +48,22 @@ namespace SpaceInvaders.Model
         ///     The height of the screen.
         /// </value>
         public double ScreenHeight { get; }
+
+        /// <summary>
+        ///     Gets or sets the score.
+        /// </summary>
+        /// <value>
+        ///     The score.
+        /// </value>
+        public int Score
+        {
+            get => this.score;
+            set
+            {
+                this.score = value;
+                this.ScoreUpdated?.Invoke(this, EventArgs.Empty);
+            }
+        }
 
         #endregion
 
@@ -134,6 +155,23 @@ namespace SpaceInvaders.Model
                 X = 200 + 64 * 3,
                 Y = 32
             });
+
+            foreach (var go in this.additionQueue)
+            {
+                if (go is Enemy enemy)
+                {
+                    enemy.Removed += onEnemyRemoved;
+                }
+            }
+        }
+
+        private void onEnemyRemoved(object sender, EventArgs e)
+        {
+            if (sender is Enemy enemy)
+            {
+                Score += enemy.Score;
+                enemy.Removed -= this.onEnemyRemoved;
+            }
         }
 
         private void onUpdateTimerTick(object sender, object e)
