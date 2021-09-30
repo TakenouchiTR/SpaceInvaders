@@ -42,7 +42,7 @@ namespace SpaceInvaders.Model.Entities
 
         #region Methods
 
-        private void onRemoved(GameObject sender, EventArgs e)
+        private void onRemoved(object sender, EventArgs e)
         {
             this.shootTimer.Stop();
         }

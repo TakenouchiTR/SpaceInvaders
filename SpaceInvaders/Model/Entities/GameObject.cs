@@ -10,14 +10,6 @@ namespace SpaceInvaders.Model.Entities
     /// </summary>
     public abstract class GameObject
     {
-        #region Types and Delegates
-
-        public delegate void MovedEventHandler(GameObject sender, EventArgs e);
-
-        public delegate void RemovedEventHandler(GameObject sender, EventArgs e);
-
-        #endregion
-
         #region Data members
 
         protected GameManager parent;
@@ -221,8 +213,8 @@ namespace SpaceInvaders.Model.Entities
 
         #region Methods
 
-        public event RemovedEventHandler Removed;
-        public event MovedEventHandler Moved;
+        public event EventHandler Removed;
+        public event EventHandler Moved;
 
         /// <summary>
         ///     The update loop for the GameObject.

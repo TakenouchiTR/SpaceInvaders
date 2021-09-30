@@ -97,10 +97,13 @@ namespace SpaceInvaders.Model.Entities
             }
         }
 
-        private void onBulletRemoval(GameObject sender, EventArgs e)
+        private void onBulletRemoval(Object sender, EventArgs e)
         {
-            this.canShoot = true;
-            sender.Removed -= this.onBulletRemoval;
+            if (sender is GameObject bullet)
+            {
+                this.canShoot = true;
+                bullet.Removed -= this.onBulletRemoval;
+            }
         }
 
         #endregion
