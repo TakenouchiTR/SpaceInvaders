@@ -50,6 +50,7 @@ namespace SpaceInvaders.Model.Entities.Enemies
         private void onTargetRemoved(object sender, EventArgs e)
         {
             this.health -= 1;
+            this.velocity.X += Math.Sign(this.velocity.X) * 75;
             if (this.health <= 0)
             {
                 this.QueueRemoval();
