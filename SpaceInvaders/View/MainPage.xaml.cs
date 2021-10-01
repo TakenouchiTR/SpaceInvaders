@@ -1,7 +1,5 @@
 ﻿using System;
 using Windows.Foundation;
-using Windows.System;
-using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using SpaceInvaders.Model;
