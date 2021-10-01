@@ -1,5 +1,6 @@
 ﻿using System;
 using Windows.UI.Xaml;
+using SpaceInvaders.Model.Entities.Effects;
 using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Entities.Enemies
@@ -63,6 +64,16 @@ namespace SpaceInvaders.Model.Entities.Enemies
             CollisionLayers = (int) PhysicsLayer.Enemy;
             CollisionMasks = (int) PhysicsLayer.PlayerHitbox;
             MovementTick += this.OnMovementTick;
+            this.Removed += this.onRemoved;
+        }
+
+        private void onRemoved(object sender, EventArgs e)
+        {
+            Explosion explosion = new Explosion(gameManager) 
+            {
+                Center = this.Center
+            };
+            gameManager.QueueGameObjectForAddition(explosion);
         }
 
         #endregion
