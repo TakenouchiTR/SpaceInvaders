@@ -59,7 +59,9 @@ namespace SpaceInvaders.Model.Entities.Enemies
         protected Enemy(GameManager parent, BaseSprite sprite) : base(parent, sprite)
         {
             Monitorable = true;
+            Monitorable = true;
             CollisionLayers = (int) PhysicsLayer.Enemy;
+            CollisionMasks = (int) PhysicsLayer.PlayerHitbox;
             MovementTick += this.OnMovementTick;
         }
 
@@ -68,6 +70,13 @@ namespace SpaceInvaders.Model.Entities.Enemies
         #region Methods
 
         public static event MovementTickHandler MovementTick;
+
+        public override void HandleCollision(GameObject target)
+        {
+            base.HandleCollision(target);
+
+            this.QueueRemoval();
+        }
 
         protected virtual void OnMovementTick(Vector2 moveDistance)
         {
