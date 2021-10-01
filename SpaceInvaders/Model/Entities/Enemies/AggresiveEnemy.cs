@@ -28,7 +28,7 @@ namespace SpaceInvaders.Model.Entities.Enemies
         ///     Initializes a new instance of the <see cref="AggresiveEnemy" /> class.
         /// </summary>
         /// <param name="parent">The parent.</param>
-        public AggresiveEnemy(GameManager parent) : base(parent, new BasicEnemySprite())
+        public AggresiveEnemy(GameManager parent) : base(parent, new AggresiveEnemySprite())
         {
             Score = 30;
             this.shootTimer = new DispatcherTimer();
