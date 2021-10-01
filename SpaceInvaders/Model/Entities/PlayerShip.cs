@@ -1,5 +1,6 @@
 ﻿using System;
 using Windows.System;
+using SpaceInvaders.Model.Entities.Effects;
 using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Entities
@@ -48,6 +49,16 @@ namespace SpaceInvaders.Model.Entities
         {
             this.handleMovement(delta);
             this.handleShooting();
+        }
+
+        public override void CompleteRemoval()
+        {
+            base.CompleteRemoval();
+            Explosion explosion = new Explosion(gameManager) 
+            {
+                Center = this.Center
+            };
+            gameManager.QueueGameObjectForAddition(explosion);
         }
 
         private void handleMovement(double delta)
