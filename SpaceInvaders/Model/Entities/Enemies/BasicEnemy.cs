@@ -1,6 +1,6 @@
 ﻿using SpaceInvaders.View.Sprites;
 
-namespace SpaceInvaders.Model.Entities
+namespace SpaceInvaders.Model.Entities.Enemies
 {
     /// <summary>
     ///     The most basic enemy. Has no additional functionality by default

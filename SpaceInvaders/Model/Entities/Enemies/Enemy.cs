@@ -2,7 +2,7 @@
 using Windows.UI.Xaml;
 using SpaceInvaders.View.Sprites;
 
-namespace SpaceInvaders.Model.Entities
+namespace SpaceInvaders.Model.Entities.Enemies
 {
     /// <summary>
     ///     Defines the basic properties of all Enemy objects
