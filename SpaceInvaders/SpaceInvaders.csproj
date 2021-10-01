@@ -124,6 +124,8 @@
     <Compile Include="Model\Entities\Enemies\BasicEnemy.cs" />
     <Compile Include="Model\Entities\Bullet.cs" />
     <Compile Include="Model\Entities\Enemies\Enemy.cs" />
+    <Compile Include="Model\Entities\Enemies\TestBoss.cs" />
+    <Compile Include="Model\Entities\Enemies\TestBossTarget.cs" />
     <Compile Include="Model\Entities\EnemyBullet.cs" />
     <Compile Include="Model\Entities\Enemies\IntermediateEnemy.cs" />
     <Compile Include="Model\Entities\PlayerBullet.cs" />
@@ -158,6 +160,9 @@
     </Compile>
     <Compile Include="View\Sprites\PlayerShipSprite.xaml.cs">
       <DependentUpon>PlayerShipSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\TestBossSprite.xaml.cs">
+      <DependentUpon>TestBossSprite.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -209,6 +214,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\PlayerShipSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\TestBossSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
