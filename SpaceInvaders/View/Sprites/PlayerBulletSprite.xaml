@@ -11,7 +11,7 @@
     Width="8"
     Height="8">
 
-    <Canvas>
+    <Canvas ZIndex="1">
         <Rectangle Width="8" Height="8" Fill="White"/>
     </Canvas>
 </local:BaseSprite>
