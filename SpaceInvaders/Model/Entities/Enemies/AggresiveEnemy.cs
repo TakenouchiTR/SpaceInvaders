@@ -31,8 +31,10 @@ namespace SpaceInvaders.Model.Entities.Enemies
         public AggresiveEnemy(GameManager manager) : base(manager, new AggresiveEnemySprite())
         {
             Score = 30;
-            this.shootTimer = new DispatcherTimer();
-            this.shootTimer.Interval = TimeSpan.FromSeconds(getNextShotDelay());
+            this.shootTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(getNextShotDelay())
+            };
             this.shootTimer.Tick += this.onShootTimerTick;
             this.shootTimer.Start();
             Removed += this.onRemoved;

@@ -25,13 +25,17 @@ namespace SpaceInvaders.Model.Entities.Enemies
             CollisionMasks = (int) PhysicsLayer.PlayerHitbox;
 
             this.canShoot = false;
-            this.shootToggleTimer = new DispatcherTimer();
-            this.shootToggleTimer.Interval = TimeSpan.FromSeconds(2);
+            this.shootToggleTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(2)
+            };
             this.shootToggleTimer.Tick += this.onShootToggleTimerTick;
             this.shootToggleTimer.Start();
 
-            this.shootTimer = new DispatcherTimer();
-            this.shootTimer.Interval = TimeSpan.FromSeconds(.5);
+            this.shootTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(.5)
+            };
             this.shootTimer.Tick += this.onShooTimerTick;
             this.shootTimer.Start();
 

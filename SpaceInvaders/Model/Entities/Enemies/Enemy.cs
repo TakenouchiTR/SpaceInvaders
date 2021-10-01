@@ -46,8 +46,10 @@ namespace SpaceInvaders.Model.Entities.Enemies
 
         static Enemy()
         {
-            moveTimer = new DispatcherTimer();
-            moveTimer.Interval = TimeSpan.FromSeconds(1);
+            moveTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
             moveTimer.Tick += onMoveTimerTick;
             moveTimer.Start();
         }
