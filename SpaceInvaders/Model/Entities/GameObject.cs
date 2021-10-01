@@ -367,6 +367,11 @@ namespace SpaceInvaders.Model.Entities
 
         public void AddChild(GameObject child)
         {
+            if (child == null)
+            {
+                throw new ArgumentException("child must not be null");
+            }
+
             this.children.Add(child);
             child.parent = this;
             child.Removed += this.onChildRemoved;
