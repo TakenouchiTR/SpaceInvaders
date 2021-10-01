@@ -19,6 +19,7 @@ namespace SpaceInvaders.Model.Entities.Enemies
         {
             this.CollisionMasks = 0;
             this.CollisionLayers = (int) PhysicsLayer.Enemy;
+            this.Score = 1000;
             
             var leftTarget = new TestBossTarget(gameManager) 
             {
