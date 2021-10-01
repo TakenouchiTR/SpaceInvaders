@@ -37,7 +37,7 @@ namespace SpaceInvaders.Model.Entities
             Monitoring = true;
 
             CollisionLayers = (int) PhysicsLayer.Player;
-            CollisionMasks = (int) PhysicsLayer.EnemyHitbox;
+            CollisionMasks = (int) PhysicsLayer.EnemyHitbox | (int) PhysicsLayer.Enemy;
         }
 
         #endregion
