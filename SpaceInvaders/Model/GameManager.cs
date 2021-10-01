@@ -20,7 +20,7 @@ namespace SpaceInvaders.Model
         private const double EnemyStartAreaWidth = 250;
         private const int EnemiesPerRow = 4;
 
-        private Canvas background;
+        private Canvas canvas;
         private readonly DispatcherTimer updateTimer;
         private readonly HashSet<GameObject> gameObjects;
         private readonly Queue<GameObject> removalQueue;
@@ -120,7 +120,7 @@ namespace SpaceInvaders.Model
                 throw new ArgumentNullException(nameof(background));
             }
 
-            this.background = background;
+            this.canvas = background;
             this.createAndPlacePlayerShip(background);
             this.createAndPlaceEnemyShips();
         }
@@ -244,7 +244,7 @@ namespace SpaceInvaders.Model
 
         private void removeSpriteFromBackground(BaseSprite sprite)
         {
-            this.background.Children.Remove(sprite);
+            this.canvas.Children.Remove(sprite);
         }
 
         /// <summary>
@@ -273,7 +273,7 @@ namespace SpaceInvaders.Model
 
                 this.gameObjects.Add(gameObject);
                 gameObject.Moved += this.onGameObjectMoved;
-                this.background.Children.Add(gameObject.Sprite);
+                this.canvas.Children.Add(gameObject.Sprite);
             }
 
             this.additionQueue.Clear();
