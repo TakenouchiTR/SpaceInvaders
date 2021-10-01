@@ -20,21 +20,13 @@ namespace SpaceInvaders.Model
         public static void OnKeyDown(CoreWindow sender, KeyEventArgs args)
         {
             var pressedKey = args.VirtualKey;
-
-            if (keyStates.ContainsKey(pressedKey))
-            {
-                keyStates[pressedKey] = true;
-            }
+            KeyStates[pressedKey] = true;
         }
 
         public static void OnKeyUp(CoreWindow sender, KeyEventArgs args)
         {
             var pressedKey = args.VirtualKey;
-
-            if (keyStates.ContainsKey(pressedKey))
-            {
-                keyStates[pressedKey] = false;
-            }
+            KeyStates[pressedKey] = false;
         }
 
         /// <summary>
