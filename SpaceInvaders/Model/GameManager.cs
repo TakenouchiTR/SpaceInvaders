@@ -25,8 +25,8 @@ namespace SpaceInvaders.Model
         private Canvas background;
         private readonly DispatcherTimer updateTimer;
         private readonly HashSet<GameObject> gameObjects;
-        private readonly HashSet<GameObject> removalQueue;
-        private readonly HashSet<GameObject> additionQueue;
+        private readonly Queue<GameObject> removalQueue;
+        private readonly Queue<GameObject> additionQueue;
 
         private long prevUpdateTime;
         private int score;
@@ -99,8 +99,8 @@ namespace SpaceInvaders.Model
             this.updateTimer.Start();
 
             this.gameObjects = new HashSet<GameObject>();
-            this.removalQueue = new HashSet<GameObject>();
-            this.additionQueue = new HashSet<GameObject>();
+            this.removalQueue = new Queue<GameObject>();
+            this.additionQueue = new Queue<GameObject>();
         }
 
         #endregion
@@ -222,13 +222,15 @@ namespace SpaceInvaders.Model
                 throw new ArgumentException("obj must not be null");
             }
 
-            this.removalQueue.Add(obj);
+            this.removalQueue.Enqueue(obj);
         }
 
         private void removeObjectsInQueue()
         {
-            foreach (var gameObject in this.removalQueue)
+            while (this.removalQueue.Count > 0)
             {
+                var gameObject = this.removalQueue.Dequeue();
+
                 if (this.gameObjects.Contains(gameObject))
                 {
                     this.gameObjects.Remove(gameObject);
@@ -261,13 +263,15 @@ namespace SpaceInvaders.Model
                 throw new ArgumentException("obj must not be null");
             }
 
-            this.additionQueue.Add(obj);
+            this.additionQueue.Enqueue(obj);
         }
 
         private void addObjectsInQueue()
         {
-            foreach (var gameObject in this.additionQueue)
+            while (this.additionQueue.Count > 0)
             {
+                var gameObject = this.additionQueue.Dequeue();
+
                 this.gameObjects.Add(gameObject);
                 gameObject.Moved += this.onGameObjectMoved;
                 this.background.Children.Add(gameObject.Sprite);
