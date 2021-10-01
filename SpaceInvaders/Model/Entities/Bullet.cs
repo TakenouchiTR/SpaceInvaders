@@ -15,6 +15,7 @@ namespace SpaceInvaders.Model.Entities
         public Bullet(GameManager parent) : base(parent, new PlayerBulletSprite())
         {
             Monitoring = true;
+            Monitorable = true;
             this.Speed = new Vector2();
         }
 
@@ -34,8 +35,7 @@ namespace SpaceInvaders.Model.Entities
         public override void HandleCollision(GameObject target)
         {
             base.HandleCollision(target);
-
-            target.QueueRemoval();
+            
             QueueRemoval();
         }
 
