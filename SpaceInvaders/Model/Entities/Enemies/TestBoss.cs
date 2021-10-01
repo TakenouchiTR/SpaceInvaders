@@ -9,7 +9,6 @@ namespace SpaceInvaders.Model.Entities.Enemies
 
         private int health = 3;
         private Vector2 velocity = new Vector2(75, 0);
-        private int direction = 1;
 
         #endregion
 
