@@ -277,7 +277,7 @@ namespace SpaceInvaders.Model.Entities
         ///     Precondition: None
         ///     Postcondition: Removed event is invoked
         /// </summary>
-        public void CompleteRemoval()
+        public virtual void CompleteRemoval()
         {
             this.Removed?.Invoke(this, EventArgs.Empty);
         }
