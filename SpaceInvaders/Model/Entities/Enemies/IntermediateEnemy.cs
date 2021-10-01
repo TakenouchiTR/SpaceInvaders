@@ -16,8 +16,8 @@ namespace SpaceInvaders.Model.Entities.Enemies
         /// <summary>
         /// Initializes a new instance of the <see cref="IntermediateEnemy"/> class.
         /// </summary>
-        /// <param name="parent">The parent.</param>
-        public IntermediateEnemy(GameManager parent) : base(parent, new IntermediateEnemySprite())
+        /// <param name="gameManager">The gameManager.</param>
+        public IntermediateEnemy(GameManager gameManager) : base(gameManager, new IntermediateEnemySprite())
         {
             this.Score = 20;
         }

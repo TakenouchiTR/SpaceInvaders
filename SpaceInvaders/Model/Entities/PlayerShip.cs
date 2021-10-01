@@ -29,7 +29,7 @@ namespace SpaceInvaders.Model.Entities
         /// <summary>
         ///     Initializes a new instance of the <see cref="PlayerShip" /> class.
         /// </summary>
-        public PlayerShip(GameManager parent) : base(parent, new PlayerShipSprite())
+        public PlayerShip(GameManager gameManager) : base(gameManager, new PlayerShipSprite())
         {
             this.canShoot = true;
             this.velocity = new Vector2();
@@ -72,9 +72,9 @@ namespace SpaceInvaders.Model.Entities
                 {
                     moveDistance = -X;
                 }
-                else if (Right + moveDistance > parent.ScreenWidth)
+                else if (Right + moveDistance > gameManager.ScreenWidth)
                 {
-                    moveDistance = parent.ScreenWidth - Right;
+                    moveDistance = gameManager.ScreenWidth - Right;
                 }
 
                 this.velocity.X = moveDistance;
@@ -87,12 +87,12 @@ namespace SpaceInvaders.Model.Entities
         {
             if (this.canShoot && Input.IsKeyPressed(ShootKey))
             {
-                var bullet = new PlayerBullet(parent) {
+                var bullet = new PlayerBullet(gameManager) {
                     Position = Position + this.bulletSpawnLocation
                 };
                 bullet.Removed += this.onBulletRemoval;
 
-                parent.QueueGameObjectForAddition(bullet);
+                gameManager.QueueGameObjectForAddition(bullet);
                 this.canShoot = false;
             }
         }

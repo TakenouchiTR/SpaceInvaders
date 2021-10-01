@@ -13,8 +13,8 @@ namespace SpaceInvaders.Model.Entities.Enemies
         /// <summary>
         ///     Initializes a new instance of the <see cref="BasicEnemy" /> class.
         /// </summary>
-        /// <param name="parent">The parent.</param>
-        public BasicEnemy(GameManager parent) : base(parent, new BasicEnemySprite())
+        /// <param name="gameManager">The gameManager.</param>
+        public BasicEnemy(GameManager gameManager) : base(gameManager, new BasicEnemySprite())
         {
             Score = 10;
         }

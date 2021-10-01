@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using SpaceInvaders.View.Sprites;
 using Point = Windows.Foundation.Point;
@@ -12,14 +13,17 @@ namespace SpaceInvaders.Model.Entities
     {
         #region Data members
 
-        protected GameManager parent;
+        private readonly HashSet<GameObject> children;
+
+        protected GameManager gameManager;
+        private GameObject parent;
         private Rectangle collisionBox;
         private Point location;
 
         #endregion
 
         #region Properties
-
+        
         /// <summary>
         ///     Gets or sets the x location of the game object.
         /// </summary>
@@ -31,6 +35,12 @@ namespace SpaceInvaders.Model.Entities
             get => this.location.X;
             set
             {
+                var moveDistance = value - this.X;
+                foreach (var child in this.children)
+                {
+                    child.X += moveDistance;
+                }
+
                 this.location.X = value;
                 this.collisionBox.X = (int) value;
                 this.render();
@@ -49,6 +59,12 @@ namespace SpaceInvaders.Model.Entities
             get => this.location.Y;
             set
             {
+                var moveDistance = value - this.Y;
+                foreach (var child in this.children)
+                {
+                    child.Y += moveDistance;
+                }
+                
                 this.location.Y = value;
                 this.collisionBox.Y = (int) value;
                 this.render();
@@ -198,15 +214,16 @@ namespace SpaceInvaders.Model.Entities
         /// <summary>
         ///     Initializes a new instance of the <see cref="GameObject" /> class.
         /// </summary>
-        /// <param name="parent">The parent.</param>
+        /// <param name="gameManager">The gameManager.</param>
         /// <param name="sprite">The sprite.</param>
-        protected GameObject(GameManager parent, BaseSprite sprite)
+        protected GameObject(GameManager gameManager, BaseSprite sprite)
         {
             this.Sprite = sprite;
-            this.parent = parent;
+            this.gameManager = gameManager;
 
             this.collisionBox.Width = (int) this.Width;
             this.collisionBox.Height = (int) this.Height;
+            this.children = new HashSet<GameObject>();
         }
 
         #endregion
@@ -248,7 +265,11 @@ namespace SpaceInvaders.Model.Entities
         /// </summary>
         public void QueueRemoval()
         {
-            this.parent.QueueGameObjectForRemoval(this);
+            this.gameManager.QueueGameObjectForRemoval(this);
+            foreach (var child in this.children)
+            {
+                child.QueueRemoval();
+            }
         }
 
         /// <summary>
@@ -327,7 +348,7 @@ namespace SpaceInvaders.Model.Entities
         /// </returns>
         public bool IsOffScreen()
         {
-            return this.X > this.parent.ScreenWidth || this.Right < 0 || this.Y > this.parent.ScreenHeight ||
+            return this.X > this.gameManager.ScreenWidth || this.Right < 0 || this.Y > this.gameManager.ScreenHeight ||
                    this.Bottom < 0;
         }
 
@@ -342,6 +363,22 @@ namespace SpaceInvaders.Model.Entities
         public bool IsOnScreen()
         {
             return !this.IsOffScreen();
+        }
+
+        public void AddChild(GameObject child)
+        {
+            this.children.Add(child);
+            child.parent = this;
+            child.Removed += this.onChildRemoved;
+        }
+
+        private void onChildRemoved(object sender, EventArgs e)
+        {
+            if (sender is GameObject child)
+            {
+                this.children.Remove(child);
+                child.Removed -= this.onChildRemoved;
+            }
         }
 
         #endregion

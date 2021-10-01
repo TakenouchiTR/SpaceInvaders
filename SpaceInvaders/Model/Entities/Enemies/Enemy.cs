@@ -55,9 +55,9 @@ namespace SpaceInvaders.Model.Entities.Enemies
         /// <summary>
         ///     Initializes a new instance of the <see cref="Enemy" /> class.
         /// </summary>
-        /// <param name="parent">The parent.</param>
+        /// <param name="gameManager">The gameManager.</param>
         /// <param name="sprite">The sprite.</param>
-        protected Enemy(GameManager parent, BaseSprite sprite) : base(parent, sprite)
+        protected Enemy(GameManager gameManager, BaseSprite sprite) : base(gameManager, sprite)
         {
             Monitorable = true;
             Monitorable = true;
