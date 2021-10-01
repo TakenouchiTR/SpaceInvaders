@@ -146,6 +146,9 @@
     <Compile Include="View\Sprites\BasicEnemySprite.xaml.cs">
       <DependentUpon>BasicEnemySprite.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Sprites\ExplosionSprite.xaml.cs">
+      <DependentUpon>ExplosionSprite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\IntermediateEnemySprite.xaml.cs">
       <DependentUpon>IntermediateEnemySprite.xaml</DependentUpon>
     </Compile>
