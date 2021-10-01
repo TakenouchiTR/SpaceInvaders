@@ -384,6 +384,23 @@ namespace SpaceInvaders.Model.Entities
             child.Removed += this.onChildRemoved;
         }
 
+        public void DetachChild(GameObject child)
+        {
+            if (this.children.Contains(child))
+            {
+                this.children.Remove(child);
+            }
+        }
+
+        public void DetachFromParent()
+        {
+            if (this.parent != null)
+            {
+                this.parent.DetachChild(this);
+                this.parent = null;
+            }
+        }
+
         private void onChildRemoved(object sender, EventArgs e)
         {
             if (sender is GameObject child)
