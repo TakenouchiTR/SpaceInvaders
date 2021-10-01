@@ -11,7 +11,7 @@ namespace SpaceInvaders.Model
     {
         #region Data members
 
-        private static readonly Dictionary<VirtualKey, bool> KeyStates = new Dictionary<VirtualKey, bool> {};
+        private static readonly Dictionary<VirtualKey, bool> KeyStates = new Dictionary<VirtualKey, bool>();
 
         #endregion
 
