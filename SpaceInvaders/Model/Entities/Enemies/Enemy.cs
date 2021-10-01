@@ -55,9 +55,9 @@ namespace SpaceInvaders.Model.Entities.Enemies
         /// <summary>
         ///     Initializes a new instance of the <see cref="Enemy" /> class.
         /// </summary>
-        /// <param name="gameManager">The gameManager.</param>
+        /// <param name="manager">The Manager.</param>
         /// <param name="sprite">The sprite.</param>
-        protected Enemy(GameManager gameManager, BaseSprite sprite) : base(gameManager, sprite)
+        protected Enemy(GameManager manager, BaseSprite sprite) : base(manager, sprite)
         {
             Monitorable = true;
             Monitoring = true;
@@ -73,10 +73,10 @@ namespace SpaceInvaders.Model.Entities.Enemies
 
         private void onRemoved(object sender, EventArgs e)
         {
-            var explosion = new Explosion(gameManager) {
+            var explosion = new Explosion(Manager) {
                 Center = Center
             };
-            gameManager.QueueGameObjectForAddition(explosion);
+            Manager.QueueGameObjectForAddition(explosion);
         }
 
         public static event MovementTickHandler MovementTick;

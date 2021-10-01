@@ -11,8 +11,8 @@
         /// <summary>
         ///     Initializes a new instance of the <see cref="PlayerBullet" /> class.
         /// </summary>
-        /// <param name="gameManager">The gameManager.</param>
-        public PlayerBullet(GameManager gameManager) : base(gameManager)
+        /// <param name="manager">The Manager.</param>
+        public PlayerBullet(GameManager manager) : base(manager)
         {
             Speed.Y = -1000;
             CollisionMasks = (int) PhysicsLayer.Enemy;

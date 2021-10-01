@@ -15,7 +15,7 @@ namespace SpaceInvaders.Model.Entities
 
         private readonly HashSet<GameObject> children;
 
-        protected GameManager gameManager;
+        protected GameManager Manager;
         private GameObject parent;
         private Rectangle collisionBox;
         private Point location;
@@ -214,12 +214,12 @@ namespace SpaceInvaders.Model.Entities
         /// <summary>
         ///     Initializes a new instance of the <see cref="GameObject" /> class.
         /// </summary>
-        /// <param name="gameManager">The gameManager.</param>
+        /// <param name="manager">The Manager.</param>
         /// <param name="sprite">The sprite.</param>
-        protected GameObject(GameManager gameManager, BaseSprite sprite)
+        protected GameObject(GameManager manager, BaseSprite sprite)
         {
             this.Sprite = sprite;
-            this.gameManager = gameManager;
+            this.Manager = manager;
 
             this.collisionBox.Width = (int) this.Width;
             this.collisionBox.Height = (int) this.Height;
@@ -265,7 +265,7 @@ namespace SpaceInvaders.Model.Entities
         /// </summary>
         public void QueueRemoval()
         {
-            this.gameManager.QueueGameObjectForRemoval(this);
+            this.Manager.QueueGameObjectForRemoval(this);
             foreach (var child in this.children)
             {
                 child.QueueRemoval();
@@ -348,7 +348,7 @@ namespace SpaceInvaders.Model.Entities
         /// </returns>
         public bool IsOffScreen()
         {
-            return this.X > this.gameManager.ScreenWidth || this.Right < 0 || this.Y > this.gameManager.ScreenHeight ||
+            return this.X > this.Manager.ScreenWidth || this.Right < 0 || this.Y > this.Manager.ScreenHeight ||
                    this.Bottom < 0;
         }
 

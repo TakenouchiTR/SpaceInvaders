@@ -16,7 +16,7 @@ namespace SpaceInvaders.Model.Entities.Effects
 
         #region Constructors
 
-        public Explosion(GameManager gameManager) : base(gameManager, new ExplosionSprite())
+        public Explosion(GameManager manager) : base(manager, new ExplosionSprite())
         {
             this.removalTimer = new DispatcherTimer {
                 Interval = TimeSpan.FromSeconds(.25)

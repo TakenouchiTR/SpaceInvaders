@@ -30,7 +30,7 @@ namespace SpaceInvaders.Model.Entities
         /// <summary>
         ///     Initializes a new instance of the <see cref="PlayerShip" /> class.
         /// </summary>
-        public PlayerShip(GameManager gameManager) : base(gameManager, new PlayerShipSprite())
+        public PlayerShip(GameManager manager) : base(manager, new PlayerShipSprite())
         {
             this.canShoot = true;
             this.velocity = new Vector2();
@@ -54,10 +54,10 @@ namespace SpaceInvaders.Model.Entities
         public override void CompleteRemoval()
         {
             base.CompleteRemoval();
-            var explosion = new Explosion(gameManager) {
+            var explosion = new Explosion(Manager) {
                 Center = Center
             };
-            gameManager.QueueGameObjectForAddition(explosion);
+            Manager.QueueGameObjectForAddition(explosion);
         }
 
         private void handleMovement(double delta)
@@ -82,9 +82,9 @@ namespace SpaceInvaders.Model.Entities
                 {
                     moveDistance = -X;
                 }
-                else if (Right + moveDistance > gameManager.ScreenWidth)
+                else if (Right + moveDistance > Manager.ScreenWidth)
                 {
-                    moveDistance = gameManager.ScreenWidth - Right;
+                    moveDistance = Manager.ScreenWidth - Right;
                 }
 
                 this.velocity.X = moveDistance;
@@ -97,12 +97,12 @@ namespace SpaceInvaders.Model.Entities
         {
             if (this.canShoot && Input.IsKeyPressed(ShootKey))
             {
-                var bullet = new PlayerBullet(gameManager) {
+                var bullet = new PlayerBullet(Manager) {
                     Position = Position + this.bulletSpawnLocation
                 };
                 bullet.Removed += this.onBulletRemoval;
 
-                gameManager.QueueGameObjectForAddition(bullet);
+                Manager.QueueGameObjectForAddition(bullet);
                 this.canShoot = false;
             }
         }

@@ -12,7 +12,7 @@ namespace SpaceInvaders.Model.Entities
 
         #region Constructors
 
-        public Bullet(GameManager gameManager) : base(gameManager, new PlayerBulletSprite())
+        public Bullet(GameManager manager) : base(manager, new PlayerBulletSprite())
         {
             Monitoring = true;
             Monitorable = true;

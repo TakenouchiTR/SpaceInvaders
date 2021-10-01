@@ -17,7 +17,7 @@ namespace SpaceInvaders.Model.Entities.Enemies
 
         #region Constructors
 
-        public TestBossTarget(GameManager gameManager) : base(gameManager, new BasicEnemySprite())
+        public TestBossTarget(GameManager manager) : base(manager, new BasicEnemySprite())
         {
             Monitoring = true;
             Monitorable = true;
@@ -54,11 +54,11 @@ namespace SpaceInvaders.Model.Entities.Enemies
         {
             if (this.canShoot)
             {
-                var bullet = new EnemyBullet(gameManager) {
+                var bullet = new EnemyBullet(Manager) {
                     Position = Position
                 };
 
-                gameManager.QueueGameObjectForAddition(bullet);
+                Manager.QueueGameObjectForAddition(bullet);
             }
         }
 

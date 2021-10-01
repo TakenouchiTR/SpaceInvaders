@@ -27,8 +27,8 @@ namespace SpaceInvaders.Model.Entities.Enemies
         /// <summary>
         ///     Initializes a new instance of the <see cref="AggresiveEnemy" /> class.
         /// </summary>
-        /// <param name="gameManager">The gameManager.</param>
-        public AggresiveEnemy(GameManager gameManager) : base(gameManager, new AggresiveEnemySprite())
+        /// <param name="manager">The Manager.</param>
+        public AggresiveEnemy(GameManager manager) : base(manager, new AggresiveEnemySprite())
         {
             Score = 30;
             this.shootTimer = new DispatcherTimer();
@@ -50,11 +50,11 @@ namespace SpaceInvaders.Model.Entities.Enemies
         private void onShootTimerTick(object sender, object e)
         {
             this.shootTimer.Interval = TimeSpan.FromSeconds(getNextShotDelay());
-            var bullet = new EnemyBullet(gameManager) {
+            var bullet = new EnemyBullet(Manager) {
                 Position = Position + this.bulletSpawnLocation
             };
 
-            gameManager.QueueGameObjectForAddition(bullet);
+            Manager.QueueGameObjectForAddition(bullet);
         }
 
         public override void Update(double delta)

@@ -15,19 +15,19 @@ namespace SpaceInvaders.Model.Entities.Enemies
 
         #region Constructors
 
-        public TestBoss(GameManager gameManager) : base(gameManager, new TestBossSprite())
+        public TestBoss(GameManager manager) : base(manager, new TestBossSprite())
         {
             CollisionMasks = 0;
             CollisionLayers = (int) PhysicsLayer.Enemy;
             Score = 1000;
 
-            var leftTarget = new TestBossTarget(gameManager) {
+            var leftTarget = new TestBossTarget(manager) {
                 Center = new Vector2(X, Bottom)
             };
-            var rightTarget = new TestBossTarget(gameManager) {
+            var rightTarget = new TestBossTarget(manager) {
                 Center = new Vector2(Right, Bottom)
             };
-            var centerTarget = new TestBossTarget(gameManager) {
+            var centerTarget = new TestBossTarget(manager) {
                 Center = new Vector2(Center.X, Bottom)
             };
 
@@ -35,9 +35,9 @@ namespace SpaceInvaders.Model.Entities.Enemies
             AddChild(centerTarget);
             AddChild(rightTarget);
 
-            gameManager.QueueGameObjectForAddition(leftTarget);
-            gameManager.QueueGameObjectForAddition(centerTarget);
-            gameManager.QueueGameObjectForAddition(rightTarget);
+            manager.QueueGameObjectForAddition(leftTarget);
+            manager.QueueGameObjectForAddition(centerTarget);
+            manager.QueueGameObjectForAddition(rightTarget);
 
             leftTarget.Removed += this.onTargetRemoved;
             centerTarget.Removed += this.onTargetRemoved;
@@ -66,7 +66,7 @@ namespace SpaceInvaders.Model.Entities.Enemies
         public override void Update(double delta)
         {
             Move(this.velocity * delta);
-            if (X < 0 || Right > gameManager.ScreenWidth)
+            if (X < 0 || Right > Manager.ScreenWidth)
             {
                 this.velocity *= -1;
             }
