@@ -13,7 +13,6 @@
 
     <UserControl.Resources>
         <SolidColorBrush x:Key="BodyColor" Color="LightGray"/>
-        <SolidColorBrush x:Key="BorderColor" Color="Black"/>
     </UserControl.Resources>
 
     <Canvas>
