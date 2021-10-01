@@ -11,11 +11,7 @@ namespace SpaceInvaders.Model
     {
         #region Data members
 
-        private static readonly Dictionary<VirtualKey, bool> keyStates = new Dictionary<VirtualKey, bool> {
-            {VirtualKey.Left, false},
-            {VirtualKey.Right, false},
-            {VirtualKey.Space, false}
-        };
+        private static readonly Dictionary<VirtualKey, bool> KeyStates = new Dictionary<VirtualKey, bool> {};
 
         #endregion
 
@@ -51,9 +47,9 @@ namespace SpaceInvaders.Model
         /// </returns>
         public static bool IsKeyPressed(VirtualKey key)
         {
-            if (keyStates.ContainsKey(key))
+            if (KeyStates.ContainsKey(key))
             {
-                return keyStates[key];
+                return KeyStates[key];
             }
 
             return false;
@@ -69,9 +65,9 @@ namespace SpaceInvaders.Model
         /// </returns>
         public static bool IsKeyReleased(VirtualKey key)
         {
-            if (keyStates.ContainsKey(key))
+            if (KeyStates.ContainsKey(key))
             {
-                return !keyStates[key];
+                return !KeyStates[key];
             }
 
             return false;
