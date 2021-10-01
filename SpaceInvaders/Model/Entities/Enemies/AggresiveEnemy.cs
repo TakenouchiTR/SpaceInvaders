@@ -16,7 +16,7 @@ namespace SpaceInvaders.Model.Entities.Enemies
         private const double MaxShotDelay = 3;
         private static readonly Random ShootRandom = new Random();
 
-        private readonly Vector2 bulletSpawnLocation = new Vector2(22, 40);
+        private readonly Vector2 bulletSpawnLocation = new Vector2(12, 40);
 
         private readonly DispatcherTimer shootTimer;
 
