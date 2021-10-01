@@ -35,7 +35,7 @@ namespace SpaceInvaders.Model.Entities
         public override void HandleCollision(GameObject target)
         {
             base.HandleCollision(target);
-            
+
             QueueRemoval();
         }
 

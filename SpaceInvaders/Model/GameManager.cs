@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model.Entities;
-using SpaceInvaders.View.Sprites;
 using SpaceInvaders.Model.Entities.Enemies;
+using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model
 {
@@ -13,8 +13,6 @@ namespace SpaceInvaders.Model
     /// </summary>
     public class GameManager
     {
-        public event EventHandler ScoreUpdated;
-
         #region Data members
 
         private const double PlayerShipBottomOffset = 30;
@@ -107,6 +105,8 @@ namespace SpaceInvaders.Model
 
         #region Methods
 
+        public event EventHandler ScoreUpdated;
+
         /// <summary>
         ///     Initializes the game placing player ship and enemy ship in the game.
         ///     Precondition: background != null
@@ -128,7 +128,7 @@ namespace SpaceInvaders.Model
         private void createAndPlacePlayerShip(Canvas background)
         {
             var playerShip = new PlayerShip(this);
-            playerShip.Removed += onPlayerShipRemoved;
+            playerShip.Removed += this.onPlayerShipRemoved;
 
             this.placePlayerShipNearBottomOfBackgroundCentered(playerShip);
         }
@@ -147,15 +147,14 @@ namespace SpaceInvaders.Model
 
         private void createAndPlaceEnemyShips()
         {
-            double spaceWidth = EnemyStartAreaWidth / EnemiesPerRow;
-            double startX = ScreenWidth / 2 - EnemyStartAreaWidth / 2;
+            var spaceWidth = EnemyStartAreaWidth / EnemiesPerRow;
+            var startX = this.ScreenWidth / 2 - EnemyStartAreaWidth / 2;
             startX += spaceWidth / 2;
 
             double startY = 48;
-            int yGap = 64;
+            var yGap = 64;
 
-            var enemies = new List<Enemy>()
-            {
+            var enemies = new List<Enemy> {
                 new AggresiveEnemy(this),
                 new AggresiveEnemy(this),
                 new AggresiveEnemy(this),
@@ -177,8 +176,8 @@ namespace SpaceInvaders.Model
                 var yPos = startY + i / EnemiesPerRow * yGap;
 
                 enemy.Position = new Vector2(xPos, yPos);
-                enemy.Removed += onEnemyRemoved;
-                QueueGameObjectForAddition(enemy);
+                enemy.Removed += this.onEnemyRemoved;
+                this.QueueGameObjectForAddition(enemy);
             }
         }
 
@@ -186,7 +185,7 @@ namespace SpaceInvaders.Model
         {
             if (sender is Enemy enemy)
             {
-                Score += enemy.Score;
+                this.Score += enemy.Score;
                 enemy.Removed -= this.onEnemyRemoved;
             }
         }
@@ -284,7 +283,7 @@ namespace SpaceInvaders.Model
         {
             if (sender is GameObject movedObject)
             {
-                checkObjectCollisions(movedObject);
+                this.checkObjectCollisions(movedObject);
             }
         }
 

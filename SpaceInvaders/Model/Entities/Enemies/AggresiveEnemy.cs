@@ -51,7 +51,7 @@ namespace SpaceInvaders.Model.Entities.Enemies
         {
             this.shootTimer.Interval = TimeSpan.FromSeconds(getNextShotDelay());
             var bullet = new EnemyBullet(gameManager) {
-                Position = this.Position + this.bulletSpawnLocation
+                Position = Position + this.bulletSpawnLocation
             };
 
             gameManager.QueueGameObjectForAddition(bullet);

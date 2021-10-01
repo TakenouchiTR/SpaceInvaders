@@ -54,9 +54,8 @@ namespace SpaceInvaders.Model.Entities
         public override void CompleteRemoval()
         {
             base.CompleteRemoval();
-            Explosion explosion = new Explosion(gameManager) 
-            {
-                Center = this.Center
+            var explosion = new Explosion(gameManager) {
+                Center = Center
             };
             gameManager.QueueGameObjectForAddition(explosion);
         }
@@ -107,14 +106,14 @@ namespace SpaceInvaders.Model.Entities
                 this.canShoot = false;
             }
         }
-   
+
         public override void HandleCollision(GameObject target)
         {
             base.HandleCollision(target);
-            this.QueueRemoval();
+            QueueRemoval();
         }
 
-        private void onBulletRemoval(Object sender, EventArgs e)
+        private void onBulletRemoval(object sender, EventArgs e)
         {
             if (sender is GameObject bullet)
             {

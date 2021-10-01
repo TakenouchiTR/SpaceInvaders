@@ -28,7 +28,7 @@
         #endregion
 
         #region Methods
-        
+
         public static Vector2 operator *(Vector2 vector, double value)
         {
             return new Vector2(vector.X * value, vector.Y * value);

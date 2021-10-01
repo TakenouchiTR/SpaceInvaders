@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using SpaceInvaders.View.Sprites;
 
@@ -10,17 +6,23 @@ namespace SpaceInvaders.Model.Entities.Enemies
 {
     public class TestBossTarget : GameObject
     {
+        #region Data members
+
         private int health = 3;
         private bool canShoot;
-        private DispatcherTimer shootToggleTimer;
-        private DispatcherTimer shootTimer;
+        private readonly DispatcherTimer shootToggleTimer;
+        private readonly DispatcherTimer shootTimer;
+
+        #endregion
+
+        #region Constructors
 
         public TestBossTarget(GameManager gameManager) : base(gameManager, new BasicEnemySprite())
         {
-            this.Monitoring = true;
-            this.Monitorable = true;
-            this.CollisionLayers = (int) PhysicsLayer.Enemy;
-            this.CollisionMasks = (int) PhysicsLayer.PlayerHitbox;
+            Monitoring = true;
+            Monitorable = true;
+            CollisionLayers = (int) PhysicsLayer.Enemy;
+            CollisionMasks = (int) PhysicsLayer.PlayerHitbox;
 
             this.canShoot = false;
             this.shootToggleTimer = new DispatcherTimer();
@@ -33,8 +35,12 @@ namespace SpaceInvaders.Model.Entities.Enemies
             this.shootTimer.Tick += this.onShooTimerTick;
             this.shootTimer.Start();
 
-            this.Removed += this.onRemoved;
+            Removed += this.onRemoved;
         }
+
+        #endregion
+
+        #region Methods
 
         private void onRemoved(object sender, EventArgs e)
         {
@@ -48,9 +54,8 @@ namespace SpaceInvaders.Model.Entities.Enemies
         {
             if (this.canShoot)
             {
-                var bullet = new EnemyBullet(gameManager)
-                {
-                    Position = this.Position
+                var bullet = new EnemyBullet(gameManager) {
+                    Position = Position
                 };
 
                 gameManager.QueueGameObjectForAddition(bullet);
@@ -64,7 +69,6 @@ namespace SpaceInvaders.Model.Entities.Enemies
 
         public override void Update(double delta)
         {
-
         }
 
         public override void HandleCollision(GameObject target)
@@ -72,9 +76,10 @@ namespace SpaceInvaders.Model.Entities.Enemies
             this.health--;
             if (this.health <= 0)
             {
-                this.QueueRemoval();
-
+                QueueRemoval();
             }
         }
+
+        #endregion
     }
 }

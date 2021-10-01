@@ -64,28 +64,27 @@ namespace SpaceInvaders.Model.Entities.Enemies
             CollisionLayers = (int) PhysicsLayer.Enemy;
             CollisionMasks = (int) PhysicsLayer.PlayerHitbox;
             MovementTick += this.OnMovementTick;
-            this.Removed += this.onRemoved;
-        }
-
-        private void onRemoved(object sender, EventArgs e)
-        {
-            Explosion explosion = new Explosion(gameManager) 
-            {
-                Center = this.Center
-            };
-            gameManager.QueueGameObjectForAddition(explosion);
+            Removed += this.onRemoved;
         }
 
         #endregion
 
         #region Methods
 
+        private void onRemoved(object sender, EventArgs e)
+        {
+            var explosion = new Explosion(gameManager) {
+                Center = Center
+            };
+            gameManager.QueueGameObjectForAddition(explosion);
+        }
+
         public static event MovementTickHandler MovementTick;
 
         public override void HandleCollision(GameObject target)
         {
             base.HandleCollision(target);
-            this.QueueRemoval();
+            QueueRemoval();
         }
 
         protected virtual void OnMovementTick(Vector2 moveDistance)

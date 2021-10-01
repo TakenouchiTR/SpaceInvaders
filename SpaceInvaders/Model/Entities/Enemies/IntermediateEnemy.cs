@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SpaceInvaders.View.Sprites;
+﻿using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Entities.Enemies
 {
@@ -13,17 +8,25 @@ namespace SpaceInvaders.Model.Entities.Enemies
     /// <seealso cref="SpaceInvaders.Model.Entities.Enemies.Enemy" />
     public class IntermediateEnemy : Enemy
     {
+        #region Constructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="IntermediateEnemy"/> class.
+        ///     Initializes a new instance of the <see cref="IntermediateEnemy" /> class.
         /// </summary>
         /// <param name="gameManager">The gameManager.</param>
         public IntermediateEnemy(GameManager gameManager) : base(gameManager, new IntermediateEnemySprite())
         {
-            this.Score = 20;
+            Score = 20;
         }
+
+        #endregion
+
+        #region Methods
 
         public override void Update(double delta)
         {
         }
+
+        #endregion
     }
 }
