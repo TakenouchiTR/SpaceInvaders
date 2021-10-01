@@ -372,7 +372,7 @@ namespace SpaceInvaders.Model.Entities
         /// </summary>
         /// <param name="child">The child.</param>
         /// <exception cref="System.ArgumentException">child must not be null</exception>
-        public void AddChild(GameObject child)
+        public void AttachChild(GameObject child)
         {
             if (child == null)
             {

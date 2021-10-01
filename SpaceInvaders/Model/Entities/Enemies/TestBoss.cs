@@ -30,9 +30,9 @@ namespace SpaceInvaders.Model.Entities.Enemies
                 Center = new Vector2(Center.X, Bottom)
             };
 
-            AddChild(leftTarget);
-            AddChild(centerTarget);
-            AddChild(rightTarget);
+            AttachChild(leftTarget);
+            AttachChild(centerTarget);
+            AttachChild(rightTarget);
 
             manager.QueueGameObjectForAddition(leftTarget);
             manager.QueueGameObjectForAddition(centerTarget);
