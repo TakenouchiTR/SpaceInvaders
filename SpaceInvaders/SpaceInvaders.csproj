@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Entities\Effects\Explosion.cs" />
     <Compile Include="Model\Entities\Enemies\AggresiveEnemy.cs" />
     <Compile Include="Model\Entities\Enemies\BasicEnemy.cs" />
     <Compile Include="Model\Entities\Bullet.cs" />
@@ -189,6 +190,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\BasicEnemySprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\ExplosionSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
