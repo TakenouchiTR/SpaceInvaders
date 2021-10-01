@@ -4,7 +4,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model.Entities;
 using SpaceInvaders.View.Sprites;
-using EventArgs = System.EventArgs;
+using SpaceInvaders.Model.Entities.Enemies;
 
 namespace SpaceInvaders.Model
 {
@@ -19,6 +19,8 @@ namespace SpaceInvaders.Model
 
         private const double PlayerShipBottomOffset = 30;
         private const double MillisecondsInSecond = 1000;
+        private const double EnemyStartAreaWidth = 250;
+        private const int EnemiesPerRow = 4;
 
         private Canvas background;
         private readonly DispatcherTimer updateTimer;
@@ -126,8 +128,14 @@ namespace SpaceInvaders.Model
         private void createAndPlacePlayerShip(Canvas background)
         {
             var playerShip = new PlayerShip(this);
+            playerShip.Removed += onPlayerShipRemoved;
 
             this.placePlayerShipNearBottomOfBackgroundCentered(playerShip);
+        }
+
+        private void onPlayerShipRemoved(object sender, EventArgs e)
+        {
+            //todo add gameover screen
         }
 
         private void placePlayerShipNearBottomOfBackgroundCentered(PlayerShip playerShip)
@@ -139,29 +147,38 @@ namespace SpaceInvaders.Model
 
         private void createAndPlaceEnemyShips()
         {
-            this.QueueGameObjectForAddition(new AggresiveEnemy(this) {
-                X = 200,
-                Y = 32
-            });
-            this.QueueGameObjectForAddition(new AggresiveEnemy(this) {
-                X = 200 + 64 * 1,
-                Y = 32
-            });
-            this.QueueGameObjectForAddition(new AggresiveEnemy(this) {
-                X = 200 + 64 * 2,
-                Y = 32
-            });
-            this.QueueGameObjectForAddition(new AggresiveEnemy(this) {
-                X = 200 + 64 * 3,
-                Y = 32
-            });
+            double spaceWidth = EnemyStartAreaWidth / EnemiesPerRow;
+            double startX = ScreenWidth / 2 - EnemyStartAreaWidth / 2;
+            startX += spaceWidth / 2;
 
-            foreach (var go in this.additionQueue)
+            double startY = 48;
+            int yGap = 64;
+
+            var enemies = new List<Enemy>()
             {
-                if (go is Enemy enemy)
-                {
-                    enemy.Removed += onEnemyRemoved;
-                }
+                new AggresiveEnemy(this),
+                new AggresiveEnemy(this),
+                new AggresiveEnemy(this),
+                new AggresiveEnemy(this),
+                new IntermediateEnemy(this),
+                new IntermediateEnemy(this),
+                new IntermediateEnemy(this),
+                new IntermediateEnemy(this),
+                new BasicEnemy(this),
+                new BasicEnemy(this),
+                new BasicEnemy(this),
+                new BasicEnemy(this)
+            };
+
+            for (var i = 0; i < enemies.Count; i++)
+            {
+                var enemy = enemies[i];
+                var xPos = startX + i % EnemiesPerRow * spaceWidth;
+                var yPos = startY + i / EnemiesPerRow * yGap;
+
+                enemy.Position = new Vector2(xPos, yPos);
+                enemy.Removed += onEnemyRemoved;
+                QueueGameObjectForAddition(enemy);
             }
         }
 
