@@ -35,7 +35,7 @@ namespace SpaceInvaders.Model
         /// </summary>
         /// <param name="key">The key.</param>
         /// <returns>
-        ///     <c>true</c> if [the specified key is pressed] and is actively used; otherwise, <c>false</c>.
+        ///     <c>true</c> if [the specified key is pressed] and has been pressed before; otherwise, <c>false</c>.
         /// </returns>
         public static bool IsKeyPressed(VirtualKey key)
         {
@@ -53,7 +53,7 @@ namespace SpaceInvaders.Model
         /// </summary>
         /// <param name="key">The key.</param>
         /// <returns>
-        ///     <c>true</c> if [the specified key is released] and is actively used; otherwise, <c>false</c>.
+        ///     <c>true</c> if [the specified key is released] and has been pressed before; otherwise, <c>false</c>.
         /// </returns>
         public static bool IsKeyReleased(VirtualKey key)
         {
