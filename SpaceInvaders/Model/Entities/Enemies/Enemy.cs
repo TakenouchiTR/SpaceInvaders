@@ -60,7 +60,7 @@ namespace SpaceInvaders.Model.Entities.Enemies
         protected Enemy(GameManager gameManager, BaseSprite sprite) : base(gameManager, sprite)
         {
             Monitorable = true;
-            Monitorable = true;
+            Monitoring = true;
             CollisionLayers = (int) PhysicsLayer.Enemy;
             CollisionMasks = (int) PhysicsLayer.PlayerHitbox;
             MovementTick += this.OnMovementTick;
@@ -85,7 +85,6 @@ namespace SpaceInvaders.Model.Entities.Enemies
         public override void HandleCollision(GameObject target)
         {
             base.HandleCollision(target);
-
             this.QueueRemoval();
         }
 
