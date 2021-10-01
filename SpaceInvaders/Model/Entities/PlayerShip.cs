@@ -107,6 +107,12 @@ namespace SpaceInvaders.Model.Entities
                 this.canShoot = false;
             }
         }
+   
+        public override void HandleCollision(GameObject target)
+        {
+            base.HandleCollision(target);
+            this.QueueRemoval();
+        }
 
         private void onBulletRemoval(Object sender, EventArgs e)
         {
