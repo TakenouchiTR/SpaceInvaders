@@ -6,18 +6,20 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="33"
-    d:DesignWidth="50"
-    Height="33"
-    Width="50">
+    d:DesignHeight="48"
+    d:DesignWidth="32"
+    Height="48"
+    Width="32">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="PlayerShipColor" Color="Blue"/>
+        <SolidColorBrush x:Key="BodyColor" Color="#888"/>
+        <SolidColorBrush x:Key="OutlineColor" Color="Black"/>
     </UserControl.Resources>
 
     <Canvas>
-        <Rectangle Width="50" Height="20" Canvas.Top="13" Fill="{StaticResource PlayerShipColor}"/>
-        <Rectangle Width="40" Height="5"  Canvas.Top="8" Canvas.Left="5" Fill="{StaticResource PlayerShipColor}"/>
-        <Rectangle Width="8" Height="8" Canvas.Left="21" Fill="{StaticResource PlayerShipColor}"/>
+        <Polygon Points="11,0 9,0 4,5 0,13 0,18 5,25 5,27 0,32 0,40 7,48 10,48 15,40 16,40 21,48 24,48 32,40 32,32 26,27 26,25 32,18 32,13 27,5 22,0 20,0 20,17 18,19 13,19 11,17"
+                 Fill="{StaticResource BodyColor}" Stroke="{StaticResource OutlineColor}"/>
+        <Polygon Points="14,7 14,16 10,20 9,22 9,24 10,26 13,29 15,30 16,30 18,29 21,26 22,24 22,22 21,20 17,16 17,7"
+                 Fill="{StaticResource BodyColor}" Stroke="{StaticResource OutlineColor}"/>
     </Canvas>
 </local:BaseSprite>
