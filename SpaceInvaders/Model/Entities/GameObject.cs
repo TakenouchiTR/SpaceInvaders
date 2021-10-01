@@ -365,6 +365,13 @@ namespace SpaceInvaders.Model.Entities
             return !this.IsOffScreen();
         }
 
+        /// <summary>
+        ///  Adds a child to the GameObject.
+        /// Precondition: child != null
+        /// Postcondition: None
+        /// </summary>
+        /// <param name="child">The child.</param>
+        /// <exception cref="System.ArgumentException">child must not be null</exception>
         public void AddChild(GameObject child)
         {
             if (child == null)
