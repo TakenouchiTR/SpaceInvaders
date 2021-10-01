@@ -15,6 +15,8 @@ namespace SpaceInvaders.Model.Entities.Enemies
 
         public delegate void MovementTickHandler(Vector2 moveDistance);
 
+        public static event MovementTickHandler MovementTick;
+
         #endregion
 
         #region Data members
@@ -80,8 +82,6 @@ namespace SpaceInvaders.Model.Entities.Enemies
             };
             Manager.QueueGameObjectForAddition(explosion);
         }
-
-        public static event MovementTickHandler MovementTick;
 
         public override void HandleCollision(GameObject target)
         {
