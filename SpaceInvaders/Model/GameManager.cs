@@ -121,11 +121,11 @@ namespace SpaceInvaders.Model
             }
 
             this.canvas = background;
-            this.createAndPlacePlayerShip(background);
+            this.createAndPlacePlayerShip();
             this.createAndPlaceEnemyShips();
         }
 
-        private void createAndPlacePlayerShip(Canvas background)
+        private void createAndPlacePlayerShip()
         {
             var playerShip = new PlayerShip(this);
             playerShip.Removed += this.onPlayerShipRemoved;
