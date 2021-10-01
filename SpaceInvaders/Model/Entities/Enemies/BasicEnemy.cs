@@ -5,7 +5,7 @@ namespace SpaceInvaders.Model.Entities.Enemies
     /// <summary>
     ///     The most basic enemy. Has no additional functionality by default
     /// </summary>
-    /// <seealso cref="SpaceInvaders.Model.Entities.Enemy" />
+    /// <seealso cref="SpaceInvaders.Model.Entities.Enemies.BasicEnemy" />
     public class BasicEnemy : Enemy
     {
         #region Constructors

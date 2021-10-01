@@ -7,7 +7,7 @@ namespace SpaceInvaders.Model.Entities.Enemies
     /// <summary>
     ///     A basic enemy with the ability to shoot at random intervals
     /// </summary>
-    /// <seealso cref="SpaceInvaders.Model.Entities.Enemy" />
+    /// <seealso cref="SpaceInvaders.Model.Entities.Enemies.AggresiveEnemy" />
     public class AggresiveEnemy : Enemy
     {
         #region Data members
