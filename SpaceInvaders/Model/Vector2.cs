@@ -2,10 +2,68 @@
 {
     public class Vector2
     {
+        private double x;
+        private double y;
+
         #region Properties
 
-        public double X { get; set; }
-        public double Y { get; set; }
+        /// <summary>
+        ///     Gets or sets the x coordinate.
+        /// </summary>
+        /// <value>
+        ///     The x coordinate.
+        /// </value>
+        /// <exception cref="System.ArgumentException">
+        /// value must not be NaN
+        /// or
+        /// value must not be infinity
+        /// </exception>
+        public double X
+        {
+            get => this.x;
+            set
+            {
+                if (double.IsNaN(value))
+                {
+                    throw new ArgumentException("value must not be NaN");
+                }
+                if (double.IsInfinity(value))
+                {
+                    throw new ArgumentException("value must not be infinity");
+                }
+
+                this.x = value;
+            }
+        }
+
+        /// <summary>
+        ///     Gets or sets the y coordinate.
+        /// </summary>
+        /// <value>
+        ///     The y coordinate.
+        /// </value>
+        /// <exception cref="System.ArgumentException">
+        /// value must not be NaN
+        /// or
+        /// value must not be infinity
+        /// </exception>
+        public double Y
+        {
+            get => this.y;
+            set
+            {
+                if (double.IsNaN(value))
+                {
+                    throw new ArgumentException("value must not be NaN");
+                }
+                if (double.IsInfinity(value))
+                {
+                    throw new ArgumentException("value must not be infinity");
+                }
+
+                this.y = value;
+            }
+        }
 
         #endregion
 
