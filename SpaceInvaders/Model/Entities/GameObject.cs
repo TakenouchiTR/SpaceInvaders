@@ -16,7 +16,6 @@ namespace SpaceInvaders.Model.Entities
         private readonly HashSet<GameObject> children;
 
         protected GameManager Manager;
-        private GameObject parent;
         private Rectangle collisionBox;
         private Point location;
 
@@ -158,6 +157,14 @@ namespace SpaceInvaders.Model.Entities
         ///     The sprite.
         /// </value>
         public BaseSprite Sprite { get; protected set; }
+
+        /// <summary>
+        ///     Gets the parent.
+        /// </summary>
+        /// <value>
+        ///     The parent.
+        /// </value>
+        public GameObject Parent { get; private set; }
 
         /// <summary>
         ///     Gets or sets the collision layers.
@@ -384,7 +391,7 @@ namespace SpaceInvaders.Model.Entities
             }
 
             this.children.Add(child);
-            child.parent = this;
+            child.Parent = this;
             child.Removed += this.onChildRemoved;
         }
 
@@ -410,10 +417,10 @@ namespace SpaceInvaders.Model.Entities
         /// </summary>
         public void DetachFromParent()
         {
-            if (this.parent != null)
+            if (this.Parent != null)
             {
-                this.parent.DetachChild(this);
-                this.parent = null;
+                this.Parent.DetachChild(this);
+                this.Parent = null;
             }
         }
 
