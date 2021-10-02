@@ -28,6 +28,7 @@ namespace SpaceInvaders.Model
 
         private long prevUpdateTime;
         private int score;
+        private int enemyCount;
 
         #endregion
 
@@ -168,6 +169,8 @@ namespace SpaceInvaders.Model
                 new BasicEnemy(this),
                 new BasicEnemy(this)
             };
+
+            this.enemyCount = enemies.Count;
 
             for (var i = 0; i < enemies.Count; i++)
             {
