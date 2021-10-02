@@ -1,6 +1,7 @@
 ﻿using System;
 using Windows.System;
 using SpaceInvaders.Model.Entities.Effects;
+using SpaceInvaders.View;
 using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Entities
@@ -82,7 +83,7 @@ namespace SpaceInvaders.Model.Entities
                 {
                     moveDistance = -X;
                 }
-                else if (Right + moveDistance > Manager.ScreenWidth)
+                else if (Right + moveDistance > MainPage.ApplicationWidth)
                 {
                     moveDistance = Manager.ScreenWidth - Right;
                 }

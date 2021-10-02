@@ -1,4 +1,5 @@
 ﻿using System;
+using SpaceInvaders.View;
 using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Entities.Enemies
@@ -61,7 +62,7 @@ namespace SpaceInvaders.Model.Entities.Enemies
         public override void Update(double delta)
         {
             Move(this.velocity * delta);
-            if (X < 0 || Right > Manager.ScreenWidth)
+            if (X < 0 || Right > MainPage.ApplicationWidth)
             {
                 this.velocity *= -1;
             }
