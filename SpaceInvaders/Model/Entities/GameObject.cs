@@ -422,6 +422,7 @@ namespace SpaceInvaders.Model.Entities
             if (this.children.Contains(child))
             {
                 this.children.Remove(child);
+                child.Parent = null;
             }
         }
 
