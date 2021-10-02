@@ -1,7 +1,9 @@
 ﻿using System;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -42,6 +44,23 @@ namespace SpaceInvaders.View
             this.gameManager = new GameManager(ApplicationHeight, ApplicationWidth);
             this.gameManager.InitializeGame(this.theCanvas);
             this.gameManager.ScoreUpdated += onGameManagerScoreUpdated;
+            this.gameManager.GameFinished += onGameManagerGameFinished;
+        }
+
+        private async void onGameManagerGameFinished(object sender, string e)
+        {
+            this.gameManager.GameFinished -= this.onGameManagerGameFinished;
+
+            var gameOverDialog = new ContentDialog
+            {
+                Title = "Game Over",
+                Content = e,
+                PrimaryButtonText = "Exit to Desktop"
+            };
+
+            await gameOverDialog.ShowAsync();
+
+            CoreApplication.Exit();
         }
 
         private void onGameManagerScoreUpdated(object sender, EventArgs e)
