@@ -414,6 +414,11 @@ namespace SpaceInvaders.Model.Entities
         /// <exception cref="System.ArgumentException">child must not be null</exception>
         public void DetachChild(GameObject child)
         {
+            if (child == null)
+            {
+                throw new ArgumentException("child must not be null");
+            }
+
             if (this.children.Contains(child))
             {
                 this.children.Remove(child);
