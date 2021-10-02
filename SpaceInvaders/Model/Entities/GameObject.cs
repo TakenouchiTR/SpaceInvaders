@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using SpaceInvaders.View.Sprites;
 using Point = Windows.Foundation.Point;
 
@@ -157,6 +158,15 @@ namespace SpaceInvaders.Model.Entities
         ///     The sprite.
         /// </value>
         public BaseSprite Sprite { get; protected set; }
+
+        /// <summary>
+        ///     Gets a list of the GameObject's children.
+        ///     Modifying the list will not affect the object's children.
+        /// </summary>
+        /// <value>
+        ///     The children.
+        /// </value>
+        public List<GameObject> Children => this.children.ToList();
 
         /// <summary>
         ///     Gets the parent.
