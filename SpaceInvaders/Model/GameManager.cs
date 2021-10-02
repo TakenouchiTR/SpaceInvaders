@@ -135,7 +135,7 @@ namespace SpaceInvaders.Model
 
         private void onPlayerShipRemoved(object sender, EventArgs e)
         {
-            //todo add gameover screen
+            GameFinished?.Invoke(this, "You ran out of lives.");
         }
 
         private void placePlayerShipNearBottomOfBackgroundCentered(PlayerShip playerShip)
@@ -187,6 +187,12 @@ namespace SpaceInvaders.Model
             {
                 this.Score += enemy.Score;
                 enemy.Removed -= this.onEnemyRemoved;
+            }
+
+            this.enemyCount--;
+            if (this.enemyCount <= 0)
+            {
+                GameFinished?.Invoke(this, "Level completed!");
             }
         }
 
