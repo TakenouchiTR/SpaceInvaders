@@ -33,11 +33,7 @@ namespace SpaceInvaders.Model.Entities.Enemies
             AttachChild(leftTarget);
             AttachChild(centerTarget);
             AttachChild(rightTarget);
-
-            manager.QueueGameObjectForAddition(leftTarget);
-            manager.QueueGameObjectForAddition(centerTarget);
-            manager.QueueGameObjectForAddition(rightTarget);
-
+            
             leftTarget.Removed += this.onTargetRemoved;
             centerTarget.Removed += this.onTargetRemoved;
             rightTarget.Removed += this.onTargetRemoved;
