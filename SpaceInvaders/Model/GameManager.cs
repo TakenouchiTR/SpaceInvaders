@@ -126,6 +126,7 @@ namespace SpaceInvaders.Model
             this.canvas = background;
             this.createAndPlacePlayerShip();
             this.createAndPlaceEnemyShips();
+            //this.createAndPlaceTestBoss();
         }
 
         private void createAndPlacePlayerShip()
@@ -184,6 +185,14 @@ namespace SpaceInvaders.Model
                 enemy.Removed += this.onEnemyRemoved;
                 this.QueueGameObjectForAddition(enemy);
             }
+        }
+
+        private void createAndPlaceTestBoss()
+        {
+            TestBoss boss = new TestBoss(this);
+            QueueGameObjectForAddition(boss);
+            boss.Removed += this.onEnemyRemoved;
+            this.enemyCount = 1;
         }
 
         private void onEnemyRemoved(object sender, EventArgs e)
