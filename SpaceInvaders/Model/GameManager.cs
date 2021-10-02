@@ -13,6 +13,8 @@ namespace SpaceInvaders.Model
     /// </summary>
     public class GameManager
     {
+        public event EventHandler<string> GameFinished;
+
         #region Data members
 
         private const double PlayerShipBottomOffset = 30;
