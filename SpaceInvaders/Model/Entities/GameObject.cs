@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using SpaceInvaders.View;
 using SpaceInvaders.View.Sprites;
 using Point = Windows.Foundation.Point;
 
@@ -369,8 +370,7 @@ namespace SpaceInvaders.Model.Entities
         /// </returns>
         public bool IsOffScreen()
         {
-            return this.X > this.Manager.ScreenWidth || this.Right < 0 || this.Y > this.Manager.ScreenHeight ||
-                   this.Bottom < 0;
+            return this.X > MainPage.ApplicationWidth || this.Right < 0 || this.Y > MainPage.ApplicationHeight || this.Bottom < 0;
         }
 
         /// <summary>
