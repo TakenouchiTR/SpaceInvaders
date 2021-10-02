@@ -107,7 +107,10 @@ namespace SpaceInvaders.Model
         #endregion
 
         #region Methods
-
+        
+        /// <summary>
+        /// Occurs when the score is updated.
+        /// </summary>
         public event EventHandler ScoreUpdated;
 
         /// <summary>
@@ -135,11 +138,6 @@ namespace SpaceInvaders.Model
             playerShip.Removed += this.onPlayerShipRemoved;
 
             this.placePlayerShipNearBottomOfBackgroundCentered(playerShip);
-        }
-
-        private void onPlayerShipRemoved(object sender, EventArgs e)
-        {
-            GameFinished?.Invoke(this, "You ran out of lives.");
         }
 
         private void placePlayerShipNearBottomOfBackgroundCentered(PlayerShip playerShip)
@@ -172,9 +170,7 @@ namespace SpaceInvaders.Model
                 new BasicEnemy(this),
                 new BasicEnemy(this)
             };
-
-            this.enemyCount = enemies.Count;
-
+            
             for (var i = 0; i < enemies.Count; i++)
             {
                 var enemy = enemies[i];
@@ -182,48 +178,21 @@ namespace SpaceInvaders.Model
                 var yPos = startY + i / EnemiesPerRow * yGap;
 
                 enemy.Position = new Vector2(xPos, yPos);
-                enemy.Removed += this.onEnemyRemoved;
-                this.QueueGameObjectForAddition(enemy);
+                addEnemy(enemy);
             }
         }
 
         private void createAndPlaceTestBoss()
         {
             TestBoss boss = new TestBoss(this);
-            QueueGameObjectForAddition(boss);
-            boss.Removed += this.onEnemyRemoved;
-            this.enemyCount = 1;
+            addEnemy(boss);
         }
 
-        private void onEnemyRemoved(object sender, EventArgs e)
+        private void addEnemy(Enemy enemy)
         {
-            if (sender is Enemy enemy)
-            {
-                this.Score += enemy.Score;
-                enemy.Removed -= this.onEnemyRemoved;
-            }
-
-            this.enemyCount--;
-            if (this.enemyCount <= 0)
-            {
-                GameFinished?.Invoke(this, "Level completed!");
-            }
-        }
-
-        private void onUpdateTimerTick(object sender, object e)
-        {
-            var curTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-            var timeSinceLastTick = curTime - this.prevUpdateTime;
-            var delta = timeSinceLastTick / MillisecondsInSecond;
-            this.prevUpdateTime = curTime;
-
-            foreach (var gameObject in this.gameObjects)
-            {
-                gameObject.Update(delta);
-            }
-
-            this.addObjectsInQueue();
-            this.removeObjectsInQueue();
+            QueueGameObjectForAddition(enemy);
+            enemy.Removed += this.onEnemyRemoved;
+            this.enemyCount += 1;
         }
 
         /// <summary>
@@ -304,14 +273,6 @@ namespace SpaceInvaders.Model
             this.additionQueue.Clear();
         }
 
-        private void onGameObjectMoved(object sender, EventArgs e)
-        {
-            if (sender is GameObject movedObject)
-            {
-                this.checkObjectCollisions(movedObject);
-            }
-        }
-
         private void checkObjectCollisions(GameObject movedObject)
         {
             foreach (var target in this.gameObjects)
@@ -331,6 +292,50 @@ namespace SpaceInvaders.Model
                     target.HandleCollision(movedObject);
                 }
             }
+        }
+
+        private void onUpdateTimerTick(object sender, object e)
+        {
+            var curTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+            var timeSinceLastTick = curTime - this.prevUpdateTime;
+            var delta = timeSinceLastTick / MillisecondsInSecond;
+            this.prevUpdateTime = curTime;
+
+            foreach (var gameObject in this.gameObjects)
+            {
+                gameObject.Update(delta);
+            }
+
+            this.addObjectsInQueue();
+            this.removeObjectsInQueue();
+        }
+
+        private void onGameObjectMoved(object sender, EventArgs e)
+        {
+            if (sender is GameObject movedObject)
+            {
+                this.checkObjectCollisions(movedObject);
+            }
+        }
+
+        private void onEnemyRemoved(object sender, EventArgs e)
+        {
+            if (sender is Enemy enemy)
+            {
+                this.Score += enemy.Score;
+                enemy.Removed -= this.onEnemyRemoved;
+            }
+
+            this.enemyCount--;
+            if (this.enemyCount <= 0)
+            {
+                GameFinished?.Invoke(this, "Level completed!");
+            }
+        }
+
+        private void onPlayerShipRemoved(object sender, EventArgs e)
+        {
+            GameFinished?.Invoke(this, "You ran out of lives.");
         }
 
         #endregion
