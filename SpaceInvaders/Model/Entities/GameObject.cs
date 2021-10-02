@@ -235,13 +235,17 @@ namespace SpaceInvaders.Model.Entities
 
         /// <summary>
         ///     The update loop for the GameObject.
+        ///     Precondition: None
+        ///     Postcondition: GameObject completes its update step
         /// </summary>
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public abstract void Update(double delta);
 
         /// <summary>
-        ///     Moves the specified distance.
-        ///     TODO conditions
+        ///     Moves by the specified distance.
+        ///     Precondition: distance != null
+        ///     Postcondition: this.X == this.X + distance.X &&
+        ///                    this.Y == this.Y + distance.Y
         /// </summary>
         /// <param name="distance">The distance to move.</param>
         /// <exception cref="System.ArgumentException">distance must not be null</exception>
@@ -384,6 +388,13 @@ namespace SpaceInvaders.Model.Entities
             child.Removed += this.onChildRemoved;
         }
 
+        /// <summary>
+        ///     Detaches the child.
+        ///     Precondition: child != null
+        ///     Postcondition: !this.Children.Contains(child)
+        /// </summary>
+        /// <param name="child">The child to detach.</param>
+        /// <exception cref="System.ArgumentException">child must not be null</exception>
         public void DetachChild(GameObject child)
         {
             if (this.children.Contains(child))
@@ -392,6 +403,11 @@ namespace SpaceInvaders.Model.Entities
             }
         }
 
+        /// <summary>
+        ///     Detaches self from parent.
+        ///     Precondition: None
+        ///     Postcondition: this.Parent == null
+        /// </summary>
         public void DetachFromParent()
         {
             if (this.parent != null)
