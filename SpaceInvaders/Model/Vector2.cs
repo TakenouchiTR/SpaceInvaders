@@ -69,14 +69,41 @@
 
         #region Constructors
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Vector2"/> class.
+        ///     Precondition: None
+        ///     Postcondition: this.X == 0 && this.Y == 0
+        /// </summary>
         public Vector2() : this(0)
         {
         }
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Vector2"/> class. <br/>
+        ///     Precondition: !double.IsNaN(value) && !double.IsInfinity(value)
+        ///     PostCondition: this.X == value && this.Y == value
+        /// </summary>
+        /// <param name="value">The X and Y value.</param>
         public Vector2(double value) : this(value, value)
         {
         }
 
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Vector2"/> class. <br/>
+        ///     Precondition: !double.IsNaN(x) && !double.IsInfinity(x) &&
+        ///                   !double.IsNaN(y) && !double.IsInfinity(y)
+        ///     PostCondition: this.X == value && this.Y == value
+        /// </summary>
+        /// <exception cref="System.ArgumentException">
+        /// x must not be NaN
+        /// or
+        /// y must not be NaN
+        /// or
+        /// x must not be infinity
+        /// or
+        /// y must not be infinity
+        /// </exception>
         public Vector2(double x, double y)
         {
             this.X = x;
