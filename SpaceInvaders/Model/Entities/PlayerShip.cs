@@ -20,9 +20,9 @@ namespace SpaceInvaders.Model.Entities
 
         private readonly Vector2 bulletSpawnLocation = new Vector2(12, -8);
 
-        private readonly Vector2 velocity;
         private readonly int moveSpeed = 200;
         private bool canShoot;
+        private Vector2 velocity;
 
         #endregion
 

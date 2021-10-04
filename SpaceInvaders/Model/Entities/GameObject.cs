@@ -263,7 +263,7 @@ namespace SpaceInvaders.Model.Entities
 
         /// <summary>
         ///     Moves by the specified distance.
-        ///     Precondition: distance != null
+        ///     Precondition: None
         ///     Postcondition: this.X == this.X + distance.X &&
         ///                    this.Y == this.Y + distance.Y
         /// </summary>
@@ -271,11 +271,6 @@ namespace SpaceInvaders.Model.Entities
         /// <exception cref="System.ArgumentException">distance must not be null</exception>
         public void Move(Vector2 distance)
         {
-            if (distance == null)
-            {
-                throw new ArgumentException("distance must not be null.");
-            }
-            
             this.X += distance.X;
             this.Y += distance.Y;
             this.collisionBox.X = (int) this.X;
@@ -285,7 +280,7 @@ namespace SpaceInvaders.Model.Entities
         /// <summary>
         ///     Queues the objects removal at the end of the update tick.
         ///     Precondition: None
-        ///     Postcondition: None
+        ///     Postcondition: Object is added to the queue to be removed
         /// </summary>
         public void QueueRemoval()
         {

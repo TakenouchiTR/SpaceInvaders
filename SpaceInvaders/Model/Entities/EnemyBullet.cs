@@ -14,7 +14,7 @@
         /// <param name="manager">The Manager.</param>
         public EnemyBullet(GameManager manager) : base(manager)
         {
-            Speed.Y = 500;
+            this.Speed = new Vector2(0, 500);
             this.CollisionMasks = PhysicsLayer.Player;
             this.CollisionLayers = PhysicsLayer.EnemyHitbox;
         }

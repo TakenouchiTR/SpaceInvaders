@@ -1,6 +1,8 @@
-﻿namespace SpaceInvaders.Model
+﻿using System;
+
+namespace SpaceInvaders.Model
 {
-    public class Vector2
+    public struct Vector2
     {
         private double x;
         private double y;
@@ -68,16 +70,7 @@
         #endregion
 
         #region Constructors
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="Vector2"/> class.
-        ///     Precondition: None
-        ///     Postcondition: this.X == 0 && this.Y == 0
-        /// </summary>
-        public Vector2() : this(0)
-        {
-        }
-
+        
         /// <summary>
         ///     Initializes a new instance of the <see cref="Vector2"/> class. <br/>
         ///     Precondition: !double.IsNaN(value) && !double.IsInfinity(value)
@@ -106,14 +99,24 @@
         /// </exception>
         public Vector2(double x, double y)
         {
-            this.X = x;
-            this.Y = y;
+            this.x = x;
+            this.y = y;
         }
 
         #endregion
 
         #region Methods
 
+        //Todo ask about overriding operators
+
+        /// <summary>
+        ///     Implements the operator *.
+        /// </summary>
+        /// <param name="vector">The vector.</param>
+        /// <param name="value">The value.</param>
+        /// <returns>
+        /// The result of the operator.
+        /// </returns>
         public static Vector2 operator *(Vector2 vector, double value)
         {
             return new Vector2(vector.X * value, vector.Y * value);
