@@ -65,8 +65,8 @@ namespace SpaceInvaders.Model.Entities.Enemies
         {
             Monitorable = true;
             Monitoring = true;
-            CollisionLayers = (int) PhysicsLayer.Enemy;
-            CollisionMasks = (int) PhysicsLayer.PlayerHitbox;
+            CollisionLayers = PhysicsLayer.Enemy;
+            CollisionMasks = PhysicsLayer.PlayerHitbox;
             MovementTick += this.OnMovementTick;
             Removed += this.onRemoved;
         }

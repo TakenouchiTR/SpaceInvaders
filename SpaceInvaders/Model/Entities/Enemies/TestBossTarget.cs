@@ -21,8 +21,8 @@ namespace SpaceInvaders.Model.Entities.Enemies
         {
             Monitoring = true;
             Monitorable = true;
-            CollisionLayers = (int) PhysicsLayer.Enemy;
-            CollisionMasks = (int) PhysicsLayer.PlayerHitbox;
+            CollisionLayers = PhysicsLayer.Enemy;
+            CollisionMasks = PhysicsLayer.PlayerHitbox;
 
             this.canShoot = false;
             this.shootToggleTimer = new DispatcherTimer

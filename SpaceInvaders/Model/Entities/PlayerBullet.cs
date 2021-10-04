@@ -15,8 +15,8 @@
         public PlayerBullet(GameManager manager) : base(manager)
         {
             Speed.Y = -1000;
-            CollisionMasks = (int) PhysicsLayer.Enemy;
-            CollisionLayers = (int) PhysicsLayer.PlayerHitbox;
+            this.CollisionMasks = PhysicsLayer.Enemy;
+            this.CollisionLayers = PhysicsLayer.PlayerHitbox;
         }
 
         #endregion

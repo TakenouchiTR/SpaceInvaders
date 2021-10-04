@@ -1,6 +1,8 @@
-﻿namespace SpaceInvaders.Model
+﻿using System;
+
+namespace SpaceInvaders.Model
 {
-    public enum PhysicsLayer
+    [Flags] public enum PhysicsLayer
     {
         World        = 0b0000_0001,
         Player       = 0b0000_0010,

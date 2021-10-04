@@ -179,23 +179,25 @@ namespace SpaceInvaders.Model.Entities
 
         /// <summary>
         ///     Gets or sets the collision layers.
-        ///     Each bit of CollisionLayers represents a different layer, for a total of 32 layers.
+        ///     Each bit of CollisionLayers represents a different layer.
         ///     If Monitorable is set to true, other GameObjects will check if any of their flagged
         ///     CollisionMask bits match this object's CollisionLayer when their bounding boxes overlap.
         /// </summary>
         /// <value>
         ///     The collision layers.
         /// </value>
-        public int CollisionLayers { get; set; }
+        public PhysicsLayer CollisionLayers { get; set; }
 
         /// <summary>
         ///     Gets or sets the collision masks.
-        ///     Each bit of CollisionMasks represents a different layer, for a total of 32 layers.
+        ///     Each bit of CollisionMasks represents a different layer.
+        ///     If Monitoring is set to true, this GameObject will check if any of its flagged
+        ///     CollisionMask bits match another object's CollisionLayer when their bounding boxes overlap.
         /// </summary>
         /// <value>
         ///     The collision masks.
         /// </value>
-        public int CollisionMasks { get; set; }
+        public PhysicsLayer CollisionMasks { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this <see cref="GameObject" /> is monitorable.
@@ -334,19 +336,14 @@ namespace SpaceInvaders.Model.Entities
                 return false;
             }
 
-            if (this.isMaskingTargetCollisionLayers(target))
+            if (this.CollisionMasks.HasFlag(target.CollisionLayers))
             {
                 return this.collisionBox.IntersectsWith(target.CollisionBox);
             }
 
             return false;
         }
-
-        private bool isMaskingTargetCollisionLayers(GameObject target)
-        {
-            return (this.CollisionMasks & target.CollisionLayers) != 0;
-        }
-
+        
         /// <summary>
         ///     Handles when the object collides with the target object.
         /// </summary>

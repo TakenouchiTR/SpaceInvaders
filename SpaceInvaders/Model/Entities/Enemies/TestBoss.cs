@@ -18,7 +18,7 @@ namespace SpaceInvaders.Model.Entities.Enemies
         public TestBoss(GameManager manager) : base(manager, new TestBossSprite())
         {
             CollisionMasks = 0;
-            CollisionLayers = (int) PhysicsLayer.Enemy;
+            CollisionLayers = PhysicsLayer.Enemy;
             Score = 1000;
 
             var leftTarget = new TestBossTarget(manager) {
