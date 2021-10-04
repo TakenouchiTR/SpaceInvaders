@@ -422,6 +422,7 @@ namespace SpaceInvaders.Model.Entities
         ///     Detaches self from parent.
         ///     Precondition: None
         ///     Postcondition: this.Parent == null
+        ///                    !this.Parent@prev.Children.Contains(this)
         /// </summary>
         public void DetachFromParent()
         {
