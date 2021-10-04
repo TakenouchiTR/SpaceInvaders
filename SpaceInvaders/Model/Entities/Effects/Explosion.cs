@@ -16,6 +16,10 @@ namespace SpaceInvaders.Model.Entities.Effects
 
         #region Constructors
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Explosion"/> class.
+        /// </summary>
+        /// <param name="manager">The manager.</param>
         public Explosion(GameManager manager) : base(manager, new ExplosionSprite())
         {
             this.removalTimer = new DispatcherTimer {
@@ -54,6 +58,12 @@ namespace SpaceInvaders.Model.Entities.Effects
             this.removalTimer.Tick -= this.onRemovalTimerTick;
         }
 
+        /// <summary>
+        /// The update loop for the GameObject.
+        /// Precondition: None
+        /// Postcondition: GameObject completes its update step
+        /// </summary>
+        /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)
         {
         }
