@@ -252,11 +252,6 @@ namespace SpaceInvaders.Model
             }
 
             this.additionQueue.Enqueue(obj);
-
-            foreach (var child in obj.Children)
-            {
-                QueueGameObjectForAddition(child);
-            }
         }
 
         private void addObjectsInQueue()

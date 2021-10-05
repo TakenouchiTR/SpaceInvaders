@@ -262,7 +262,13 @@ namespace SpaceInvaders.Model.Entities
         ///     Postcondition: GameObject completes its update step
         /// </summary>
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
-        public abstract void Update(double delta);
+        public virtual void Update(double delta)
+        {
+            foreach (var child in this.children)
+            {
+                child.Update(delta);
+            }
+        }
 
         /// <summary>
         ///     Moves by the specified distance.
