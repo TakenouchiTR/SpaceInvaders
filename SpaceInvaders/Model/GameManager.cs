@@ -267,7 +267,11 @@ namespace SpaceInvaders.Model
 
                 this.gameObjects.Add(gameObject);
                 gameObject.Moved += this.onGameObjectMoved;
-                this.canvas.Children.Add(gameObject.Sprite);
+
+                if (gameObject.Sprite != null)
+                {
+                    this.canvas.Children.Add(gameObject.Sprite);
+                }
             }
 
             this.additionQueue.Clear();
