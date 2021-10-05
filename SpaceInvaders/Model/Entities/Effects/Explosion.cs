@@ -7,13 +7,6 @@ namespace SpaceInvaders.Model.Entities.Effects
 {
     public class Explosion : GameObject
     {
-        #region Data members
-
-        private readonly DispatcherTimer removalTimer;
-        private readonly DispatcherTimer growTimer;
-
-        #endregion
-
         #region Constructors
 
         /// <summary>
@@ -22,18 +15,23 @@ namespace SpaceInvaders.Model.Entities.Effects
         /// <param name="manager">The manager.</param>
         public Explosion(GameManager manager) : base(manager, new ExplosionSprite())
         {
-            this.removalTimer = new DispatcherTimer {
-                Interval = TimeSpan.FromSeconds(.25)
+            UpdateTimer growTimer = new UpdateTimer(manager) {
+                Repeat = false,
+                Duration = .1
             };
-            this.growTimer = new DispatcherTimer {
-                Interval = TimeSpan.FromSeconds(.1)
+            UpdateTimer removalTimer = new UpdateTimer(manager) {
+                Repeat = false,
+                Duration = .2
             };
 
-            this.removalTimer.Tick += this.onRemovalTimerTick;
-            this.growTimer.Tick += this.onGrowTimerTick;
+            growTimer.Tick += this.onGrowTimerTick;
+            removalTimer.Tick += this.onRemovalTimerTick;
 
-            this.removalTimer.Start();
-            this.growTimer.Start();
+            AttachChild(growTimer);
+            AttachChild(removalTimer);
+
+            growTimer.Start();
+            removalTimer.Start();
         }
 
         #endregion
