@@ -241,8 +241,11 @@ namespace SpaceInvaders.Model.Entities
             this.Sprite = sprite;
             this.Manager = manager;
 
-            this.collisionBox.Width = (int) this.Width;
-            this.collisionBox.Height = (int) this.Height;
+            if (sprite != null)
+            {
+                this.collisionBox.Width = (int)this.Width;
+                this.collisionBox.Height = (int)this.Height;
+            }
             this.children = new HashSet<GameObject>();
         }
 
@@ -441,7 +444,7 @@ namespace SpaceInvaders.Model.Entities
                 child.Removed -= this.onChildRemoved;
             }
         }
-
+        
         #endregion
     }
 }
