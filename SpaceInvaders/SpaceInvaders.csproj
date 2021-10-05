@@ -134,6 +134,7 @@
     <Compile Include="Model\Input.cs" />
     <Compile Include="Model\PhysicsLayer.cs" />
     <Compile Include="Model\Entities\PlayerShip.cs" />
+    <Compile Include="Model\UpdateTimer.cs" />
     <Compile Include="Model\Vector2.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
