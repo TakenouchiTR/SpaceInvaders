@@ -61,11 +61,6 @@ namespace SpaceInvaders.Model.Nodes.Levels
             {
                 node2D.Moved += this.onChildMoved;
             }
-
-            if (child is Enemy enemy)
-            {
-                enemy.Removed += this.onEnemyRemoved;
-            }
         }
 
         private void testForCollisions(List<CollisionArea> sourceAreas, List<CollisionArea> targetAreas)
@@ -78,15 +73,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
                 }
             }
         }
-
-        private void onEnemyRemoved(object sender, EventArgs e)
-        {
-            if (sender is Enemy enemy)
-            {
-                this.Score += enemy.Score;
-            }
-        }
-
+        
         private void onChildMoved(object sender, Vector2 e)
         {
 
