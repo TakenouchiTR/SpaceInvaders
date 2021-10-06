@@ -43,11 +43,14 @@ namespace SpaceInvaders.Model.Nodes.Entities
             base.Update(delta);
         }
 
-        public override void CompleteRemoval()
+        public override void Update(double delta)
         {
-
+            this.handleMovement(delta);
+            this.handleShooting();
+            
+            base.Update(delta);
         }
-
+        
         private void handleMovement(double delta)
         {
             double moveDistance = 0;
@@ -81,35 +84,31 @@ namespace SpaceInvaders.Model.Nodes.Entities
             }
         }
 
-        //private void handleShooting()
-        //{
-        //    if (this.canShoot && Input.IsKeyPressed(ShootKey))
-        //    {
-        //        var bullet = new PlayerBullet(Manager)
-        //        {
-        //            Position = Position + this.bulletSpawnLocation
-        //        };
-        //        bullet.Removed += this.onBulletRemoval;
+        private void handleShooting()
+        {
+            if (this.canShoot && Input.IsKeyPressed(ShootKey))
+            {
+                var bullet = new Bullet()
+                {
+                    Position = Position + this.bulletSpawnLocation,
+                    Velocity = new Vector2(0, -1000)
+                };
+                bullet.Collision.CollisionMasks = PhysicsLayer.Enemy;
+                bullet.Collision.CollisionLayers = PhysicsLayer.PlayerHitbox;
+                bullet.Removed += this.onBulletRemoval;
 
-        //        Manager.QueueGameObjectForAddition(bullet);
-        //        this.canShoot = false;
-        //    }
-        //}
-
-        //public override void HandleCollision(GameObject target)
-        //{
-        //    base.HandleCollision(target);
-        //    QueueRemoval();
-        //}
-
-        //private void onBulletRemoval(object sender, EventArgs e)
-        //{
-        //    if (sender is GameObject bullet)
-        //    {
-        //        this.canShoot = true;
-        //        bullet.Removed -= this.onBulletRemoval;
-        //    }
-        //}
+                Parent.QueueGameObjectForAddition(bullet);
+                this.canShoot = false;
+            }
+        }
+        private void onBulletRemoval(object sender, EventArgs e)
+        {
+            if (sender is Bullet bullet)
+            {
+                this.canShoot = true;
+                bullet.Removed -= this.onBulletRemoval;
+            }
+        }
 
     }
 }
