@@ -45,6 +45,21 @@ namespace SpaceInvaders.Model.Nodes.Levels
         {
             base.CompleteRemoval();
             this.updateTimer.Tick -= this.onUpdateTimerTick;
+
+            if (this.ScoreChanged != null)
+            {
+                foreach (var subscriber in this.ScoreChanged.GetInvocationList())
+                {
+                    this.ScoreChanged -= subscriber as EventHandler<int>;
+                }
+            }
+            if (this.GameFinished != null)
+            {
+                foreach (var subscriber in this.GameFinished.GetInvocationList())
+                {
+                    this.GameFinished -= subscriber as EventHandler<string>;
+                }
+            }
         }
 
         protected void CompleteGame(string message)
