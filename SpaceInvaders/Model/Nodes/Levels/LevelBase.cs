@@ -69,6 +69,18 @@ namespace SpaceInvaders.Model.Nodes.Levels
                 enemy.Removed += this.onEnemyRemoved;
             }
         }
+
+        private void testForCollisions(List<CollisionArea> sourceAreas, List<CollisionArea> targetAreas)
+        {
+            foreach (var sourceArea in sourceAreas)
+            {
+                foreach (var targetArea in targetAreas)
+                {
+                    sourceArea.DetectCollision(targetArea);
+                }
+            }
+        }
+
         private void onEnemyRemoved(object sender, EventArgs e)
         {
             if (sender is Enemy enemy)
@@ -85,7 +97,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
             {
                 throw new ArgumentException("sender must be a Node");
             }
-            
+
             List<CollisionArea> sourceCollisionAreas = senderNode.GetCollisionAreas();
 
             foreach (var child in children)
@@ -100,16 +112,6 @@ namespace SpaceInvaders.Model.Nodes.Levels
             }
         }
 
-        private void testForCollisions(List<CollisionArea> sourceAreas, List<CollisionArea> targetAreas)
-        {
-            foreach (var sourceArea in sourceAreas)
-            {
-                foreach (var targetArea in targetAreas)
-                {
-                    sourceArea.DetectCollision(targetArea);
-                }
-            }
-        }
     }
 
 }
