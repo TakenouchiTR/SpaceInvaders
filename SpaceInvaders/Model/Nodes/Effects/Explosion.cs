@@ -27,16 +27,19 @@ namespace SpaceInvaders.Model.Nodes.Effects
 
             AttachChild(growTimer);
             AttachChild(removalTimer);
+
+            growTimer.Start();
+            removalTimer.Start();
         }
 
         private void onRemovalTimerTick(object sender, EventArgs e)
         {
-            this.Sprite.RenderTransform = new ScaleTransform();
+            this.QueueForRemoval();
         }
 
         private void onGrowTimerTick(object sender, EventArgs e)
         {
-            this.QueueForRemoval();
+            this.Sprite.RenderTransform = new ScaleTransform();
         }
     }
 }
