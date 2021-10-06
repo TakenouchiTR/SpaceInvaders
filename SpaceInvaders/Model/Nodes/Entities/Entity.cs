@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Notifications;
-using SpaceInvaders.View.Sprites;
+﻿using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Nodes.Entities
 {
@@ -25,5 +19,6 @@ namespace SpaceInvaders.Model.Nodes.Entities
             this.AttachChild(this.Sprite);
             this.AttachChild(this.Collision);
         }
+        
     }
 }

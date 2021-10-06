@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using SpaceInvaders.Model.Nodes.Entities;
-using SpaceInvaders.Model.Nodes.Entities.Enemies;
 
 namespace SpaceInvaders.Model.Nodes.Levels
 {
