@@ -27,8 +27,7 @@ namespace SpaceInvaders.View
         ///     The application width
         /// </summary>
         public const double ApplicationWidth = 640;
-
-        private readonly GameManager gameManager;
+        
         private readonly LevelBase level;
 
         /// <summary>
