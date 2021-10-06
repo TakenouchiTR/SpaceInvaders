@@ -7,11 +7,15 @@ namespace SpaceInvaders.Model.Nodes.Levels
     public class Level1 : LevelBase
     {
         public override void Initialize(Canvas background)
+        private Node enemies;
         {
             Timer enemyMoveTimer = new Timer();
             enemyMoveTimer.Start();
             enemyMoveTimer.Tick += this.onEnemyMoveTimerTick;
             AttachChild(enemyMoveTimer);
+
+            this.enemies = new Node();
+            this.AttachChild(enemies);
 
             Entity sprite = new PlayerShip();
             sprite.X = 200;
