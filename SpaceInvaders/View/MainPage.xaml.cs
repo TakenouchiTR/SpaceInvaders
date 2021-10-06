@@ -5,6 +5,9 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model;
+using SpaceInvaders.Model.Nodes;
+using SpaceInvaders.View.Sprites;
+using SpaceInvaders.Model.Nodes.Levels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -26,6 +29,7 @@ namespace SpaceInvaders.View
         public const double ApplicationWidth = 640;
 
         private readonly GameManager gameManager;
+        private readonly LevelBase level;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MainPage"/> class.
@@ -40,16 +44,28 @@ namespace SpaceInvaders.View
             
             Window.Current.CoreWindow.KeyDown += Input.OnKeyDown;
             Window.Current.CoreWindow.KeyUp += Input.OnKeyUp;
+            
+            SpriteNode.SpriteRemoved += this.onSpriteNodeRemoved;
+            SpriteNode.SpriteAdded += this.onSpriteNodeAdded;
 
-            this.gameManager = new GameManager(ApplicationHeight, ApplicationWidth);
-            this.gameManager.InitializeGame(this.theCanvas);
-            this.gameManager.ScoreUpdated += onGameManagerScoreUpdated;
-            this.gameManager.GameFinished += onGameManagerGameFinished;
+            this.level = new Level1();
+            this.level.ScoreChanged += this.onLevelScoreChanged;
+            this.level.GameFinished += this.onLevelGameFinished;
         }
 
-        private async void onGameManagerGameFinished(object sender, string e)
+        private void onSpriteNodeRemoved(object sender, BaseSprite e)
         {
-            this.gameManager.GameFinished -= this.onGameManagerGameFinished;
+            this.theCanvas.Children.Remove(e);
+        }
+
+        private void onSpriteNodeAdded(object sender, BaseSprite e)
+        {
+            this.theCanvas.Children.Add(e);
+        }
+
+        private async void onLevelGameFinished(object sender, string e)
+        { 
+            this.level.GameFinished -= this.onLevelGameFinished;
 
             var gameOverDialog = new ContentDialog
             {
@@ -63,9 +79,9 @@ namespace SpaceInvaders.View
             CoreApplication.Exit();
         }
 
-        private void onGameManagerScoreUpdated(object sender, EventArgs e)
+        private void onLevelScoreChanged(object sender, int e)
         {
-            this.scoreText.Text = $"Score: {this.gameManager.Score}";
+            this.scoreText.Text = $"Score: {e}";
         }
     }
 }
