@@ -24,6 +24,7 @@ namespace SpaceInvaders.Model.Nodes
 
         public Node Parent { get; protected set; }
 
+        public event EventHandler<Node> ChildAdded;
         public event EventHandler Removed;
 
         public Node()
@@ -155,6 +156,8 @@ namespace SpaceInvaders.Model.Nodes
 
             this.children.Add(child);
             child.Parent = this;
+
+            this.ChildAdded?.Invoke(this, child);
         }
 
         /// <summary>
