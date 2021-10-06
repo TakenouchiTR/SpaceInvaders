@@ -1,5 +1,4 @@
 ﻿using System;
-using SpaceInvaders.Model.Entities;
 
 namespace SpaceInvaders.Model.Nodes
 {
