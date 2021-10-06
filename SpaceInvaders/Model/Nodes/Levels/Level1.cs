@@ -60,14 +60,14 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
             List<Enemy> enemyList = new List<Enemy> 
             {
-                new BasicEnemy(),
-                new BasicEnemy(),
-                new BasicEnemy(),
-                new BasicEnemy(),
-                new BasicEnemy(),
-                new BasicEnemy(),
-                new BasicEnemy(),
-                new BasicEnemy(),
+                new AggresiveEnemy(),
+                new AggresiveEnemy(),
+                new AggresiveEnemy(),
+                new AggresiveEnemy(),
+                new IntermediateEnemy(),
+                new IntermediateEnemy(),
+                new IntermediateEnemy(),
+                new IntermediateEnemy(),
                 new BasicEnemy(),
                 new BasicEnemy(),
                 new BasicEnemy(),
