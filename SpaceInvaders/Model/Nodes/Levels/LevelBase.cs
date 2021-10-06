@@ -11,6 +11,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         private readonly DispatcherTimer updateTimer;
         private long prevUpdateTime;
         private int score;
+        private bool gameActive;
 
         public int Score
         {
@@ -25,6 +26,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         protected LevelBase()
         {
             this.score = 0;
+            this.gameActive = true;
 
             this.updateTimer = new DispatcherTimer
             {
@@ -37,11 +39,23 @@ namespace SpaceInvaders.Model.Nodes.Levels
         }
 
         public event EventHandler<int> ScoreChanged;
+        public event EventHandler<string> GameFinished;
         
         public override void CompleteRemoval()
         {
             base.CompleteRemoval();
             this.updateTimer.Tick -= this.onUpdateTimerTick;
+        }
+
+        protected void CompleteGame(string message)
+        {
+            if (!this.gameActive)
+            {
+                return;
+            }
+
+            this.GameFinished?.Invoke(this, message);
+            this.gameActive = false;
         }
 
         private void onUpdateTimerTick(object sender, object e)
