@@ -12,6 +12,14 @@ namespace SpaceInvaders.Model.Nodes.Levels
         private const int EnemiesPerRow = 4;
         private const double EnemySpawnAreaWidth = 250;
         private const double EnemyVerticalGap = 64;
+
+        private const int TotalMovementSteps = 19;
+        private const int XMoveAmount = 15;
+        private const int YMoveAmount = 32;
+        
+        private static int curMovementStep = 9;
+        private static int movementDirection = 1;
+
         private int enemiesRemaining;
 
         private Node2D enemies;
@@ -104,7 +112,21 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         private void onEnemyMoveTimerTick(object sender, EventArgs e)
         {
-            this.enemies.X += 10;
+            var moveDistance = new Vector2();
+
+            curMovementStep += movementDirection;
+
+            if (curMovementStep > TotalMovementSteps || curMovementStep < 0)
+            {
+                movementDirection *= -1;
+                moveDistance.Y = YMoveAmount;
+            }
+            else
+            {
+                moveDistance.X = XMoveAmount * movementDirection;
+            }
+
+            this.enemies.Move(moveDistance);
         }
     }
 }
