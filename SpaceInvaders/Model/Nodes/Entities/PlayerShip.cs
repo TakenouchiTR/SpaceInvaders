@@ -30,17 +30,13 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
             this.Collision.CollisionLayers = PhysicsLayer.Player;
             this.Collision.CollisionMasks = PhysicsLayer.EnemyHitbox | PhysicsLayer.Enemy;
+
+            this.Collision.Collided += this.onCollision;
         }
 
-        public override void Update(double delta)
+        private void onCollision(object sender, CollisionArea e)
         {
-            this.handleMovement(delta);
-            //this.handleShooting();
-            if (Input.IsKeyPressed(ShootKey))
-            {
-                this.QueueForRemoval();
-            }
-            base.Update(delta);
+            this.QueueForRemoval();
         }
 
         public override void Update(double delta)
