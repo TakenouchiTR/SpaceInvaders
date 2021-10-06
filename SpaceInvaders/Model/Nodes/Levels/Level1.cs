@@ -8,10 +8,25 @@ namespace SpaceInvaders.Model.Nodes.Levels
     {
         public override void Initialize(Canvas background)
         {
+            Timer enemyMoveTimer = new Timer();
+            enemyMoveTimer.Start();
+            enemyMoveTimer.Tick += this.onEnemyMoveTimerTick;
+            AttachChild(enemyMoveTimer);
+
             Entity sprite = new PlayerShip();
             sprite.X = 200;
             sprite.Y = MainPage.ApplicationHeight - 64;
             AttachChild(sprite);
+
+        private void onEnemyMoveTimerTick(object sender, EventArgs e)
+        {
+            foreach (var child in this.enemies.Children)
+            {
+                if (child is Enemy enemy)
+                {
+                    enemy.X += 10;
+                }
+            }
         }
     }
 }
