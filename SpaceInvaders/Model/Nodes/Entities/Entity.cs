@@ -2,7 +2,7 @@
 
 namespace SpaceInvaders.Model.Nodes.Entities
 {
-    public class Entity : Node2D
+    public class Entity : Area
     {
         public SpriteNode Sprite { get; protected set; }
         public CollisionArea Collision { get; protected set; }
@@ -15,6 +15,8 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 Width = this.Sprite.Width,
                 Height = this.Sprite.Height
             };
+            this.Width = this.Sprite.Width;
+            this.Height = this.Sprite.Height;
 
             this.AttachChild(this.Sprite);
             this.AttachChild(this.Collision);
