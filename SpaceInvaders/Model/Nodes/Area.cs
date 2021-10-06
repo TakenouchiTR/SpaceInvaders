@@ -18,8 +18,8 @@ namespace SpaceInvaders.Model.Nodes
                 this.Y = value.Y - this.Height / 2;
             }
         }
-        public double Width { get; set; }
-        public double Height { get; set; }
+        public virtual double Width { get; set; }
+        public virtual double Height { get; set; }
 
         protected bool IsOffScreen()
         {
