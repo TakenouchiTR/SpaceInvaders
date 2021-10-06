@@ -6,7 +6,7 @@ namespace SpaceInvaders.Model.Nodes
     public class SpriteNode : Node2D
     {
         private BaseSprite sprite;
-
+        public BaseSprite Sprite => this.sprite;
         public override double X
         {
             get => base.X;
