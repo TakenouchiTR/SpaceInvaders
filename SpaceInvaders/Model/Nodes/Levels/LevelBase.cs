@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model.Nodes.Entities;
@@ -41,5 +42,49 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
             this.Update(delta);
         }
+
+        public override void AttachChild(Node child)
+        {
+            base.AttachChild(child);
+            if (child is Node2D node2D)
+            {
+                node2D.Moved += this.onChildMoved;
+            }
+        }
+
+        private void onChildMoved(object sender, Vector2 e)
+        {
+
+            var senderNode = sender as Node;
+            if (senderNode == null)
+            {
+                throw new ArgumentException("sender must be a Node");
+            }
+            
+            List<CollisionArea> sourceCollisionAreas = senderNode.GetCollisionAreas();
+
+            foreach (var child in children)
+            {
+                if (child == sender)
+                {
+                    continue;
+                }
+
+                List<CollisionArea> targetCollisionAreas = child.GetCollisionAreas();
+                testForCollisions(sourceCollisionAreas, targetCollisionAreas);
+            }
+        }
+
+        private void testForCollisions(List<CollisionArea> sourceAreas, List<CollisionArea> targetAreas)
+        {
+            foreach (var sourceArea in sourceAreas)
+            {
+                foreach (var targetArea in targetAreas)
+                {
+                    sourceArea.DetectCollision(targetArea);
+                }
+            }
+        }
     }
+
 }
