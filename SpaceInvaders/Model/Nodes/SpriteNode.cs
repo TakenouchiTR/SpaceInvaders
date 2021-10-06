@@ -3,7 +3,7 @@ using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Nodes
 {
-    public class SpriteNode : Node2D
+    public class SpriteNode : Area
     {
         private BaseSprite sprite;
         public BaseSprite Sprite => this.sprite;
@@ -25,8 +25,8 @@ namespace SpaceInvaders.Model.Nodes
                 this.render();
             }
         }
-        public double Width => this.sprite.Width;
-        public double Height => this.sprite.Height;
+        public override double Width => this.sprite.Width;
+        public override double Height => this.sprite.Height;
 
         public SpriteNode(BaseSprite sprite)
         {
