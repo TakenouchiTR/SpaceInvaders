@@ -1,4 +1,5 @@
 ﻿using System.Reflection.Metadata.Ecma335;
+using SpaceInvaders.View;
 
 namespace SpaceInvaders.Model.Nodes
 {
@@ -19,5 +20,13 @@ namespace SpaceInvaders.Model.Nodes
         }
         public double Width { get; set; }
         public double Height { get; set; }
+
+        protected bool IsOffScreen()
+        {
+            return this.Left > MainPage.ApplicationWidth ||
+                   this.Right < 0 ||
+                   this.Top > MainPage.ApplicationHeight ||
+                   this.Bottom < 0;
+        }
     }
 }

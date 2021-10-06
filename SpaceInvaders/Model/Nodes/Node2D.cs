@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
+using SpaceInvaders.View;
 
 namespace SpaceInvaders.Model.Nodes
 {
@@ -78,6 +79,14 @@ namespace SpaceInvaders.Model.Nodes
                     this.Removed -= subscriber as EventHandler;
                 }
             }
+        }
+
+        public virtual bool IsOffScreen()
+        {
+            return this.X > MainPage.ApplicationWidth ||
+                   this.X < 0 ||
+                   this.Y > MainPage.ApplicationHeight ||
+                   this.Y < 0;
         }
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using SpaceInvaders.View.Sprites;
+﻿using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Nodes.Entities
 {
@@ -21,7 +15,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
         public override void Update(double delta)
         {
             this.Move(Velocity * delta);
-            if (this.IsOffScreen())
+            if (this.Sprite.IsOffScreen())
             {
                 this.QueueForRemoval();
             }
