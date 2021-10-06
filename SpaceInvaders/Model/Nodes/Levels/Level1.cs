@@ -24,10 +24,10 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         private void addPlayer()
         {
-            Entity sprite = new PlayerShip();
-            sprite.X = 200;
-            sprite.Y = MainPage.ApplicationHeight - 64;
-            AttachChild(sprite);
+            PlayerShip player = new PlayerShip();
+            player.X = MainPage.ApplicationWidth / 2 - player.Collision.Width / 2;
+            player.Y = MainPage.ApplicationHeight - 64;
+            AttachChild(player);
         }
 
         private void addEnemyHelperNodes()
@@ -65,9 +65,13 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
             for (var i = 0; i < enemyList.Count; i++)
             {
-                Enemy enemy = enemyList[i];
-                enemy.X = startX + (i % EnemiesPerRow) * spawnCellWidth;
-                enemy.Y = startY + (i / EnemiesPerRow) * EnemyVerticalGap;
+                var enemy = enemyList[i];
+                var enemyCenter = new Vector2 {
+                    X = startX + (i % EnemiesPerRow) * spawnCellWidth,
+                    // ReSharper disable once PossibleLossOfFraction
+                    Y = startY + i / EnemiesPerRow * EnemyVerticalGap
+                };
+                enemy.Center = enemyCenter;
                 enemy.Removed += this.onEnemyRemoved;
                 this.enemies.AttachChild(enemy);
             }
