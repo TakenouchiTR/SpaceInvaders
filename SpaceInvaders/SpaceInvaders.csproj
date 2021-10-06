@@ -132,9 +132,18 @@
     <Compile Include="Model\GameManager.cs" />
     <Compile Include="Model\Entities\GameObject.cs" />
     <Compile Include="Model\Input.cs" />
+    <Compile Include="Model\Nodes\Area.cs" />
+    <Compile Include="Model\Nodes\CollisionArea.cs" />
+    <Compile Include="Model\Nodes\Entities\Entity.cs" />
+    <Compile Include="Model\Nodes\Entities\PlayerShip.cs" />
+    <Compile Include="Model\Nodes\Levels\Level1.cs" />
+    <Compile Include="Model\Nodes\Node.cs" />
+    <Compile Include="Model\Nodes\Node2D.cs" />
+    <Compile Include="Model\Nodes\Levels\LevelBase.cs" />
     <Compile Include="Model\PhysicsLayer.cs" />
     <Compile Include="Model\Entities\PlayerShip.cs" />
-    <Compile Include="Model\UpdateTimer.cs" />
+    <Compile Include="Model\Nodes\SpriteNode.cs" />
+    <Compile Include="Model\Nodes\Timer.cs" />
     <Compile Include="Model\Vector2.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
