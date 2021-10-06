@@ -1,4 +1,6 @@
-﻿using SpaceInvaders.View.Sprites;
+﻿using System;
+using SpaceInvaders.Model.Nodes.Effects;
+using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 {
@@ -13,6 +15,16 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             this.Collision.Monitoring = true;
             this.Collision.Monitorable = true;
             this.Score = 0;
+        }
+
+        public override void CompleteRemoval()
+        {
+            Explosion explosion = new Explosion() 
+            {
+                Center = this.Center
+            };
+            this.GetRoot().QueueGameObjectForAddition(explosion);
+            base.CompleteRemoval();
         }
     }
 }
