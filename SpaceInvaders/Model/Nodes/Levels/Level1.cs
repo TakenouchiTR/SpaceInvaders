@@ -12,6 +12,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         private const int EnemiesPerRow = 4;
         private const double EnemySpawnAreaWidth = 250;
         private const double EnemyVerticalGap = 64;
+        private int enemiesRemaining;
 
         private Node2D enemies;
 
@@ -28,8 +29,10 @@ namespace SpaceInvaders.Model.Nodes.Levels
             player.X = MainPage.ApplicationWidth / 2 - player.Collision.Width / 2;
             player.Y = MainPage.ApplicationHeight - 64;
             AttachChild(player);
-        }
 
+            player.Removed += onPlayerRemoved;
+        }
+        
         private void addEnemyHelperNodes()
         {
             Timer enemyMoveTimer = new Timer();
@@ -77,13 +80,25 @@ namespace SpaceInvaders.Model.Nodes.Levels
             }
 
             this.enemies.X = MainPage.ApplicationWidth / 2 - EnemySpawnAreaWidth / 2;
+
+            this.enemiesRemaining += enemyList.Count;
         }
-        
+
+        private void onPlayerRemoved(object sender, EventArgs e)
+        {
+            CompleteGame("You have been destroyed!");
+        }
+
         private void onEnemyRemoved(object sender, EventArgs e)
         {
             if (sender is Enemy enemy)
             {
                 this.Score += enemy.Score;
+                this.enemiesRemaining--;
+                if (this.enemiesRemaining <= 0)
+                {
+                    this.CompleteGame("All enemies have been defeated!");
+                }
             }
         }
 
