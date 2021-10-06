@@ -8,7 +8,7 @@ namespace SpaceInvaders.Model.Nodes.Effects
     {
         public Explosion() : base(new ExplosionSprite())
         {
-            
+            this.addTimers();
         }
 
         private void addTimers()
