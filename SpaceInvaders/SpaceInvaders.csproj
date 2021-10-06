@@ -135,6 +135,8 @@
     <Compile Include="Model\Nodes\Area.cs" />
     <Compile Include="Model\Nodes\CollisionArea.cs" />
     <Compile Include="Model\Nodes\Entities\Bullet.cs" />
+    <Compile Include="Model\Nodes\Entities\Enemies\BasicEnemy.cs" />
+    <Compile Include="Model\Nodes\Entities\Enemies\Enemy.cs" />
     <Compile Include="Model\Nodes\Entities\Entity.cs" />
     <Compile Include="Model\Nodes\Entities\PlayerShip.cs" />
     <Compile Include="Model\Nodes\Levels\Level1.cs" />
