@@ -1,5 +1,8 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using System;
+using System.Collections.Generic;
+using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model.Nodes.Entities;
+using SpaceInvaders.Model.Nodes.Entities.Enemies;
 using SpaceInvaders.View;
 
 namespace SpaceInvaders.Model.Nodes.Levels
@@ -71,13 +74,12 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
             this.enemies.X = MainPage.ApplicationWidth / 2 - EnemySpawnAreaWidth / 2;
         }
+        
+        private void onEnemyRemoved(object sender, EventArgs e)
         {
-            foreach (var child in this.enemies.Children)
+            if (sender is Enemy enemy)
             {
-                if (child is Enemy enemy)
-                {
-                    enemy.X += 10;
-                }
+                this.Score += enemy.Score;
             }
         }
 
