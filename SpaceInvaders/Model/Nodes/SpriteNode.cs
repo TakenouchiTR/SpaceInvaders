@@ -55,6 +55,7 @@ namespace SpaceInvaders.Model.Nodes
             SpriteRemoved?.Invoke(this, this.sprite);
             this.sprite = newSprite;
             SpriteAdded?.Invoke(this, this.sprite);
+            this.render();
         }
 
     }
