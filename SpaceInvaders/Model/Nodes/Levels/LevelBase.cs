@@ -40,9 +40,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         }
 
         public event EventHandler<int> ScoreChanged;
-
-        public abstract void Initialize();
-
+        
         public override void CompleteRemoval()
         {
             base.CompleteRemoval();
