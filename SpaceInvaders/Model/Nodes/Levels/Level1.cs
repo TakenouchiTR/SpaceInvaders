@@ -6,8 +6,9 @@ namespace SpaceInvaders.Model.Nodes.Levels
 {
     public class Level1 : LevelBase
     {
-        public override void Initialize(Canvas background)
         private Node enemies;
+
+        public override void Initialize()
         {
             Timer enemyMoveTimer = new Timer();
             enemyMoveTimer.Start();
