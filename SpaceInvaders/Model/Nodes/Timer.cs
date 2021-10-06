@@ -3,7 +3,7 @@ using SpaceInvaders.Model.Entities;
 
 namespace SpaceInvaders.Model.Nodes
 {
-    public class Timer : GameObject
+    public class Timer : Node
     {
         private double currentTime;
 
@@ -12,7 +12,7 @@ namespace SpaceInvaders.Model.Nodes
         public double Duration { get; set; }
         public double TimeRemaining => Duration - this.currentTime;
 
-        public Timer(GameManager manager) : base(manager, null)
+        public Timer()
         {
             this.currentTime = 0;
             this.Duration = 1;
