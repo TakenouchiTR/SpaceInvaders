@@ -77,6 +77,16 @@ namespace SpaceInvaders.Model.Nodes
             
         }
 
+        public Node GetRoot()
+        {
+            if (this.Parent == null)
+            {
+                return this;
+            }
+
+            return Parent.GetRoot();
+        }
+
         public void QueueForRemoval()
         {
             this.Parent?.QueueGameObjectForRemoval(this);
