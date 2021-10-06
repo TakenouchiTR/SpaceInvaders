@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model.Nodes.Entities;
+using SpaceInvaders.Model.Nodes.Entities.Enemies;
 
 namespace SpaceInvaders.Model.Nodes.Levels
 {
@@ -38,7 +39,9 @@ namespace SpaceInvaders.Model.Nodes.Levels
             this.prevUpdateTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
         }
 
-        public abstract void Initialize(Canvas background);
+        public event EventHandler<int> ScoreChanged;
+
+        public abstract void Initialize();
 
         public override void CompleteRemoval()
         {
