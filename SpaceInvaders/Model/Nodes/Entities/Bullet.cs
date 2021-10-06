@@ -10,6 +10,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
             this.Velocity = new Vector2();
             Collision.Monitoring = true;
             Collision.Monitorable = true;
+            this.Collision.Collided += this.onCollided;
         }
 
         public override void Update(double delta)
@@ -20,6 +21,11 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 this.QueueForRemoval();
             }
             base.Update(delta);
+        }
+
+        private void onCollided(object sender, CollisionArea e)
+        {
+            this.QueueForRemoval();
         }
     }
 }
