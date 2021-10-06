@@ -6,8 +6,8 @@ namespace SpaceInvaders.Model.Nodes.Levels
 {
     public class Level1 : LevelBase
     {
-        private Node enemies;
 
+        private Node2D enemies;
         {
             Timer enemyMoveTimer = new Timer();
             enemyMoveTimer.Start();
@@ -27,6 +27,11 @@ namespace SpaceInvaders.Model.Nodes.Levels
                     enemy.X += 10;
                 }
             }
+        }
+
+        private void onEnemyMoveTimerTick(object sender, EventArgs e)
+        {
+            this.enemies.X += 10;
         }
     }
 }
