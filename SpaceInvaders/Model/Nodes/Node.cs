@@ -143,7 +143,6 @@ namespace SpaceInvaders.Model.Nodes
 
             this.children.Add(child);
             child.Parent = this;
-            child.Removed += this.onChildRemoved;
         }
 
         /// <summary>
@@ -182,12 +181,8 @@ namespace SpaceInvaders.Model.Nodes
             }
         }
 
-        private void onChildRemoved(object sender, EventArgs e)
         {
-            if (sender is Node child)
             {
-                this.children.Remove(child);
-                child.Removed -= this.onChildRemoved;
             }
         }
 
