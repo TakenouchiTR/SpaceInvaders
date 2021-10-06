@@ -180,11 +180,23 @@ namespace SpaceInvaders.Model.Nodes
                 this.Parent = null;
             }
         }
+        
 
+        public List<CollisionArea> GetCollisionAreas()
         {
-            {
-            }
-        }
+            List<CollisionArea> areas = new List<CollisionArea>();
 
+            if (this is CollisionArea)
+            {
+                areas.Add(this as CollisionArea);
+            }
+
+            foreach (var child in this.children)
+            {
+                areas.AddRange(child.GetCollisionAreas());
+            }
+
+            return areas;
+        }
     }
 }
