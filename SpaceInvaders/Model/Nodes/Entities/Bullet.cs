@@ -12,10 +12,10 @@ namespace SpaceInvaders.Model.Nodes.Entities
             Collision.Monitorable = true;
             this.Collision.Collided += this.onCollided;
         }
-
+        
         public override void Update(double delta)
         {
-            this.Move(Velocity * delta);
+            this.Move(this.Velocity * delta);
             if (this.Sprite.IsOffScreen())
             {
                 this.QueueForRemoval();
