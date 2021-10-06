@@ -6,6 +6,9 @@ namespace SpaceInvaders.Model.Nodes.Levels
 {
     public class Level1 : LevelBase
     {
+        private const int EnemiesPerRow = 4;
+        private const double EnemySpawnAreaWidth = 250;
+        private const double EnemyVerticalGap = 64;
 
         private Node2D enemies;
 
