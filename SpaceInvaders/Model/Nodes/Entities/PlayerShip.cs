@@ -15,7 +15,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
         private const VirtualKey RightKey = VirtualKey.Right;
         private const VirtualKey ShootKey = VirtualKey.Space;
 
-        private readonly Vector2 bulletSpawnLocation = new Vector2(12, -8);
+        private readonly Vector2 bulletSpawnLocation = new Vector2(12, -4);
 
         private readonly int moveSpeed = 200;
         private bool canShoot;
