@@ -107,7 +107,7 @@ namespace SpaceInvaders.Model.Nodes
         /// </summary>
         /// <param name="obj">The object to add.</param>
         /// <exception cref="System.ArgumentException">obj must not be null</exception>
-        public void QueueGameObjectForAddition(Node newNode)
+        public virtual void QueueGameObjectForAddition(Node newNode)
         {
             if (newNode == null)
             {
@@ -134,7 +134,7 @@ namespace SpaceInvaders.Model.Nodes
         /// </summary>
         /// <param name="child">The child.</param>
         /// <exception cref="System.ArgumentException">child must not be null</exception>
-        public void AttachChild(Node child)
+        public virtual void AttachChild(Node child)
         {
             if (child == null)
             {
@@ -153,7 +153,7 @@ namespace SpaceInvaders.Model.Nodes
         /// </summary>
         /// <param name="child">The child to detach.</param>
         /// <exception cref="System.ArgumentException">child must not be null</exception>
-        public void DetachChild(Node child)
+        public virtual void DetachChild(Node child)
         {
             if (child == null)
             {
