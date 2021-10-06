@@ -12,9 +12,22 @@ namespace SpaceInvaders.Model.Nodes.Levels
         
         private readonly DispatcherTimer updateTimer;
         private long prevUpdateTime;
+        private int score;
+
+        public int Score
+        {
+            get => this.score;
+            private set
+            {
+                this.score = value;
+                this.ScoreChanged?.Invoke(this, this.Score);
+            }
+        }
 
         protected LevelBase()
         {
+            this.score = 0;
+
             this.updateTimer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMilliseconds(.1)
