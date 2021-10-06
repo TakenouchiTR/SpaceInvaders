@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SpaceInvaders.Model.Nodes
 {
@@ -9,6 +10,17 @@ namespace SpaceInvaders.Model.Nodes
         private readonly Queue<Node> additionQueue;
 
         protected HashSet<Node> children;
+
+
+        /// <summary>
+        ///     Gets a list of the Node's children.
+        ///     Modifying the list will not affect the node's children.
+        /// </summary>
+        /// <value>
+        ///     The children.
+        /// </value>
+        public List<Node> Children => this.children.ToList();
+
 
         public Node Parent { get; protected set; }
 
