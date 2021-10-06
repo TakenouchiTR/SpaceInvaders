@@ -127,9 +127,12 @@
     <Compile Include="Model\Nodes\Entities\Enemies\IntermediateEnemy.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\BasicEnemy.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\Enemy.cs" />
+    <Compile Include="Model\Nodes\Entities\Enemies\TestBoss.cs" />
+    <Compile Include="Model\Nodes\Entities\Enemies\TestBossTarget.cs" />
     <Compile Include="Model\Nodes\Entities\Entity.cs" />
     <Compile Include="Model\Nodes\Entities\PlayerShip.cs" />
     <Compile Include="Model\Nodes\Levels\Level1.cs" />
+    <Compile Include="Model\Nodes\Levels\TestBossLevel.cs" />
     <Compile Include="Model\Nodes\Node.cs" />
     <Compile Include="Model\Nodes\Node2D.cs" />
     <Compile Include="Model\Nodes\Levels\LevelBase.cs" />
