@@ -15,7 +15,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         public int Score
         {
             get => this.score;
-            private set
+            protected set
             {
                 this.score = value;
                 this.ScoreChanged?.Invoke(this, this.Score);
