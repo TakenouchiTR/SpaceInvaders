@@ -5,6 +5,8 @@ namespace SpaceInvaders.Model.Nodes
 {
     public class SpriteNode : Area
     {
+        private bool visible;
+
         #region Properties
 
         /// <summary>
@@ -63,6 +65,28 @@ namespace SpaceInvaders.Model.Nodes
         /// </value>
         public override double Height => this.Sprite.Height;
 
+        public bool Visible
+        {
+            get => this.visible;
+            set
+            {
+                if (this.visible == value)
+                {
+                    return;
+                }
+                
+                if (value)
+                {
+                    SpriteShown?.Invoke(this, this.Sprite);
+                }
+                else
+                {
+                    SpriteHidden?.Invoke(this, this.Sprite);
+                }
+
+                this.visible = value;
+            }
+        }
         #endregion
 
         #region Constructors
@@ -74,6 +98,7 @@ namespace SpaceInvaders.Model.Nodes
         public SpriteNode(BaseSprite sprite)
         {
             this.Sprite = sprite;
+            this.visible = true;
 
             SpriteShown?.Invoke(this, this.Sprite);
         }
@@ -117,10 +142,16 @@ namespace SpaceInvaders.Model.Nodes
         /// <param name="newSprite">The new sprite.</param>
         public void ChangeSprite(BaseSprite newSprite)
         {
-            SpriteHidden?.Invoke(this, this.Sprite);
+            var oldSprite = this.Sprite;
             this.Sprite = newSprite;
-            SpriteShown?.Invoke(this, this.Sprite);
-            this.render();
+
+            if (this.Visible)
+            {
+                SpriteHidden?.Invoke(this, oldSprite);
+                SpriteShown?.Invoke(this, newSprite);
+
+                this.render();
+            }
         }
 
         #endregion
