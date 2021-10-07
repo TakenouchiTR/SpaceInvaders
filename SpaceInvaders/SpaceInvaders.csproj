@@ -167,6 +167,9 @@
     <Compile Include="View\Sprites\PlayerShipSprite.xaml.cs">
       <DependentUpon>PlayerShipSprite.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Sprites\StarSprite.xaml.cs">
+      <DependentUpon>StarSprite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\TestBossSprite.xaml.cs">
       <DependentUpon>TestBossSprite.xaml</DependentUpon>
     </Compile>
@@ -220,6 +223,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\PlayerShipSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\StarSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
