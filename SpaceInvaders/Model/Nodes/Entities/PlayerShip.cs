@@ -1,5 +1,6 @@
 ﻿using System;
 using Windows.System;
+using SpaceInvaders.Model.Nodes.Effects;
 using SpaceInvaders.View;
 using SpaceInvaders.View.Sprites;
 
@@ -114,6 +115,22 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 Parent.QueueGameObjectForAddition(bullet);
                 this.canShoot = false;
             }
+        }
+
+        /// <summary>
+        /// Runs cleanup and invokes the Removed event when removed from the game.<br />
+        /// Precondition: None<br />
+        /// Postcondition: Removed event is invoked &amp;&amp;<br />
+        /// All event subscribers are removed
+        /// </summary>
+        public override void CompleteRemoval()
+        {
+            var explosion = new Explosion
+            {
+                Center = Center
+            };
+            GetRoot().QueueGameObjectForAddition(explosion);
+            base.CompleteRemoval();
         }
 
         private void onBulletRemoval(object sender, EventArgs e)
