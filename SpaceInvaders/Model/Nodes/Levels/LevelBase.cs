@@ -4,6 +4,10 @@ using Windows.UI.Xaml;
 
 namespace SpaceInvaders.Model.Nodes.Levels
 {
+    /// <summary>
+    /// The basic structure for other levels.
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.Model.Nodes.Node" />
     public abstract class LevelBase : Node
     {
         #region Data members
@@ -19,6 +23,12 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the score.
+        /// </summary>
+        /// <value>
+        /// The score.
+        /// </value>
         public int Score
         {
             get => this.score;
@@ -33,6 +43,9 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LevelBase"/> class.
+        /// </summary>
         protected LevelBase()
         {
             this.score = 0;
@@ -51,9 +64,21 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         #region Methods
 
+        /// <summary>
+        /// Occurs when the score is changed.
+        /// </summary>
         public event EventHandler<int> ScoreChanged;
+        /// <summary>
+        /// Occurs when the game is finished.
+        /// </summary>
         public event EventHandler<string> GameFinished;
 
+        /// <summary>
+        /// Runs cleanup and invokes the Removed event when removed from the game.<br />
+        /// Precondition: None<br />
+        /// Postcondition: Removed event is invoked &amp;&amp;<br />
+        /// All event subscribers are removed
+        /// </summary>
         public override void CompleteRemoval()
         {
             base.CompleteRemoval();
@@ -76,6 +101,10 @@ namespace SpaceInvaders.Model.Nodes.Levels
             }
         }
 
+        /// <summary>
+        /// Fires the GameFinished event with the specified message.
+        /// </summary>
+        /// <param name="message">The message.</param>
         protected void CompleteGame(string message)
         {
             if (!this.gameActive)
@@ -97,6 +126,12 @@ namespace SpaceInvaders.Model.Nodes.Levels
             Update(delta);
         }
 
+        /// <summary>
+        /// Attaches a new child to the node.<br />
+        /// Precondition: child != null<br />
+        /// Postcondition: None
+        /// </summary>
+        /// <param name="child">The child.</param>
         public override void AttachChild(Node child)
         {
             base.AttachChild(child);

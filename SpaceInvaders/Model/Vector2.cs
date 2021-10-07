@@ -79,6 +79,11 @@ namespace SpaceInvaders.Model
         ///     PostCondition: this.X == value && this.Y == value
         /// </summary>
         /// <param name="value">The X and Y value.</param>
+        /// <exception cref="System.ArgumentException">
+        ///     value must not be NaN
+        ///     or
+        ///     value must not be infinity
+        /// </exception>
         public Vector2(double value) : this(value, value)
         {
         }
@@ -100,6 +105,23 @@ namespace SpaceInvaders.Model
         /// </exception>
         public Vector2(double x, double y)
         {
+            if (double.IsNaN(x))
+            {
+                throw new ArgumentException("x must not be NaN");
+            }
+            if (double.IsNaN(y))
+            {
+                throw new ArgumentException("y must not be NaN");
+            }
+            if (double.IsInfinity(x))
+            {
+                throw new ArgumentException("x must not be infinity");
+            }
+            if (double.IsInfinity(y))
+            {
+                throw new ArgumentException("y must not be infinity");
+            }
+
             this.x = x;
             this.y = y;
         }
@@ -107,27 +129,44 @@ namespace SpaceInvaders.Model
         #endregion
 
         #region Methods
-
-        //Todo ask about overriding operators
-
         /// <summary>
-        ///     Implements the operator *.
+        ///     Implements the * operator between a Vector2 and a double.<br/>
+        ///     Each component of the Vector2 will be multiplied by the scalar.
+        ///     Precondition: None<br/>
+        ///     Postcondition: None
         /// </summary>
         /// <param name="vector">The vector.</param>
-        /// <param name="value">The value.</param>
+        /// <param name="scalar">The scalar.</param>
+        /// <returns>
+        ///     The result of the operator
+        /// </returns>
+        public static Vector2 operator *(Vector2 vector, double scalar)
+        {
+            return new Vector2(vector.X * scalar, vector.Y * scalar);
+        }
+
+        /// <summary>
+        ///     Implements the * operator between two Vector2s<br/>
+        ///     Each component of the first Vector2 will be added to the corresponding component of the other..
+        ///     Precondition: None<br/>
+        ///     Postcondition: None
+        /// </summary>
+        /// <param name="v1">The first vector.</param>
+        /// <param name="v2">The second vector.</param>
         /// <returns>
         ///     The result of the operator.
         /// </returns>
-        public static Vector2 operator *(Vector2 vector, double value)
-        {
-            return new Vector2(vector.X * value, vector.Y * value);
-        }
-
         public static Vector2 operator +(Vector2 v1, Vector2 v2)
         {
             return new Vector2(v1.X + v2.X, v1.Y + v2.Y);
         }
 
+        /// <summary>
+        /// Converts to the string (this.X, this.Y).
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             return $"({this.X}, {this.Y})";

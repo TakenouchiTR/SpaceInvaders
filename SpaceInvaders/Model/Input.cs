@@ -17,12 +17,22 @@ namespace SpaceInvaders.Model
 
         #region Methods
 
+        /// <summary>
+        /// Called when [key down].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="args">The <see cref="KeyEventArgs"/> instance containing the event data.</param>
         public static void OnKeyDown(CoreWindow sender, KeyEventArgs args)
         {
             var pressedKey = args.VirtualKey;
             KeyStates[pressedKey] = true;
         }
 
+        /// <summary>
+        /// Called when [key up].
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="args">The <see cref="KeyEventArgs"/> instance containing the event data.</param>
         public static void OnKeyUp(CoreWindow sender, KeyEventArgs args)
         {
             var pressedKey = args.VirtualKey;
