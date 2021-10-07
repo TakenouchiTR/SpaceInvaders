@@ -98,7 +98,7 @@ namespace SpaceInvaders.Model.Nodes
         /// </summary>
         public SpriteNode()
         {
-
+            this.visible = true;
         }
 
         /// <summary>
