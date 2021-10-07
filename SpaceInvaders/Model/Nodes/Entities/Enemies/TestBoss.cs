@@ -14,6 +14,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         private Vector2 velocity;
         private int health;
+        private double speed;
 
         #endregion
 
@@ -25,7 +26,8 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         public TestBoss() : base(new TestBossSprite())
         {
             Collision.Monitoring = false;
-            this.velocity = new Vector2(100, 0);
+            this.speed = 100;
+            this.velocity = new Vector2(this.speed, 0);
             this.health = 3;
 
             this.createTargets();
@@ -56,6 +58,8 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         private void onTargetRemoved(object sender, EventArgs e)
         {
             this.health--;
+            this.speed += 50;
+            this.velocity.X = Math.Sign(this.velocity.X) * this.speed;
             if (this.health <= 0)
             {
                 QueueForRemoval();
@@ -72,11 +76,11 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         {
             if (Left <= 0)
             {
-                this.velocity.X = 100;
+                this.velocity.X = this.speed;
             }
             else if (Right >= MainPage.ApplicationWidth)
             {
-                this.velocity.X = -100;
+                this.velocity.X = -this.speed;
             }
 
             Move(this.velocity * delta);
