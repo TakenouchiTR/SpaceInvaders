@@ -29,6 +29,8 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             Collision.Collided += this.onCollided;
             Collision.Monitoring = true;
             Collision.Monitorable = true;
+
+            this.setupTimer();
         }
 
         #endregion
