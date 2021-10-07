@@ -39,7 +39,10 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         private void setupTimer()
         {
-            Timer timer = new Timer();
+            Timer timer = new Timer() 
+            {
+                Duration = 1.5
+            };
             timer.Start();
             timer.Tick += this.onShootTimerTick;
             AttachChild(timer);
