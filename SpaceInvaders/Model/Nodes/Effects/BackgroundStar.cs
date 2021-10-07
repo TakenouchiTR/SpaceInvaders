@@ -26,7 +26,7 @@ namespace SpaceInvaders.Model.Nodes.Effects
 
         public override void Update(double delta)
         {
-            this.Y += this.velocity;
+            this.Y += this.velocity * delta;
             if (this.IsOffScreen())
             {
                 this.QueueForRemoval();
