@@ -1,0 +1,16 @@
+﻿I am unable to find any major bugs or missing functionality with the program.
+
+There are some minor issues, such as collision not being checked if a node that is not a direct child of the root
+    is moved, but it currently has no effect on gameplay with how the game is structured.
+
+The game is structured as a tree of nodes, with every part of the game (Sprites, collision, timers, etc.) being 
+    respresented as a node. Nodes may have children, which allow for complex structures to be created through
+    composition. An entity is a Node2D that has a SpriteNode and a CollisionArea as children, rather than being 
+    a new type of node that has a sprite and a way to detect collisions as properties or fields.
+
+When two CollisionAreas overlap, both check if their CollisionMasks match the other's CollisionLayers. 
+    The CollisionLayer is what the CollisionArea is (An enemy would have the Enemy collision layer), while the
+    CollisionMasks is what the CollisionArea is looking for (An enemy would be looking for the things with
+    PlayerHitbox). If a CollisionArea is overlapping another CollisionArea and is masking its CollisionLayers, 
+    then it emits an event for another Node to handle. This allows both sides of a collision to pick what it 
+    wants to react to. An enemy running into the player will kill the player, but the enemy is unaffected.
