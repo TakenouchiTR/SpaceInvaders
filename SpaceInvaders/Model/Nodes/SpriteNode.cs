@@ -75,7 +75,7 @@ namespace SpaceInvaders.Model.Nodes
         {
             this.Sprite = sprite;
 
-            SpriteAdded?.Invoke(this, this.Sprite);
+            SpriteShown?.Invoke(this, this.Sprite);
         }
 
         #endregion
@@ -91,18 +91,18 @@ namespace SpaceInvaders.Model.Nodes
         public override void CompleteRemoval()
         {
             base.CompleteRemoval();
-            SpriteRemoved?.Invoke(null, this.Sprite);
+            SpriteHidden?.Invoke(null, this.Sprite);
         }
 
         /// <summary>
-        ///     Occurs when a sprite is added.
+        ///     Occurs when a sprite is Shown.
         /// </summary>
-        public static event EventHandler<BaseSprite> SpriteAdded;
+        public static event EventHandler<BaseSprite> SpriteShown;
 
         /// <summary>
-        ///     Occurs when a sprite is removed.
+        ///     Occurs when a sprite is Hidden.
         /// </summary>
-        public static event EventHandler<BaseSprite> SpriteRemoved;
+        public static event EventHandler<BaseSprite> SpriteHidden;
 
         private void render()
         {
@@ -117,9 +117,9 @@ namespace SpaceInvaders.Model.Nodes
         /// <param name="newSprite">The new sprite.</param>
         public void ChangeSprite(BaseSprite newSprite)
         {
-            SpriteRemoved?.Invoke(this, this.Sprite);
+            SpriteHidden?.Invoke(this, this.Sprite);
             this.Sprite = newSprite;
-            SpriteAdded?.Invoke(this, this.Sprite);
+            SpriteShown?.Invoke(this, this.Sprite);
             this.render();
         }
 

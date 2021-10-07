@@ -50,8 +50,8 @@ namespace SpaceInvaders.View
             Window.Current.CoreWindow.KeyDown += Input.OnKeyDown;
             Window.Current.CoreWindow.KeyUp += Input.OnKeyUp;
 
-            SpriteNode.SpriteRemoved += this.onSpriteNodeRemoved;
-            SpriteNode.SpriteAdded += this.onSpriteNodeAdded;
+            SpriteNode.SpriteHidden += this.onSpriteNodeHidden;
+            SpriteNode.SpriteShown += this.onSpriteNodeShown;
 
             this.level = new Level1();
             this.level.ScoreChanged += this.onLevelScoreChanged;
@@ -62,12 +62,12 @@ namespace SpaceInvaders.View
 
         #region Methods
 
-        private void onSpriteNodeRemoved(object sender, BaseSprite e)
+        private void onSpriteNodeHidden(object sender, BaseSprite e)
         {
             this.theCanvas.Children.Remove(e);
         }
 
-        private void onSpriteNodeAdded(object sender, BaseSprite e)
+        private void onSpriteNodeShown(object sender, BaseSprite e)
         {
             this.theCanvas.Children.Add(e);
         }
