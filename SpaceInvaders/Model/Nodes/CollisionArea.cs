@@ -38,7 +38,7 @@ namespace SpaceInvaders.Model.Nodes
         public PhysicsLayer CollisionMasks { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether this <see cref="GameObject" /> is monitorable.
+        ///     Gets or sets a value indicating whether this <see cref="CollisionArea" /> is monitorable.
         /// </summary>
         /// <value>
         ///     <c>true</c> if monitorable; otherwise, <c>false</c>.
@@ -46,7 +46,7 @@ namespace SpaceInvaders.Model.Nodes
         public bool Monitorable { get; set; }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether this <see cref="GameObject" /> is monitoring for collisions.
+        ///     Gets or sets a value indicating whether this <see cref="CollisionArea" /> is monitoring for collisions.
         /// </summary>
         /// <value>
         ///     <c>true</c> if monitoring; otherwise, <c>false</c>.
