@@ -19,6 +19,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         private const int EnemiesPerRow = 4;
         private const double EnemySpawnAreaWidth = 250;
         private const double EnemyVerticalGap = 64;
+        private const int StarCount = 50;
 
         private const int TotalMovementSteps = 19;
         private const int XMoveAmount = 15;
@@ -43,7 +44,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
             this.addPlayer();
             this.addEnemyHelperNodes();
             this.addEnemies();
-            this.setupStarTimer();
+            this.addStars();
         }
 
         #endregion
@@ -110,21 +111,19 @@ namespace SpaceInvaders.Model.Nodes.Levels
             this.enemiesRemaining += enemyList.Count;
         }
 
-        private void setupStarTimer()
+        private void addStars()
         {
-            Timer starTimer = new Timer() {
-                Duration = .1
-            };
-            starTimer.Tick += this.onStarTimerTick;
-            AttachChild(starTimer);
-            starTimer.Start();
+            Random starRandom = new Random();
+            for (var i = 0; i < StarCount; ++i)
+            {
+                var star = new BackgroundStar() 
+                {
+                    Y = starRandom.NextDouble() * MainPage.ApplicationHeight
+                };
+                AttachChild(star);
+            }
         }
-
-        private void onStarTimerTick(object sender, EventArgs e)
-        {
-            QueueGameObjectForAddition(new BackgroundStar());
-        }
-
+        
         private void onPlayerRemoved(object sender, EventArgs e)
         {
             CompleteGame("You have been destroyed!");
