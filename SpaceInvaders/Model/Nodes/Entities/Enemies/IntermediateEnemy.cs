@@ -3,8 +3,8 @@
 namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 {
     /// <summary>
-    /// An enemy with no behavior.<br/>
-    /// Worth more points than BasicEnemy
+    ///     An enemy with no behavior.<br />
+    ///     Worth more points than BasicEnemy
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.Nodes.Entities.Enemies.Enemy" />
     public class IntermediateEnemy : Enemy
@@ -12,7 +12,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="IntermediateEnemy"/> class.
+        ///     Initializes a new instance of the <see cref="IntermediateEnemy" /> class.
         /// </summary>
         public IntermediateEnemy() : base(new IntermediateEnemySprite())
         {

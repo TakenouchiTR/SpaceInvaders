@@ -7,8 +7,8 @@ using SpaceInvaders.View;
 namespace SpaceInvaders.Model.Nodes.Levels
 {
     /// <summary>
-    /// The first level of the game.<br/>
-    /// Has three layers of four enemies in descending difficulty.
+    ///     The first level of the game.<br />
+    ///     Has three layers of four enemies in descending difficulty.
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.Nodes.Levels.LevelBase" />
     public class Level1 : LevelBase
@@ -35,7 +35,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Level1"/> class.
+        ///     Initializes a new instance of the <see cref="Level1" /> class.
         /// </summary>
         public Level1()
         {

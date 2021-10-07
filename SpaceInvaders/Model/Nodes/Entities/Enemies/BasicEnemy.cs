@@ -3,7 +3,7 @@
 namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 {
     /// <summary>
-    /// A basic enemy that has no behavior
+    ///     A basic enemy that has no behavior
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.Nodes.Entities.Enemies.Enemy" />
     public class BasicEnemy : Enemy
@@ -11,7 +11,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BasicEnemy"/> class.
+        ///     Initializes a new instance of the <see cref="BasicEnemy" /> class.
         /// </summary>
         public BasicEnemy() : base(new BasicEnemySprite())
         {

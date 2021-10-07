@@ -4,7 +4,7 @@ using SpaceInvaders.View.Sprites;
 namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 {
     /// <summary>
-    /// An enemy that fires in irregular intervals
+    ///     An enemy that fires in irregular intervals
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.Nodes.Entities.Enemies.Enemy" />
     public class AggresiveEnemy : Enemy
@@ -23,7 +23,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AggresiveEnemy"/> class.
+        ///     Initializes a new instance of the <see cref="AggresiveEnemy" /> class.
         /// </summary>
         public AggresiveEnemy() : base(new AggresiveEnemySprite())
         {

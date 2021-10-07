@@ -3,7 +3,7 @@
 namespace SpaceInvaders.Model
 {
     /// <summary>
-    /// Represents each of the different physics layers.
+    ///     Represents each of the different physics layers.
     /// </summary>
     [Flags]
     public enum PhysicsLayer

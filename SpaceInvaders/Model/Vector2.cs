@@ -109,14 +109,17 @@ namespace SpaceInvaders.Model
             {
                 throw new ArgumentException("x must not be NaN");
             }
+
             if (double.IsNaN(y))
             {
                 throw new ArgumentException("y must not be NaN");
             }
+
             if (double.IsInfinity(x))
             {
                 throw new ArgumentException("x must not be infinity");
             }
+
             if (double.IsInfinity(y))
             {
                 throw new ArgumentException("y must not be infinity");
@@ -129,10 +132,11 @@ namespace SpaceInvaders.Model
         #endregion
 
         #region Methods
+
         /// <summary>
-        ///     Implements the * operator between a Vector2 and a double.<br/>
+        ///     Implements the * operator between a Vector2 and a double.<br />
         ///     Each component of the Vector2 will be multiplied by the scalar.
-        ///     Precondition: None<br/>
+        ///     Precondition: None<br />
         ///     Postcondition: None
         /// </summary>
         /// <param name="vector">The vector.</param>
@@ -146,9 +150,9 @@ namespace SpaceInvaders.Model
         }
 
         /// <summary>
-        ///     Implements the * operator between two Vector2s<br/>
+        ///     Implements the * operator between two Vector2s<br />
         ///     Each component of the first Vector2 will be added to the corresponding component of the other..
-        ///     Precondition: None<br/>
+        ///     Precondition: None<br />
         ///     Postcondition: None
         /// </summary>
         /// <param name="v1">The first vector.</param>
@@ -162,10 +166,10 @@ namespace SpaceInvaders.Model
         }
 
         /// <summary>
-        /// Converts to the string (this.X, this.Y).
+        ///     Converts to the string (this.X, this.Y).
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String" /> that represents this instance.
+        ///     A <see cref="System.String" /> that represents this instance.
         /// </returns>
         public override string ToString()
         {

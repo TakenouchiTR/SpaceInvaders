@@ -6,7 +6,7 @@ using SpaceInvaders.View.Sprites;
 namespace SpaceInvaders.Model.Nodes.Entities
 {
     /// <summary>
-    /// The player character
+    ///     The player character
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.Nodes.Entities.Entity" />
     public class PlayerShip : Entity
@@ -28,7 +28,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PlayerShip"/> class.
+        ///     Initializes a new instance of the <see cref="PlayerShip" /> class.
         /// </summary>
         public PlayerShip() : base(new PlayerShipSprite())
         {
@@ -53,9 +53,9 @@ namespace SpaceInvaders.Model.Nodes.Entities
         }
 
         /// <summary>
-        /// The update loop for the GameObject.<br />
-        /// Precondition: None<br />
-        /// Postcondition: GameObject completes its update step
+        ///     The update loop for the GameObject.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: GameObject completes its update step
         /// </summary>
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)

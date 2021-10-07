@@ -5,7 +5,7 @@ using SpaceInvaders.View.Sprites;
 namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 {
     /// <summary>
-    /// A boss used for testing the tree structure on moving nodes
+    ///     A boss used for testing the tree structure on moving nodes
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.Nodes.Entities.Enemies.Enemy" />
     public class TestBoss : Enemy
@@ -20,7 +20,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TestBoss"/> class.
+        ///     Initializes a new instance of the <see cref="TestBoss" /> class.
         /// </summary>
         public TestBoss() : base(new TestBossSprite())
         {
@@ -63,9 +63,9 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         }
 
         /// <summary>
-        /// The update loop for the GameObject.<br />
-        /// Precondition: None<br />
-        /// Postcondition: GameObject completes its update step
+        ///     The update loop for the GameObject.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: GameObject completes its update step
         /// </summary>
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)

@@ -5,7 +5,7 @@ using Windows.UI.Xaml;
 namespace SpaceInvaders.Model.Nodes.Levels
 {
     /// <summary>
-    /// The basic structure for other levels.
+    ///     The basic structure for other levels.
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.Nodes.Node" />
     public abstract class LevelBase : Node
@@ -24,10 +24,10 @@ namespace SpaceInvaders.Model.Nodes.Levels
         #region Properties
 
         /// <summary>
-        /// Gets or sets the score.
+        ///     Gets or sets the score.
         /// </summary>
         /// <value>
-        /// The score.
+        ///     The score.
         /// </value>
         public int Score
         {
@@ -44,7 +44,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LevelBase"/> class.
+        ///     Initializes a new instance of the <see cref="LevelBase" /> class.
         /// </summary>
         protected LevelBase()
         {
@@ -65,19 +65,20 @@ namespace SpaceInvaders.Model.Nodes.Levels
         #region Methods
 
         /// <summary>
-        /// Occurs when the score is changed.
+        ///     Occurs when the score is changed.
         /// </summary>
         public event EventHandler<int> ScoreChanged;
+
         /// <summary>
-        /// Occurs when the game is finished.
+        ///     Occurs when the game is finished.
         /// </summary>
         public event EventHandler<string> GameFinished;
 
         /// <summary>
-        /// Runs cleanup and invokes the Removed event when removed from the game.<br />
-        /// Precondition: None<br />
-        /// Postcondition: Removed event is invoked &amp;&amp;<br />
-        /// All event subscribers are removed
+        ///     Runs cleanup and invokes the Removed event when removed from the game.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: Removed event is invoked &amp;&amp;<br />
+        ///     All event subscribers are removed
         /// </summary>
         public override void CompleteRemoval()
         {
@@ -102,7 +103,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         }
 
         /// <summary>
-        /// Fires the GameFinished event with the specified message.
+        ///     Fires the GameFinished event with the specified message.
         /// </summary>
         /// <param name="message">The message.</param>
         protected void CompleteGame(string message)
@@ -127,9 +128,9 @@ namespace SpaceInvaders.Model.Nodes.Levels
         }
 
         /// <summary>
-        /// Attaches a new child to the node.<br />
-        /// Precondition: child != null<br />
-        /// Postcondition: None
+        ///     Attaches a new child to the node.<br />
+        ///     Precondition: child != null<br />
+        ///     Postcondition: None
         /// </summary>
         /// <param name="child">The child.</param>
         public override void AttachChild(Node child)
