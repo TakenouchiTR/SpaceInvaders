@@ -2,16 +2,29 @@
 
 namespace SpaceInvaders.Model.Nodes.Entities
 {
+    /// <summary>
+    /// The general class for any projectile fired
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.Model.Nodes.Entities.Entity" />
     public class Bullet : Entity
     {
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the velocity.
+        /// </summary>
+        /// <value>
+        /// The velocity.
+        /// </value>
         public Vector2 Velocity { get; set; }
 
         #endregion
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Bullet"/> class.
+        /// </summary>
         public Bullet() : base(new PlayerBulletSprite())
         {
             this.Velocity = new Vector2();
@@ -24,6 +37,12 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
         #region Methods
 
+        /// <summary>
+        /// The update loop for the GameObject.<br />
+        /// Precondition: None<br />
+        /// Postcondition: GameObject completes its update step
+        /// </summary>
+        /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)
         {
             Move(this.Velocity * delta);

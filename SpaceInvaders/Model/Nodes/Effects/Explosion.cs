@@ -4,10 +4,17 @@ using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Nodes.Effects
 {
+    /// <summary>
+    /// Plays a quick animation of an explosion
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.Model.Nodes.SpriteNode" />
     public class Explosion : SpriteNode
     {
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Explosion"/> class.
+        /// </summary>
         public Explosion() : base(new ExplosionSprite())
         {
             this.addTimers();

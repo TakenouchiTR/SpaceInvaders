@@ -3,6 +3,10 @@ using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 {
+    /// <summary>
+    /// The base class to derive enemies from
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.Model.Nodes.Entities.Entity" />
     public abstract class Enemy : Entity
     {
         #region Properties

@@ -6,6 +6,11 @@ using SpaceInvaders.View;
 
 namespace SpaceInvaders.Model.Nodes.Levels
 {
+    /// <summary>
+    /// The first level of the game.<br/>
+    /// Has three layers of four enemies in descending difficulty.
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.Model.Nodes.Levels.LevelBase" />
     public class Level1 : LevelBase
     {
         #region Data members
@@ -23,12 +28,15 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         private int enemiesRemaining;
 
-        private Node2D enemies;
+        private Node2D enemyGroup;
 
         #endregion
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Level1"/> class.
+        /// </summary>
         public Level1()
         {
             this.addPlayer();
@@ -57,8 +65,8 @@ namespace SpaceInvaders.Model.Nodes.Levels
             enemyMoveTimer.Tick += this.onEnemyMoveTimerTick;
             AttachChild(enemyMoveTimer);
 
-            this.enemies = new Node2D();
-            AttachChild(this.enemies);
+            this.enemyGroup = new Node2D();
+            AttachChild(this.enemyGroup);
         }
 
         private void addEnemies()
@@ -92,10 +100,10 @@ namespace SpaceInvaders.Model.Nodes.Levels
                 };
                 enemy.Center = enemyCenter;
                 enemy.Removed += this.onEnemyRemoved;
-                this.enemies.AttachChild(enemy);
+                this.enemyGroup.AttachChild(enemy);
             }
 
-            this.enemies.X = MainPage.ApplicationWidth / 2 - EnemySpawnAreaWidth / 2;
+            this.enemyGroup.X = MainPage.ApplicationWidth / 2 - EnemySpawnAreaWidth / 2;
 
             this.enemiesRemaining += enemyList.Count;
         }
@@ -134,7 +142,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
                 moveDistance.X = XMoveAmount * movementDirection;
             }
 
-            this.enemies.Move(moveDistance);
+            this.enemyGroup.Move(moveDistance);
         }
 
         #endregion

@@ -2,6 +2,10 @@
 
 namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 {
+    /// <summary>
+    /// The weak points for the test boss
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.Model.Nodes.Entities.Entity" />
     public class TestBossTarget : Entity
     {
         #region Data members
@@ -12,6 +16,9 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestBossTarget"/> class.
+        /// </summary>
         public TestBossTarget() : base(new BasicEnemySprite())
         {
             this.health = 3;
