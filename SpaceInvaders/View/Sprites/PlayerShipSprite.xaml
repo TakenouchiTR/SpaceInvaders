@@ -12,14 +12,15 @@
     Width="32">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="BodyColor" Color="#888"/>
-        <SolidColorBrush x:Key="OutlineColor" Color="Black"/>
+        <SolidColorBrush x:Key="BodyColor" Color="#888" />
+        <SolidColorBrush x:Key="OutlineColor" Color="Black" />
     </UserControl.Resources>
 
     <Canvas>
-        <Polygon Points="11,0 9,0 4,5 0,13 0,18 5,25 5,27 0,32 0,40 7,48 10,48 15,40 16,40 21,48 24,48 32,40 32,32 26,27 26,25 32,18 32,13 27,5 22,0 20,0 20,17 18,19 13,19 11,17"
-                 Fill="{StaticResource BodyColor}" Stroke="{StaticResource OutlineColor}"/>
+        <Polygon
+            Points="11,0 9,0 4,5 0,13 0,18 5,25 5,27 0,32 0,40 7,48 10,48 15,40 16,40 21,48 24,48 32,40 32,32 26,27 26,25 32,18 32,13 27,5 22,0 20,0 20,17 18,19 13,19 11,17"
+            Fill="{StaticResource BodyColor}" Stroke="{StaticResource OutlineColor}" />
         <Polygon Points="14,7 14,16 10,20 9,22 9,24 10,26 13,29 15,30 16,30 18,29 21,26 22,24 22,22 21,20 17,16 17,7"
-                 Fill="{StaticResource BodyColor}" Stroke="{StaticResource OutlineColor}"/>
+                 Fill="{StaticResource BodyColor}" Stroke="{StaticResource OutlineColor}" />
     </Canvas>
 </local:BaseSprite>

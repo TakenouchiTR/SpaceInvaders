@@ -1,5 +1,4 @@
 ﻿using System;
-using Windows.Devices.PointOfService;
 using SpaceInvaders.View;
 using SpaceInvaders.View.Sprites;
 
@@ -7,8 +6,15 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 {
     public class TestBoss : Enemy
     {
+        #region Data members
+
         private Vector2 velocity;
         private int health;
+
+        #endregion
+
+        #region Constructors
+
         public TestBoss() : base(new TestBossSprite())
         {
             Collision.Monitoring = false;
@@ -18,17 +24,20 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             this.createTargets();
         }
 
+        #endregion
+
+        #region Methods
+
         private void createTargets()
         {
-            AttachChild(new TestBossTarget() {
-                Center = new Vector2(this.Left, this.Bottom)
+            AttachChild(new TestBossTarget {
+                Center = new Vector2(Left, Bottom)
             });
-            AttachChild(new TestBossTarget() {
-                Center = new Vector2(this.Center.X, this.Bottom)
+            AttachChild(new TestBossTarget {
+                Center = new Vector2(Center.X, Bottom)
             });
-            AttachChild(new TestBossTarget()
-            {
-                Center = new Vector2(this.Right, this.Bottom)
+            AttachChild(new TestBossTarget {
+                Center = new Vector2(Right, Bottom)
             });
 
             foreach (var child in children)
@@ -42,23 +51,25 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             this.health--;
             if (this.health <= 0)
             {
-                this.QueueForRemoval();
+                QueueForRemoval();
             }
         }
 
         public override void Update(double delta)
         {
-            if (this.Left <= 0)
+            if (Left <= 0)
             {
                 this.velocity.X = 100;
             }
-            else if (this.Right >= MainPage.ApplicationWidth)
+            else if (Right >= MainPage.ApplicationWidth)
             {
                 this.velocity.X = -100;
             }
 
-            this.Move(this.velocity * delta);
+            Move(this.velocity * delta);
             base.Update(delta);
         }
+
+        #endregion
     }
 }

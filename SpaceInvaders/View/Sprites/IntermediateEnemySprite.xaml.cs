@@ -4,9 +4,13 @@ namespace SpaceInvaders.View.Sprites
 {
     public sealed partial class IntermediateEnemySprite
     {
+        #region Constructors
+
         public IntermediateEnemySprite()
         {
             this.InitializeComponent();
         }
+
+        #endregion
     }
 }

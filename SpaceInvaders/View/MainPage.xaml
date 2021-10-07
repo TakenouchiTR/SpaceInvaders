@@ -8,7 +8,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 
-    <Canvas x:Name="theCanvas" Width="640" Height="480" Background ="Black">
-        <TextBlock x:Name="scoreText" Text="Score: 0"/>
+    <Canvas x:Name="theCanvas" Width="640" Height="480" Background="Black">
+        <TextBlock x:Name="scoreText" Text="Score: 0" />
     </Canvas>
 </Page>

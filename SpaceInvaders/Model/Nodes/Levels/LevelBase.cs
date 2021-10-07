@@ -6,12 +6,18 @@ namespace SpaceInvaders.Model.Nodes.Levels
 {
     public abstract class LevelBase : Node
     {
+        #region Data members
+
         private const double MillisecondsInSecond = 1000;
-        
+
         private readonly DispatcherTimer updateTimer;
         private long prevUpdateTime;
         private int score;
         private bool gameActive;
+
+        #endregion
+
+        #region Properties
 
         public int Score
         {
@@ -23,13 +29,16 @@ namespace SpaceInvaders.Model.Nodes.Levels
             }
         }
 
+        #endregion
+
+        #region Constructors
+
         protected LevelBase()
         {
             this.score = 0;
             this.gameActive = true;
 
-            this.updateTimer = new DispatcherTimer
-            {
+            this.updateTimer = new DispatcherTimer {
                 Interval = TimeSpan.FromMilliseconds(.1)
             };
             this.updateTimer.Tick += this.onUpdateTimerTick;
@@ -38,9 +47,13 @@ namespace SpaceInvaders.Model.Nodes.Levels
             this.prevUpdateTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
         }
 
+        #endregion
+
+        #region Methods
+
         public event EventHandler<int> ScoreChanged;
         public event EventHandler<string> GameFinished;
-        
+
         public override void CompleteRemoval()
         {
             base.CompleteRemoval();
@@ -53,6 +66,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
                     this.ScoreChanged -= subscriber as EventHandler<int>;
                 }
             }
+
             if (this.GameFinished != null)
             {
                 foreach (var subscriber in this.GameFinished.GetInvocationList())
@@ -80,7 +94,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
             var delta = timeSinceLastTick / MillisecondsInSecond;
             this.prevUpdateTime = curTime;
 
-            this.Update(delta);
+            Update(delta);
         }
 
         public override void AttachChild(Node child)
@@ -102,17 +116,16 @@ namespace SpaceInvaders.Model.Nodes.Levels
                 }
             }
         }
-        
+
         private void onChildMoved(object sender, Vector2 e)
         {
-
             var senderNode = sender as Node;
             if (senderNode == null)
             {
                 throw new ArgumentException("sender must be a Node");
             }
 
-            List<CollisionArea> sourceCollisionAreas = senderNode.GetCollisionAreas();
+            var sourceCollisionAreas = senderNode.GetCollisionAreas();
 
             foreach (var child in children)
             {
@@ -121,11 +134,11 @@ namespace SpaceInvaders.Model.Nodes.Levels
                     continue;
                 }
 
-                List<CollisionArea> targetCollisionAreas = child.GetCollisionAreas();
-                testForCollisions(sourceCollisionAreas, targetCollisionAreas);
+                var targetCollisionAreas = child.GetCollisionAreas();
+                this.testForCollisions(sourceCollisionAreas, targetCollisionAreas);
             }
         }
 
+        #endregion
     }
-
 }

@@ -6,18 +6,24 @@ namespace SpaceInvaders.Model.Nodes.Effects
 {
     public class Explosion : SpriteNode
     {
+        #region Constructors
+
         public Explosion() : base(new ExplosionSprite())
         {
             this.addTimers();
         }
 
+        #endregion
+
+        #region Methods
+
         private void addTimers()
         {
-            Timer growTimer = new Timer() {
+            var growTimer = new Timer {
                 Duration = .1,
                 Repeat = false
             };
-            Timer removalTimer = new Timer() {
+            var removalTimer = new Timer {
                 Duration = .2,
                 Repeat = false
             };
@@ -34,12 +40,14 @@ namespace SpaceInvaders.Model.Nodes.Effects
 
         private void onRemovalTimerTick(object sender, EventArgs e)
         {
-            this.QueueForRemoval();
+            QueueForRemoval();
         }
 
         private void onGrowTimerTick(object sender, EventArgs e)
         {
-            this.Sprite.RenderTransform = new ScaleTransform();
+            Sprite.RenderTransform = new ScaleTransform();
         }
+
+        #endregion
     }
 }

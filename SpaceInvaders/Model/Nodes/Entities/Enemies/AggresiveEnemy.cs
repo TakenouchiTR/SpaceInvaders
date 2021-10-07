@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 {
     public class AggresiveEnemy : Enemy
     {
+        #region Data members
+
         private const double MinShotDelay = 2;
         private const double MaxShotDelay = 4.5;
         private static readonly Random ShotDelayGenerator = new Random();
@@ -16,18 +14,25 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         private Timer shotTimer;
 
+        #endregion
+
+        #region Constructors
+
         public AggresiveEnemy() : base(new AggresiveEnemySprite())
         {
-            this.Collision.Collided += this.onCollided;
-            this.Score = 30;
+            Collision.Collided += this.onCollided;
+            Score = 30;
 
             this.initializeTimer();
         }
 
+        #endregion
+
+        #region Methods
+
         private void initializeTimer()
         {
-            this.shotTimer = new Timer()
-            {
+            this.shotTimer = new Timer {
                 Duration = getShotDelay(),
                 Repeat = true
             };
@@ -35,14 +40,13 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             this.shotTimer.Tick += this.onShotTimerTick;
             this.shotTimer.Start();
 
-            AttachChild(shotTimer);
+            AttachChild(this.shotTimer);
         }
 
         private void onShotTimerTick(object sender, EventArgs e)
         {
-            Bullet bullet = new Bullet() 
-            {
-                Position = this.Position + BulletSpawnLocation,
+            var bullet = new Bullet {
+                Position = Position + BulletSpawnLocation,
                 Velocity = new Vector2(0, 500)
             };
             bullet.Collision.CollisionLayers = PhysicsLayer.EnemyHitbox;
@@ -50,17 +54,19 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
             this.shotTimer.Duration = getShotDelay();
 
-            this.GetRoot().QueueGameObjectForAddition(bullet);
+            GetRoot().QueueGameObjectForAddition(bullet);
         }
 
         private void onCollided(object sender, CollisionArea e)
         {
-            this.QueueForRemoval();
+            QueueForRemoval();
         }
 
         private static double getShotDelay()
         {
             return ShotDelayGenerator.NextDouble() * (MaxShotDelay - MinShotDelay) + MinShotDelay;
         }
+
+        #endregion
     }
 }

@@ -6,11 +6,21 @@ namespace SpaceInvaders.Model.Nodes
 {
     public class Node
     {
+        #region Data members
+
+        /// <summary>
+        ///     The children nodes.
+        ///     Whenever a parent is moved, all of its (applicable) children are moved with it.
+        ///     Removing a parent will also remove all of its children.
+        /// </summary>
+        protected HashSet<Node> children;
+
         private readonly Queue<Node> removalQueue;
         private readonly Queue<Node> additionQueue;
 
-        protected HashSet<Node> children;
+        #endregion
 
+        #region Properties
 
         /// <summary>
         ///     Gets a list of the Node's children.
@@ -21,12 +31,21 @@ namespace SpaceInvaders.Model.Nodes
         /// </value>
         public List<Node> Children => this.children.ToList();
 
-
+        /// <summary>
+        ///     Gets or sets the node's parent.
+        /// </summary>
+        /// <value>
+        ///     The node's parent.
+        /// </value>
         public Node Parent { get; protected set; }
 
-        public event EventHandler<Node> ChildAdded;
-        public event EventHandler Removed;
+        #endregion
 
+        #region Constructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Node" /> class.
+        /// </summary>
         public Node()
         {
             this.removalQueue = new Queue<Node>();
@@ -34,9 +53,23 @@ namespace SpaceInvaders.Model.Nodes
             this.children = new HashSet<Node>();
         }
 
+        #endregion
+
+        #region Methods
+
         /// <summary>
-        ///     The update loop for the GameObject.
-        ///     Precondition: None
+        ///     Occurs when a child is added.
+        /// </summary>
+        public event EventHandler<Node> ChildAdded;
+
+        /// <summary>
+        ///     Occurs when the node is removed.
+        /// </summary>
+        public event EventHandler Removed;
+
+        /// <summary>
+        ///     The update loop for the GameObject.<br />
+        ///     Precondition: None<br />
         ///     Postcondition: GameObject completes its update step
         /// </summary>
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
@@ -46,15 +79,16 @@ namespace SpaceInvaders.Model.Nodes
             {
                 child.Update(delta);
             }
+
             this.addObjectsInQueue();
             this.removeObjectsInQueue();
         }
-        
 
         /// <summary>
-        ///     Runs cleanup code and invokes the Removed event when removed from the game.
-        ///     Precondition: None
-        ///     Postcondition: Removed event is invoked
+        ///     Runs cleanup and invokes the Removed event when removed from the game.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: Removed event is invoked &amp;&amp;<br />
+        ///     All event subscribers are removed
         /// </summary>
         public virtual void CompleteRemoval()
         {
@@ -64,6 +98,7 @@ namespace SpaceInvaders.Model.Nodes
             {
                 child.CompleteRemoval();
             }
+
             this.Parent = null;
             this.children.Clear();
 
@@ -74,9 +109,15 @@ namespace SpaceInvaders.Model.Nodes
                     this.Removed -= subscriber as EventHandler;
                 }
             }
-            
         }
 
+        /// <summary>
+        ///     Gets the root for the node. <br />
+        ///     The root is the top-most node for a tree, or the node without a parent.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: None
+        /// </summary>
+        /// <returns>The root for the node's tree</returns>
         public Node GetRoot()
         {
             if (this.Parent == null)
@@ -84,19 +125,24 @@ namespace SpaceInvaders.Model.Nodes
                 return this;
             }
 
-            return Parent.GetRoot();
+            return this.Parent.GetRoot();
         }
 
+        /// <summary>
+        ///     Queues the node and its children for removal at the end of the current update tick.<br />
+        ///     Precondition: None
+        ///     Postcondition: The node and its children are queued for removal during the end of their parent's update tick.
+        /// </summary>
         public void QueueForRemoval()
         {
-            this.Parent?.QueueGameObjectForRemoval(this);
+            this.Parent?.queueGameObjectForRemoval(this);
             foreach (var child in this.children)
             {
                 child.QueueForRemoval();
             }
         }
 
-        public void QueueGameObjectForRemoval(Node obj)
+        private void queueGameObjectForRemoval(Node obj)
         {
             if (obj == null)
             {
@@ -123,12 +169,12 @@ namespace SpaceInvaders.Model.Nodes
         }
 
         /// <summary>
-        ///     Queues the specified game object for adding at the end of the update tick.
-        ///     Addition is deferred to prevent errors with updating the set of game objects while iterating over it.
-        ///     Precondition: obj != null
-        ///     Postcondition: obj is added at the end of the update tick
+        ///     Queues the specified game object for adding at the end of the update tick.<br />
+        ///     Addition is deferred to prevent errors with updating the set of game objects while iterating over it.<br />
+        ///     Precondition: obj != null<br />
+        ///     Postcondition: obj is added to children at the end of the update tick
         /// </summary>
-        /// <param name="obj">The object to add.</param>
+        /// <param name="newNode">The object to add.</param>
         /// <exception cref="System.ArgumentException">obj must not be null</exception>
         public virtual void QueueGameObjectForAddition(Node newNode)
         {
@@ -145,15 +191,14 @@ namespace SpaceInvaders.Model.Nodes
             while (this.additionQueue.Count > 0)
             {
                 var gameObject = this.additionQueue.Dequeue();
-                AttachChild(gameObject);
+                this.AttachChild(gameObject);
             }
         }
 
-
         /// <summary>
-        ///  Adds a child to the GameObject.
-        /// Precondition: child != null
-        /// Postcondition: None
+        ///     Attaches a new child to the node.<br />
+        ///     Precondition: child != null<br />
+        ///     Postcondition: None
         /// </summary>
         /// <param name="child">The child.</param>
         /// <exception cref="System.ArgumentException">child must not be null</exception>
@@ -171,8 +216,8 @@ namespace SpaceInvaders.Model.Nodes
         }
 
         /// <summary>
-        ///     Detaches the child.
-        ///     Precondition: child != null
+        ///     Detaches the child.<br />
+        ///     Precondition: child != null<br />
         ///     Postcondition: !this.Children.Contains(child)
         /// </summary>
         /// <param name="child">The child to detach.</param>
@@ -192,10 +237,10 @@ namespace SpaceInvaders.Model.Nodes
         }
 
         /// <summary>
-        ///     Detaches self from parent.
-        ///     Precondition: None
-        ///     Postcondition: this.Parent == null
-        ///                    !this.Parent@prev.Children.Contains(this)
+        ///     Detaches self from parent.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: this.Parent == null &amp;&amp;<br />
+        ///     !this.Parent@prev.Children.Contains(this)
         /// </summary>
         public void DetachFromParent()
         {
@@ -205,11 +250,16 @@ namespace SpaceInvaders.Model.Nodes
                 this.Parent = null;
             }
         }
-        
 
+        /// <summary>
+        ///     Gets all collision areas below the node, including the node itself.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: None
+        /// </summary>
+        /// <returns>A list of all collision areas below the node</returns>
         public List<CollisionArea> GetCollisionAreas()
         {
-            List<CollisionArea> areas = new List<CollisionArea>();
+            var areas = new List<CollisionArea>();
 
             if (this is CollisionArea)
             {
@@ -223,5 +273,7 @@ namespace SpaceInvaders.Model.Nodes
 
             return areas;
         }
+
+        #endregion
     }
 }

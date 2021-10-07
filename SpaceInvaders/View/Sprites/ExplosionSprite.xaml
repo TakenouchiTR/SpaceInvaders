@@ -13,12 +13,12 @@
     RenderTransformOrigin="0.5, 0.5">
     <UserControl.RenderTransform>
         <TransformGroup>
-            <ScaleTransform ScaleX=".5" ScaleY=".5"/>
+            <ScaleTransform ScaleX=".5" ScaleY=".5" />
         </TransformGroup>
     </UserControl.RenderTransform>
     <Canvas>
-        <Polygon Points="5,0 15,12 21,0 26,12 41,0 38,14 48,17 36,21 48,32 32,30 48,45 28,34 20,47 17,33 0,48 9,29 0,30 8,22 0,12 9,15"
-                 Stroke="Yellow">
-        </Polygon>
+        <Polygon
+            Points="5,0 15,12 21,0 26,12 41,0 38,14 48,17 36,21 48,32 32,30 48,45 28,34 20,47 17,33 0,48 9,29 0,30 8,22 0,12 9,15"
+            Stroke="Yellow" />
     </Canvas>
 </local:BaseSprite>

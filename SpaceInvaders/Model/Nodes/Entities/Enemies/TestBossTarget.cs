@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SpaceInvaders.View.Sprites;
+﻿using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 {
     public class TestBossTarget : Entity
     {
+        #region Data members
+
         private int health;
+
+        #endregion
+
+        #region Constructors
 
         public TestBossTarget() : base(new BasicEnemySprite())
         {
@@ -22,14 +23,20 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             Collision.Monitorable = true;
         }
 
+        #endregion
+
+        #region Methods
+
         private void onCollided(object sender, CollisionArea e)
         {
             this.health--;
 
             if (this.health <= 0)
             {
-                this.QueueForRemoval();
+                QueueForRemoval();
             }
         }
+
+        #endregion
     }
 }

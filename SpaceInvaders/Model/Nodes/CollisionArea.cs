@@ -4,10 +4,21 @@ namespace SpaceInvaders.Model.Nodes
 {
     public class CollisionArea : Area
     {
+        #region Data members
+
         /// <summary>
-        ///     Gets or sets the collision layers.
-        ///     Each bit of CollisionLayers represents a different layer.
-        ///     If Monitorable is set to true, other GameObjects will check if any of their flagged
+        ///     Occurs whenever the CollisionArea collides with another Collision Area that is is masking
+        /// </summary>
+        public EventHandler<CollisionArea> Collided;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     Gets or sets the collision layers.<br />
+        ///     Each bit of CollisionLayers represents a different layer.<br />
+        ///     If Monitorable is set to true, other GameObjects will check if any of their flagged<br />
         ///     CollisionMask bits match this object's CollisionLayer when their bounding boxes overlap.
         /// </summary>
         /// <value>
@@ -16,9 +27,9 @@ namespace SpaceInvaders.Model.Nodes
         public PhysicsLayer CollisionLayers { get; set; }
 
         /// <summary>
-        ///     Gets or sets the collision masks.
-        ///     Each bit of CollisionMasks represents a different layer.
-        ///     If Monitoring is set to true, this GameObject will check if any of its flagged
+        ///     Gets or sets the collision masks.<br />
+        ///     Each bit of CollisionMasks represents a different layer.<br />
+        ///     If Monitoring is set to true, this GameObject will check if any of its flagged<br />
         ///     CollisionMask bits match another object's CollisionLayer when their bounding boxes overlap.
         /// </summary>
         /// <value>
@@ -42,8 +53,16 @@ namespace SpaceInvaders.Model.Nodes
         /// </value>
         public bool Monitoring { get; set; }
 
-        public EventHandler<CollisionArea> Collided;
+        #endregion
 
+        #region Methods
+
+        /// <summary>
+        ///     Runs cleanup and invokes the Removed event when removed from the game.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: Removed event is invoked &amp;&amp;<br />
+        ///     All event subscribers are removed
+        /// </summary>
         public override void CompleteRemoval()
         {
             base.CompleteRemoval();
@@ -51,13 +70,26 @@ namespace SpaceInvaders.Model.Nodes
             {
                 foreach (var subscriber in this.Collided?.GetInvocationList())
                 {
-                    this.Removed -= subscriber as EventHandler;
+                    Removed -= subscriber as EventHandler;
                 }
             }
         }
 
+        /// <summary>
+        ///     Detects if collision is occurring between this CollisionArea and the target.<br />
+        ///     Precondition: target != null<br />
+        ///     Postcondition: this.Collided fires if collision occurs and this is masking target &amp;&amp;<br />
+        ///     target.Collided fires is collision occurs and target is masking this
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <exception cref="System.ArgumentException">Target must not be null</exception>
         public void DetectCollision(CollisionArea target)
         {
+            if (target == null)
+            {
+                throw new ArgumentException("Target must not be null");
+            }
+
             if (!this.isOverlappingWith(target))
             {
                 return;
@@ -76,16 +108,17 @@ namespace SpaceInvaders.Model.Nodes
 
         private bool isOverlappingWith(CollisionArea target)
         {
-            return this.Left <= target.Right &&
-                   this.Right >= target.Left &&
-                   this.Top <= target.Bottom &&
-                   this.Bottom >= target.Top;
-
+            return Left <= target.Right &&
+                   Right >= target.Left &&
+                   Top <= target.Bottom &&
+                   Bottom >= target.Top;
         }
 
         private bool isMaskingTarget(CollisionArea target)
         {
             return this.Monitoring && target.Monitorable && this.CollisionMasks.HasFlag(target.CollisionLayers);
         }
+
+        #endregion
     }
 }

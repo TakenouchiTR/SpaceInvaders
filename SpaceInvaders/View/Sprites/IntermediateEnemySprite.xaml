@@ -12,35 +12,39 @@
     Width="27">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="BodyColor" Color="LightGray"/>
+        <SolidColorBrush x:Key="BodyColor" Color="LightGray" />
     </UserControl.Resources>
 
     <Canvas>
-        <local:BasicEnemySprite/>
-        <Rectangle Width="2" Height="8" Fill="{StaticResource BodyColor}" Canvas.Left="2" Canvas.Top="13"/>
-        <Rectangle Width="2" Height="8" Fill="{StaticResource ResourceKey=BodyColor}" Canvas.Left="23" Canvas.Top="13"/>
-        <Rectangle Width="7" Height="2" Fill="{StaticResource ResourceKey=BodyColor}" Canvas.Left="2.375" Canvas.Top="13" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+        <local:BasicEnemySprite />
+        <Rectangle Width="2" Height="8" Fill="{StaticResource BodyColor}" Canvas.Left="2" Canvas.Top="13" />
+        <Rectangle Width="2" Height="8" Fill="{StaticResource ResourceKey=BodyColor}" Canvas.Left="23" Canvas.Top="13" />
+        <Rectangle Width="7" Height="2" Fill="{StaticResource ResourceKey=BodyColor}" Canvas.Left="2.375"
+                   Canvas.Top="13" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-19.808"/>
+                <CompositeTransform Rotation="-19.808" />
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Width="7" Height="2" Fill="{StaticResource ResourceKey=BodyColor}" Canvas.Left="17.75" Canvas.Top="13" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+        <Rectangle Width="7" Height="2" Fill="{StaticResource ResourceKey=BodyColor}" Canvas.Left="17.75"
+                   Canvas.Top="13" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="19.808"/>
+                <CompositeTransform Rotation="19.808" />
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Ellipse Width="2" Height="2" Fill="{StaticResource BodyColor}" Canvas.Left="2" Canvas.Top="20"/>
-        <Ellipse Width="2" Height="2" Fill="{StaticResource BodyColor}" Canvas.Left="2" Canvas.Top="12"/>
-        <Ellipse Width="2" Height="2" Fill="{StaticResource BodyColor}" Canvas.Left="23" Canvas.Top="20"/>
-        <Ellipse Width="2" Height="2" Fill="{StaticResource BodyColor}" Canvas.Left="23" Canvas.Top="12"/>
-        <Rectangle Width="7" Height="2" Fill="{StaticResource ResourceKey=BodyColor}" Canvas.Left="2.375" Canvas.Top="18.25" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+        <Ellipse Width="2" Height="2" Fill="{StaticResource BodyColor}" Canvas.Left="2" Canvas.Top="20" />
+        <Ellipse Width="2" Height="2" Fill="{StaticResource BodyColor}" Canvas.Left="2" Canvas.Top="12" />
+        <Ellipse Width="2" Height="2" Fill="{StaticResource BodyColor}" Canvas.Left="23" Canvas.Top="20" />
+        <Ellipse Width="2" Height="2" Fill="{StaticResource BodyColor}" Canvas.Left="23" Canvas.Top="12" />
+        <Rectangle Width="7" Height="2" Fill="{StaticResource ResourceKey=BodyColor}" Canvas.Left="2.375"
+                   Canvas.Top="18.25" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-19.808"/>
+                <CompositeTransform Rotation="-19.808" />
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Width="7" Height="2" Fill="{StaticResource ResourceKey=BodyColor}" Canvas.Left="17.75" Canvas.Top="18.25" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+        <Rectangle Width="7" Height="2" Fill="{StaticResource ResourceKey=BodyColor}" Canvas.Left="17.75"
+                   Canvas.Top="18.25" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
             <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="19.808"/>
+                <CompositeTransform Rotation="19.808" />
             </Rectangle.RenderTransform>
         </Rectangle>
     </Canvas>

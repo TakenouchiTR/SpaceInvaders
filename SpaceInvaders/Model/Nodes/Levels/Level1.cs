@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model.Nodes.Entities;
 using SpaceInvaders.Model.Nodes.Entities.Enemies;
 using SpaceInvaders.View;
@@ -9,6 +8,8 @@ namespace SpaceInvaders.Model.Nodes.Levels
 {
     public class Level1 : LevelBase
     {
+        #region Data members
+
         private const int EnemiesPerRow = 4;
         private const double EnemySpawnAreaWidth = 250;
         private const double EnemyVerticalGap = 64;
@@ -16,7 +17,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         private const int TotalMovementSteps = 19;
         private const int XMoveAmount = 15;
         private const int YMoveAmount = 32;
-        
+
         private static int curMovementStep = 9;
         private static int movementDirection = 1;
 
@@ -24,32 +25,40 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         private Node2D enemies;
 
-        public Level1() : base()
+        #endregion
+
+        #region Constructors
+
+        public Level1()
         {
             this.addPlayer();
             this.addEnemyHelperNodes();
             this.addEnemies();
         }
 
+        #endregion
+
+        #region Methods
+
         private void addPlayer()
         {
-            PlayerShip player = new PlayerShip();
+            var player = new PlayerShip();
             player.X = MainPage.ApplicationWidth / 2 - player.Collision.Width / 2;
             player.Y = MainPage.ApplicationHeight - 64;
             AttachChild(player);
 
-            player.Removed += onPlayerRemoved;
+            player.Removed += this.onPlayerRemoved;
         }
-        
+
         private void addEnemyHelperNodes()
         {
-            Timer enemyMoveTimer = new Timer();
+            var enemyMoveTimer = new Timer();
             enemyMoveTimer.Start();
             enemyMoveTimer.Tick += this.onEnemyMoveTimerTick;
             AttachChild(enemyMoveTimer);
 
             this.enemies = new Node2D();
-            this.AttachChild(enemies);
+            AttachChild(this.enemies);
         }
 
         private void addEnemies()
@@ -58,8 +67,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
             var startX = spawnCellWidth / 2;
             var startY = 64;
 
-            List<Enemy> enemyList = new List<Enemy> 
-            {
+            var enemyList = new List<Enemy> {
                 new AggresiveEnemy(),
                 new AggresiveEnemy(),
                 new AggresiveEnemy(),
@@ -71,14 +79,14 @@ namespace SpaceInvaders.Model.Nodes.Levels
                 new BasicEnemy(),
                 new BasicEnemy(),
                 new BasicEnemy(),
-                new BasicEnemy(),
+                new BasicEnemy()
             };
 
             for (var i = 0; i < enemyList.Count; i++)
             {
                 var enemy = enemyList[i];
                 var enemyCenter = new Vector2 {
-                    X = startX + (i % EnemiesPerRow) * spawnCellWidth,
+                    X = startX + i % EnemiesPerRow * spawnCellWidth,
                     // ReSharper disable once PossibleLossOfFraction
                     Y = startY + i / EnemiesPerRow * EnemyVerticalGap
                 };
@@ -101,11 +109,11 @@ namespace SpaceInvaders.Model.Nodes.Levels
         {
             if (sender is Enemy enemy)
             {
-                this.Score += enemy.Score;
+                Score += enemy.Score;
                 this.enemiesRemaining--;
                 if (this.enemiesRemaining <= 0)
                 {
-                    this.CompleteGame("All enemies have been defeated!");
+                    CompleteGame("All enemies have been defeated!");
                 }
             }
         }
@@ -128,5 +136,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
             this.enemies.Move(moveDistance);
         }
+
+        #endregion
     }
 }

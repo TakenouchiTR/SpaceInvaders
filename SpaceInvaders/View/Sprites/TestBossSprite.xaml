@@ -11,7 +11,5 @@
     Height="120"
     Width="180">
 
-    <Canvas Background="Aqua">
-    
-    </Canvas>
+    <Canvas Background="Aqua" />
 </local:BaseSprite>

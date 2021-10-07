@@ -16,9 +16,9 @@ namespace SpaceInvaders.Model
         ///     The x coordinate.
         /// </value>
         /// <exception cref="System.ArgumentException">
-        /// value must not be NaN
-        /// or
-        /// value must not be infinity
+        ///     value must not be NaN
+        ///     or
+        ///     value must not be infinity
         /// </exception>
         public double X
         {
@@ -29,6 +29,7 @@ namespace SpaceInvaders.Model
                 {
                     throw new ArgumentException("value must not be NaN");
                 }
+
                 if (double.IsInfinity(value))
                 {
                     throw new ArgumentException("value must not be infinity");
@@ -45,9 +46,9 @@ namespace SpaceInvaders.Model
         ///     The y coordinate.
         /// </value>
         /// <exception cref="System.ArgumentException">
-        /// value must not be NaN
-        /// or
-        /// value must not be infinity
+        ///     value must not be NaN
+        ///     or
+        ///     value must not be infinity
         /// </exception>
         public double Y
         {
@@ -58,6 +59,7 @@ namespace SpaceInvaders.Model
                 {
                     throw new ArgumentException("value must not be NaN");
                 }
+
                 if (double.IsInfinity(value))
                 {
                     throw new ArgumentException("value must not be infinity");
@@ -70,9 +72,9 @@ namespace SpaceInvaders.Model
         #endregion
 
         #region Constructors
-        
+
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Vector2"/> class. <br/>
+        ///     Initializes a new instance of the <see cref="Vector2" /> class. <br />
         ///     Precondition: !double.IsNaN(value) && !double.IsInfinity(value)
         ///     PostCondition: this.X == value && this.Y == value
         /// </summary>
@@ -81,21 +83,20 @@ namespace SpaceInvaders.Model
         {
         }
 
-
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Vector2"/> class. <br/>
+        ///     Initializes a new instance of the <see cref="Vector2" /> class. <br />
         ///     Precondition: !double.IsNaN(x) && !double.IsInfinity(x) &&
-        ///                   !double.IsNaN(y) && !double.IsInfinity(y)
+        ///     !double.IsNaN(y) && !double.IsInfinity(y)
         ///     PostCondition: this.X == value && this.Y == value
         /// </summary>
         /// <exception cref="System.ArgumentException">
-        /// x must not be NaN
-        /// or
-        /// y must not be NaN
-        /// or
-        /// x must not be infinity
-        /// or
-        /// y must not be infinity
+        ///     x must not be NaN
+        ///     or
+        ///     y must not be NaN
+        ///     or
+        ///     x must not be infinity
+        ///     or
+        ///     y must not be infinity
         /// </exception>
         public Vector2(double x, double y)
         {
@@ -115,7 +116,7 @@ namespace SpaceInvaders.Model
         /// <param name="vector">The vector.</param>
         /// <param name="value">The value.</param>
         /// <returns>
-        /// The result of the operator.
+        ///     The result of the operator.
         /// </returns>
         public static Vector2 operator *(Vector2 vector, double value)
         {

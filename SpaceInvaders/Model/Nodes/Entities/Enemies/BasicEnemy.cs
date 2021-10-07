@@ -1,23 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SpaceInvaders.View.Sprites;
+﻿using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 {
     public class BasicEnemy : Enemy
     {
+        #region Constructors
+
         public BasicEnemy() : base(new BasicEnemySprite())
         {
-            this.Collision.Collided += this.onCollided;
-            this.Score = 10;
+            Collision.Collided += this.onCollided;
+            Score = 10;
         }
+
+        #endregion
+
+        #region Methods
 
         private void onCollided(object sender, CollisionArea e)
         {
-            this.QueueForRemoval();
+            QueueForRemoval();
         }
+
+        #endregion
     }
 }

@@ -6,18 +6,20 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model;
 using SpaceInvaders.Model.Nodes;
-using SpaceInvaders.View.Sprites;
 using SpaceInvaders.Model.Nodes.Levels;
+using SpaceInvaders.View.Sprites;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace SpaceInvaders.View
 {
     /// <summary>
-    /// The main page for the game.
+    ///     The main page for the game.
     /// </summary>
     public sealed partial class MainPage
     {
+        #region Data members
+
         /// <summary>
         ///     The application height
         /// </summary>
@@ -27,23 +29,27 @@ namespace SpaceInvaders.View
         ///     The application width
         /// </summary>
         public const double ApplicationWidth = 640;
-        
+
         private readonly LevelBase level;
 
+        #endregion
+
+        #region Constructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="MainPage"/> class.
+        ///     Initializes a new instance of the <see cref="MainPage" /> class.
         /// </summary>
         public MainPage()
         {
             this.InitializeComponent();
 
-            ApplicationView.PreferredLaunchViewSize = new Size { Width = ApplicationWidth, Height = ApplicationHeight };
+            ApplicationView.PreferredLaunchViewSize = new Size {Width = ApplicationWidth, Height = ApplicationHeight};
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(ApplicationWidth, ApplicationHeight));
-            
+
             Window.Current.CoreWindow.KeyDown += Input.OnKeyDown;
             Window.Current.CoreWindow.KeyUp += Input.OnKeyUp;
-            
+
             SpriteNode.SpriteRemoved += this.onSpriteNodeRemoved;
             SpriteNode.SpriteAdded += this.onSpriteNodeAdded;
 
@@ -51,6 +57,10 @@ namespace SpaceInvaders.View
             this.level.ScoreChanged += this.onLevelScoreChanged;
             this.level.GameFinished += this.onLevelGameFinished;
         }
+
+        #endregion
+
+        #region Methods
 
         private void onSpriteNodeRemoved(object sender, BaseSprite e)
         {
@@ -63,11 +73,10 @@ namespace SpaceInvaders.View
         }
 
         private async void onLevelGameFinished(object sender, string e)
-        { 
+        {
             this.level.GameFinished -= this.onLevelGameFinished;
 
-            var gameOverDialog = new ContentDialog
-            {
+            var gameOverDialog = new ContentDialog {
                 Title = "Game Over",
                 Content = e,
                 PrimaryButtonText = "Exit to Desktop"
@@ -82,5 +91,7 @@ namespace SpaceInvaders.View
         {
             this.scoreText.Text = $"Score: {e}";
         }
+
+        #endregion
     }
 }
