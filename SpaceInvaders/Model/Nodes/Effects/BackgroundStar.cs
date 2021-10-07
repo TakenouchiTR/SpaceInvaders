@@ -12,7 +12,7 @@ namespace SpaceInvaders.Model.Nodes.Effects
 
         private readonly double velocity;
 
-        public BackgroundStar(BaseSprite sprite) : base(new StarSprite())
+        public BackgroundStar() : base(new StarSprite())
         {
             this.velocity = StarRandom.NextDouble() * (MaxSpeed - MinSpeed) + MinSpeed;
             this.setStartingPosition();
