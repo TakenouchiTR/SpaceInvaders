@@ -39,8 +39,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         private void setupTimer()
         {
-            Timer timer = new Timer() 
-            {
+            var timer = new Timer {
                 Duration = 2
             };
             timer.Start();
@@ -50,12 +49,11 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         private void onShootTimerTick(object sender, EventArgs e)
         {
-            EnemyBullet bullet = new EnemyBullet()
-            {
-                Position = this.Center
+            var bullet = new EnemyBullet {
+                Position = Center
             };
 
-            this.GetRoot().QueueGameObjectForAddition(bullet);
+            GetRoot().QueueGameObjectForAddition(bullet);
         }
 
         private void onCollided(object sender, CollisionArea e)

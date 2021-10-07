@@ -7,7 +7,7 @@ namespace SpaceInvaders.Model.Nodes
     public class Node
     {
         #region Data members
-        
+
         private readonly HashSet<Node> children;
         private readonly Queue<Node> removalQueue;
         private readonly Queue<Node> additionQueue;

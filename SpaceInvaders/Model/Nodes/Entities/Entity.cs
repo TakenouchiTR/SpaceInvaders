@@ -36,19 +36,22 @@ namespace SpaceInvaders.Model.Nodes.Entities
         /// <param name="sprite">The sprite.</param>
         public Entity(BaseSprite sprite)
         {
-            initializeChildren(sprite);
+            this.initializeChildren(sprite);
         }
+
+        #endregion
+
+        #region Methods
 
         private void initializeChildren(BaseSprite sprite)
         {
             this.Sprite = new SpriteNode(sprite);
-            this.Collision = new CollisionArea
-            {
+            this.Collision = new CollisionArea {
                 Width = this.Sprite.Width,
                 Height = this.Sprite.Height
             };
-            this.Width = this.Sprite.Width;
-            this.Height = this.Sprite.Height;
+            Width = this.Sprite.Width;
+            Height = this.Sprite.Height;
 
             AttachChild(this.Sprite);
             AttachChild(this.Collision);

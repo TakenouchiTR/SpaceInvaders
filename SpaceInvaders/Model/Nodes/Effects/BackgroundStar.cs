@@ -7,11 +7,17 @@ namespace SpaceInvaders.Model.Nodes.Effects
 {
     public class BackgroundStar : SpriteNode
     {
+        #region Data members
+
         private static readonly Random StarRandom = new Random();
         private const double MaxSpeed = 250;
         private const double MinSpeed = 100;
 
         private double velocity;
+
+        #endregion
+
+        #region Constructors
 
         public BackgroundStar() : base(new StarSprite())
         {
@@ -19,27 +25,34 @@ namespace SpaceInvaders.Model.Nodes.Effects
             this.setStartingPosition();
         }
 
+        #endregion
+
+        #region Methods
+
         private void setVelocityAndScale()
         {
             this.velocity = StarRandom.NextDouble() * (MaxSpeed - MinSpeed) + MinSpeed;
-            this.Sprite.Scale = new Vector3((float) (this.velocity / MaxSpeed));
+            Sprite.Scale = new Vector3((float) (this.velocity / MaxSpeed));
         }
 
         private void setStartingPosition()
         {
-            this.Y = -this.Height;
-            this.X = StarRandom.Next((int)(MainPage.ApplicationWidth - this.Width));
+            Y = -Height;
+            X = StarRandom.Next((int) (MainPage.ApplicationWidth - Width));
         }
 
         public override void Update(double delta)
         {
-            this.Y += this.velocity * delta;
-            if (this.IsOffScreen())
+            Y += this.velocity * delta;
+            if (IsOffScreen())
             {
                 this.setVelocityAndScale();
                 this.setStartingPosition();
             }
+
             base.Update(delta);
         }
+
+        #endregion
     }
 }

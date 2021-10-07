@@ -113,17 +113,16 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         private void addStars()
         {
-            Random starRandom = new Random();
+            var starRandom = new Random();
             for (var i = 0; i < StarCount; ++i)
             {
-                var star = new BackgroundStar() 
-                {
+                var star = new BackgroundStar {
                     Y = starRandom.NextDouble() * MainPage.ApplicationHeight
                 };
                 AttachChild(star);
             }
         }
-        
+
         private void onPlayerRemoved(object sender, EventArgs e)
         {
             CompleteGame("You have been destroyed!");

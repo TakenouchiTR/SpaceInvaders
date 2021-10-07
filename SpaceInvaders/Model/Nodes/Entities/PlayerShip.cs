@@ -105,7 +105,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
             if (this.canShoot && Input.IsKeyPressed(ShootKey))
             {
                 var bullet = new PlayerBullet {
-                    Position = Position + this.bulletSpawnLocation,
+                    Position = Position + this.bulletSpawnLocation
                 };
                 bullet.Removed += this.onBulletRemoval;
 
@@ -115,15 +115,14 @@ namespace SpaceInvaders.Model.Nodes.Entities
         }
 
         /// <summary>
-        /// Runs cleanup and invokes the Removed event when removed from the game.<br />
-        /// Precondition: None<br />
-        /// Postcondition: Removed event is invoked &amp;&amp;<br />
-        /// All event subscribers are removed
+        ///     Runs cleanup and invokes the Removed event when removed from the game.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: Removed event is invoked &amp;&amp;<br />
+        ///     All event subscribers are removed
         /// </summary>
         public override void CompleteRemoval()
         {
-            var explosion = new Explosion
-            {
+            var explosion = new Explosion {
                 Center = Center
             };
             GetRoot().QueueGameObjectForAddition(explosion);

@@ -49,7 +49,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
                 Center = new Vector2(Right, Bottom)
             });
 
-            foreach (var child in this.Children)
+            foreach (var child in Children)
             {
                 child.Removed += this.onTargetRemoved;
             }

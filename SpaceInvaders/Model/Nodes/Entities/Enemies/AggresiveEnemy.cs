@@ -53,7 +53,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         private void onShotTimerTick(object sender, EventArgs e)
         {
             var bullet = new EnemyBullet {
-                Position = Position + BulletSpawnLocation,
+                Position = Position + BulletSpawnLocation
             };
             this.shotTimer.Duration = getShotDelay();
 
