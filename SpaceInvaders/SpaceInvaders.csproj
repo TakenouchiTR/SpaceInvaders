@@ -122,6 +122,7 @@
     <Compile Include="Model\Input.cs" />
     <Compile Include="Model\Nodes\Area.cs" />
     <Compile Include="Model\Nodes\CollisionArea.cs" />
+    <Compile Include="Model\Nodes\Effects\BackgroundStar.cs" />
     <Compile Include="Model\Nodes\Effects\Explosion.cs" />
     <Compile Include="Model\Nodes\Entities\Bullet.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\AggresiveEnemy.cs" />
