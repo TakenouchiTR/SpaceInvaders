@@ -104,12 +104,9 @@ namespace SpaceInvaders.Model.Nodes.Entities
         {
             if (this.canShoot && Input.IsKeyPressed(ShootKey))
             {
-                var bullet = new Bullet {
+                var bullet = new PlayerBullet {
                     Position = Position + this.bulletSpawnLocation,
-                    Velocity = new Vector2(0, -1000)
                 };
-                bullet.Collision.CollisionMasks = PhysicsLayer.Enemy;
-                bullet.Collision.CollisionLayers = PhysicsLayer.PlayerHitbox;
                 bullet.Removed += this.onBulletRemoval;
 
                 Parent.QueueGameObjectForAddition(bullet);

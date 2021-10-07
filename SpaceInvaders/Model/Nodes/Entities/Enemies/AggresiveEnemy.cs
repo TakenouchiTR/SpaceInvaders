@@ -52,13 +52,9 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         private void onShotTimerTick(object sender, EventArgs e)
         {
-            var bullet = new Bullet {
+            var bullet = new EnemyBullet {
                 Position = Position + BulletSpawnLocation,
-                Velocity = new Vector2(0, 500)
             };
-            bullet.Collision.CollisionLayers = PhysicsLayer.EnemyHitbox;
-            bullet.Collision.CollisionMasks = PhysicsLayer.Player;
-
             this.shotTimer.Duration = getShotDelay();
 
             GetRoot().QueueGameObjectForAddition(bullet);
