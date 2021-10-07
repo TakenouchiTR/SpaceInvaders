@@ -11,7 +11,7 @@
     Height="4"
     Width="4">
 
-    <Canvas>
         <Ellipse Width="4" Height="4" Fill="White"/>
+    <Canvas ZIndex="-10">
     </Canvas>
 </local:BaseSprite>
