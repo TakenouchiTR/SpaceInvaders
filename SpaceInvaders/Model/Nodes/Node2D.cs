@@ -102,6 +102,11 @@ namespace SpaceInvaders.Model.Nodes
         /// <param name="y">The y coordinate.</param>
         public Node2D(double x, double y)
         {
+            this.applyCoordinates(x, y);
+        }
+
+        private void applyCoordinates(double x, double y)
+        {
             this.X = x;
             this.Y = y;
         }

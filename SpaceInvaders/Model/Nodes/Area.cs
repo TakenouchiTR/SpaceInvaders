@@ -102,6 +102,11 @@ namespace SpaceInvaders.Model.Nodes
         /// <param name="height">The height.</param>
         public Area(double x, double y, double width, double height) : base(x, y)
         {
+            this.applySize(width, height);
+        }
+
+        private void applySize(double width, double height)
+        {
             this.Width = width;
             this.Height = height;
         }
