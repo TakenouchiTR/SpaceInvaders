@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SpaceInvaders.Model.Nodes.Effects;
 using SpaceInvaders.Model.Nodes.Entities;
 using SpaceInvaders.Model.Nodes.Entities.Enemies;
 using SpaceInvaders.View;
@@ -42,6 +43,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
             this.addPlayer();
             this.addEnemyHelperNodes();
             this.addEnemies();
+            this.setupStarTimer();
         }
 
         #endregion
@@ -106,6 +108,21 @@ namespace SpaceInvaders.Model.Nodes.Levels
             this.enemyGroup.X = MainPage.ApplicationWidth / 2 - EnemySpawnAreaWidth / 2;
 
             this.enemiesRemaining += enemyList.Count;
+        }
+
+        private void setupStarTimer()
+        {
+            Timer starTimer = new Timer() {
+                Duration = .1
+            };
+            starTimer.Tick += this.onStarTimerTick;
+            AttachChild(starTimer);
+            starTimer.Start();
+        }
+
+        private void onStarTimerTick(object sender, EventArgs e)
+        {
+            QueueGameObjectForAddition(new BackgroundStar());
         }
 
         private void onPlayerRemoved(object sender, EventArgs e)
