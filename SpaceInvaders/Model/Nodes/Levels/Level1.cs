@@ -41,10 +41,10 @@ namespace SpaceInvaders.Model.Nodes.Levels
         /// </summary>
         public Level1()
         {
+            this.addStars();
             this.addPlayer();
             this.addEnemyHelperNodes();
             this.addEnemies();
-            this.addStars();
         }
 
         #endregion
