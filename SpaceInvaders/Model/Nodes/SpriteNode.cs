@@ -74,22 +74,32 @@ namespace SpaceInvaders.Model.Nodes
                 {
                     return;
                 }
-                
-                if (value)
-                {
-                    SpriteShown?.Invoke(this, this.Sprite);
-                }
-                else
-                {
-                    SpriteHidden?.Invoke(this, this.Sprite);
-                }
-
                 this.visible = value;
+
+                if (this.Sprite != null)
+                {
+                    if (value)
+                    {
+                        SpriteShown?.Invoke(this, this.Sprite);
+                    }
+                    else
+                    {
+                        SpriteHidden?.Invoke(this, this.Sprite);
+                    }
+                }
             }
         }
         #endregion
 
         #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SpriteNode"/> class without a BaseSprite.
+        /// </summary>
+        public SpriteNode()
+        {
+
+        }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SpriteNode" /> class.
@@ -145,11 +155,19 @@ namespace SpaceInvaders.Model.Nodes
             var oldSprite = this.Sprite;
             this.Sprite = newSprite;
 
-            if (this.Visible)
+            if (!Visible)
+            {
+                return;
+            }
+            
+            if (oldSprite != null)
             {
                 SpriteHidden?.Invoke(this, oldSprite);
-                SpriteShown?.Invoke(this, newSprite);
+            }
 
+            if (newSprite != null)
+            {
+                SpriteShown?.Invoke(this, newSprite);
                 this.render();
             }
         }

@@ -1,4 +1,5 @@
-﻿using SpaceInvaders.View;
+﻿using Windows.UI.Xaml;
+using SpaceInvaders.View;
 
 namespace SpaceInvaders.Model.Nodes
 {
@@ -73,6 +74,37 @@ namespace SpaceInvaders.Model.Nodes
         public virtual double Height { get; set; }
 
         #endregion
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Area"/> class.<br/>
+        /// The area will have no width, height, and will be placed at (0, 0).
+        /// </summary>
+        public Area()
+        {
+
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Area"/> class with a specified width and height at the coordinates (0, 0).
+        /// </summary>
+        /// <param name="width">The width.</param>
+        /// <param name="height">The height.</param>
+        public Area(double width, double height) : this(0, 0, width, height)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Area"/> class with a specified width, height, and coordinates.
+        /// </summary>
+        /// <param name="x">The x coordinate.</param>
+        /// <param name="y">The y coordinate.</param>
+        /// <param name="width">The width.</param>
+        /// <param name="height">The height.</param>
+        public Area(double x, double y, double width, double height) : base(x, y)
+        {
+            this.Width = width;
+            this.Height = height;
+        }
 
         #region Methods
 

@@ -86,6 +86,28 @@ namespace SpaceInvaders.Model.Nodes
 
         #endregion
 
+        #region Constructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Node2D" /> class at the coordinates (0, 0).
+        /// </summary>
+        public Node2D()
+        {
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Node2D" /> class and sets its coordinates
+        /// </summary>
+        /// <param name="x">The x coordinate.</param>
+        /// <param name="y">The y coordinate.</param>
+        public Node2D(double x, double y)
+        {
+            this.X = x;
+            this.Y = y;
+        }
+
+        #endregion
+
         #region Methods
 
         /// <summary>

@@ -49,13 +49,31 @@ namespace SpaceInvaders.Model.Nodes
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Timer" /> class.
+        ///     Initializes a new instance of the <see cref="Timer" /> class.<br/>
+        ///     By default, the timer is set to 1 second and will auto repeat.
         /// </summary>
-        public Timer()
+        public Timer() : this(1)
+        {
+            
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Timer" /> class with a specified duration in seconds.<br/>
+        ///     By default, the timer will auto repeat.
+        /// </summary>
+        public Timer(double duration) : this(duration, true)
+        {
+
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Timer" /> class with a specified duration and repeat option.
+        /// </summary>
+        public Timer(double duration, bool repeat)
         {
             this.currentTime = 0;
-            this.Duration = 1;
-            this.Repeat = true;
+            this.Duration = duration;
+            this.Repeat = repeat;
         }
 
         #endregion
