@@ -105,15 +105,15 @@ namespace SpaceInvaders.Model.Nodes
             this.applyCoordinates(x, y);
         }
 
+        #endregion
+
+        #region Methods
+
         private void applyCoordinates(double x, double y)
         {
             this.X = x;
             this.Y = y;
         }
-
-        #endregion
-
-        #region Methods
 
         /// <summary>
         ///     Moves by the specified distance.<br />

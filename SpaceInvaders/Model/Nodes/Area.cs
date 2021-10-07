@@ -1,5 +1,4 @@
-﻿using Windows.UI.Xaml;
-using SpaceInvaders.View;
+﻿using SpaceInvaders.View;
 
 namespace SpaceInvaders.Model.Nodes
 {
@@ -75,17 +74,19 @@ namespace SpaceInvaders.Model.Nodes
 
         #endregion
 
+        #region Constructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="Area"/> class.<br/>
-        /// The area will have no width, height, and will be placed at (0, 0).
+        ///     Initializes a new instance of the <see cref="Area" /> class.<br />
+        ///     The area will have no width, height, and will be placed at (0, 0).
         /// </summary>
         public Area()
         {
-
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Area"/> class with a specified width and height at the coordinates (0, 0).
+        ///     Initializes a new instance of the <see cref="Area" /> class with a specified width and height at the coordinates
+        ///     (0, 0).
         /// </summary>
         /// <param name="width">The width.</param>
         /// <param name="height">The height.</param>
@@ -94,7 +95,7 @@ namespace SpaceInvaders.Model.Nodes
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Area"/> class with a specified width, height, and coordinates.
+        ///     Initializes a new instance of the <see cref="Area" /> class with a specified width, height, and coordinates.
         /// </summary>
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
@@ -105,13 +106,15 @@ namespace SpaceInvaders.Model.Nodes
             this.applySize(width, height);
         }
 
+        #endregion
+
+        #region Methods
+
         private void applySize(double width, double height)
         {
             this.Width = width;
             this.Height = height;
         }
-
-        #region Methods
 
         /// <summary>
         ///     Determines whether [is off screen].

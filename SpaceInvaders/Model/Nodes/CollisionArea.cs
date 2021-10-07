@@ -55,27 +55,29 @@ namespace SpaceInvaders.Model.Nodes
 
         #endregion
 
+        #region Constructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="CollisionArea"/> class.<br/>
-        /// The area will have no width, height, and will be placed at (0, 0).
+        ///     Initializes a new instance of the <see cref="CollisionArea" /> class.<br />
+        ///     The area will have no width, height, and will be placed at (0, 0).
         /// </summary>
         public CollisionArea()
         {
-
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CollisionArea"/> class with a specified width and height at the coordinates (0, 0).
+        ///     Initializes a new instance of the <see cref="CollisionArea" /> class with a specified width and height at the
+        ///     coordinates (0, 0).
         /// </summary>
         /// <param name="width">The width.</param>
         /// <param name="height">The height.</param>
         public CollisionArea(double width, double height) : base(width, height)
         {
-
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CollisionArea"/> class with a specified width, height, and coordinates.
+        ///     Initializes a new instance of the <see cref="CollisionArea" /> class with a specified width, height, and
+        ///     coordinates.
         /// </summary>
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>
@@ -83,8 +85,9 @@ namespace SpaceInvaders.Model.Nodes
         /// <param name="height">The height.</param>
         public CollisionArea(double x, double y, double width, double height) : base(x, y, width, height)
         {
-
         }
+
+        #endregion
 
         #region Methods
 

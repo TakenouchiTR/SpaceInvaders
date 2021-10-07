@@ -5,7 +5,11 @@ namespace SpaceInvaders.Model.Nodes
 {
     public class SpriteNode : Area
     {
+        #region Data members
+
         private bool visible;
+
+        #endregion
 
         #region Properties
 
@@ -74,6 +78,7 @@ namespace SpaceInvaders.Model.Nodes
                 {
                     return;
                 }
+
                 this.visible = value;
 
                 if (this.Sprite != null)
@@ -89,12 +94,13 @@ namespace SpaceInvaders.Model.Nodes
                 }
             }
         }
+
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SpriteNode"/> class without a BaseSprite.
+        ///     Initializes a new instance of the <see cref="SpriteNode" /> class without a BaseSprite.
         /// </summary>
         public SpriteNode()
         {
@@ -155,11 +161,11 @@ namespace SpaceInvaders.Model.Nodes
             var oldSprite = this.Sprite;
             this.Sprite = newSprite;
 
-            if (!Visible)
+            if (!this.Visible)
             {
                 return;
             }
-            
+
             if (oldSprite != null)
             {
                 SpriteHidden?.Invoke(this, oldSprite);
