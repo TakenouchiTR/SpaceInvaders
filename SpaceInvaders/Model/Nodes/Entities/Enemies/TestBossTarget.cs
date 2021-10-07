@@ -1,4 +1,5 @@
-﻿using SpaceInvaders.View.Sprites;
+﻿using System;
+using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 {
@@ -33,6 +34,24 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         #endregion
 
         #region Methods
+
+        private void setupTimer()
+        {
+            Timer timer = new Timer();
+            timer.Start();
+            timer.Tick += this.onShootTimerTick;
+            AttachChild(timer);
+        }
+
+        private void onShootTimerTick(object sender, EventArgs e)
+        {
+            EnemyBullet bullet = new EnemyBullet()
+            {
+                Position = this.Center
+            };
+
+            this.GetRoot().QueueGameObjectForAddition(bullet);
+        }
 
         private void onCollided(object sender, CollisionArea e)
         {
