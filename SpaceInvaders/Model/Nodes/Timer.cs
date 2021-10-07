@@ -138,9 +138,12 @@ namespace SpaceInvaders.Model.Nodes
         public override void CompleteRemoval()
         {
             base.CompleteRemoval();
-            foreach (var subscriber in this.Tick?.GetInvocationList())
+            if (this.Tick != null)
             {
-                this.Tick -= subscriber as EventHandler;
+                foreach (var subscriber in this.Tick?.GetInvocationList())
+                {
+                    this.Tick -= subscriber as EventHandler;
+                }
             }
         }
 

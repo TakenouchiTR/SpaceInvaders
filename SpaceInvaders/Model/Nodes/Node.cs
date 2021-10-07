@@ -7,14 +7,8 @@ namespace SpaceInvaders.Model.Nodes
     public class Node
     {
         #region Data members
-
-        /// <summary>
-        ///     The children nodes.
-        ///     Whenever a parent is moved, all of its (applicable) children are moved with it.
-        ///     Removing a parent will also remove all of its children.
-        /// </summary>
-        protected HashSet<Node> children;
-
+        
+        private readonly HashSet<Node> children;
         private readonly Queue<Node> removalQueue;
         private readonly Queue<Node> additionQueue;
 

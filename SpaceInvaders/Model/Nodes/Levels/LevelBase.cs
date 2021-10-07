@@ -163,7 +163,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
             var sourceCollisionAreas = senderNode.GetCollisionAreas();
 
-            foreach (var child in children)
+            foreach (var child in this.Children)
             {
                 if (child == sender)
                 {

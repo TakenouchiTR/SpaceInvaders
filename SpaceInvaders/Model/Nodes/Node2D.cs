@@ -30,7 +30,7 @@ namespace SpaceInvaders.Model.Nodes
             set
             {
                 var moveDistance = value - this.X;
-                foreach (var child in children)
+                foreach (var child in this.Children)
                 {
                     if (child is Node2D node)
                     {
@@ -55,7 +55,7 @@ namespace SpaceInvaders.Model.Nodes
             set
             {
                 var moveDistance = value - this.Y;
-                foreach (var child in children)
+                foreach (var child in this.Children)
                 {
                     if (child is Node2D node)
                     {
