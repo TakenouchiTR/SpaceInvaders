@@ -8,6 +8,10 @@ The game is structured as a tree of nodes, with every part of the game (Sprites,
     composition. An entity is a Node2D that has a SpriteNode and a CollisionArea as children, rather than being 
     a new type of node that has a sprite and a way to detect collisions as properties or fields.
 
+I have a quick boss fight that I used to test the structure. It's made up of a boss who has three weak points,
+    each requiring three shots to destroy. If you are interested, you can run it by setting "level" to 
+    "TestBossLevel" on line 56 of MainPage.xaml.cs.
+
 When two CollisionAreas overlap, both check if their CollisionMasks match the other's CollisionLayers. 
     The CollisionLayer is what the CollisionArea is (An enemy would have the Enemy collision layer), while the
     CollisionMasks is what the CollisionArea is looking for (An enemy would be looking for the things with
