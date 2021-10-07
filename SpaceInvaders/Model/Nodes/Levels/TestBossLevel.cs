@@ -18,7 +18,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         /// </summary>
         public TestBossLevel()
         {
-            AttachChild(new TestBoss());
+            this.addEnemies();
             this.addPlayer();
         }
 
@@ -32,6 +32,11 @@ namespace SpaceInvaders.Model.Nodes.Levels
             player.X = MainPage.ApplicationWidth / 2 - player.Collision.Width / 2;
             player.Y = MainPage.ApplicationHeight - 64;
             AttachChild(player);
+        }
+
+        private void addEnemies()
+        {
+            AttachChild(new TestBoss());
         }
 
         #endregion
