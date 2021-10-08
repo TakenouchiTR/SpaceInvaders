@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Nodes.Entities.Enemies
@@ -12,6 +13,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         #region Data members
 
         private int health;
+        private AnimationStateMachine stateMachine;
 
         #endregion
 
@@ -30,7 +32,10 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             Collision.Monitoring = true;
             Collision.Monitorable = true;
 
+            Sprite.Visible = false;
+
             this.setupTimer();
+            this.addAnimations();
         }
 
         #endregion
@@ -47,6 +52,25 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             AttachChild(timer);
         }
 
+        private void addAnimations()
+        {
+            var animation1 = new AnimatedSprite(1, new List<BaseSprite> {
+                new BasicEnemySprite()
+            });
+            var animation2 = new AnimatedSprite(1, new List<BaseSprite> {
+                new AggresiveEnemySprite()
+            });
+            this.stateMachine = new AnimationStateMachine();
+            this.stateMachine.AddAnimation("normal", animation1);
+            this.stateMachine.AddAnimation("damaged", animation2);
+
+            AttachChild(animation1);
+            AttachChild(animation2);
+            AttachChild(this.stateMachine);
+
+            this.stateMachine.ChangeAnimation("normal");
+        }
+
         private void onShootTimerTick(object sender, EventArgs e)
         {
             var bullet = new EnemyBullet {
@@ -59,6 +83,8 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         private void onCollided(object sender, CollisionArea e)
         {
             this.health--;
+
+            this.stateMachine.ChangeAnimation("damaged");
 
             if (this.health <= 0)
             {
