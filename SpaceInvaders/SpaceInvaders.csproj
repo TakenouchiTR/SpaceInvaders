@@ -122,6 +122,7 @@
     <Compile Include="Model\AnimationFrame.cs" />
     <Compile Include="Model\Input.cs" />
     <Compile Include="Model\Nodes\AnimatedSprite.cs" />
+    <Compile Include="Model\Nodes\AnimationStateMachine.cs" />
     <Compile Include="Model\Nodes\Area.cs" />
     <Compile Include="Model\Nodes\CollisionArea.cs" />
     <Compile Include="Model\Nodes\Effects\BackgroundStar.cs" />
