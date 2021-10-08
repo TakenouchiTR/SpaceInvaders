@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\AnimationFrame.cs" />
     <Compile Include="Model\Input.cs" />
     <Compile Include="Model\Nodes\AnimatedSprite.cs" />
     <Compile Include="Model\Nodes\Area.cs" />
