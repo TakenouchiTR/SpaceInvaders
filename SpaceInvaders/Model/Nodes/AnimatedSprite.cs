@@ -13,7 +13,7 @@ namespace SpaceInvaders.Model.Nodes
         #region Data members
 
         private int currentFrame;
-        private readonly List<BaseSprite> frames;
+        private readonly List<AnimationFrame> frames;
         private Timer frameTimer;
 
         #endregion
@@ -42,7 +42,8 @@ namespace SpaceInvaders.Model.Nodes
                 {
                     this.currentFrame += this.frames.Count;
                 }
-                ChangeSprite(this.frames[this.currentFrame]);
+                ChangeSprite(this.frames[this.currentFrame].Sprite);
+                this.frameTimer.Duration = this.frames[this.currentFrame].Duration;
             }
         }
 
@@ -61,19 +62,43 @@ namespace SpaceInvaders.Model.Nodes
         /// <summary>
         ///     Initializes a new instance of the <see cref="AnimatedSprite" /> class.
         /// </summary>
-        /// <param name="frameDuration">Duration of each frame, in seconds.</param>
         /// <param name="frames">The frames.</param>
         /// <exception cref="System.ArgumentException">frames must not be empty</exception>
-        public AnimatedSprite(double frameDuration, List<BaseSprite> frames)
+        public AnimatedSprite(List<AnimationFrame> frames)
         {
             if (frames.Count == 0)
             {
                 throw new ArgumentException("frames must not be empty");
             }
 
+            this.setupTimer(frames[0].Duration);
+
             this.frames = frames;
-            ChangeSprite(this.frames[0]);
+            ChangeSprite(this.frames[0].Sprite);
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="AnimatedSprite" /> class.<br/>
+        ///     Converts the collection of BaseSprites into AnimationFrames, each with the specified frame duration. 
+        /// </summary>
+        /// <param name="frameDuration">Duration of each frame, in seconds.</param>
+        /// <param name="frames">The frames.</param>
+        /// <exception cref="System.ArgumentException">frames must not be empty</exception>
+        public AnimatedSprite(double frameDuration, ICollection<BaseSprite> frames)
+        {
+            if (frames.Count == 0)
+            {
+                throw new ArgumentException("frames must not be empty");
+            }
+
+            this.frames = new List<AnimationFrame>();
+            foreach (var baseSprite in frames)
+            {
+                this.frames.Add(new AnimationFrame(baseSprite, frameDuration));
+            }
+
             this.setupTimer(frameDuration);
+            ChangeSprite(this.frames[0].Sprite);
         }
 
         #endregion
