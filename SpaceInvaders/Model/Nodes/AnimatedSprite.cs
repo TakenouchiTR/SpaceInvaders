@@ -21,7 +21,8 @@ namespace SpaceInvaders.Model.Nodes
         #region Properties
 
         /// <summary>
-        ///     Gets or sets the current frame of the animation.
+        ///     Gets or sets the current frame of the animation.<br/>
+        ///     If the new frame is greater than the total number of frames or below 0, it will loop around.
         /// </summary>
         /// <value>
         ///     The current frame.
@@ -35,8 +36,12 @@ namespace SpaceInvaders.Model.Nodes
                 {
                     return;
                 }
-
+                
                 this.currentFrame = value % this.frames.Count;
+                if (this.currentFrame < 0)
+                {
+                    this.currentFrame += this.frames.Count;
+                }
                 ChangeSprite(this.frames[this.currentFrame]);
             }
         }
