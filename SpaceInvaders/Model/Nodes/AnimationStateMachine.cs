@@ -95,7 +95,7 @@ namespace SpaceInvaders.Model.Nodes
         /// <summary>
         ///     Changes the animation.<br />
         ///     If the animation is already playing, nothing will occur.<br />
-        ///     Precondition: nextAnimation != null &amp;&amp;
+        ///     Precondition: nextAnimation != null &amp;&amp;<br />
         ///     An animation with the specified name exists<br />
         ///     Postcondition: Animation changes to specified animation, if it was not already playing.
         /// </summary>
