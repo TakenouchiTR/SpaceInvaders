@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Windows.System;
 using SpaceInvaders.Model.Nodes.Effects;
 using SpaceInvaders.Model.Nodes.Entities;
 using SpaceInvaders.Model.Nodes.Entities.Enemies;
@@ -25,12 +26,16 @@ namespace SpaceInvaders.Model.Nodes.Levels
         private const int XMoveAmount = 15;
         private const int YMoveAmount = 32;
 
+        private const VirtualKey ToggleStarsKey = VirtualKey.S;
+
         private static int curMovementStep = 9;
         private static int movementDirection = 1;
 
         private int enemiesRemaining;
+        private bool togglePressedLastFrame;
 
         private Node2D enemyGroup;
+        private Node starNode;
 
         #endregion
 
@@ -113,14 +118,34 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         private void addStars()
         {
+            this.starNode = new Node();
             var starRandom = new Random();
             for (var i = 0; i < StarCount; ++i)
             {
                 var star = new BackgroundStar {
                     Y = starRandom.NextDouble() * MainPage.ApplicationHeight
                 };
-                AttachChild(star);
+                this.starNode.AttachChild(star);
             }
+            this.AttachChild(this.starNode);
+        }
+
+        public override void Update(double delta)
+        {
+            if (Input.IsKeyPressed(ToggleStarsKey) && !this.togglePressedLastFrame)
+            {
+                foreach (var child in this.starNode.Children)
+                {
+                    if (child is SpriteNode star)
+                    {
+                        star.Visible = !star.Visible;
+                    }
+                }
+            }
+
+            this.togglePressedLastFrame = Input.IsKeyPressed(ToggleStarsKey);
+
+            base.Update(delta);
         }
 
         private void onPlayerRemoved(object sender, EventArgs e)
