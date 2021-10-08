@@ -134,18 +134,23 @@ namespace SpaceInvaders.Model.Nodes.Levels
         {
             if (Input.IsKeyPressed(ToggleStarsKey) && !this.togglePressedLastFrame)
             {
-                foreach (var child in this.starNode.Children)
-                {
-                    if (child is SpriteNode star)
-                    {
-                        star.Visible = !star.Visible;
-                    }
-                }
+                this.toggleStarVisibility();
             }
 
             this.togglePressedLastFrame = Input.IsKeyPressed(ToggleStarsKey);
 
             base.Update(delta);
+        }
+
+        private void toggleStarVisibility()
+        {
+            foreach (var child in this.starNode.Children)
+            {
+                if (child is SpriteNode star)
+                {
+                    star.Visible = !star.Visible;
+                }
+            }
         }
 
         private void onPlayerRemoved(object sender, EventArgs e)
