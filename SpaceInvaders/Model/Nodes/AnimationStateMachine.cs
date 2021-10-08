@@ -82,17 +82,12 @@ namespace SpaceInvaders.Model.Nodes
                 throw new ArgumentNullException(nameof(name));
             }
 
-            if (animation == null)
-            {
-                throw new ArgumentNullException(nameof(animation));
-            }
-
             if (this.animations.ContainsKey(name))
             {
                 throw new ArgumentException($"Animation {name} already exists");
             }
 
-            this.animations[name] = animation;
+            this.animations[name] = animation ?? throw new ArgumentNullException(nameof(animation));
             animation.Stop();
             animation.Visible = false;
         }
