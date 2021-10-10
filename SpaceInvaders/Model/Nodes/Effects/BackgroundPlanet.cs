@@ -32,6 +32,8 @@ namespace SpaceInvaders.Model.Nodes.Effects
             this.velocity = new Vector2(0, 30);
             this.setupTimer();
             this.active = false;
+
+            this.placeOffScreen();
         }
 
         #endregion
