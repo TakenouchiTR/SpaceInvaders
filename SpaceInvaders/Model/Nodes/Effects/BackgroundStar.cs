@@ -10,8 +10,8 @@ namespace SpaceInvaders.Model.Nodes.Effects
         #region Data members
 
         private static readonly Random StarRandom = new Random();
-        private const double MaxSpeed = 250;
-        private const double MinSpeed = 100;
+        private const double MaxSpeed = 15;
+        private const double MinSpeed = 5;
 
         private double velocity;
 
