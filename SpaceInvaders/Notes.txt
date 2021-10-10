@@ -3,7 +3,8 @@
 There are some minor issues, such as collision not being checked if a node that is not a direct child of the root
     is moved, but it currently has no effect on gameplay with how the game is structured.
 
-If the stars in the background make tracking enemy bullets difficult, pressing the S key will turn them off.
+If the stars in the background make tracking enemy bullets difficult, pressing the S key will turn the background 
+    off.
 
 The game is structured as a tree of nodes, with every part of the game (Sprites, collision, timers, etc.) being 
     respresented as a node. Nodes may have children, which allow for complex structures to be created through
