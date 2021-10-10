@@ -32,7 +32,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         private bool togglePressedLastFrame;
 
         private EnemyGroup enemyGroup;
-        private Node starNode;
+        private Node backgroundNode;
 
         #endregion
 
@@ -105,7 +105,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         private void addBackground()
         {
-            this.starNode = new Node();
+            this.backgroundNode = new Node();
             var starRandom = new Random();
 
             for (var i = 0; i < StarCount; ++i)
@@ -113,12 +113,12 @@ namespace SpaceInvaders.Model.Nodes.Levels
                 var star = new BackgroundStar {
                     Y = starRandom.NextDouble() * MainPage.ApplicationHeight
                 };
-                this.starNode.AttachChild(star);
+                this.backgroundNode.AttachChild(star);
             }
 
-            this.starNode.AttachChild(new BackgroundPlanet());
+            this.backgroundNode.AttachChild(new BackgroundPlanet());
 
-            AttachChild(this.starNode);
+            AttachChild(this.backgroundNode);
         }
 
         public override void Update(double delta)
@@ -135,7 +135,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         private void toggleStarVisibility()
         {
-            foreach (var child in this.starNode.Children)
+            foreach (var child in this.backgroundNode.Children)
             {
                 if (child is SpriteNode star)
                 {
