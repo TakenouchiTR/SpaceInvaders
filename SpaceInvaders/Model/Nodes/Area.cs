@@ -7,38 +7,54 @@ namespace SpaceInvaders.Model.Nodes
         #region Properties
 
         /// <summary>
-        ///     The left side of the area.<br />
+        ///     Gets or sets the left side of the area.<br />
         ///     Equivalent to this.X.
         /// </summary>
         /// <value>
         ///     The left side of the area.
         /// </value>
-        public double Left => X;
+        public double Left
+        {
+            get => this.X;
+            set => this.X = value;
+        }
 
         /// <summary>
-        ///     Gets the right on the area.<br />
+        ///     Gets or sets the right on the area.<br />
         /// </summary>
         /// <value>
         ///     The right side of the area.
         /// </value>
-        public double Right => X + this.Width;
+        public double Right
+        {
+            get => X + this.Width;
+            set => this.X = value - this.Width;
+        }
 
         /// <summary>
-        ///     Gets the top side of the area.<br />
+        ///     Gets or sets the top side of the area.<br />
         ///     Equivalent to this.Y.
         /// </summary>
         /// <value>
         ///     The top side of the area.
         /// </value>
-        public double Top => Y;
+        public double Top
+        {
+            get => this.Y;
+            set => this.Y = value;
+        }
 
         /// <summary>
-        ///     Gets the bottom side of the area.<br />
+        ///     Gets or sets the bottom side of the area.<br />
         /// </summary>
         /// <value>
         ///     The bottom.
         /// </value>
-        public double Bottom => Y + this.Height;
+        public double Bottom 
+        {
+            get => this.Y + this.Height;
+            set => this.Y = value - this.Height;
+        }
 
         /// <summary>
         ///     Gets or sets the center coordinate of the area.
