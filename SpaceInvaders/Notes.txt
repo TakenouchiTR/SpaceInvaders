@@ -16,7 +16,6 @@ I have a quick boss fight that I used to test the structure. It's made up of a b
 
 When two CollisionAreas overlap, both check if their CollisionMasks match the other's CollisionLayers. 
     The CollisionLayer is what the CollisionArea is (An enemy would have the Enemy collision layer), while the
-    CollisionMasks is what the CollisionArea is looking for (An enemy would be looking for the things with
-    PlayerHitbox). If a CollisionArea is overlapping another CollisionArea and is masking its CollisionLayers, 
-    then it emits an event for another Node to handle. This allows both sides of a collision to pick what it 
-    wants to react to. An enemy running into the player will kill the player, but the enemy is unaffected.
+    CollisionMasks is what the CollisionArea is looking for (An enemy would be looking for the things with the
+    PlayerHitbox flag). If a CollisionArea is overlapping another CollisionArea and is masking its CollisionLayers, 
+    then it emits an event for another Node to handle.
