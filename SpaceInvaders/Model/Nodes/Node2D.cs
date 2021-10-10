@@ -84,6 +84,35 @@ namespace SpaceInvaders.Model.Nodes
             }
         }
 
+        /// <summary>
+        /// Gets or sets the position relative to the parent.<br />
+        /// If the node is the root node, this is functionally equivalent to this.Position.
+        /// </summary>
+        /// <value>
+        /// The position relative to the parent.
+        /// </value>
+        public virtual Vector2 RelativePosition
+        {
+            get
+            {
+                if (Parent is Node2D parentNode2D)
+                {
+                    return this.Position - parentNode2D.Position;
+                }
+
+                return this.Position;
+            }
+            set
+            {
+                if (Parent is Node2D parentNode2D)
+                {
+                    this.Position = parentNode2D.Position + value;
+                }
+
+                this.Position = value;
+            }
+        }
+
         #endregion
 
         #region Constructors
