@@ -135,13 +135,13 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
             for (var i = StarCount / 2; i < StarCount; ++i)
             {
-                var star = new BackgroundStar
-                {
+                var star = new BackgroundStar {
                     Y = starRandom.NextDouble() * MainPage.ApplicationHeight
                 };
                 this.starNode.AttachChild(star);
             }
-            this.AttachChild(this.starNode);
+
+            AttachChild(this.starNode);
         }
 
         public override void Update(double delta)

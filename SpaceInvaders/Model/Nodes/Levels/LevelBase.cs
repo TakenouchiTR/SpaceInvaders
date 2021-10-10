@@ -124,7 +124,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
             var delta = timeSinceLastTick / MillisecondsInSecond;
             this.prevUpdateTime = curTime;
 
-            this.Update(delta);
+            Update(delta);
         }
 
         /// <summary>

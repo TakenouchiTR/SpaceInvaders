@@ -62,7 +62,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
                 new AnimationFrame(new AggresiveEnemySprite(), .2),
                 new AnimationFrame(new PlayerShipSprite(), .8)
             });
-            
+
             this.stateMachine = new AnimationStateMachine();
             this.stateMachine.AddAnimation("normal", animation1);
             this.stateMachine.AddAnimation("damaged", animation2);

@@ -15,8 +15,8 @@ namespace SpaceInvaders.Model.Nodes
         /// </value>
         public double Left
         {
-            get => this.X;
-            set => this.X = value;
+            get => X;
+            set => X = value;
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace SpaceInvaders.Model.Nodes
         public double Right
         {
             get => X + this.Width;
-            set => this.X = value - this.Width;
+            set => X = value - this.Width;
         }
 
         /// <summary>
@@ -40,8 +40,8 @@ namespace SpaceInvaders.Model.Nodes
         /// </value>
         public double Top
         {
-            get => this.Y;
-            set => this.Y = value;
+            get => Y;
+            set => Y = value;
         }
 
         /// <summary>
@@ -50,10 +50,10 @@ namespace SpaceInvaders.Model.Nodes
         /// <value>
         ///     The bottom.
         /// </value>
-        public double Bottom 
+        public double Bottom
         {
-            get => this.Y + this.Height;
-            set => this.Y = value - this.Height;
+            get => Y + this.Height;
+            set => Y = value - this.Height;
         }
 
         /// <summary>

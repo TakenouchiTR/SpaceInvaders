@@ -12,6 +12,6 @@
     Width="128">
 
     <Canvas>
-        <Ellipse Height="128" Width="128" Fill="#822" Stroke="#411" StrokeThickness="4"/>
+        <Ellipse Height="128" Width="128" Fill="#822" Stroke="#411" StrokeThickness="4" />
     </Canvas>
 </local:BaseSprite>
