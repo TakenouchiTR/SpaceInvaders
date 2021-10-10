@@ -5,3 +5,5 @@
 	[ ] RenderLayer enum for picking which canvas to render to
 		(BG x3, Main x4, UI x3)?
 	[ ] Update SpriteNode to accept RenderLayer
+
+[ ] Figure out how to move the Sprites to different folders.
