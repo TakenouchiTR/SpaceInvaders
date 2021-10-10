@@ -18,8 +18,9 @@ namespace SpaceInvaders.Model.Nodes.Effects
         private const double minTime = 5;
         private const double maxTime = 10;
 
-        private Vector2 velocity;
+        private readonly Vector2 velocity;
         private Timer refreshTimer;
+        private bool active;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BackgroundPlanet"/> class.
@@ -29,6 +30,7 @@ namespace SpaceInvaders.Model.Nodes.Effects
             this.Y = MainPage.ApplicationHeight + 1;
             this.velocity = new Vector2(0, 30);
             this.setupTimer();
+            this.active = false;
         }
 
         private void setupTimer()
@@ -46,12 +48,13 @@ namespace SpaceInvaders.Model.Nodes.Effects
         private void onRefreshTimerTick(object sender, EventArgs e)
         {
             this.moveToNewPosition();
+            this.active = true;
         }
 
         private void moveToNewPosition()
         {
-            this.Y = -this.Height;
-            this.X = RefreshRandom.NextDouble() * MainPage.ApplicationWidth - this.Width;
+            this.Bottom = 0;
+            this.X = (RefreshRandom.NextDouble() * (MainPage.ApplicationWidth + this.Width * 2)) - this.Width;
         }
 
         /// <summary>
@@ -62,12 +65,17 @@ namespace SpaceInvaders.Model.Nodes.Effects
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)
         {
-            this.Move(this.velocity * delta);
-
-            if (this.IsOffScreen())
+            if (this.active)
             {
-                this.refreshTimer.Duration = this.getNextRefreshTime();
-                this.refreshTimer.Start();
+                this.Move(this.velocity * delta);
+
+                if (this.IsOffScreen())
+                {
+                    this.refreshTimer.Duration = this.getNextRefreshTime();
+                    this.refreshTimer.Start();
+                    this.active = false;
+                }
+
             }
 
             base.Update(delta);
