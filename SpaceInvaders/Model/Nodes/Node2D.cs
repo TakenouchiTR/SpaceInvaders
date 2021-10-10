@@ -85,11 +85,11 @@ namespace SpaceInvaders.Model.Nodes
         }
 
         /// <summary>
-        /// Gets or sets the position relative to the parent.<br />
-        /// If the node is the root node, this is functionally equivalent to this.Position.
+        ///     Gets or sets the position relative to the parent.<br />
+        ///     If the node is the root node, this is functionally equivalent to this.Position.
         /// </summary>
         /// <value>
-        /// The position relative to the parent.
+        ///     The position relative to the parent.
         /// </value>
         public virtual Vector2 RelativePosition
         {

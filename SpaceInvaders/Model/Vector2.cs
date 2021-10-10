@@ -149,17 +149,16 @@ namespace SpaceInvaders.Model
             return new Vector2(vector.X * scalar, vector.Y * scalar);
         }
 
-
         /// <summary>
-        /// Implements the operator / between a Vector2 and a double.
-        /// Each component of the Vector 2 will be divided by the scalar. The scalar <i>must not</i> be 0.<br />
-        /// Precondition: scalar != 0<br />
-        /// Postcondition: None
+        ///     Implements the operator / between a Vector2 and a double.
+        ///     Each component of the Vector 2 will be divided by the scalar. The scalar <i>must not</i> be 0.<br />
+        ///     Precondition: scalar != 0<br />
+        ///     Postcondition: None
         /// </summary>
         /// <param name="vector">The vector.</param>
         /// <param name="scalar">The scalar.</param>
         /// <returns>
-        /// The result of the operator.
+        ///     The result of the operator.
         /// </returns>
         /// <exception cref="System.ArgumentException">Scalar cannot be 0</exception>
         public static Vector2 operator /(Vector2 vector, double scalar)
@@ -168,6 +167,7 @@ namespace SpaceInvaders.Model
             {
                 throw new ArgumentException("Scalar cannot be 0");
             }
+
             return new Vector2(vector.X / scalar, vector.Y / scalar);
         }
 

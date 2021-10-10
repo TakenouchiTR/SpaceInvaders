@@ -1,18 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 {
     public class EnemyGroup : Node2D
     {
+        #region Data members
+
         private Vector2 cellSize;
         private int totalEnemiesAdded;
 
+        #endregion
+
+        #region Properties
+
         public double Width => this.EnemiesPerRow * this.cellSize.X;
         public int EnemiesPerRow { get; protected set; }
+
+        #endregion
+
+        #region Constructors
 
         public EnemyGroup(Vector2 cellSize, int enemiesPerRow)
         {
@@ -20,15 +26,19 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             this.EnemiesPerRow = enemiesPerRow;
         }
 
+        #endregion
+
+        #region Methods
+
         public void AddEnemy(Enemy enemy)
         {
             QueueGameObjectForAddition(enemy);
 
-            double xPos = (this.totalEnemiesAdded % this.EnemiesPerRow) * this.cellSize.X;
+            var xPos = this.totalEnemiesAdded % this.EnemiesPerRow * this.cellSize.X;
             // ReSharper disable once PossibleLossOfFraction
-            double yPos = (this.totalEnemiesAdded / this.EnemiesPerRow) * this.cellSize.Y;
+            var yPos = this.totalEnemiesAdded / this.EnemiesPerRow * this.cellSize.Y;
 
-            enemy.Center = new Vector2(xPos, yPos) + this.cellSize / 2 + this.Position;
+            enemy.Center = new Vector2(xPos, yPos) + this.cellSize / 2 + Position;
 
             this.totalEnemiesAdded++;
         }
@@ -40,5 +50,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
                 this.AddEnemy(enemy);
             }
         }
+
+        #endregion
     }
 }
