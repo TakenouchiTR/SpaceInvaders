@@ -8,6 +8,10 @@ using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Nodes.Effects
 {
+    /// <summary>
+    /// Represents a slow moving planet that occasionally appears in the background
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.Model.Nodes.SpriteNode" />
     public class BackgroundPlanet : SpriteNode
     {
         private static readonly Random RefreshRandom = new Random();
@@ -17,6 +21,9 @@ namespace SpaceInvaders.Model.Nodes.Effects
         private Vector2 velocity;
         private Timer refreshTimer;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BackgroundPlanet"/> class.
+        /// </summary>
         public BackgroundPlanet() : base(new Planet1Sprite())
         {
             this.Y = MainPage.ApplicationHeight + 1;
@@ -47,6 +54,12 @@ namespace SpaceInvaders.Model.Nodes.Effects
             this.X = RefreshRandom.NextDouble() * MainPage.ApplicationWidth - this.Width;
         }
 
+        /// <summary>
+        /// The update loop for the GameObject.<br />
+        /// Precondition: None<br />
+        /// Postcondition: GameObject completes its update step
+        /// </summary>
+        /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)
         {
             this.Move(this.velocity * delta);
