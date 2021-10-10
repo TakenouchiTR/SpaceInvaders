@@ -21,12 +21,11 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         private const int TotalMovementSteps = 19;
         private const int XMoveAmount = 15;
-        private const int YMoveAmount = 32;
 
         private const VirtualKey ToggleStarsKey = VirtualKey.S;
 
         private static int curMovementStep = 9;
-        private static int movementDirection = 1;
+        private static int movementFactor = 1;
 
         private int enemiesRemaining;
         private bool togglePressedLastFrame;
@@ -166,17 +165,13 @@ namespace SpaceInvaders.Model.Nodes.Levels
         {
             var moveDistance = new Vector2();
 
-            curMovementStep += movementDirection;
+            curMovementStep += movementFactor;
 
-            if (curMovementStep > TotalMovementSteps || curMovementStep < 0)
+            if (curMovementStep >= TotalMovementSteps || curMovementStep <= 0)
             {
-                movementDirection *= -1;
-                moveDistance.Y = YMoveAmount;
+                movementFactor *= -1;
             }
-            else
-            {
-                moveDistance.X = XMoveAmount * movementDirection;
-            }
+            moveDistance.X = XMoveAmount * movementFactor;
 
             this.enemyGroup.Move(moveDistance);
         }
