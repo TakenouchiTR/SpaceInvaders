@@ -46,7 +46,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         /// </summary>
         public Level1()
         {
-            this.addStars();
+            this.addBackground();
             this.addPlayer();
             this.addEnemyHelperNodes();
             this.addEnemies();
@@ -116,13 +116,27 @@ namespace SpaceInvaders.Model.Nodes.Levels
             this.enemiesRemaining += enemyList.Count;
         }
 
-        private void addStars()
+        private void addBackground()
         {
             this.starNode = new Node();
             var starRandom = new Random();
-            for (var i = 0; i < StarCount; ++i)
+
+            for (var i = 0; i < StarCount / 2; ++i)
             {
                 var star = new BackgroundStar {
+                    Y = starRandom.NextDouble() * MainPage.ApplicationHeight
+                };
+                this.starNode.AttachChild(star);
+            }
+
+            //Must create planet between stars so that stars will go both behind and in front of the planet.
+            //This must be done since ZIndex is not a property of UserControls, so the draw order cannot be easily set.
+            this.starNode.AttachChild(new BackgroundPlanet());
+
+            for (var i = StarCount / 2; i < StarCount; ++i)
+            {
+                var star = new BackgroundStar
+                {
                     Y = starRandom.NextDouble() * MainPage.ApplicationHeight
                 };
                 this.starNode.AttachChild(star);
