@@ -18,6 +18,12 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         #region Properties
 
+        /// <summary>
+        ///     Gets the width.
+        /// </summary>
+        /// <value>
+        ///     The width.
+        /// </value>
         public double Width => this.EnemiesPerRow * this.cellSize.X;
 
         /// <summary>
