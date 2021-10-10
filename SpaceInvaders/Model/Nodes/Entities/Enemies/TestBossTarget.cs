@@ -55,11 +55,14 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         private void addAnimations()
         {
             var animation1 = new AnimatedSprite(1, new List<BaseSprite> {
-                new BasicEnemySprite()
+                new BasicEnemySprite(),
+                new IntermediateEnemySprite()
             });
-            var animation2 = new AnimatedSprite(1, new List<BaseSprite> {
-                new AggresiveEnemySprite()
+            var animation2 = new AnimatedSprite(new List<AnimationFrame> {
+                new AnimationFrame(new AggresiveEnemySprite(), .2),
+                new AnimationFrame(new PlayerShipSprite(), .8)
             });
+            
             this.stateMachine = new AnimationStateMachine();
             this.stateMachine.AddAnimation("normal", animation1);
             this.stateMachine.AddAnimation("damaged", animation2);
