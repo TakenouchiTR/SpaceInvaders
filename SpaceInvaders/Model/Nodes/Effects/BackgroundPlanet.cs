@@ -46,7 +46,7 @@ namespace SpaceInvaders.Model.Nodes.Effects
         private void setupTimer()
         {
             this.refreshTimer = new Timer {
-                Duration = this.getNextRefreshTime(),
+                Duration = getNextRefreshTime(),
                 Repeat = false
             };
             AttachChild(this.refreshTimer);
@@ -80,7 +80,7 @@ namespace SpaceInvaders.Model.Nodes.Effects
 
                 if (IsOffScreen())
                 {
-                    this.refreshTimer.Duration = this.getNextRefreshTime();
+                    this.refreshTimer.Duration = getNextRefreshTime();
                     this.refreshTimer.Start();
                     this.active = false;
                 }
@@ -89,7 +89,7 @@ namespace SpaceInvaders.Model.Nodes.Effects
             base.Update(delta);
         }
 
-        private double getNextRefreshTime()
+        private static double getNextRefreshTime()
         {
             return BackgroundPlanetRandom.NextDouble() * (MaxRefreshTime - MinRefreshTime) + MinRefreshTime;
         }
