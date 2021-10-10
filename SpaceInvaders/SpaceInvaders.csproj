@@ -125,6 +125,7 @@
     <Compile Include="Model\Nodes\AnimationStateMachine.cs" />
     <Compile Include="Model\Nodes\Area.cs" />
     <Compile Include="Model\Nodes\CollisionArea.cs" />
+    <Compile Include="Model\Nodes\Effects\BackgroundPlanet.cs" />
     <Compile Include="Model\Nodes\Effects\BackgroundStar.cs" />
     <Compile Include="Model\Nodes\Effects\Explosion.cs" />
     <Compile Include="Model\Nodes\Entities\Bullet.cs" />
@@ -167,6 +168,9 @@
       <DependentUpon>IntermediateEnemySprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\ISpriteRender.cs" />
+    <Compile Include="View\Sprites\Planet1Sprite.xaml.cs">
+      <DependentUpon>Planet1Sprite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\PlayerBulletSprite.xaml.cs">
       <DependentUpon>PlayerBulletSprite.xaml</DependentUpon>
     </Compile>
@@ -222,6 +226,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\IntermediateEnemySprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\Planet1Sprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
