@@ -17,9 +17,6 @@ namespace SpaceInvaders.Model.Nodes.Levels
     {
         #region Data members
 
-        private const int EnemiesPerRow = 4;
-        private const double EnemySpawnAreaWidth = 250;
-        private const double EnemyVerticalGap = 64;
         private const int StarCount = 50;
 
         private const int TotalMovementSteps = 19;
@@ -34,7 +31,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         private int enemiesRemaining;
         private bool togglePressedLastFrame;
 
-        private Node2D enemyGroup;
+        private EnemyGroup enemyGroup;
         private Node starNode;
 
         #endregion
@@ -73,15 +70,13 @@ namespace SpaceInvaders.Model.Nodes.Levels
             enemyMoveTimer.Tick += this.onEnemyMoveTimerTick;
             AttachChild(enemyMoveTimer);
 
-            this.enemyGroup = new Node2D();
+            this.enemyGroup = new EnemyGroup(new Vector2(75, 64), 4);
             AttachChild(this.enemyGroup);
         }
 
         private void addEnemies()
         {
-            var spawnCellWidth = EnemySpawnAreaWidth / EnemiesPerRow;
-            var startX = spawnCellWidth / 2;
-            var startY = 64;
+            this.enemyGroup.X = MainPage.ApplicationWidth / 2 - this.enemyGroup.Width / 2;
 
             var enemyList = new List<Enemy> {
                 new AggresiveEnemy(),
@@ -98,20 +93,12 @@ namespace SpaceInvaders.Model.Nodes.Levels
                 new BasicEnemy()
             };
 
-            for (var i = 0; i < enemyList.Count; i++)
-            {
-                var enemy = enemyList[i];
-                var enemyCenter = new Vector2 {
-                    X = startX + i % EnemiesPerRow * spawnCellWidth,
-                    // ReSharper disable once PossibleLossOfFraction
-                    Y = startY + i / EnemiesPerRow * EnemyVerticalGap
-                };
-                enemy.Center = enemyCenter;
-                enemy.Removed += this.onEnemyRemoved;
-                this.enemyGroup.AttachChild(enemy);
-            }
+            this.enemyGroup.AddEnemies(enemyList);
 
-            this.enemyGroup.X = MainPage.ApplicationWidth / 2 - EnemySpawnAreaWidth / 2;
+            foreach (var enemy in enemyList)
+            {
+                enemy.Removed += this.onEnemyRemoved;
+            }
 
             this.enemiesRemaining += enemyList.Count;
         }
