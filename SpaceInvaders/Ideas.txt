@@ -1,0 +1,7 @@
+﻿[x] "RelativePosition" property for Node2D
+	Gets and sets the position relative to the parent
+
+[ ] Multiple canvases for pseudo ZIndex
+	[ ] RenderLayer enum for picking which canvas to render to
+		(BG x3, Main x4, UI x3)?
+	[ ] Update SpriteNode to accept RenderLayer
