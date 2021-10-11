@@ -45,7 +45,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             var explosion = new Explosion {
                 Center = Center
             };
-            GetRoot().QueueGameObjectForAddition(explosion);
+            GetRoot().QueueNodeForAddition(explosion);
             base.CompleteRemoval();
         }
 

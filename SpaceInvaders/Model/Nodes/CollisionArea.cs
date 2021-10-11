@@ -18,7 +18,7 @@ namespace SpaceInvaders.Model.Nodes
         /// <summary>
         ///     Gets or sets the collision layers.<br />
         ///     Each bit of CollisionLayers represents a different layer.<br />
-        ///     If Monitorable is set to true, other GameObjects will check if any of their flagged<br />
+        ///     If Monitorable is set to true, other Nodes will check if any of their flagged<br />
         ///     CollisionMask bits match this object's CollisionLayer when their bounding boxes overlap.
         /// </summary>
         /// <value>
@@ -29,7 +29,7 @@ namespace SpaceInvaders.Model.Nodes
         /// <summary>
         ///     Gets or sets the collision masks.<br />
         ///     Each bit of CollisionMasks represents a different layer.<br />
-        ///     If Monitoring is set to true, this GameObject will check if any of its flagged<br />
+        ///     If Monitoring is set to true, this Node will check if any of its flagged<br />
         ///     CollisionMask bits match another object's CollisionLayer when their bounding boxes overlap.
         /// </summary>
         /// <value>

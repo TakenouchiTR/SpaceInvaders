@@ -69,9 +69,9 @@ namespace SpaceInvaders.Model.Nodes.Effects
         }
 
         /// <summary>
-        ///     The update loop for the GameObject.<br />
+        ///     The update loop for the Node.<br />
         ///     Precondition: None<br />
-        ///     Postcondition: GameObject completes its update step
+        ///     Postcondition: Node completes its update step
         /// </summary>
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)

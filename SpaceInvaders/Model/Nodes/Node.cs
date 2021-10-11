@@ -62,9 +62,9 @@ namespace SpaceInvaders.Model.Nodes
         public event EventHandler Removed;
 
         /// <summary>
-        ///     The update loop for the GameObject.<br />
+        ///     The update loop for the Node.<br />
         ///     Precondition: None<br />
-        ///     Postcondition: GameObject completes its update step
+        ///     Postcondition: Node completes its update step
         /// </summary>
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public virtual void Update(double delta)
@@ -129,14 +129,14 @@ namespace SpaceInvaders.Model.Nodes
         /// </summary>
         public void QueueForRemoval()
         {
-            this.Parent?.queueGameObjectForRemoval(this);
+            this.Parent?.queueNodeForRemoval(this);
             foreach (var child in this.children)
             {
                 child.QueueForRemoval();
             }
         }
 
-        private void queueGameObjectForRemoval(Node obj)
+        private void queueNodeForRemoval(Node obj)
         {
             if (obj == null)
             {
@@ -150,12 +150,12 @@ namespace SpaceInvaders.Model.Nodes
         {
             while (this.removalQueue.Count > 0)
             {
-                var gameObject = this.removalQueue.Dequeue();
+                var Node = this.removalQueue.Dequeue();
 
-                if (this.children.Contains(gameObject))
+                if (this.children.Contains(Node))
                 {
-                    this.children.Remove(gameObject);
-                    gameObject.CompleteRemoval();
+                    this.children.Remove(Node);
+                    Node.CompleteRemoval();
                 }
             }
 
@@ -170,7 +170,7 @@ namespace SpaceInvaders.Model.Nodes
         /// </summary>
         /// <param name="newNode">The object to add.</param>
         /// <exception cref="System.ArgumentException">obj must not be null</exception>
-        public virtual void QueueGameObjectForAddition(Node newNode)
+        public virtual void QueueNodeForAddition(Node newNode)
         {
             if (newNode == null)
             {
@@ -184,8 +184,8 @@ namespace SpaceInvaders.Model.Nodes
         {
             while (this.additionQueue.Count > 0)
             {
-                var gameObject = this.additionQueue.Dequeue();
-                this.AttachChild(gameObject);
+                var Node = this.additionQueue.Dequeue();
+                this.AttachChild(Node);
             }
         }
 

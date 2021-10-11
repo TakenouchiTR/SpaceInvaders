@@ -74,7 +74,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
                 throw new ArgumentNullException(nameof(enemy));
             }
 
-            QueueGameObjectForAddition(enemy);
+            QueueNodeForAddition(enemy);
 
             var xPos = this.totalEnemiesAdded % this.EnemiesPerRow * this.cellSize.X;
             // ReSharper disable once PossibleLossOfFraction

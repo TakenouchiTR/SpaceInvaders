@@ -54,9 +54,9 @@ namespace SpaceInvaders.Model.Nodes.Entities
         }
 
         /// <summary>
-        ///     The update loop for the GameObject.<br />
+        ///     The update loop for the Node.<br />
         ///     Precondition: None<br />
-        ///     Postcondition: GameObject completes its update step
+        ///     Postcondition: Node completes its update step
         /// </summary>
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)
@@ -109,7 +109,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 };
                 bullet.Removed += this.onBulletRemoval;
 
-                Parent.QueueGameObjectForAddition(bullet);
+                Parent.QueueNodeForAddition(bullet);
                 this.canShoot = false;
             }
         }
@@ -125,7 +125,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
             var explosion = new Explosion {
                 Center = Center
             };
-            GetRoot().QueueGameObjectForAddition(explosion);
+            GetRoot().QueueNodeForAddition(explosion);
             base.CompleteRemoval();
         }
 

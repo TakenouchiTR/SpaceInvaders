@@ -57,7 +57,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             };
             this.shotTimer.Duration = getShotDelay();
 
-            GetRoot().QueueGameObjectForAddition(bullet);
+            GetRoot().QueueNodeForAddition(bullet);
         }
 
         private void onCollided(object sender, CollisionArea e)

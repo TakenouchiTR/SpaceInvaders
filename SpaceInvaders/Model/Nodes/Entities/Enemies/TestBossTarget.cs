@@ -80,7 +80,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
                 Position = Center
             };
 
-            GetRoot().QueueGameObjectForAddition(bullet);
+            GetRoot().QueueNodeForAddition(bullet);
         }
 
         private void onCollided(object sender, CollisionArea e)

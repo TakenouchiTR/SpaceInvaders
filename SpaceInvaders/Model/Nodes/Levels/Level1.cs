@@ -120,6 +120,12 @@ namespace SpaceInvaders.Model.Nodes.Levels
             AttachChild(this.backgroundNode);
         }
 
+        /// <summary>
+        /// The update loop for the Node.<br />
+        /// Precondition: None<br />
+        /// Postcondition: Node completes its update step
+        /// </summary>
+        /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)
         {
             if (Input.IsKeyPressed(ToggleStarsKey) && !this.togglePressedLastFrame)
