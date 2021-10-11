@@ -3,6 +3,10 @@ using SpaceInvaders.View;
 
 namespace SpaceInvaders.Model.Nodes
 {
+    /// <summary>
+    /// A node with an X/Y components.
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.Model.Nodes.Node" />
     public class Node2D : Node
     {
         #region Data members

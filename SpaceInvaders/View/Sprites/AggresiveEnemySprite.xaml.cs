@@ -3,12 +3,15 @@
 namespace SpaceInvaders.View.Sprites
 {
     /// <summary>
-    ///     An empty page that can be used on its own or navigated to within a Frame.
+    ///     Draws the aggressive enemy ship
     /// </summary>
     public sealed partial class AggresiveEnemySprite
     {
         #region Constructors
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="AggresiveEnemySprite" /> class.
+        /// </summary>
         public AggresiveEnemySprite()
         {
             this.InitializeComponent();

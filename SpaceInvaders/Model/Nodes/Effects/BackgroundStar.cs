@@ -5,6 +5,10 @@ using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Nodes.Effects
 {
+    /// <summary>
+    /// Represents a star that slowly moves down the screen in the background
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.Model.Nodes.SpriteNode" />
     public class BackgroundStar : SpriteNode
     {
         #region Data members
@@ -19,6 +23,9 @@ namespace SpaceInvaders.Model.Nodes.Effects
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BackgroundStar"/> class.
+        /// </summary>
         public BackgroundStar() : base(new StarSprite())
         {
             this.setVelocityAndScale();
@@ -41,6 +48,12 @@ namespace SpaceInvaders.Model.Nodes.Effects
             X = StarRandom.Next((int) (MainPage.ApplicationWidth - Width));
         }
 
+        /// <summary>
+        /// The update loop for the Node.<br />
+        /// Precondition: None<br />
+        /// Postcondition: Node completes its update step
+        /// </summary>
+        /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)
         {
             Y += this.velocity * delta;

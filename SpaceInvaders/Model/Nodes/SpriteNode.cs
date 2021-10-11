@@ -3,6 +3,10 @@ using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Nodes
 {
+    /// <summary>
+    /// A node that handles the display and movement of Sprites.
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.Model.Nodes.Area" />
     public class SpriteNode : Area
     {
         #region Data members
@@ -69,6 +73,12 @@ namespace SpaceInvaders.Model.Nodes
         /// </value>
         public override double Height => this.Sprite.Height;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="SpriteNode"/> is visible.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if visible; otherwise, <c>false</c>.
+        /// </value>
         public bool Visible
         {
             get => this.visible;

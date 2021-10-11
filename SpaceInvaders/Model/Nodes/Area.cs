@@ -2,6 +2,10 @@
 
 namespace SpaceInvaders.Model.Nodes
 {
+    /// <summary>
+    /// A node that represents a rectangle, with a specified X coordinate, Y coordinate, width, and height.
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.Model.Nodes.Node2D" />
     public class Area : Node2D
     {
         #region Properties

@@ -2,6 +2,10 @@
 
 namespace SpaceInvaders.Model.Nodes
 {
+    /// <summary>
+    /// A node that fires an event after a specified amount of time has passed.
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.Model.Nodes.Node" />
     public class Timer : Node
     {
         #region Data members

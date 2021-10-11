@@ -40,6 +40,12 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         #region Methods
 
+        /// <summary>
+        /// Runs cleanup and invokes the Removed event when removed from the game.<br />
+        /// Precondition: None<br />
+        /// Postcondition: Removed event is invoked &amp;&amp;<br />
+        /// All event subscribers are removed
+        /// </summary>
         public override void CompleteRemoval()
         {
             var explosion = new Explosion {

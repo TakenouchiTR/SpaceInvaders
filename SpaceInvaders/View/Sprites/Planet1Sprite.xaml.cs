@@ -2,10 +2,19 @@
 
 namespace SpaceInvaders.View.Sprites
 {
+    /// <summary>
+    /// Draws a large, red planet sprite
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.View.Sprites.BaseSprite" />
+    /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />
+    /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector2" />
     public sealed partial class Planet1Sprite
     {
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Planet1Sprite"/> class.
+        /// </summary>
         public Planet1Sprite()
         {
             this.InitializeComponent();
