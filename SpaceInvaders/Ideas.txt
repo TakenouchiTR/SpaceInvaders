@@ -7,3 +7,12 @@
 	[ ] Update SpriteNode to accept RenderLayer
 
 [ ] Figure out how to move the Sprites to different folders.
+
+[ ] Add rotation to Node2D
+	[ ] Rotates children around center
+	[ ] Redo Position to GlobalPosition, RelativePosition to Position
+	[ ] Figure out how to handle changing X/Y directly (Should it be relative to parent or to global origin? Removed?)
+
+[ ] Add different swap options for the AnimationStateMachine
+	[ ] Reset - Resets the animation to the first frame when swapping animations
+	[ ] Keep - Sets the new animation's frame to the previous one's
