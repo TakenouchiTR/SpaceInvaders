@@ -148,6 +148,7 @@
     <Compile Include="Model\PhysicsLayer.cs" />
     <Compile Include="Model\Nodes\SpriteNode.cs" />
     <Compile Include="Model\Nodes\Timer.cs" />
+    <Compile Include="Model\RenderLayer.cs" />
     <Compile Include="Model\Vector2.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -257,7 +258,6 @@
       <Version>6.2.10</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
