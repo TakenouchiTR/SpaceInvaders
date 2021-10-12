@@ -30,7 +30,10 @@ namespace SpaceInvaders.View
         /// </summary>
         public const double ApplicationWidth = 640;
 
+        private const int CanvasLayerCount = 10;
+
         private readonly LevelBase level;
+        private Canvas[] canvasLayers;
 
         #endregion
 
@@ -53,6 +56,8 @@ namespace SpaceInvaders.View
             SpriteNode.SpriteHidden += this.onSpriteNodeHidden;
             SpriteNode.SpriteShown += this.onSpriteNodeShown;
 
+            this.createAndPopulateCanvasLayers();
+
             this.level = new Level1();
             this.level.ScoreChanged += this.onLevelScoreChanged;
             this.level.GameFinished += this.onLevelGameFinished;
@@ -61,6 +66,22 @@ namespace SpaceInvaders.View
         #endregion
 
         #region Methods
+
+        private void createAndPopulateCanvasLayers()
+        {
+            this.canvasLayers = new Canvas[Enum.GetValues(typeof(RenderLayer)).Length];
+
+            for (var i = 0; i < CanvasLayerCount; i++)
+            {
+                var canvas = new Canvas {
+                    Width = ApplicationWidth,
+                    Height = ApplicationHeight
+                };
+
+                this.theCanvas.Children.Add(canvas);
+                this.canvasLayers[i] = canvas;
+            }
+        }
 
         private void onSpriteNodeHidden(object sender, BaseSprite e)
         {
