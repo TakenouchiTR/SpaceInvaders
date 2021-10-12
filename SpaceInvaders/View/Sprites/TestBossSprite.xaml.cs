@@ -3,7 +3,7 @@
 namespace SpaceInvaders.View.Sprites
 {
     /// <summary>
-    /// Draws the test boss sprite
+    ///     Draws the test boss sprite
     /// </summary>
     /// <seealso cref="SpaceInvaders.View.Sprites.BaseSprite" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />
@@ -13,7 +13,7 @@ namespace SpaceInvaders.View.Sprites
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TestBossSprite"/> class.
+        ///     Initializes a new instance of the <see cref="TestBossSprite" /> class.
         /// </summary>
         public TestBossSprite()
         {

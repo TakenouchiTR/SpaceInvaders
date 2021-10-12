@@ -3,7 +3,7 @@
 namespace SpaceInvaders.Model.Nodes
 {
     /// <summary>
-    /// A specialized area that checks if it is overlapping with other CollisionAreas
+    ///     A specialized area that checks if it is overlapping with other CollisionAreas
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.Nodes.Area" />
     public class CollisionArea : Area

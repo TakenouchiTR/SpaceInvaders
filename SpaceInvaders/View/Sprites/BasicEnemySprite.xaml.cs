@@ -13,7 +13,7 @@ namespace SpaceInvaders.View.Sprites
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BasicEnemySprite"/> class.
+        ///     Initializes a new instance of the <see cref="BasicEnemySprite" /> class.
         /// </summary>
         public BasicEnemySprite()
         {

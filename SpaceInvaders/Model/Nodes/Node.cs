@@ -5,7 +5,7 @@ using System.Linq;
 namespace SpaceInvaders.Model.Nodes
 {
     /// <summary>
-    /// The base node that can be extended from. Contains all the basic functions required by all nodes
+    ///     The base node that can be extended from. Contains all the basic functions required by all nodes
     /// </summary>
     public class Node
     {

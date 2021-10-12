@@ -3,7 +3,7 @@
 namespace SpaceInvaders.View.Sprites
 {
     /// <summary>
-    /// Draws the intermediate enemy sprite
+    ///     Draws the intermediate enemy sprite
     /// </summary>
     /// <seealso cref="SpaceInvaders.View.Sprites.BaseSprite" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />
@@ -13,7 +13,7 @@ namespace SpaceInvaders.View.Sprites
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="IntermediateEnemySprite"/> class.
+        ///     Initializes a new instance of the <see cref="IntermediateEnemySprite" /> class.
         /// </summary>
         public IntermediateEnemySprite()
         {

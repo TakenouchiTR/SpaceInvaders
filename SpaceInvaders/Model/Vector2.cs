@@ -3,7 +3,7 @@
 namespace SpaceInvaders.Model
 {
     /// <summary>
-    /// Represents an XY coordinate pair.
+    ///     Represents an XY coordinate pair.
     /// </summary>
     public struct Vector2
     {

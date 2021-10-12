@@ -6,7 +6,7 @@ using SpaceInvaders.View.Sprites;
 namespace SpaceInvaders.Model.Nodes.Effects
 {
     /// <summary>
-    /// Represents a star that slowly moves down the screen in the background
+    ///     Represents a star that slowly moves down the screen in the background
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.Nodes.SpriteNode" />
     public class BackgroundStar : SpriteNode
@@ -24,7 +24,7 @@ namespace SpaceInvaders.Model.Nodes.Effects
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BackgroundStar"/> class.
+        ///     Initializes a new instance of the <see cref="BackgroundStar" /> class.
         /// </summary>
         public BackgroundStar() : base(new StarSprite())
         {
@@ -49,9 +49,9 @@ namespace SpaceInvaders.Model.Nodes.Effects
         }
 
         /// <summary>
-        /// The update loop for the Node.<br />
-        /// Precondition: None<br />
-        /// Postcondition: Node completes its update step
+        ///     The update loop for the Node.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: Node completes its update step
         /// </summary>
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)

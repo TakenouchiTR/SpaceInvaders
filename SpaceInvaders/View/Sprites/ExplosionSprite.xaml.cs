@@ -3,7 +3,7 @@
 namespace SpaceInvaders.View.Sprites
 {
     /// <summary>
-    /// Draws an explosion sprite
+    ///     Draws an explosion sprite
     /// </summary>
     /// <seealso cref="SpaceInvaders.View.Sprites.BaseSprite" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />
@@ -13,7 +13,7 @@ namespace SpaceInvaders.View.Sprites
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ExplosionSprite"/> class.
+        ///     Initializes a new instance of the <see cref="ExplosionSprite" /> class.
         /// </summary>
         public ExplosionSprite()
         {
