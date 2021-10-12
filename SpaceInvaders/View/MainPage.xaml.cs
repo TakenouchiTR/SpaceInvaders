@@ -96,7 +96,7 @@ namespace SpaceInvaders.View
         {
             if (sender is SpriteNode node)
             {
-                var layerIndex = (int)node.Layer;
+                var layerIndex = (int) node.Layer;
                 this.canvasLayers[layerIndex].Children.Add(e);
             }
         }

@@ -29,10 +29,10 @@ namespace SpaceInvaders.Model.Nodes
         public BaseSprite Sprite { get; private set; }
 
         /// <summary>
-        /// Gets or sets the render layer.
+        ///     Gets or sets the render layer.
         /// </summary>
         /// <value>
-        /// The render layer.
+        ///     The render layer.
         /// </value>
         public RenderLayer Layer
         {
@@ -41,12 +41,13 @@ namespace SpaceInvaders.Model.Nodes
             {
                 if (this.Visible)
                 {
-                    SpriteHidden?.Invoke(this, Sprite);
+                    SpriteHidden?.Invoke(this, this.Sprite);
                 }
+
                 this.layer = value;
                 if (this.Visible)
                 {
-                    SpriteShown?.Invoke(this, Sprite);
+                    SpriteShown?.Invoke(this, this.Sprite);
                 }
             }
         }
@@ -149,11 +150,10 @@ namespace SpaceInvaders.Model.Nodes
         /// <param name="sprite">The sprite.</param>
         public SpriteNode(BaseSprite sprite) : this(sprite, DefaultRenderLayer)
         {
-            
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SpriteNode"/> class with a specified Sprite and RenderLayer.
+        ///     Initializes a new instance of the <see cref="SpriteNode" /> class with a specified Sprite and RenderLayer.
         /// </summary>
         /// <param name="sprite">The sprite.</param>
         /// <param name="layer">The render layer.</param>

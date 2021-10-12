@@ -153,12 +153,12 @@ namespace SpaceInvaders.Model.Nodes
         {
             while (this.removalQueue.Count > 0)
             {
-                var Node = this.removalQueue.Dequeue();
+                var node = this.removalQueue.Dequeue();
 
-                if (this.children.Contains(Node))
+                if (this.children.Contains(node))
                 {
-                    this.children.Remove(Node);
-                    Node.CompleteRemoval();
+                    this.children.Remove(node);
+                    node.CompleteRemoval();
                 }
             }
 
@@ -187,8 +187,8 @@ namespace SpaceInvaders.Model.Nodes
         {
             while (this.additionQueue.Count > 0)
             {
-                var Node = this.additionQueue.Dequeue();
-                this.AttachChild(Node);
+                var node = this.additionQueue.Dequeue();
+                this.AttachChild(node);
             }
         }
 
