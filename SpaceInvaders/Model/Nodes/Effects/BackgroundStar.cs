@@ -26,7 +26,7 @@ namespace SpaceInvaders.Model.Nodes.Effects
         /// <summary>
         ///     Initializes a new instance of the <see cref="BackgroundStar" /> class.
         /// </summary>
-        public BackgroundStar() : base(new StarSprite())
+        public BackgroundStar() : base(new StarSprite(), RenderLayer.BackgroundBottom)
         {
             this.setVelocityAndScale();
             this.setStartingPosition();

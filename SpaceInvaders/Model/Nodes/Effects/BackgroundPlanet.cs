@@ -27,7 +27,7 @@ namespace SpaceInvaders.Model.Nodes.Effects
         /// <summary>
         ///     Initializes a new instance of the <see cref="BackgroundPlanet" /> class.
         /// </summary>
-        public BackgroundPlanet() : base(new Planet1Sprite())
+        public BackgroundPlanet() : base(new Planet1Sprite(), RenderLayer.BackgroundMiddle)
         {
             this.velocity = new Vector2(0, 30);
             this.setupTimer();
