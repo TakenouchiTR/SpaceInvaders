@@ -11,7 +11,10 @@ namespace SpaceInvaders.Model.Nodes
     {
         #region Data members
 
+        private const RenderLayer DefaultRenderLayer = RenderLayer.MainUpperMiddle;
+
         private bool visible;
+        private RenderLayer layer;
 
         #endregion
 
@@ -24,6 +27,29 @@ namespace SpaceInvaders.Model.Nodes
         ///     The sprite.
         /// </value>
         public BaseSprite Sprite { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the render layer.
+        /// </summary>
+        /// <value>
+        /// The render layer.
+        /// </value>
+        public RenderLayer Layer
+        {
+            get => this.layer;
+            set
+            {
+                if (this.Visible)
+                {
+                    SpriteHidden?.Invoke(this, Sprite);
+                }
+                this.layer = value;
+                if (this.Visible)
+                {
+                    SpriteShown?.Invoke(this, Sprite);
+                }
+            }
+        }
 
         /// <summary>
         ///     Gets or sets the x coordinate.
@@ -118,15 +144,24 @@ namespace SpaceInvaders.Model.Nodes
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SpriteNode" /> class.
+        ///     Initializes a new instance of the <see cref="SpriteNode" /> class with a specified Sprite.
         /// </summary>
         /// <param name="sprite">The sprite.</param>
-        public SpriteNode(BaseSprite sprite)
+        public SpriteNode(BaseSprite sprite) : this(sprite, DefaultRenderLayer)
+        {
+            
+        }
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="SpriteNode"/> class with a specified Sprite and RenderLayer.
+        /// </summary>
+        /// <param name="sprite">The sprite.</param>
+        /// <param name="layer">The render layer.</param>
+        public SpriteNode(BaseSprite sprite, RenderLayer layer)
         {
             this.Sprite = sprite;
             this.visible = true;
-
-            SpriteShown?.Invoke(this, this.Sprite);
+            this.Layer = layer;
         }
 
         #endregion

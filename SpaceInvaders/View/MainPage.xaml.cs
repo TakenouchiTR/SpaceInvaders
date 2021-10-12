@@ -85,12 +85,20 @@ namespace SpaceInvaders.View
 
         private void onSpriteNodeHidden(object sender, BaseSprite e)
         {
-            this.theCanvas.Children.Remove(e);
+            if (sender is SpriteNode node)
+            {
+                var layerIndex = (int) node.Layer;
+                this.canvasLayers[layerIndex].Children.Remove(e);
+            }
         }
 
         private void onSpriteNodeShown(object sender, BaseSprite e)
         {
-            this.theCanvas.Children.Add(e);
+            if (sender is SpriteNode node)
+            {
+                var layerIndex = (int)node.Layer;
+                this.canvasLayers[layerIndex].Children.Add(e);
+            }
         }
 
         private async void onLevelGameFinished(object sender, string e)
