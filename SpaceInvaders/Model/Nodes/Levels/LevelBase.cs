@@ -80,9 +80,9 @@ namespace SpaceInvaders.Model.Nodes.Levels
         ///     Postcondition: Removed event is invoked &amp;&amp;<br />
         ///     All event subscribers are removed
         /// </summary>
-        public override void CompleteRemoval()
+        public override void CompleteRemoval(bool emitRemovedSignal = true)
         {
-            base.CompleteRemoval();
+            base.CompleteRemoval(false);
             this.updateTimer.Tick -= this.onUpdateTimerTick;
 
             if (this.ScoreChanged != null)
