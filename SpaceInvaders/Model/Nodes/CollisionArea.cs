@@ -101,9 +101,9 @@ namespace SpaceInvaders.Model.Nodes
         ///     Postcondition: Removed event is invoked &amp;&amp;<br />
         ///     All event subscribers are removed
         /// </summary>
-        public override void CompleteRemoval()
+        public override void CompleteRemoval(bool emitRemovedSignal = true)
         {
-            base.CompleteRemoval();
+            base.CompleteRemoval(emitRemovedSignal);
             if (this.Collided != null)
             {
                 foreach (var subscriber in this.Collided?.GetInvocationList())

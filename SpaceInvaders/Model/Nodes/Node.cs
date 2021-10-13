@@ -87,13 +87,11 @@ namespace SpaceInvaders.Model.Nodes
         ///     Postcondition: Removed event is invoked &amp;&amp;<br />
         ///     All event subscribers are removed
         /// </summary>
-        public virtual void CompleteRemoval()
+        public virtual void CompleteRemoval(bool emitRemovedSignal = true)
         {
-            this.Removed?.Invoke(this, EventArgs.Empty);
-
             foreach (var child in this.children)
             {
-                child.CompleteRemoval();
+                child.CompleteRemoval(emitRemovedSignal);
             }
 
             this.Parent = null;
