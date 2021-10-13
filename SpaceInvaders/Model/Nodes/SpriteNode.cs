@@ -176,8 +176,9 @@ namespace SpaceInvaders.Model.Nodes
         /// </summary>
         public override void CompleteRemoval(bool emitRemovedSignal = true)
         {
-            SpriteHidden?.Invoke(null, this.Sprite);
             base.CompleteRemoval(emitRemovedSignal);
+
+            SpriteHidden?.Invoke(this, this.Sprite);
         }
 
         /// <summary>
