@@ -40,13 +40,14 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         private void createTargets()
         {
             AttachChild(new TestBossTarget {
-                Center = new Vector2(Left, Bottom)
+                Center = new Vector2(Left + Width / 6, Bottom)
             });
             AttachChild(new TestBossTarget {
-                Center = new Vector2(Center.X, Bottom)
+                Center = new Vector2(Right - Width / 6, Bottom)
             });
             AttachChild(new TestBossTarget {
-                Center = new Vector2(Right, Bottom)
+                Center = new Vector2(Center.X, Bottom),
+                MovementFactor = -1
             });
 
             foreach (var child in Children)
