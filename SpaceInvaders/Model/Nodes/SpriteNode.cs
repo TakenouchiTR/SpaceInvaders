@@ -161,7 +161,9 @@ namespace SpaceInvaders.Model.Nodes
         {
             this.Sprite = sprite;
             this.visible = true;
-            this.Layer = layer;
+            this.layer = layer;
+
+            SpriteShown?.Invoke(this, this.Sprite);
         }
 
         #endregion
