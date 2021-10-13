@@ -152,7 +152,7 @@ namespace SpaceInvaders.View
 
         private void onCurrentLevelScoreChanged(object sender, int e)
         {
-            updateScore(e);
+            this.updateScore(e);
         }
 
         #endregion

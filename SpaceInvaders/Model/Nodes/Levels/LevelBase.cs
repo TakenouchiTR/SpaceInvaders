@@ -79,7 +79,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         ///     removal step on itself.<br />
         ///     Precondition: None <br />
         ///     Postcondition: this.children.Count == 0 &amp;&amp;
-        ///                    All event subscribers are removed
+        ///     All event subscribers are removed
         /// </summary>
         public void CleanupLevel()
         {
@@ -87,7 +87,6 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
             this.CompleteRemoval(false);
         }
-
 
         /// <summary>
         ///     Runs cleanup and invokes the Removed event when removed from the game.<br />

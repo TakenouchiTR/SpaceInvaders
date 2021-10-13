@@ -45,6 +45,7 @@ namespace SpaceInvaders.Model.Nodes
                 }
 
                 this.layer = value;
+
                 if (this.Visible)
                 {
                     SpriteShown?.Invoke(this, this.Sprite);

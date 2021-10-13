@@ -107,7 +107,7 @@ namespace SpaceInvaders.Model.Nodes
                     this.Removed -= subscriber as EventHandler;
                 }
             }
-            
+
             this.Parent = null;
             this.children.Clear();
         }
