@@ -106,7 +106,7 @@ namespace SpaceInvaders.View
             this.level.GameFinished -= this.onLevelGameFinished;
 
             var gameOverDialog = new ContentDialog {
-                Title = "Game Over",
+                Title = "Game Finished",
                 Content = e,
                 PrimaryButtonText = "Exit to Desktop"
             };
