@@ -58,9 +58,7 @@ namespace SpaceInvaders.View
 
             this.createAndPopulateCanvasLayers();
 
-            this.level = new Level1();
-            this.level.ScoreChanged += this.onLevelScoreChanged;
-            this.level.GameFinished += this.onLevelGameFinished;
+            this.setupLevel(new Level1());
         }
 
         #endregion
@@ -81,6 +79,13 @@ namespace SpaceInvaders.View
                 this.theCanvas.Children.Add(canvas);
                 this.canvasLayers[i] = canvas;
             }
+        }
+
+        private void setupLevel(LevelBase level)
+        {
+            this.currentLevel = level;
+            this.currentLevel.ScoreChanged += this.onCurrentLevelScoreChanged;
+            this.currentLevel.GameFinished += this.onCurrentLevelGameFinished;
         }
 
         private void onSpriteNodeHidden(object sender, BaseSprite e)
