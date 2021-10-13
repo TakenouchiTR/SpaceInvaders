@@ -83,6 +83,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         public override void CompleteRemoval(bool emitRemovedSignal = true)
         {
             base.CompleteRemoval(false);
+            this.updateTimer.Stop();
             this.updateTimer.Tick -= this.onUpdateTimerTick;
 
             if (this.ScoreChanged != null)
