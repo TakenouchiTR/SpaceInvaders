@@ -141,7 +141,8 @@ namespace SpaceInvaders.Model.Nodes
         /// </summary>
         public SpriteNode()
         {
-            this.visible = true;
+            this.visible = false;
+            this.layer = DefaultRenderLayer;
         }
 
         /// <summary>
