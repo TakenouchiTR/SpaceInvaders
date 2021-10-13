@@ -88,6 +88,20 @@ namespace SpaceInvaders.View
             this.currentLevel.GameFinished += this.onCurrentLevelGameFinished;
         }
 
+        private void cleanupLevel()
+        {
+            if (this.currentLevel == null)
+            {
+                return;
+            }
+
+            this.currentLevel.CleanupLevel();
+
+            this.currentLevel.ScoreChanged -= this.onCurrentLevelScoreChanged;
+            this.currentLevel.GameFinished -= this.onCurrentLevelGameFinished;
+            this.currentLevel = null;
+        }
+
         private void onSpriteNodeHidden(object sender, BaseSprite e)
         {
             if (sender is SpriteNode node)
