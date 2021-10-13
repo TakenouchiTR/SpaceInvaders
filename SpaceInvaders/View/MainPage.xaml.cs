@@ -100,6 +100,13 @@ namespace SpaceInvaders.View
             this.currentLevel.ScoreChanged -= this.onCurrentLevelScoreChanged;
             this.currentLevel.GameFinished -= this.onCurrentLevelGameFinished;
             this.currentLevel = null;
+
+            this.updateScore(0);
+        }
+
+        private void updateScore(int score)
+        {
+            this.scoreText.Text = $"Score: {score}";
         }
 
         private void onSpriteNodeHidden(object sender, BaseSprite e)
@@ -145,7 +152,7 @@ namespace SpaceInvaders.View
 
         private void onCurrentLevelScoreChanged(object sender, int e)
         {
-            this.scoreText.Text = $"Score: {e}";
+            updateScore(e);
         }
 
         #endregion
