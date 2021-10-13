@@ -7,9 +7,9 @@ If the stars in the background make tracking enemy bullets difficult, pressing t
     off.
 
 The game is structured as a tree of nodes, with every part of the game (Sprites, collision, timers, etc.) being 
-    respresented as a node. Nodes may have children, which allow for complex structures to be created through
-    composition. An entity is a Node2D that has a SpriteNode and a CollisionArea as children, rather than being 
-    a new type of node that has a sprite and a way to detect collisions as properties or fields.
+    respresented as a node. Nodes allow for complex structures to be created through composition. ie: An entity is 
+    an Area that has a SpriteNode and a CollisionArea as children, rather than being a new object that has a 
+    sprite and a way to detect collisions.
 
 I have a quick boss fight that I used to test the structure. It's made up of a boss who has three weak points,
     each requiring three shots to destroy. If you are interested, you can run it by setting "level" to 
