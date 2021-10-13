@@ -36,10 +36,8 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             Collision.Monitorable = true;
 
             this.Score = 0;
-            this.Removed += this.onRemoved;
+            Removed += this.onRemoved;
         }
-
-
 
         #endregion
 
@@ -47,8 +45,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         private void onRemoved(object sender, EventArgs e)
         {
-            var explosion = new Explosion
-            {
+            var explosion = new Explosion {
                 Center = Center
             };
             GetRoot().QueueNodeForAddition(explosion);

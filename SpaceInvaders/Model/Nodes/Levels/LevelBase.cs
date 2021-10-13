@@ -76,7 +76,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         public void CleanupLevel()
         {
-            this.SilentlyRemoveAllChildren();
+            SilentlyRemoveAllChildren();
 
             this.CompleteRemoval(false);
         }

@@ -42,21 +42,20 @@ namespace SpaceInvaders.Model.Nodes.Entities
             Collision.CollisionMasks = PhysicsLayer.EnemyHitbox | PhysicsLayer.Enemy;
 
             Collision.Collided += this.onCollision;
-            this.Removed += onRemoved;
-        }
-
-        private void onRemoved(object sender, EventArgs e)
-        {
-            var explosion = new Explosion
-            {
-                Center = Center
-            };
-            GetRoot().QueueNodeForAddition(explosion);
+            Removed += this.onRemoved;
         }
 
         #endregion
 
         #region Methods
+
+        private void onRemoved(object sender, EventArgs e)
+        {
+            var explosion = new Explosion {
+                Center = Center
+            };
+            GetRoot().QueueNodeForAddition(explosion);
+        }
 
         private void onCollision(object sender, CollisionArea e)
         {
@@ -123,7 +122,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 this.canShoot = false;
             }
         }
-        
+
         private void onBulletRemoval(object sender, EventArgs e)
         {
             if (sender is Bullet bullet)
