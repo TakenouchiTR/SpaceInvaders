@@ -74,6 +74,13 @@ namespace SpaceInvaders.Model.Nodes.Levels
         /// </summary>
         public event EventHandler<string> GameFinished;
 
+        public void CleanupLevel()
+        {
+            this.SilentlyRemoveAllChildren();
+
+            this.CompleteRemoval(false);
+        }
+
         /// <summary>
         ///     Runs cleanup and invokes the Removed event when removed from the game.<br />
         ///     Precondition: None<br />
