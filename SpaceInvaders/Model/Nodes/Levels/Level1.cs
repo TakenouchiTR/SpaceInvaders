@@ -151,7 +151,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         private void onPlayerRemoved(object sender, EventArgs e)
         {
-            CompleteGame("You have been destroyed!");
+            CompleteGame("Game Over!\nYou have been destroyed!");
         }
 
         private void onEnemyRemoved(object sender, EventArgs e)
@@ -162,7 +162,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
                 this.enemiesRemaining--;
                 if (this.enemiesRemaining <= 0)
                 {
-                    CompleteGame("All enemies have been defeated!");
+                    CompleteGame("You won!\nAll enemies have been defeated!");
                 }
             }
         }
