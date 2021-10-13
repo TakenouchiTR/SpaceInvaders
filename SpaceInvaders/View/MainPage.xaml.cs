@@ -32,7 +32,7 @@ namespace SpaceInvaders.View
 
         private const int CanvasLayerCount = 10;
 
-        private readonly LevelBase level;
+        private LevelBase currentLevel;
         private Canvas[] canvasLayers;
 
         #endregion
@@ -101,9 +101,9 @@ namespace SpaceInvaders.View
             }
         }
 
-        private async void onLevelGameFinished(object sender, string e)
+        private async void onCurrentLevelGameFinished(object sender, string e)
         {
-            this.level.GameFinished -= this.onLevelGameFinished;
+            this.currentLevel.GameFinished -= this.onCurrentLevelGameFinished;
 
             var gameOverDialog = new ContentDialog {
                 Title = "Game Finished",
@@ -124,7 +124,7 @@ namespace SpaceInvaders.View
             }
         }
 
-        private void onLevelScoreChanged(object sender, int e)
+        private void onCurrentLevelScoreChanged(object sender, int e)
         {
             this.scoreText.Text = $"Score: {e}";
         }
