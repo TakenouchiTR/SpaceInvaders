@@ -39,9 +39,9 @@ namespace SpaceInvaders.Model.Nodes
         ///     Gets a list of all added animations.
         /// </summary>
         /// <value>
-        ///     The animation list.
+        ///     The animations.
         /// </value>
-        public List<AnimatedSprite> AnimationList => this.animations.Values.ToList();
+        public List<AnimatedSprite> Animations => this.animations.Values.ToList();
 
         #endregion
 
@@ -130,9 +130,15 @@ namespace SpaceInvaders.Model.Nodes
             this.CurrentAnimation.Visible = true;
         }
 
+        /// <summary>
+        ///     Sets the render layer for all animated sprites.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: all items in this.Animations have Layer set to layer.
+        /// </summary>
+        /// <param name="layer">The layer.</param>
         public void SetRenderLayer(RenderLayer layer)
         {
-            foreach (var animatedSprite in this.AnimationList)
+            foreach (var animatedSprite in this.Animations)
             {
                 animatedSprite.Layer = layer;
             }
