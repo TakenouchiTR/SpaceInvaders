@@ -95,8 +95,6 @@ namespace SpaceInvaders.Model.Nodes
                 child.CompleteRemoval(emitRemovedEvent);
             }
 
-            this.Parent = null;
-            this.children.Clear();
             if (emitRemovedEvent && this.Removed != null)
             {
                 this.Removed.Invoke(this, EventArgs.Empty);
@@ -109,6 +107,9 @@ namespace SpaceInvaders.Model.Nodes
                     this.Removed -= subscriber as EventHandler;
                 }
             }
+            
+            this.Parent = null;
+            this.children.Clear();
         }
 
         /// <summary>
