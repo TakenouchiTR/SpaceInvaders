@@ -108,7 +108,8 @@ namespace SpaceInvaders.View
             var gameOverDialog = new ContentDialog {
                 Title = "Game Finished",
                 Content = e,
-                PrimaryButtonText = "Exit to Desktop"
+                PrimaryButtonText = "Play Again",
+                SecondaryButtonText = "Exit to Desktop"
             };
 
             await gameOverDialog.ShowAsync();
