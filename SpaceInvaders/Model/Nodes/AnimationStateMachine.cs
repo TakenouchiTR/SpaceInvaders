@@ -130,6 +130,14 @@ namespace SpaceInvaders.Model.Nodes
             this.CurrentAnimation.Visible = true;
         }
 
+        public void SetRenderLayer(RenderLayer layer)
+        {
+            foreach (var animatedSprite in this.AnimationList)
+            {
+                animatedSprite.Layer = layer;
+            }
+        }
+
         #endregion
     }
 }
