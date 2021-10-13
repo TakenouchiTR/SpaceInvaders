@@ -174,12 +174,13 @@ namespace SpaceInvaders.Model.Nodes
         /// <summary>
         ///     Runs cleanup and invokes the Removed event when removed from the game.<br />
         ///     Precondition: None<br />
-        ///     Postcondition: Removed event is invoked &amp;&amp;<br />
+        ///     Postcondition: Removed event is invoked if emitRemovedEvent == true &amp;&amp;<br />
         ///     All event subscribers are removed
         /// </summary>
-        public override void CompleteRemoval(bool emitRemovedSignal = true)
+        /// <param name="emitRemovedEvent">Whether to emit the Removed event</param>
+        public override void CompleteRemoval(bool emitRemovedEvent = true)
         {
-            base.CompleteRemoval(emitRemovedSignal);
+            base.CompleteRemoval(emitRemovedEvent);
 
             SpriteHidden?.Invoke(this, this.Sprite);
         }

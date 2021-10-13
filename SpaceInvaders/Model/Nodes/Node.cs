@@ -84,18 +84,23 @@ namespace SpaceInvaders.Model.Nodes
         /// <summary>
         ///     Runs cleanup and invokes the Removed event when removed from the game.<br />
         ///     Precondition: None<br />
-        ///     Postcondition: Removed event is invoked &amp;&amp;<br />
+        ///     Postcondition: Removed event is invoked if emitRemovedEvent == true &amp;&amp;<br />
         ///     All event subscribers are removed
         /// </summary>
-        public virtual void CompleteRemoval(bool emitRemovedSignal = true)
+        /// <param name="emitRemovedEvent">Whether to emit the Removed event</param>
+        public virtual void CompleteRemoval(bool emitRemovedEvent = true)
         {
             foreach (var child in this.children)
             {
-                child.CompleteRemoval(emitRemovedSignal);
+                child.CompleteRemoval(emitRemovedEvent);
             }
 
             this.Parent = null;
             this.children.Clear();
+            if (emitRemovedEvent && this.Removed != null)
+            {
+                this.Removed.Invoke(this, EventArgs.Empty);
+            }
 
             if (this.Removed != null)
             {

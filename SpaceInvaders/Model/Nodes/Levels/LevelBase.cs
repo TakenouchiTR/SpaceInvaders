@@ -74,6 +74,13 @@ namespace SpaceInvaders.Model.Nodes.Levels
         /// </summary>
         public event EventHandler<string> GameFinished;
 
+        /// <summary>
+        ///     Safely removes all children from the node without firing their Removed events, then completes the <br />
+        ///     removal step on itself.<br />
+        ///     Precondition: None <br />
+        ///     Postcondition: this.children.Count == 0 &amp;&amp;
+        ///                    All event subscribers are removed
+        /// </summary>
         public void CleanupLevel()
         {
             SilentlyRemoveAllChildren();
@@ -81,13 +88,15 @@ namespace SpaceInvaders.Model.Nodes.Levels
             this.CompleteRemoval(false);
         }
 
+
         /// <summary>
         ///     Runs cleanup and invokes the Removed event when removed from the game.<br />
         ///     Precondition: None<br />
-        ///     Postcondition: Removed event is invoked &amp;&amp;<br />
+        ///     Postcondition: Removed event is invoked if emitRemovedEvent == true &amp;&amp;<br />
         ///     All event subscribers are removed
         /// </summary>
-        public override void CompleteRemoval(bool emitRemovedSignal = true)
+        /// <param name="emitRemovedEvent">Whether to emit the Removed event</param>
+        public override void CompleteRemoval(bool emitRemovedEvent = true)
         {
             base.CompleteRemoval(false);
             this.updateTimer.Stop();
