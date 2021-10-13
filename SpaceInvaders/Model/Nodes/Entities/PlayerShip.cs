@@ -42,6 +42,16 @@ namespace SpaceInvaders.Model.Nodes.Entities
             Collision.CollisionMasks = PhysicsLayer.EnemyHitbox | PhysicsLayer.Enemy;
 
             Collision.Collided += this.onCollision;
+            this.Removed += onRemoved;
+        }
+
+        private void onRemoved(object sender, EventArgs e)
+        {
+            var explosion = new Explosion
+            {
+                Center = Center
+            };
+            GetRoot().QueueNodeForAddition(explosion);
         }
 
         #endregion
@@ -113,22 +123,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 this.canShoot = false;
             }
         }
-
-        /// <summary>
-        ///     Runs cleanup and invokes the Removed event when removed from the game.<br />
-        ///     Precondition: None<br />
-        ///     Postcondition: Removed event is invoked &amp;&amp;<br />
-        ///     All event subscribers are removed
-        /// </summary>
-        public override void CompleteRemoval()
-        {
-            var explosion = new Explosion {
-                Center = Center
-            };
-            GetRoot().QueueNodeForAddition(explosion);
-            base.CompleteRemoval();
-        }
-
+        
         private void onBulletRemoval(object sender, EventArgs e)
         {
             if (sender is Bullet bullet)

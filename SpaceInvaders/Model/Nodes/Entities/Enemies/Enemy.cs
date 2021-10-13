@@ -1,4 +1,5 @@
-﻿using SpaceInvaders.Model.Nodes.Effects;
+﻿using System;
+using SpaceInvaders.Model.Nodes.Effects;
 using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Nodes.Entities.Enemies
@@ -33,26 +34,24 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             Collision.CollisionMasks = PhysicsLayer.PlayerHitbox;
             Collision.Monitoring = true;
             Collision.Monitorable = true;
+
             this.Score = 0;
+            this.Removed += this.onRemoved;
         }
+
+
 
         #endregion
 
         #region Methods
 
-        /// <summary>
-        ///     Runs cleanup and invokes the Removed event when removed from the game.<br />
-        ///     Precondition: None<br />
-        ///     Postcondition: Removed event is invoked &amp;&amp;<br />
-        ///     All event subscribers are removed
-        /// </summary>
-        public override void CompleteRemoval()
+        private void onRemoved(object sender, EventArgs e)
         {
-            var explosion = new Explosion {
+            var explosion = new Explosion
+            {
                 Center = Center
             };
             GetRoot().QueueNodeForAddition(explosion);
-            base.CompleteRemoval();
         }
 
         #endregion
