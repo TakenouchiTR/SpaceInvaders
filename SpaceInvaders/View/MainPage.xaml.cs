@@ -112,9 +112,16 @@ namespace SpaceInvaders.View
                 SecondaryButtonText = "Exit to Desktop"
             };
 
-            await gameOverDialog.ShowAsync();
-
-            CoreApplication.Exit();
+            var dialogResult = await gameOverDialog.ShowAsync();
+            if (dialogResult == ContentDialogResult.Primary)
+            {
+                this.cleanupLevel();
+                this.setupLevel(new Level1());
+            }
+            else
+            {
+                CoreApplication.Exit();
+            }
         }
 
         private void onLevelScoreChanged(object sender, int e)
