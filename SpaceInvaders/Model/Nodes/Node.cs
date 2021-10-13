@@ -163,6 +163,26 @@ namespace SpaceInvaders.Model.Nodes
             this.removalQueue.Clear();
         }
 
+        protected void SilentlyRemoveAllChildren()
+        {
+            foreach (var child in this.children)
+            {
+                if (child.Removed != null)
+                {
+                    foreach (var subscriber in child.Removed.GetInvocationList())
+                    {
+                        child.Removed -= subscriber as EventHandler;
+                    }
+                }
+
+                child.CompleteRemoval(false);
+                child.SilentlyRemoveAllChildren();
+                child.Parent = null;
+            }
+
+            this.children.Clear();
+        }
+
         /// <summary>
         ///     Queues the specified game object for adding at the end of the update tick.<br />
         ///     Addition is deferred to prevent errors with updating the set of game objects while iterating over it.<br />
