@@ -24,7 +24,12 @@ namespace SpaceInvaders.Model.Nodes.Effects
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="BackgroundStar" /> class.
+        ///     Initializes a new instance of the <see cref="BackgroundStar" /> class.<br />
+        ///     Precondition: None
+        ///     Postcondition: this.Y &gt;= 0 &amp;&amp; this.Y &lt;= MainPage.ApplicationHeight &amp;&amp;<br />
+        ///     this.X &gt;= 0 &amp;&amp; this.X &lt;= MainPage.ApplicationWidth &amp;&amp;<br />
+        ///     this.Sprite is StarSprite &amp;&amp;<br />
+        ///     this.Layer == RenderLayer.Background
         /// </summary>
         public BackgroundStar() : base(new StarSprite(), RenderLayer.BackgroundBottom)
         {

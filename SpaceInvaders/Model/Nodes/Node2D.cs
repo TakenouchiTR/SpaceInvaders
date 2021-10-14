@@ -122,7 +122,9 @@ namespace SpaceInvaders.Model.Nodes
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Node2D" /> class at the coordinates (0, 0).
+        ///     Initializes a new instance of the <see cref="Node2D" /> class at the coordinates (0, 0).<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: None
         /// </summary>
         public Node2D()
         {
@@ -130,6 +132,9 @@ namespace SpaceInvaders.Model.Nodes
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Node2D" /> class and sets its coordinates
+        ///     Precondition: None<br />
+        ///     Postcondition: this.X == x &amp;&amp;<br />
+        ///     this.y == y
         /// </summary>
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>

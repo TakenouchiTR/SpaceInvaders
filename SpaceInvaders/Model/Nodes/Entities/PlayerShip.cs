@@ -29,7 +29,13 @@ namespace SpaceInvaders.Model.Nodes.Entities
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PlayerShip" /> class.
+        ///     Initializes a new instance of the <see cref="PlayerShip" /> class.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: this.Collision.Monitoring == true &amp;&amp;<br />
+        ///     this.Collision.Monitorable == true &amp;&amp;<br />
+        ///     this.Collision.CollisionLayers == PhysicsLayer.Player &amp;&amp;<br />
+        ///     this.Collision.CollisionMasks == PhysicsLayer.EnemyHitbox | PhysicsLayer.Enemy &amp;&amp;<br />
+        ///     this.Sprite is PlayerShipSprite
         /// </summary>
         public PlayerShip() : base(new PlayerShipSprite())
         {

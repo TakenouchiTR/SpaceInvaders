@@ -13,7 +13,10 @@ namespace SpaceInvaders.Model.Nodes.Effects
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Explosion" /> class.
+        ///     Initializes a new instance of the <see cref="Explosion" /> class.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: this.Sprite is ExplosionSprite &amp;&amp;<br />
+        ///     this.Children.Count == 2
         /// </summary>
         public Explosion() : base(new ExplosionSprite())
         {

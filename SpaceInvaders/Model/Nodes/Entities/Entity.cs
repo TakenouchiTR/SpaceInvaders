@@ -31,7 +31,11 @@ namespace SpaceInvaders.Model.Nodes.Entities
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Entity" /> class.
+        ///     Initializes a new instance of the <see cref="Entity" /> class.<br />
+        ///     Precondition: None
+        ///     Postcondition: this.Sprite == sprite &amp;&amp;<br />
+        ///     this.Children.Count == 2 &amp;&amp;<br />
+        ///     this.Collision != null
         /// </summary>
         /// <param name="sprite">The sprite.</param>
         public Entity(BaseSprite sprite)

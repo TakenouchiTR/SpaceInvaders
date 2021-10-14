@@ -63,7 +63,9 @@ namespace SpaceInvaders.Model.Nodes
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CollisionArea" /> class.<br />
-        ///     The area will have no width, height, and will be placed at (0, 0).
+        ///     The area will have no width, height, and will be placed at (0, 0).<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: None
         /// </summary>
         public CollisionArea()
         {
@@ -72,6 +74,9 @@ namespace SpaceInvaders.Model.Nodes
         /// <summary>
         ///     Initializes a new instance of the <see cref="CollisionArea" /> class with a specified width and height at the
         ///     coordinates (0, 0).
+        ///     Precondition: None<br />
+        ///     Postcondition: this.Height == height &amp;&amp;<br />
+        ///     this.Width == width
         /// </summary>
         /// <param name="width">The width.</param>
         /// <param name="height">The height.</param>
@@ -82,6 +87,11 @@ namespace SpaceInvaders.Model.Nodes
         /// <summary>
         ///     Initializes a new instance of the <see cref="CollisionArea" /> class with a specified width, height, and
         ///     coordinates.
+        ///     Precondition: None<br />
+        ///     Postcondition: this.Height == height &amp;&amp;<br />
+        ///     this.Width == width &amp;&amp;<br />
+        ///     this.X == x &amp;&amp;<br />
+        ///     this.Y == y
         /// </summary>
         /// <param name="x">The x coordinate.</param>
         /// <param name="y">The y coordinate.</param>

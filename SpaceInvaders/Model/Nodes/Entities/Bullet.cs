@@ -23,7 +23,11 @@ namespace SpaceInvaders.Model.Nodes.Entities
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Bullet" /> class.
+        ///     Initializes a new instance of the <see cref="Bullet" /> class.<br />
+        ///     Precondition: None
+        ///     Postcondition: this.Collision.Monitoring == true &amp;&amp;<br />
+        ///     this.Collision.Monitorable == true &amp;&amp;<br />
+        ///     this.Sprite is PlayerBulletSprite
         /// </summary>
         public Bullet() : base(new PlayerBulletSprite())
         {

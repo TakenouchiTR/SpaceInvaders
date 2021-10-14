@@ -58,7 +58,7 @@ namespace SpaceInvaders.View
 
             this.createAndPopulateCanvasLayers();
 
-            this.setupLevel(new Level1());
+            this.setupLevel(new TestBossLevel());
         }
 
         #endregion

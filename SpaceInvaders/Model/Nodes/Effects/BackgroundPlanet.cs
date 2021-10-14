@@ -25,7 +25,12 @@ namespace SpaceInvaders.Model.Nodes.Effects
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="BackgroundPlanet" /> class.
+        ///     Initializes a new instance of the <see cref="BackgroundPlanet" /> class.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: this.Y == MainPage.ApplicationHeight + 1 &amp;&amp;<br />
+        ///     this.Children.Count == 1 &amp;&amp;<br />
+        ///     this.Sprite is Planet1Sprite &amp;&amp;<br />
+        ///     this.Layer == RenderLayer.BackgroundMiddle
         /// </summary>
         public BackgroundPlanet() : base(new Planet1Sprite(), RenderLayer.BackgroundMiddle)
         {

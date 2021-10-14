@@ -54,7 +54,11 @@ namespace SpaceInvaders.Model.Nodes
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Timer" /> class.<br />
-        ///     By default, the timer is set to 1 second and will auto repeat.
+        ///     By default, the timer is set to 1 second and will auto repeat.<br />
+        ///     Precondition: None
+        ///     Postcondition: this.Duration == 1 &amp;&amp;<br />
+        ///     this.Repeat == repeat &amp;&amp;<br />
+        ///     this.TimeRemaining == 1
         /// </summary>
         public Timer() : this(1)
         {
@@ -62,17 +66,35 @@ namespace SpaceInvaders.Model.Nodes
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Timer" /> class with a specified duration in seconds.<br />
-        ///     By default, the timer will auto repeat.
+        ///     By default, the timer will auto repeat.<br />
+        ///     Precondition: Duration &gt; 0<br />
+        ///     Postcondition: this.Duration == duration &amp;&amp;<br />
+        ///     this.Repeat == true &amp;&amp;<br />
+        ///     this.TimeRemaining == duration
         /// </summary>
+        /// <param name="duration">The duration.</param>
+        /// <exception cref="System.ArgumentException">duration must be a positive number</exception>
         public Timer(double duration) : this(duration, true)
         {
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Timer" /> class with a specified duration and repeat option.
+        ///     Initializes a new instance of the <see cref="Timer" /> class with a specified duration and repeat option.<br />
+        ///     Precondition: Duration &gt; 0<br />
+        ///     Postcondition: this.Duration == duration &amp;&amp;<br />
+        ///     this.Repeat == repeat &amp;&amp;<br />
+        ///     this.TimeRemaining == duration
         /// </summary>
+        /// <param name="duration">The duration.</param>
+        /// <param name="repeat">if set to <c>true</c> [repeat].</param>
+        /// <exception cref="System.ArgumentException">duration must be a positive number</exception>
         public Timer(double duration, bool repeat)
         {
+            if (duration <= 0)
+            {
+                throw new ArgumentException("duration must be a positive number");
+            }
+
             this.currentTime = 0;
             this.Duration = duration;
             this.Repeat = repeat;

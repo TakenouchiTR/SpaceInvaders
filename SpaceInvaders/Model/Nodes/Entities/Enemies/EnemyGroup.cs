@@ -40,7 +40,9 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="EnemyGroup" /> class.<br />
-        ///     Precondition: enemiesPerRow > 0
+        ///     Precondition: enemiesPerRow $gt; 0
+        ///     Postcondition: this.EnemiesPerRow == enemiesPerRow &amp;&amp;<br />
+        ///     this.Width == enemiesPerRow * cellSize.X
         /// </summary>
         /// <param name="cellSize">Size of each cell.</param>
         /// <param name="enemiesPerRow">The enemies per row.</param>

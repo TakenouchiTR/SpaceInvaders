@@ -12,7 +12,11 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="IntermediateEnemy" /> class.
+        ///     Initializes a new instance of the <see cref="IntermediateEnemy" /> class.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: this.Children.Count == 2 &amp;&amp;<br />
+        ///     this.Score == 20 &amp;&amp;<br />
+        ///     this.Sprite is IntermediateEnemySprite
         /// </summary>
         public IntermediateEnemy() : base(new IntermediateEnemySprite())
         {

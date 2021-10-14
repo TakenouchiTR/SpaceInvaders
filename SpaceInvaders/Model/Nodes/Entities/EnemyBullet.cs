@@ -9,7 +9,11 @@
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="EnemyBullet" /> class.
+        ///     Initializes a new instance of the <see cref="EnemyBullet" /> class.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: this.Collision.CollisionLayers == PhysicsLayer.EnemyHitbox &amp;&amp;<br />
+        ///     this.Collision.CollisionLayers == PhysicsLayer.Player &amp;&amp;<br />
+        ///     this.Velocity.Y == 500
         /// </summary>
         public EnemyBullet()
         {

@@ -1,4 +1,5 @@
-﻿using SpaceInvaders.View.Sprites;
+﻿using System;
+using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model
 {
@@ -30,12 +31,21 @@ namespace SpaceInvaders.Model
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AnimationFrame" /> class.
+        ///     Initializes a new instance of the <see cref="AnimationFrame" /> class.<br />
+        ///     Precondition: duration &gt; 0<br />
+        ///     Postcondition: this.Sprite == sprite &amp;&amp;<br />
+        ///     this.Duration == duration
         /// </summary>
         /// <param name="sprite">The sprite.</param>
         /// <param name="duration">The duration.</param>
+        /// <exception cref="System.ArgumentException">duration must be a positive number</exception>
         public AnimationFrame(BaseSprite sprite, double duration)
         {
+            if (duration <= 0)
+            {
+                throw new ArgumentException("duration must be a positive number");
+            }
+
             this.Sprite = sprite;
             this.Duration = duration;
         }

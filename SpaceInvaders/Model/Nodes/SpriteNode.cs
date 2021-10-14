@@ -11,7 +11,10 @@ namespace SpaceInvaders.Model.Nodes
     {
         #region Data members
 
-        private const RenderLayer DefaultRenderLayer = RenderLayer.MainUpperMiddle;
+        /// <summary>
+        ///     The default render layer
+        /// </summary>
+        public const RenderLayer DefaultRenderLayer = RenderLayer.MainUpperMiddle;
 
         private bool visible;
         private RenderLayer layer;
@@ -39,14 +42,14 @@ namespace SpaceInvaders.Model.Nodes
             get => this.layer;
             set
             {
-                if (this.Visible)
+                if (this.Visible && this.Sprite != null)
                 {
                     SpriteHidden?.Invoke(this, this.Sprite);
                 }
 
                 this.layer = value;
 
-                if (this.Visible)
+                if (this.Visible && this.Sprite != null)
                 {
                     SpriteShown?.Invoke(this, this.Sprite);
                 }
@@ -138,16 +141,21 @@ namespace SpaceInvaders.Model.Nodes
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SpriteNode" /> class without a BaseSprite.
+        ///     Initializes a new instance of the <see cref="SpriteNode" /> class without a BaseSprite.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: this.Layer == SpriteNode.DefaultRenderLayer
         /// </summary>
         public SpriteNode()
         {
-            this.visible = false;
             this.layer = DefaultRenderLayer;
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SpriteNode" /> class with a specified Sprite.
+        ///     Initializes a new instance of the <see cref="SpriteNode" /> class with a specified Sprite.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: this.Layer == SpriteNode.DefaultRenderLayer &amp;&amp;<br />
+        ///     this.Sprite == sprite &amp;&amp;<br />
+        ///     this.Visible == true
         /// </summary>
         /// <param name="sprite">The sprite.</param>
         public SpriteNode(BaseSprite sprite) : this(sprite, DefaultRenderLayer)
@@ -156,6 +164,10 @@ namespace SpaceInvaders.Model.Nodes
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SpriteNode" /> class with a specified Sprite and RenderLayer.
+        ///     Precondition: None<br />
+        ///     Postcondition: this.Layer == layer &amp;&amp;<br />
+        ///     this.Sprite == sprite &amp;&amp;<br />
+        ///     this.Visible == true
         /// </summary>
         /// <param name="sprite">The sprite.</param>
         /// <param name="layer">The render layer.</param>

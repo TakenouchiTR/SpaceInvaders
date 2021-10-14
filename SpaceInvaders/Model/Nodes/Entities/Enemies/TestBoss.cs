@@ -22,6 +22,11 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="TestBoss" /> class.
+        ///     Precondition: None<br />
+        ///     Postcondition: this.Children.Count == 3 &amp;&amp;<br />
+        ///     this.Score == 1000 &amp;&amp;<br />
+        ///     this.Sprite is TestBossSprite &amp;&amp;
+        ///     this.Collision.Monitoring == false
         /// </summary>
         public TestBoss() : base(new TestBossSprite())
         {

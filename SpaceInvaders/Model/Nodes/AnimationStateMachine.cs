@@ -28,12 +28,24 @@ namespace SpaceInvaders.Model.Nodes
         public string CurrentAnimationName { get; protected set; }
 
         /// <summary>
-        ///     Gets the current animation.
+        ///     Gets the current animation.<br />
+        ///     If no animations are added, returns null.
         /// </summary>
         /// <value>
-        ///     The current animation.
+        ///     The current animation if animations have been added, otherwise null.
         /// </value>
-        public AnimatedSprite CurrentAnimation => this.animations[this.CurrentAnimationName];
+        public AnimatedSprite CurrentAnimation
+        {
+            get
+            {
+                if (this.animations.Count == 0)
+                {
+                    return null;
+                }
+
+                return this.animations[this.CurrentAnimationName];
+            }
+        }
 
         /// <summary>
         ///     Gets a list of all added animations.
@@ -48,7 +60,9 @@ namespace SpaceInvaders.Model.Nodes
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AnimationStateMachine" /> class.
+        ///     Initializes a new instance of the <see cref="AnimationStateMachine" /> class.<br />
+        ///     Precondition: None
+        ///     Postcondition: None
         /// </summary>
         public AnimationStateMachine()
         {

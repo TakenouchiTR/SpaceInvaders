@@ -41,7 +41,9 @@ namespace SpaceInvaders.Model.Nodes
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="Node" /> class.
+        ///     Initializes a new instance of the <see cref="Node" /> class.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: None
         /// </summary>
         public Node()
         {

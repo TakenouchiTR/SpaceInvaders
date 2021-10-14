@@ -61,12 +61,23 @@ namespace SpaceInvaders.Model.Nodes
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AnimatedSprite" /> class.
+        ///     Initializes a new instance of the <see cref="AnimatedSprite" /> class.<br />
+        ///     Precondition: frames != null &amp;&amp;<br />
+        ///     frames.Count != 0
+        ///     Postcondition: this.Frame == frames[0].Sprite &amp;&amp;<br />
+        ///     this.IsPlaying == true &amp;&amp;<br />
+        ///     this.Children.Count == 1
         /// </summary>
         /// <param name="frames">The frames.</param>
+        /// <exception cref="System.ArgumentNullException">frames</exception>
         /// <exception cref="System.ArgumentException">frames must not be empty</exception>
         public AnimatedSprite(List<AnimationFrame> frames)
         {
+            if (frames == null)
+            {
+                throw new ArgumentNullException(nameof(frames));
+            }
+
             if (frames.Count == 0)
             {
                 throw new ArgumentException("frames must not be empty");
@@ -80,16 +91,33 @@ namespace SpaceInvaders.Model.Nodes
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AnimatedSprite" /> class.<br />
-        ///     Converts the collection of BaseSprites into AnimationFrames, each with the specified frame duration.
+        ///     Plays an animation with a specified duration between frames
+        ///     Precondition: frames != null &amp;&amp;<br />
+        ///     frames.Count != 0
+        ///     Postcondition: this.Frame == frames[0] &amp;&amp;<br />
+        ///     this.IsPlaying == true &amp;&amp;<br />
+        ///     this.Children.Count == 1
         /// </summary>
         /// <param name="frameDuration">Duration of each frame, in seconds.</param>
         /// <param name="frames">The frames.</param>
+        /// <exception cref="System.ArgumentNullException">frames</exception>
         /// <exception cref="System.ArgumentException">frames must not be empty</exception>
+        /// <exception cref="System.ArgumentException">frameDuration must be a positive number</exception>
         public AnimatedSprite(double frameDuration, ICollection<BaseSprite> frames)
         {
+            if (frames == null)
+            {
+                throw new ArgumentNullException(nameof(frames));
+            }
+
             if (frames.Count == 0)
             {
                 throw new ArgumentException("frames must not be empty");
+            }
+
+            if (frameDuration <= 0)
+            {
+                throw new ArgumentException("frameDuration must be a positive number");
             }
 
             this.frames = new List<AnimationFrame>();

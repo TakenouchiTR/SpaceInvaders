@@ -87,8 +87,20 @@ namespace SpaceInvaders.Model
         ///     or
         ///     value must not be infinity
         /// </exception>
-        public Vector2(double value) : this(value, value)
+        public Vector2(double value)
         {
+            if (double.IsNaN(value))
+            {
+                throw new ArgumentException("value must not be NaN");
+            }
+
+            if (double.IsInfinity(value))
+            {
+                throw new ArgumentException("value must not be infinity");
+            }
+
+            this.x = value;
+            this.y = value;
         }
 
         /// <summary>
@@ -207,7 +219,9 @@ namespace SpaceInvaders.Model
         }
 
         /// <summary>
-        ///     Converts to the string (this.X, this.Y).
+        ///     Converts to the string (this.X, this.Y).<br />
+        ///     Precondition: None
+        ///     Postcondition: None
         /// </summary>
         /// <returns>
         ///     A <see cref="System.String" /> that represents this instance.

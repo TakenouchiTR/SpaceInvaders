@@ -14,7 +14,9 @@ namespace SpaceInvaders.Model.Nodes.Levels
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="TestBossLevel" /> class.
+        ///     Initializes a new instance of the <see cref="TestBossLevel" /> class.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: this.Children.Count == 2
         /// </summary>
         public TestBossLevel()
         {

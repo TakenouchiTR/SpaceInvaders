@@ -52,6 +52,14 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="TestBossTarget" /> class.
+        ///     Precondition: None
+        ///     Postcondition: this.Collision.CollisionLayers == PhysicsLayer.Enemy &amp;&amp;<br />
+        ///     this.Collision.CollisionMasks == this.PhysicsLayer.PlayerHitbox &amp;&amp;<br />
+        ///     this.Collision.Monitoring == true &amp;&amp;<br />
+        ///     this.Collision.Monitorable == true &amp;&amp;<br />
+        ///     this.Sprite is BasicEnemySprite &amp;&amp;<br />
+        ///     this.Sprite.Visible == false &amp;&amp;<br />
+        ///     this.Children.Count == 5
         /// </summary>
         public TestBossTarget() : base(new BasicEnemySprite())
         {
@@ -89,7 +97,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         {
             var animation1 = new AnimatedSprite(1, new List<BaseSprite> {
                 new BasicEnemySprite(),
-                new IntermediateEnemySprite()
+                null
             });
             var animation2 = new AnimatedSprite(new List<AnimationFrame> {
                 new AnimationFrame(new AggresiveEnemySprite(), .2),

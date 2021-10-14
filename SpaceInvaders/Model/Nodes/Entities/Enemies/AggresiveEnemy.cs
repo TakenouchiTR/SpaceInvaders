@@ -23,7 +23,11 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggresiveEnemy" /> class.
+        ///     Initializes a new instance of the <see cref="AggresiveEnemy" /> class.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: this.Children.Count == 3 &amp;&amp;<br />
+        ///     this.Score == 30 &amp;&amp;<br />
+        ///     this.Sprite is AggresiveEnemySprite
         /// </summary>
         public AggresiveEnemy() : base(new AggresiveEnemySprite())
         {
