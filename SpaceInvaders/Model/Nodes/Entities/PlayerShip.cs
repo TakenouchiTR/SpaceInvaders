@@ -24,7 +24,9 @@ namespace SpaceInvaders.Model.Nodes.Entities
         private int maxLives;
         private int currentLives;
         private bool canShoot;
+        private bool isAlive;
         private Vector2 velocity;
+        private Timer respawnTimer;
 
         #endregion
 
@@ -68,11 +70,14 @@ namespace SpaceInvaders.Model.Nodes.Entities
         {
             this.canShoot = true;
             this.velocity = new Vector2();
+            this.isAlive = true;
             this.MaxLives = 3;
-
+            
             this.setupCollision();
+            this.setupTimers();
 
             Collision.Collided += this.onCollision;
+            this.respawnTimer.Tick += onRespawnTimerTick;
         }
 
         #endregion
@@ -87,7 +92,16 @@ namespace SpaceInvaders.Model.Nodes.Entities
             Collision.CollisionLayers = PhysicsLayer.Player;
             Collision.CollisionMasks = PhysicsLayer.EnemyHitbox | PhysicsLayer.Enemy;
         }
-        
+
+        private void setupTimers()
+        {
+            this.respawnTimer = new Timer() 
+            {
+                Repeat = false
+            };
+            AttachChild(this.respawnTimer);
+        }
+
         private void onCollision(object sender, CollisionArea e)
         {
             var explosion = new Explosion
@@ -100,6 +114,8 @@ namespace SpaceInvaders.Model.Nodes.Entities
             this.Collision.Monitorable = false;
 
             this.Sprite.Visible = false;
+
+            this.respawnTimer.Restart();
         }
 
         /// <summary>
@@ -162,7 +178,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 this.canShoot = false;
             }
         }
-
+        
         private void onBulletRemoval(object sender, EventArgs e)
         {
             if (sender is Bullet bullet)
@@ -171,7 +187,21 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 bullet.Removed -= this.onBulletRemoval;
             }
         }
+        
+        private void onRespawnTimerTick(object sender, EventArgs e)
+        {
+            this.CurrentLives--;
+            if (this.CurrentLives == 0)
+            {
+                this.QueueForRemoval();
+                return;
+            }
 
+            this.X = MainPage.ApplicationWidth / 2 - this.Width / 2;
+            this.Collision.Monitorable = true;
+            this.Sprite.Visible = true;
+            this.isAlive = true;
+        }
         #endregion
     }
 }
