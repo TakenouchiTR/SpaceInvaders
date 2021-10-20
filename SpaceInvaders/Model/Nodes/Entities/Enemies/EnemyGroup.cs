@@ -64,34 +64,32 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         /// <summary>
         ///     Adds an enemy.<br />
-        ///     Precondition: enemy != null<br />
-        ///     PostCondition: this.Children.Contains(enemy)
+        ///     Null objects represent a blank space and cause gaps in enemy placement.<br />
+        ///     Precondition: None<br />
+        ///     PostCondition: if (enemy != null), this.Children.Contains(enemy)
         /// </summary>
         /// <param name="enemy">The enemy.</param>
-        /// <exception cref="System.ArgumentNullException">enemy</exception>
         public void AddEnemy(Enemy enemy)
         {
-            if (enemy == null)
+            if (enemy != null)
             {
-                throw new ArgumentNullException(nameof(enemy));
+                QueueNodeForAddition(enemy);
+
+                var xPos = this.totalEnemiesAdded % this.EnemiesPerRow * this.cellSize.X;
+                // ReSharper disable once PossibleLossOfFraction
+                var yPos = this.totalEnemiesAdded / this.EnemiesPerRow * this.cellSize.Y;
+
+                enemy.Center = new Vector2(xPos, yPos) + this.cellSize / 2 + Position;
             }
-
-            QueueNodeForAddition(enemy);
-
-            var xPos = this.totalEnemiesAdded % this.EnemiesPerRow * this.cellSize.X;
-            // ReSharper disable once PossibleLossOfFraction
-            var yPos = this.totalEnemiesAdded / this.EnemiesPerRow * this.cellSize.Y;
-
-            enemy.Center = new Vector2(xPos, yPos) + this.cellSize / 2 + Position;
 
             this.totalEnemiesAdded++;
         }
 
         /// <summary>
         ///     Adds a collection of enemies.<br />
-        ///     Precondition: enemies != null &amp;&amp;<br />
-        ///     all items in enemy must not be null<br />
-        ///     Postcondition: All items in enemies are in this.Children
+        ///     Null objects represent a blank space and cause gaps in enemy placement.<br />
+        ///     Precondition: enemies != null<br />
+        ///     Postcondition: All non-null items in enemies are in this.Children
         /// </summary>
         /// <param name="enemies">The enemies.</param>
         public void AddEnemies(IEnumerable<Enemy> enemies)
@@ -103,11 +101,6 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
             foreach (var enemy in enemies)
             {
-                if (enemy == null)
-                {
-                    throw new ArgumentException("enemy must not be null.");
-                }
-
                 this.AddEnemy(enemy);
             }
         }

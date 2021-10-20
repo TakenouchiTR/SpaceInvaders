@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Windows.System;
 using SpaceInvaders.Model.Nodes.Effects;
 using SpaceInvaders.Model.Nodes.Entities;
@@ -78,12 +79,12 @@ namespace SpaceInvaders.Model.Nodes.Levels
         {
             this.enemyGroup.X = MainPage.ApplicationWidth / 2 - this.enemyGroup.Width / 2;
 
-            var enemyList = new List<Enemy> {
+            var enemyOrder = new List<Enemy> {
                 new AggresiveEnemy(),
                 new AggresiveEnemy(),
                 new AggresiveEnemy(),
                 new AggresiveEnemy(),
-                new IntermediateEnemy(),
+                null,
                 new IntermediateEnemy(),
                 new IntermediateEnemy(),
                 new IntermediateEnemy(),
@@ -92,15 +93,17 @@ namespace SpaceInvaders.Model.Nodes.Levels
                 new BasicEnemy(),
                 new BasicEnemy()
             };
+            var enemies = enemyOrder.Where(enemy => enemy != null).ToList();
 
-            this.enemyGroup.AddEnemies(enemyList);
+            this.enemyGroup.AddEnemies(enemyOrder);
+            
 
-            foreach (var enemy in enemyList)
+            foreach (var enemy in enemies)
             {
                 enemy.Removed += this.onEnemyRemoved;
             }
 
-            this.enemiesRemaining += enemyList.Count;
+            this.enemiesRemaining += enemies.Count();
         }
 
         private void addBackground()
