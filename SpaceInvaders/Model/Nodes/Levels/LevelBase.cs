@@ -160,7 +160,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
             }
         }
 
-        private void testForCollisions(List<CollisionArea> sourceAreas, List<CollisionArea> targetAreas)
+        private void testForCollisions(IEnumerable<CollisionArea> sourceAreas, IList<CollisionArea> targetAreas)
         {
             foreach (var sourceArea in sourceAreas)
             {

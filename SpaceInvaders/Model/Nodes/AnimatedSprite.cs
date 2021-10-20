@@ -13,7 +13,7 @@ namespace SpaceInvaders.Model.Nodes
         #region Data members
 
         private int currentFrame;
-        private readonly List<AnimationFrame> frames;
+        private readonly IList<AnimationFrame> frames;
         private Timer frameTimer;
 
         #endregion
@@ -71,7 +71,7 @@ namespace SpaceInvaders.Model.Nodes
         /// <param name="frames">The frames.</param>
         /// <exception cref="System.ArgumentNullException">frames</exception>
         /// <exception cref="System.ArgumentException">frames must not be empty</exception>
-        public AnimatedSprite(List<AnimationFrame> frames)
+        public AnimatedSprite(IList<AnimationFrame> frames)
         {
             if (frames == null)
             {
