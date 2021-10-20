@@ -68,12 +68,9 @@ namespace SpaceInvaders.Model.Nodes.Entities
         {
             this.canShoot = true;
             this.velocity = new Vector2();
-            Collision.Monitorable = true;
-            Collision.Monitoring = true;
             this.MaxLives = 3;
 
-            Collision.CollisionLayers = PhysicsLayer.Player;
-            Collision.CollisionMasks = PhysicsLayer.EnemyHitbox | PhysicsLayer.Enemy;
+            this.setupCollision();
 
             Collision.Collided += this.onCollision;
             Removed += this.onRemoved;
@@ -82,6 +79,15 @@ namespace SpaceInvaders.Model.Nodes.Entities
         #endregion
 
         #region Methods
+
+        private void setupCollision()
+        {
+            Collision.Monitorable = true;
+            Collision.Monitoring = true;
+
+            Collision.CollisionLayers = PhysicsLayer.Player;
+            Collision.CollisionMasks = PhysicsLayer.EnemyHitbox | PhysicsLayer.Enemy;
+        }
 
         private void onRemoved(object sender, EventArgs e)
         {
