@@ -99,7 +99,6 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
         private void onCollision(object sender, CollisionArea e)
         {
-            QueueForRemoval();
         }
 
         /// <summary>
