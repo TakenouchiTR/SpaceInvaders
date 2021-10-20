@@ -21,13 +21,15 @@ namespace SpaceInvaders.Model.Nodes.Entities
         private readonly Vector2 bulletSpawnLocation = new Vector2(12, -4);
 
         private readonly int moveSpeed = 200;
+
         private int maxLives;
         private int currentLives;
-        private bool canShoot;
+        private int activeShots;
         private bool isAlive;
         private Vector2 velocity;
         private Timer invulnerabilityTimer;
         private Timer respawnTimer;
+        private Timer shotCooldownTimer;
 
         #endregion
 
@@ -56,6 +58,16 @@ namespace SpaceInvaders.Model.Nodes.Entities
             set => this.currentLives = Math.Clamp(value, 0, this.maxLives);
         }
 
+        public int MaxShots { get; set; }
+
+        public double ShotCooldownDuration
+        {
+            get => this.shotCooldownTimer.Duration;
+            set => this.shotCooldownTimer.Duration = value;
+        }
+
+        private bool CanShoot => this.activeShots < this.MaxShots && !this.shotCooldownTimer.IsActive;
+
         #region Constructors
 
         /// <summary>
@@ -69,10 +81,11 @@ namespace SpaceInvaders.Model.Nodes.Entities
         /// </summary>
         public PlayerShip() : base(new PlayerShipSprite())
         {
-            this.canShoot = true;
             this.velocity = new Vector2();
             this.isAlive = true;
+
             this.MaxLives = 3;
+            this.MaxShots = 3;
             
             this.setupCollision();
             this.setupTimers();
@@ -97,17 +110,13 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
         private void setupTimers()
         {
-            this.respawnTimer = new Timer() 
-            {
-                Repeat = false
-            };
-            this.invulnerabilityTimer = new Timer() 
-            {
-                Repeat = false
-            };
+            this.respawnTimer = new Timer(1.5, false);
+            this.invulnerabilityTimer = new Timer(1.5, false);
+            this.shotCooldownTimer = new Timer(.33, false);
 
             AttachChild(this.respawnTimer);
             AttachChild(this.invulnerabilityTimer);
+            AttachChild(this.shotCooldownTimer);
         }
 
         private void onCollision(object sender, CollisionArea e)
@@ -178,7 +187,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
         private void handleShooting()
         {
-            if (this.canShoot && Input.IsKeyPressed(ShootKey))
+            if (this.CanShoot && Input.IsKeyPressed(ShootKey))
             {
                 var bullet = new PlayerBullet {
                     Position = Position + this.bulletSpawnLocation
@@ -186,7 +195,8 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 bullet.Removed += this.onBulletRemoval;
 
                 Parent.QueueNodeForAddition(bullet);
-                this.canShoot = false;
+                this.activeShots++;
+                this.shotCooldownTimer.Restart();
             }
         }
         
@@ -194,7 +204,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
         {
             if (sender is Bullet bullet)
             {
-                this.canShoot = true;
+                this.activeShots--;
                 bullet.Removed -= this.onBulletRemoval;
             }
         }
