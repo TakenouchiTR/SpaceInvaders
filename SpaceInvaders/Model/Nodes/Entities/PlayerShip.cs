@@ -96,6 +96,10 @@ namespace SpaceInvaders.Model.Nodes.Entities
             };
             GetRoot().QueueNodeForAddition(explosion);
 
+            this.Collision.Monitoring = false;
+            this.Collision.Monitorable = false;
+
+            this.Sprite.Visible = false;
         }
 
         /// <summary>
