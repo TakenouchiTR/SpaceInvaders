@@ -33,6 +33,14 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
         #endregion
 
+        /// <summary>
+        /// Gets or sets the maximum lives. Values will be clamped to 1 as the lowest value.<br/>
+        /// If the value is increased, this.CurrentLives will increase by the same amount.<br/>
+        /// If the value is decreased, this.CurrentLives will match this.MaxLives if it falls below it.
+        /// </summary>
+        /// <value>
+        /// The maximum lives.
+        /// </value>
         public int MaxLives
         {
             get => this.maxLives;
@@ -52,20 +60,45 @@ namespace SpaceInvaders.Model.Nodes.Entities
             }
         }
 
+        /// <summary>
+        /// Gets or sets the current lives. Values will be clamped between 0 and this.MaxLives, inclusive.<br />
+        /// </summary>
+        /// <value>
+        /// The current lives.
+        /// </value>
         public int CurrentLives
         {
             get => this.currentLives;
             set => this.currentLives = Math.Clamp(value, 0, this.maxLives);
         }
 
+        /// <summary>
+        /// Gets or sets the maximum shots that can be on the screen at once.
+        /// </summary>
+        /// <value>
+        /// The maximum shots.
+        /// </value>
         public int MaxShots { get; set; }
 
+        /// <summary>
+        /// Gets or sets the delay between each shot fired.
+        /// </summary>
+        /// <value>
+        /// The duration of the shot cooldown.
+        /// </value>
         public double ShotCooldownDuration
         {
             get => this.shotCooldownTimer.Duration;
             set => this.shotCooldownTimer.Duration = value;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance can shoot.<br/>
+        /// The shot cooldown must not be active and there must be less than the maximum amount of shots active to be able to shoot.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance can shoot; otherwise, <c>false</c>.
+        /// </value>
         private bool CanShoot => this.activeShots < this.MaxShots && !this.shotCooldownTimer.IsActive;
 
         #region Constructors
