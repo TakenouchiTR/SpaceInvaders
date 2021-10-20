@@ -26,8 +26,8 @@ namespace SpaceInvaders.Model.Nodes.Entities
         private bool canShoot;
         private bool isAlive;
         private Vector2 velocity;
-        private Timer respawnTimer;
         private Timer invulnerabilityTimer;
+        private Timer respawnTimer;
 
         #endregion
 
