@@ -126,8 +126,11 @@ namespace SpaceInvaders.Model.Nodes.Entities
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)
         {
-            this.handleMovement(delta);
-            this.handleShooting();
+            if (this.isAlive)
+            {
+                this.handleMovement(delta);
+                this.handleShooting();
+            }
 
             base.Update(delta);
         }
