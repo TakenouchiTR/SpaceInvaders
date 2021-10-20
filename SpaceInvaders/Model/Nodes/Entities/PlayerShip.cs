@@ -21,10 +21,37 @@ namespace SpaceInvaders.Model.Nodes.Entities
         private readonly Vector2 bulletSpawnLocation = new Vector2(12, -4);
 
         private readonly int moveSpeed = 200;
+        private int maxLives;
+        private int currentLives;
         private bool canShoot;
         private Vector2 velocity;
 
         #endregion
+
+        public int MaxLives
+        {
+            get => this.maxLives;
+            set
+            {
+                value = Math.Max(value, 1);
+                if (value > this.maxLives)
+                {
+                    this.currentLives += value - this.maxLives;
+                    this.maxLives = value;
+                }
+                else
+                {
+                    this.maxLives = value;
+                    this.currentLives = Math.Min(this.maxLives, this.currentLives);
+                }
+            }
+        }
+
+        public int CurrentLives
+        {
+            get => this.currentLives;
+            set => this.currentLives = Math.Clamp(value, 0, this.maxLives);
+        }
 
         #region Constructors
 
@@ -43,6 +70,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
             this.velocity = new Vector2();
             Collision.Monitorable = true;
             Collision.Monitoring = true;
+            this.MaxLives = 3;
 
             Collision.CollisionLayers = PhysicsLayer.Player;
             Collision.CollisionMasks = PhysicsLayer.EnemyHitbox | PhysicsLayer.Enemy;
