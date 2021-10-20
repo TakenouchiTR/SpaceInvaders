@@ -27,6 +27,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
         private bool isAlive;
         private Vector2 velocity;
         private Timer respawnTimer;
+        private Timer invulnerabilityTimer;
 
         #endregion
 
@@ -78,6 +79,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
             Collision.Collided += this.onCollision;
             this.respawnTimer.Tick += onRespawnTimerTick;
+            this.invulnerabilityTimer.Tick += onInvulnerabilityTimerTick;
         }
 
         #endregion
@@ -99,7 +101,13 @@ namespace SpaceInvaders.Model.Nodes.Entities
             {
                 Repeat = false
             };
+            this.invulnerabilityTimer = new Timer() 
+            {
+                Repeat = false
+            };
+
             AttachChild(this.respawnTimer);
+            AttachChild(this.invulnerabilityTimer);
         }
 
         private void onCollision(object sender, CollisionArea e)
@@ -206,7 +214,16 @@ namespace SpaceInvaders.Model.Nodes.Entities
             this.Collision.Monitorable = true;
             this.Sprite.Visible = true;
             this.isAlive = true;
+
+            this.invulnerabilityTimer.Restart();
         }
+
+        private void onInvulnerabilityTimerTick(object sender, EventArgs e)
+        {
+            this.Sprite.Sprite.Opacity = 1;
+            this.Collision.Monitoring = true;
+        }
+
         #endregion
     }
 }
