@@ -73,7 +73,6 @@ namespace SpaceInvaders.Model.Nodes.Entities
             this.setupCollision();
 
             Collision.Collided += this.onCollision;
-            Removed += this.onRemoved;
         }
 
         #endregion
@@ -88,17 +87,15 @@ namespace SpaceInvaders.Model.Nodes.Entities
             Collision.CollisionLayers = PhysicsLayer.Player;
             Collision.CollisionMasks = PhysicsLayer.EnemyHitbox | PhysicsLayer.Enemy;
         }
-
-        private void onRemoved(object sender, EventArgs e)
+        
+        private void onCollision(object sender, CollisionArea e)
         {
-            var explosion = new Explosion {
+            var explosion = new Explosion
+            {
                 Center = Center
             };
             GetRoot().QueueNodeForAddition(explosion);
-        }
 
-        private void onCollision(object sender, CollisionArea e)
-        {
         }
 
         /// <summary>
