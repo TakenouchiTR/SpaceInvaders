@@ -33,13 +33,15 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
         #endregion
 
+        #region Properties
+
         /// <summary>
-        /// Gets or sets the maximum lives. Values will be clamped to 1 as the lowest value.<br/>
-        /// If the value is increased, this.CurrentLives will increase by the same amount.<br/>
-        /// If the value is decreased, this.CurrentLives will match this.MaxLives if it falls below it.
+        ///     Gets or sets the maximum lives. Values will be clamped to 1 as the lowest value.<br />
+        ///     If the value is increased, this.CurrentLives will increase by the same amount.<br />
+        ///     If the value is decreased, this.CurrentLives will match this.MaxLives if it falls below it.
         /// </summary>
         /// <value>
-        /// The maximum lives.
+        ///     The maximum lives.
         /// </value>
         public int MaxLives
         {
@@ -61,10 +63,10 @@ namespace SpaceInvaders.Model.Nodes.Entities
         }
 
         /// <summary>
-        /// Gets or sets the current lives. Values will be clamped between 0 and this.MaxLives, inclusive.<br />
+        ///     Gets or sets the current lives. Values will be clamped between 0 and this.MaxLives, inclusive.<br />
         /// </summary>
         /// <value>
-        /// The current lives.
+        ///     The current lives.
         /// </value>
         public int CurrentLives
         {
@@ -73,18 +75,18 @@ namespace SpaceInvaders.Model.Nodes.Entities
         }
 
         /// <summary>
-        /// Gets or sets the maximum shots that can be on the screen at once.
+        ///     Gets or sets the maximum shots that can be on the screen at once.
         /// </summary>
         /// <value>
-        /// The maximum shots.
+        ///     The maximum shots.
         /// </value>
         public int MaxShots { get; set; }
 
         /// <summary>
-        /// Gets or sets the delay between each shot fired.
+        ///     Gets or sets the delay between each shot fired.
         /// </summary>
         /// <value>
-        /// The duration of the shot cooldown.
+        ///     The duration of the shot cooldown.
         /// </value>
         public double ShotCooldownDuration
         {
@@ -93,13 +95,16 @@ namespace SpaceInvaders.Model.Nodes.Entities
         }
 
         /// <summary>
-        /// Gets a value indicating whether this instance can shoot.<br/>
-        /// The shot cooldown must not be active and there must be less than the maximum amount of shots active to be able to shoot.
+        ///     Gets a value indicating whether this instance can shoot.<br />
+        ///     The shot cooldown must not be active and there must be less than the maximum amount of shots active to be able to
+        ///     shoot.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if this instance can shoot; otherwise, <c>false</c>.
+        ///     <c>true</c> if this instance can shoot; otherwise, <c>false</c>.
         /// </value>
         private bool CanShoot => this.activeShots < this.MaxShots && !this.shotCooldownTimer.IsActive;
+
+        #endregion
 
         #region Constructors
 
@@ -119,13 +124,13 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
             this.MaxLives = 3;
             this.MaxShots = 3;
-            
+
             this.setupCollision();
             this.setupTimers();
 
             Collision.Collided += this.onCollision;
-            this.respawnTimer.Tick += onRespawnTimerTick;
-            this.invulnerabilityTimer.Tick += onInvulnerabilityTimerTick;
+            this.respawnTimer.Tick += this.onRespawnTimerTick;
+            this.invulnerabilityTimer.Tick += this.onInvulnerabilityTimerTick;
         }
 
         #endregion
@@ -154,16 +159,15 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
         private void onCollision(object sender, CollisionArea e)
         {
-            var explosion = new Explosion
-            {
+            var explosion = new Explosion {
                 Center = Center
             };
             GetRoot().QueueNodeForAddition(explosion);
 
-            this.Collision.Monitoring = false;
-            this.Collision.Monitorable = false;
+            Collision.Monitoring = false;
+            Collision.Monitorable = false;
 
-            this.Sprite.Visible = false;
+            Sprite.Visible = false;
 
             this.respawnTimer.Restart();
         }
@@ -232,7 +236,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 this.shotCooldownTimer.Restart();
             }
         }
-        
+
         private void onBulletRemoval(object sender, EventArgs e)
         {
             if (sender is Bullet bullet)
@@ -241,21 +245,21 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 bullet.Removed -= this.onBulletRemoval;
             }
         }
-        
+
         private void onRespawnTimerTick(object sender, EventArgs e)
         {
             this.CurrentLives--;
             if (this.CurrentLives == 0)
             {
-                this.QueueForRemoval();
+                QueueForRemoval();
                 return;
             }
 
-            this.Sprite.Sprite.Opacity = .5;
+            Sprite.Sprite.Opacity = .5;
 
-            this.X = MainPage.ApplicationWidth / 2 - this.Width / 2;
-            this.Collision.Monitorable = true;
-            this.Sprite.Visible = true;
+            X = MainPage.ApplicationWidth / 2 - Width / 2;
+            Collision.Monitorable = true;
+            Sprite.Visible = true;
             this.isAlive = true;
 
             this.invulnerabilityTimer.Restart();
@@ -263,8 +267,8 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
         private void onInvulnerabilityTimerTick(object sender, EventArgs e)
         {
-            this.Sprite.Sprite.Opacity = 1;
-            this.Collision.Monitoring = true;
+            Sprite.Sprite.Opacity = 1;
+            Collision.Monitoring = true;
         }
 
         #endregion
