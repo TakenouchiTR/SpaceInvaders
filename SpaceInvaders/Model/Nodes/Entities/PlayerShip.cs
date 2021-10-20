@@ -200,6 +200,8 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 return;
             }
 
+            this.Sprite.Sprite.Opacity = .5;
+
             this.X = MainPage.ApplicationWidth / 2 - this.Width / 2;
             this.Collision.Monitorable = true;
             this.Sprite.Visible = true;
