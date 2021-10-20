@@ -121,6 +121,19 @@ namespace SpaceInvaders.Model.Nodes
         }
 
         /// <summary>
+        ///     Starts the timer from the beginning.<br />
+        ///     Timers that are already active will remain active, but will have their TimeRemaining reset.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: this.IsActive == true &amp;&amp;<br />
+        /// this.TimeRemaining == this.Duration
+        /// </summary>
+        public void Restart()
+        {
+            this.IsActive = true;
+            this.currentTime = 0;
+        }
+
+        /// <summary>
         ///     Pauses the timer without resetting the time.<br />
         ///     Timers that are already inactive will remain inactive.<br />
         ///     Precondition: None<br />
