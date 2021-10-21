@@ -14,13 +14,12 @@ namespace SpaceInvaders.Model.Nodes.Entities
     {
         #region Data members
 
+        private const int MoveSpeed = 200;
         private const VirtualKey LeftKey = VirtualKey.Left;
         private const VirtualKey RightKey = VirtualKey.Right;
         private const VirtualKey ShootKey = VirtualKey.Space;
 
         private readonly Vector2 bulletSpawnLocation = new Vector2(12, -4);
-
-        private readonly int moveSpeed = 200;
 
         private int maxLives;
         private int currentLives;
@@ -206,7 +205,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
             if (moveDistance != 0)
             {
-                moveDistance *= this.moveSpeed * delta;
+                moveDistance *= MoveSpeed * delta;
 
                 if (X + moveDistance < 0)
                 {
