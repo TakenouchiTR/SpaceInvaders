@@ -80,6 +80,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
             this.enemyGroup.X = MainPage.ApplicationWidth / 2 - this.enemyGroup.Width / 2;
 
             var enemyOrder = this.createEnemyOrder().ToArray();
+            var enemies = enemyOrder.Where(enemy => enemy != null).ToArray();
 
             this.enemyGroup.AddEnemies(enemyOrder);
             
