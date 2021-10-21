@@ -20,6 +20,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
         private const VirtualKey ShootKey = VirtualKey.Space;
 
         private readonly Vector2 bulletSpawnLocation = new Vector2(12, -4);
+        private readonly Vector2 muzzleFlashLocation = new Vector2(10, -8);
 
         private int maxLives;
         private int currentLives;
@@ -229,9 +230,16 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 var bullet = new PlayerBullet {
                     Position = Position + this.bulletSpawnLocation
                 };
-                bullet.Removed += this.onBulletRemoval;
+
+                var flash = new MuzzleFlash() {
+                    Position = Position + this.muzzleFlashLocation
+                };
 
                 Parent.QueueNodeForAddition(bullet);
+                QueueNodeForAddition(flash);
+
+                bullet.Removed += this.onBulletRemoval;
+
                 this.activeShots++;
                 this.shotCooldownTimer.Restart();
             }
