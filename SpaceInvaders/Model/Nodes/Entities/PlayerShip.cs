@@ -149,7 +149,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
         {
             this.respawnTimer = new Timer(1.5, false);
             this.invulnerabilityTimer = new Timer(1.5, false);
-            this.shotCooldownTimer = new Timer(.33, false);
+            this.shotCooldownTimer = new Timer(.25, false);
 
             AttachChild(this.respawnTimer);
             AttachChild(this.invulnerabilityTimer);
