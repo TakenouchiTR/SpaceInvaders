@@ -83,7 +83,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
             var enemies = enemyOrder.Where(enemy => enemy != null).ToArray();
 
             this.enemyGroup.AddEnemies(enemyOrder);
-            
+
             foreach (var enemy in enemies)
             {
                 enemy.Removed += this.onEnemyRemoved;
@@ -98,7 +98,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
                 typeof(AggresiveEnemy),
                 typeof(AggresiveEnemy),
                 typeof(IntermediateEnemy),
-                typeof(BasicEnemy),
+                typeof(BasicEnemy)
             };
             var enemyOrder = new List<Enemy>();
 
