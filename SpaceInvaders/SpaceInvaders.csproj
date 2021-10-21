@@ -128,6 +128,7 @@
     <Compile Include="Model\Nodes\Effects\BackgroundPlanet.cs" />
     <Compile Include="Model\Nodes\Effects\BackgroundStar.cs" />
     <Compile Include="Model\Nodes\Effects\Explosion.cs" />
+    <Compile Include="Model\Nodes\Effects\MuzzleFlash.cs" />
     <Compile Include="Model\Nodes\Entities\Bullet.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\AggresiveEnemy.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\EnemyGroup.cs" />
@@ -162,6 +163,9 @@
     </Compile>
     <Compile Include="View\Sprites\BasicEnemySprite.xaml.cs">
       <DependentUpon>BasicEnemySprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\Effects\MuzzleFlashSprite.xaml.cs">
+      <DependentUpon>MuzzleFlashSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\ExplosionSprite.xaml.cs">
       <DependentUpon>ExplosionSprite.xaml</DependentUpon>
@@ -224,6 +228,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Sprites\Effects\MuzzleFlashSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Sprites\ExplosionSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -258,6 +266,7 @@
       <Version>6.2.10</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
