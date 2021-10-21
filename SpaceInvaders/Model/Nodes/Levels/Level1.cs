@@ -71,7 +71,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
             enemyMoveTimer.Tick += this.onEnemyMoveTimerTick;
             AttachChild(enemyMoveTimer);
 
-            this.enemyGroup = new EnemyGroup(new Vector2(75, 64), 4);
+            this.enemyGroup = new EnemyGroup(new Vector2(55, 64), 8);
             AttachChild(this.enemyGroup);
         }
 
@@ -79,31 +79,52 @@ namespace SpaceInvaders.Model.Nodes.Levels
         {
             this.enemyGroup.X = MainPage.ApplicationWidth / 2 - this.enemyGroup.Width / 2;
 
-            var enemyOrder = new List<Enemy> {
-                new AggresiveEnemy(),
-                new AggresiveEnemy(),
-                new AggresiveEnemy(),
-                new AggresiveEnemy(),
-                null,
-                new IntermediateEnemy(),
-                new IntermediateEnemy(),
-                new IntermediateEnemy(),
-                new BasicEnemy(),
-                new BasicEnemy(),
-                new BasicEnemy(),
-                new BasicEnemy()
-            };
-            var enemies = enemyOrder.Where(enemy => enemy != null).ToList();
+            var enemyOrder = this.createEnemyOrder().ToArray();
 
             this.enemyGroup.AddEnemies(enemyOrder);
             
-
             foreach (var enemy in enemies)
             {
                 enemy.Removed += this.onEnemyRemoved;
             }
 
             this.enemiesRemaining += enemies.Count();
+        }
+
+        private IEnumerable<Enemy> createEnemyOrder()
+        {
+            Type[] classOrder = {
+                typeof(AggresiveEnemy),
+                typeof(AggresiveEnemy),
+                typeof(IntermediateEnemy),
+                typeof(BasicEnemy),
+            };
+            var enemyOrder = new List<Enemy>();
+
+            for (var i = 0; i < classOrder.Length; i++)
+            {
+                var currentClass = classOrder[i];
+                var j = 0;
+
+                for (; j < i; j++)
+                {
+                    enemyOrder.Add(null);
+                }
+
+                for (; j < this.enemyGroup.EnemiesPerRow - i; j++)
+                {
+                    var constructor = currentClass.GetConstructors()[0];
+                    var enemy = constructor.Invoke(new object[] { });
+                    enemyOrder.Add((Enemy) enemy);
+                }
+
+                for (; j < this.enemyGroup.EnemiesPerRow; j++)
+                {
+                    enemyOrder.Add(null);
+                }
+            }
+
+            return enemyOrder;
         }
 
         private void addBackground()
