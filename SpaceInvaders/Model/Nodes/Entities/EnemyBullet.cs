@@ -17,7 +17,7 @@
         /// </summary>
         public EnemyBullet()
         {
-            Velocity = new Vector2(0, 500);
+            Velocity = new Vector2(0, 350);
             Collision.CollisionLayers = PhysicsLayer.EnemyHitbox;
             Collision.CollisionMasks = PhysicsLayer.Player;
         }
