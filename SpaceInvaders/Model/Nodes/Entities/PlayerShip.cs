@@ -169,6 +169,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
             Sprite.Visible = false;
 
+            this.isAlive = false;
             this.respawnTimer.Restart();
         }
 
