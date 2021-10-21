@@ -21,7 +21,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         private const int StarCount = 50;
 
         private const int TotalMovementSteps = 19;
-        private const int XMoveAmount = 15;
+        private const int XMoveAmount = 10;
 
         private const VirtualKey ToggleStarsKey = VirtualKey.S;
 
