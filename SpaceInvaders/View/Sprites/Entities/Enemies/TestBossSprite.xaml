@@ -1,17 +1,16 @@
-﻿<local:BaseSprite
-    x:Class="SpaceInvaders.View.Sprites.Planet1Sprite"
+﻿<base:BaseSprite
+    x:Class="SpaceInvaders.View.Sprites.TestBossSprite"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SpaceInvaders.View.Sprites"
+    xmlns:base="using:SpaceInvaders.View.Sprites"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="128"
-    d:DesignWidth="128"
-    Height="128"
-    Width="128">
+    d:DesignHeight="120"
+    d:DesignWidth="180"
+    Height="120"
+    Width="180">
 
-    <Canvas>
-        <Ellipse Height="128" Width="128" Fill="#822" Stroke="#411" StrokeThickness="4" />
-    </Canvas>
-</local:BaseSprite>
+    <Canvas Background="Aqua" />
+</base:BaseSprite>

@@ -1,8 +1,9 @@
-﻿<local:BaseSprite
+﻿<base:BaseSprite
     x:Class="SpaceInvaders.View.Sprites.ExplosionSprite"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SpaceInvaders.View.Sprites"
+    xmlns:base="using:SpaceInvaders.View.Sprites"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -21,4 +22,4 @@
             Points="5,0 15,12 21,0 26,12 41,0 38,14 48,17 36,21 48,32 32,30 48,45 28,34 20,47 17,33 0,48 9,29 0,30 8,22 0,12 9,15"
             Stroke="Yellow" />
     </Canvas>
-</local:BaseSprite>
+</base:BaseSprite>

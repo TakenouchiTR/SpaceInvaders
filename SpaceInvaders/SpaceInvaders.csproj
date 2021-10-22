@@ -155,38 +155,38 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\Sprites\AggresiveEnemySprite.xaml.cs">
+    <Compile Include="View\Sprites\Entities\Enemies\AggresiveEnemySprite.xaml.cs">
       <DependentUpon>AggresiveEnemySprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\BaseSprite.xaml.cs">
       <DependentUpon>BaseSprite.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Sprites\BasicEnemySprite.xaml.cs">
+    <Compile Include="View\Sprites\Entities\Enemies\BasicEnemySprite.xaml.cs">
       <DependentUpon>BasicEnemySprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\Effects\MuzzleFlashSprite.xaml.cs">
       <DependentUpon>MuzzleFlashSprite.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Sprites\ExplosionSprite.xaml.cs">
+    <Compile Include="View\Sprites\Effects\ExplosionSprite.xaml.cs">
       <DependentUpon>ExplosionSprite.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Sprites\IntermediateEnemySprite.xaml.cs">
+    <Compile Include="View\Sprites\Entities\Enemies\IntermediateEnemySprite.xaml.cs">
       <DependentUpon>IntermediateEnemySprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\ISpriteRender.cs" />
-    <Compile Include="View\Sprites\Planet1Sprite.xaml.cs">
+    <Compile Include="View\Sprites\Background\Planet1Sprite.xaml.cs">
       <DependentUpon>Planet1Sprite.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Sprites\PlayerBulletSprite.xaml.cs">
+    <Compile Include="View\Sprites\Entities\PlayerBulletSprite.xaml.cs">
       <DependentUpon>PlayerBulletSprite.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Sprites\PlayerShipSprite.xaml.cs">
+    <Compile Include="View\Sprites\Entities\PlayerShipSprite.xaml.cs">
       <DependentUpon>PlayerShipSprite.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Sprites\StarSprite.xaml.cs">
+    <Compile Include="View\Sprites\Background\StarSprite.xaml.cs">
       <DependentUpon>StarSprite.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Sprites\TestBossSprite.xaml.cs">
+    <Compile Include="View\Sprites\Entities\Enemies\TestBossSprite.xaml.cs">
       <DependentUpon>TestBossSprite.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -216,7 +216,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Sprites\AggresiveEnemySprite.xaml">
+    <Page Include="View\Sprites\Entities\Enemies\AggresiveEnemySprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -224,7 +224,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Sprites\BasicEnemySprite.xaml">
+    <Page Include="View\Sprites\Entities\Enemies\BasicEnemySprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -232,31 +232,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Sprites\ExplosionSprite.xaml">
+    <Page Include="View\Sprites\Effects\ExplosionSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Sprites\IntermediateEnemySprite.xaml">
+    <Page Include="View\Sprites\Entities\Enemies\IntermediateEnemySprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Sprites\Planet1Sprite.xaml">
+    <Page Include="View\Sprites\Background\Planet1Sprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Sprites\PlayerBulletSprite.xaml">
+    <Page Include="View\Sprites\Entities\PlayerBulletSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Sprites\PlayerShipSprite.xaml">
+    <Page Include="View\Sprites\Entities\PlayerShipSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Sprites\StarSprite.xaml">
+    <Page Include="View\Sprites\Background\StarSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Sprites\TestBossSprite.xaml">
+    <Page Include="View\Sprites\Entities\Enemies\TestBossSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -266,7 +266,9 @@
       <Version>6.2.10</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="View\Sprites\UI\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
