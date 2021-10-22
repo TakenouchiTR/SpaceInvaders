@@ -101,25 +101,26 @@ namespace SpaceInvaders.Model.Nodes.Levels
                 typeof(BasicEnemy)
             };
             var enemyOrder = new List<Enemy>();
+            var enemiesPerRow = this.enemyGroup.EnemiesPerRow;
 
-            for (var i = 0; i < classOrder.Length; i++)
+            for (var i = 0; i < classOrder.Length && i * 2 < enemiesPerRow; i++)
             {
-                var currentClass = classOrder[i];
-                var j = 0;
+                var currentType = classOrder[i];
 
-                for (; j < i; j++)
+                for (var j = 0; j < i; j++)
                 {
                     enemyOrder.Add(null);
                 }
 
-                for (; j < this.enemyGroup.EnemiesPerRow - i; j++)
+                for (var j = 0; j < enemiesPerRow - 2 * i; j++)
                 {
-                    var constructor = currentClass.GetConstructors()[0];
+                    //Gets the default constructor for the Type, then invokes it to create a new enemy
+                    var constructor = currentType.GetConstructors()[0];
                     var enemy = constructor.Invoke(new object[] { });
                     enemyOrder.Add((Enemy) enemy);
                 }
 
-                for (; j < this.enemyGroup.EnemiesPerRow; j++)
+                for (var j = 0; j < i; j++)
                 {
                     enemyOrder.Add(null);
                 }
