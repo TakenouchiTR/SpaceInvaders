@@ -17,6 +17,7 @@ namespace SpaceInvaders.Model.Nodes
         public EventHandler<Vector2> Moved;
 
         private Vector2 position;
+        private bool suppressMoveEvent;
 
         #endregion
 
@@ -42,7 +43,10 @@ namespace SpaceInvaders.Model.Nodes
                     }
                 }
 
-                this.Moved?.Invoke(this, new Vector2(moveDistance, 0));
+                if (this.Moved != null && !this.suppressMoveEvent)
+                {
+                    this.Moved.Invoke(this, new Vector2(moveDistance, 0));
+                }
                 this.position.X = value;
             }
         }
@@ -67,7 +71,10 @@ namespace SpaceInvaders.Model.Nodes
                     }
                 }
 
-                this.Moved?.Invoke(this, new Vector2(0, moveDistance));
+                if (this.Moved != null && !this.suppressMoveEvent)
+                {
+                    this.Moved.Invoke(this, new Vector2(0, moveDistance));
+                }
                 this.position.Y = value;
             }
         }
@@ -128,6 +135,7 @@ namespace SpaceInvaders.Model.Nodes
         /// </summary>
         public Node2D()
         {
+            this.suppressMoveEvent = false;
         }
 
         /// <summary>
@@ -161,8 +169,14 @@ namespace SpaceInvaders.Model.Nodes
         /// <param name="distance">The distance.</param>
         public void Move(Vector2 distance)
         {
+            this.suppressMoveEvent = true;
+
             this.X += distance.X;
             this.Y += distance.Y;
+
+            this.suppressMoveEvent = false;
+
+            this.Moved?.Invoke(this, distance);
         }
 
         /// <summary>
