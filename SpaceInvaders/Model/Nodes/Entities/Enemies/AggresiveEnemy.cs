@@ -1,6 +1,6 @@
 ﻿using System;
 using SpaceInvaders.Model.Nodes.Effects;
-using SpaceInvaders.View.Sprites;
+using SpaceInvaders.View.Sprites.Entities.Enemies;
 
 namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 {

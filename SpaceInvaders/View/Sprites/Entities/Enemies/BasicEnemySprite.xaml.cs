@@ -1,6 +1,6 @@
 ﻿// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace SpaceInvaders.View.Sprites
+namespace SpaceInvaders.View.Sprites.Entities.Enemies
 {
     /// <summary>
     ///     Draws the basic enemy sprite

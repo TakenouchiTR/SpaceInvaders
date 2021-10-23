@@ -2,6 +2,7 @@
 using System.Numerics;
 using SpaceInvaders.View;
 using SpaceInvaders.View.Sprites;
+using SpaceInvaders.View.Sprites.Background;
 
 namespace SpaceInvaders.Model.Nodes.Effects
 {

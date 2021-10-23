@@ -3,6 +3,7 @@ using Windows.System;
 using SpaceInvaders.Model.Nodes.Effects;
 using SpaceInvaders.View;
 using SpaceInvaders.View.Sprites;
+using SpaceInvaders.View.Sprites.Entities;
 
 namespace SpaceInvaders.Model.Nodes.Entities
 {

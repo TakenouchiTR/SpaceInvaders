@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using SpaceInvaders.View.Sprites;
+using SpaceInvaders.View.Sprites.Entities;
+using SpaceInvaders.View.Sprites.Entities.Enemies;
 
 namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 {

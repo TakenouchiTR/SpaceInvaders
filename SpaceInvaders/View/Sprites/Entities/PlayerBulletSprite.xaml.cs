@@ -1,6 +1,6 @@
 ﻿// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace SpaceInvaders.View.Sprites
+namespace SpaceInvaders.View.Sprites.Entities
 {
     /// <summary>
     ///     Draws a bullet sprite
@@ -8,7 +8,7 @@ namespace SpaceInvaders.View.Sprites
     /// <seealso cref="SpaceInvaders.View.Sprites.BaseSprite" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector2" />
-    public sealed partial class PlayerBulletSprite
+public sealed partial class PlayerBulletSprite
     {
         #region Constructors
 
