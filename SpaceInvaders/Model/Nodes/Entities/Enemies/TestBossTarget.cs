@@ -102,7 +102,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
                 null
             });
             var animation2 = new AnimatedSprite(new List<AnimationFrame> {
-                new AnimationFrame(new AggresiveEnemySprite(), .2),
+                new AnimationFrame(new AggresiveEnemySpriteBase(), .2),
                 new AnimationFrame(new PlayerShipSprite(), .8)
             });
 
