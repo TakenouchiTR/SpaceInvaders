@@ -158,8 +158,8 @@
     <Compile Include="View\Sprites\Background\Planet1Sprite.xaml.cs">
       <DependentUpon>Planet1Sprite.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Sprites\Entities\Enemies\AggresiveEnemySprite.xaml.cs">
-      <DependentUpon>AggresiveEnemySprite.xaml</DependentUpon>
+    <Compile Include="View\Sprites\Entities\Enemies\AggresiveEnemySpriteBase.xaml.cs">
+      <DependentUpon>AggresiveEnemySpriteBase.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\BaseSprite.xaml.cs">
       <DependentUpon>BaseSprite.xaml</DependentUpon>
@@ -241,7 +241,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Sprites\Entities\Enemies\AggresiveEnemySprite.xaml">
+    <Page Include="View\Sprites\Entities\Enemies\AggresiveEnemySpriteBase.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

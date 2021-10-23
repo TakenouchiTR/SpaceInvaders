@@ -3,16 +3,16 @@
 namespace SpaceInvaders.View.Sprites.Entities.Enemies
 {
     /// <summary>
-    ///     Draws the aggressive enemy ship
+    ///     Draws the base of the AggressiveEnemy
     /// </summary>
-    public sealed partial class AggresiveEnemySprite
+    public sealed partial class AggresiveEnemySpriteBase
     {
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggresiveEnemySprite" /> class.
+        ///     Initializes a new instance of the <see cref="AggresiveEnemySpriteBase" /> class.
         /// </summary>
-        public AggresiveEnemySprite()
+        public AggresiveEnemySpriteBase()
         {
             this.InitializeComponent();
         }
