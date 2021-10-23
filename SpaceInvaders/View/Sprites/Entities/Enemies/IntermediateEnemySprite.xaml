@@ -14,39 +14,14 @@
 
     <UserControl.Resources>
         <SolidColorBrush x:Key="BodyColor" Color="LightGray" />
+        <SolidColorBrush x:Key="OutlineColor" Color="Black" />
     </UserControl.Resources>
 
     <Canvas>
+        <Polygon Fill="{StaticResource BodyColor}" Stroke="{StaticResource OutlineColor}"
+                 Points="6,13 6,15 4,16 4,19 6,18 6,20 4,21 3.5,21.75 3,22 2,22 1.5,21.75 1,21 1,13 1.5,12.25 2,12 3,12 3.5,12.25 4,13 4,14"/>
+        <Polygon Fill="{StaticResource BodyColor}" Stroke="{StaticResource OutlineColor}"
+                 Points="22,13 22,15 24,16 24,19 22,18 22,20 24,21 24.5,21.75 25,22 26,22 26.5,21.75 27,21 27,13 26.5,12.25 26,12 25,12 24.5,12.25 24,13 24,14"/>
         <local:BasicEnemySprite />
-        <Rectangle Width="2" Height="8" Fill="{StaticResource BodyColor}" Canvas.Left="2" Canvas.Top="13" />
-        <Rectangle Width="2" Height="8" Fill="{StaticResource ResourceKey=BodyColor}" Canvas.Left="23" Canvas.Top="13" />
-        <Rectangle Width="7" Height="2" Fill="{StaticResource ResourceKey=BodyColor}" Canvas.Left="2.375"
-                   Canvas.Top="13" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-19.808" />
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="7" Height="2" Fill="{StaticResource ResourceKey=BodyColor}" Canvas.Left="17.75"
-                   Canvas.Top="13" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="19.808" />
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Ellipse Width="2" Height="2" Fill="{StaticResource BodyColor}" Canvas.Left="2" Canvas.Top="20" />
-        <Ellipse Width="2" Height="2" Fill="{StaticResource BodyColor}" Canvas.Left="2" Canvas.Top="12" />
-        <Ellipse Width="2" Height="2" Fill="{StaticResource BodyColor}" Canvas.Left="23" Canvas.Top="20" />
-        <Ellipse Width="2" Height="2" Fill="{StaticResource BodyColor}" Canvas.Left="23" Canvas.Top="12" />
-        <Rectangle Width="7" Height="2" Fill="{StaticResource ResourceKey=BodyColor}" Canvas.Left="2.375"
-                   Canvas.Top="18.25" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="-19.808" />
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="7" Height="2" Fill="{StaticResource ResourceKey=BodyColor}" Canvas.Left="17.75"
-                   Canvas.Top="18.25" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-            <Rectangle.RenderTransform>
-                <CompositeTransform Rotation="19.808" />
-            </Rectangle.RenderTransform>
-        </Rectangle>
     </Canvas>
 </base:BaseSprite>
