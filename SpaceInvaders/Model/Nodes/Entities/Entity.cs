@@ -40,6 +40,16 @@ namespace SpaceInvaders.Model.Nodes.Entities
         /// <param name="sprite">The sprite.</param>
         public Entity(BaseSprite sprite)
         {
+            SpriteNode spriteNode = new SpriteNode(sprite);
+            this.initializeChildren(spriteNode);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Entity"/> class.
+        /// </summary>
+        /// <param name="sprite">The sprite.</param>
+        public Entity(SpriteNode sprite)
+        {
             this.initializeChildren(sprite);
         }
 
@@ -47,9 +57,9 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
         #region Methods
 
-        private void initializeChildren(BaseSprite sprite)
+        private void initializeChildren(SpriteNode sprite)
         {
-            this.Sprite = new SpriteNode(sprite);
+            this.Sprite = sprite;
             this.Collision = new CollisionArea {
                 Width = this.Sprite.Width,
                 Height = this.Sprite.Height
