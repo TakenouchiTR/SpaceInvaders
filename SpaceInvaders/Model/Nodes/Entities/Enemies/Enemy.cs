@@ -34,15 +34,17 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         ///     this.Sprite == sprite
         /// </summary>
         /// <param name="sprite">The enemy sprite.</param>
-        protected Enemy(BaseSprite sprite) : base(sprite)
+        protected Enemy(AnimatedSprite sprite) : base(sprite)
         {
             Collision.CollisionLayers = PhysicsLayer.Enemy;
             Collision.CollisionMasks = PhysicsLayer.PlayerHitbox;
             Collision.Monitoring = true;
             Collision.Monitorable = true;
 
-            this.Score = 0;
+            sprite.Stop();
+            sprite.Visible = true;
             Removed += this.onRemoved;
+            Moved += this.onMoved;
         }
 
         #endregion
@@ -55,6 +57,14 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
                 Center = Center
             };
             GetRoot().QueueNodeForAddition(explosion);
+        }
+
+        private void onMoved(object sender, Vector2 e)
+        {
+            if (this.Sprite is AnimatedSprite animatedSprite)
+            {
+                animatedSprite.Frame++;
+            }
         }
 
         #endregion
