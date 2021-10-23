@@ -173,6 +173,12 @@
     <Compile Include="View\Sprites\Effects\ExplosionSprite.xaml.cs">
       <DependentUpon>ExplosionSprite.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Sprites\Entities\Enemies\BasicLightsDim.xaml.cs">
+      <DependentUpon>BasicLightsDim.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\Entities\Enemies\BasicLightsLit.xaml.cs">
+      <DependentUpon>BasicLightsLit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\Entities\Enemies\IntermediateEnemySprite.xaml.cs">
       <DependentUpon>IntermediateEnemySprite.xaml</DependentUpon>
     </Compile>
@@ -240,6 +246,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\Effects\ExplosionSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\Entities\Enemies\BasicLightsDim.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\Entities\Enemies\BasicLightsLit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
