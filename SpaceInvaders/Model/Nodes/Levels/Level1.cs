@@ -196,18 +196,14 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         private void onEnemyMoveTimerTick(object sender, EventArgs e)
         {
-            var moveDistance = new Vector2();
-
             this.curMovementStep += this.movementFactor;
 
             if (this.curMovementStep >= TotalMovementSteps || this.curMovementStep <= 0)
             {
                 this.movementFactor *= -1;
             }
-
-            moveDistance.X = XMoveAmount * this.movementFactor;
-
-            this.enemyGroup.Move(moveDistance);
+            
+            this.enemyGroup.X += XMoveAmount * this.movementFactor;
         }
 
         #endregion
