@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using SpaceInvaders.Model.Nodes.Effects;
+using SpaceInvaders.View.Sprites;
 using SpaceInvaders.View.Sprites.Entities.Enemies;
 
 namespace SpaceInvaders.Model.Nodes.Entities.Enemies
@@ -31,7 +33,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         ///     this.Score == 30 &amp;&amp;<br />
         ///     this.Sprite is AggresiveEnemySprite
         /// </summary>
-        public AggresiveEnemy() : base(new AggresiveEnemySprite())
+        public AggresiveEnemy() : base(createSprite())
         {
             Collision.Collided += this.onCollided;
             Score = 30;
@@ -42,6 +44,18 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         #endregion
 
         #region Methods
+
+        private static AnimatedSprite createSprite()
+        {
+            var sprites = new List<BaseSprite>() 
+            {
+                new AggressiveEnemySprite1(),
+                new AggressiveEnemySprite2(),
+                new AggressiveEnemySprite3()
+            };
+
+            return new AnimatedSprite(1, sprites);
+        }
 
         private void initializeTimer()
         {
