@@ -164,8 +164,8 @@
     <Compile Include="View\Sprites\BaseSprite.xaml.cs">
       <DependentUpon>BaseSprite.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Sprites\Entities\Enemies\BasicEnemySprite.xaml.cs">
-      <DependentUpon>BasicEnemySprite.xaml</DependentUpon>
+    <Compile Include="View\Sprites\Entities\Enemies\BasicEnemySpriteBase.xaml.cs">
+      <DependentUpon>BasicEnemySpriteBase.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\Effects\MuzzleFlashSprite.xaml.cs">
       <DependentUpon>MuzzleFlashSprite.xaml</DependentUpon>
@@ -237,7 +237,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Sprites\Entities\Enemies\BasicEnemySprite.xaml">
+    <Page Include="View\Sprites\Entities\Enemies\BasicEnemySpriteBase.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

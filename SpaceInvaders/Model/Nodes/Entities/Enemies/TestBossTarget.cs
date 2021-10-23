@@ -63,7 +63,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         ///     this.Sprite.Visible == false &amp;&amp;<br />
         ///     this.Children.Count == 5
         /// </summary>
-        public TestBossTarget() : base(new BasicEnemySprite())
+        public TestBossTarget() : base(new BasicEnemySpriteBase())
         {
             this.health = 3;
 
@@ -98,7 +98,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         private void addAnimations()
         {
             var animation1 = new AnimatedSprite(1, new List<BaseSprite> {
-                new BasicEnemySprite(),
+                new BasicEnemySpriteBase(),
                 null
             });
             var animation2 = new AnimatedSprite(new List<AnimationFrame> {

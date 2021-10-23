@@ -18,7 +18,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         ///     this.Score == 10 &amp;&amp;<br />
         ///     this.Sprite is BasicEnemySprite
         /// </summary>
-        public BasicEnemy() : base(new BasicEnemySprite())
+        public BasicEnemy() : base(new BasicEnemySpriteBase())
         {
             Collision.Collided += this.onCollided;
             Score = 10;
