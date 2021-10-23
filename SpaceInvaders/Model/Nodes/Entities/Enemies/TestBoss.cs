@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SpaceInvaders.View;
 using SpaceInvaders.View.Sprites;
 using SpaceInvaders.View.Sprites.Entities.Enemies;
@@ -29,7 +30,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         ///     this.Sprite is TestBossSprite &amp;&amp;
         ///     this.Collision.Monitoring == false
         /// </summary>
-        public TestBoss() : base(new TestBossSprite())
+        public TestBoss() : base(createSprite())
         {
             Collision.Monitoring = false;
             this.speed = 100;
@@ -42,6 +43,16 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         #endregion
 
         #region Methods
+
+        private static AnimatedSprite createSprite()
+        {
+            var sprites = new List<BaseSprite>()
+            {
+                new TestBossSprite()
+            };
+
+            return new AnimatedSprite(1, sprites);
+        }
 
         private void createTargets()
         {
