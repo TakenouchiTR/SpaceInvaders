@@ -164,6 +164,15 @@
     <Compile Include="View\Sprites\BaseSprite.xaml.cs">
       <DependentUpon>BaseSprite.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Sprites\Entities\Enemies\AggressiveEnemySprite2.xaml.cs">
+      <DependentUpon>AggressiveEnemySprite2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\Entities\Enemies\AggressiveEnemySprite3.xaml.cs">
+      <DependentUpon>AggressiveEnemySprite3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\Entities\Enemies\AggressiveEnemySprite1.xaml.cs">
+      <DependentUpon>AggressiveEnemySprite1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\Entities\Enemies\BasicAttachmentSprite.xaml.cs">
       <DependentUpon>BasicAttachmentSprite.xaml</DependentUpon>
     </Compile>
@@ -246,6 +255,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\BaseSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\Entities\Enemies\AggressiveEnemySprite2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Sprites\Entities\Enemies\AggressiveEnemySprite3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Sprites\Entities\Enemies\AggressiveEnemySprite1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
