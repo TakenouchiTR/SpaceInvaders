@@ -12,30 +12,13 @@
     Width="27">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="BodyColor" Color="LightGray" />
         <SolidColorBrush x:Key="BorderColor" Color="Black" />
     </UserControl.Resources>
 
     <Canvas>
-        <Rectangle Width="15" Height="19" Canvas.Left="6" Canvas.Top="3" Fill="{StaticResource BodyColor}" />
-        <Rectangle Width="12" Height="10" Fill="{StaticResource BodyColor}" Canvas.Top="0.125"
-                   RenderTransformOrigin="0.5,0.5" Canvas.Left="9.543" UseLayoutRounding="False"
-                   d:LayoutRounding="Auto">
-            <Rectangle.RenderTransform>
-                <CompositeTransform SkewX="-31.574" TranslateX="2.26" />
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Rectangle Width="14" Height="10" Fill="{StaticResource BodyColor}" Canvas.Top="0.501"
-                   RenderTransformOrigin="0.5,0.5" Canvas.Left="-1.8" UseLayoutRounding="False" d:LayoutRounding="Auto">
-            <Rectangle.RenderTransform>
-                <CompositeTransform SkewX="-39.094" TranslateX="4.507" Rotation="51" ScaleX="0.887" SkewY="8.934"
-                                    TranslateY="0.002" />
-            </Rectangle.RenderTransform>
-        </Rectangle>
-        <Ellipse Width="15" Height="19" Fill="{StaticResource BodyColor}" Canvas.Top="13" Canvas.Left="6" />
-        <Ellipse Width="9" Height="17" Fill="{StaticResource BorderColor}" Canvas.Left="9" Canvas.Top="13" />
-        <Ellipse Width="7" Height="16" Fill="Aqua" Canvas.Left="10" Canvas.Top="13" />
-        <Rectangle Width="11" Height="11" Fill="{StaticResource BodyColor}" Canvas.Left="8" Canvas.Top="10" />
-        <Rectangle Width="9" Height="1" Fill="{StaticResource BorderColor}" Canvas.Left="9" Canvas.Top="20" />
+        <Polygon Fill="LightGray" Stroke="{StaticResource BorderColor}" 
+                 Points="14,4 11,0 0,0 6,10 6,23 8,29 10,31 14,32 18,31 20,29 22,23 22,10 27,0 17,0"/>
+        <Polygon Fill="Aqua" Stroke="{StaticResource BorderColor}"
+                 Points="10,21 10,23 11,26.5 12,28.25 13,29 14,29.5 15,29 16,28.25 17,26.5 18,23 18,21"/>
     </Canvas>
 </base:BaseSprite>
