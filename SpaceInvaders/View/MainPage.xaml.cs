@@ -102,7 +102,7 @@ namespace SpaceInvaders.View
         
         private void onSpriteNodeHidden(object sender, BaseSprite e)
         {
-            if (sender is SpriteNode node)
+            if (sender is SpriteNode node && e != null)
             {
                 var layerIndex = (int) node.Layer;
                 this.canvasLayers[layerIndex].Children.Remove(e);
@@ -111,7 +111,7 @@ namespace SpaceInvaders.View
 
         private void onSpriteNodeShown(object sender, BaseSprite e)
         {
-            if (sender is SpriteNode node)
+            if (sender is SpriteNode node && e != null)
             {
                 var layerIndex = (int) node.Layer;
                 this.canvasLayers[layerIndex].Children.Add(e);
