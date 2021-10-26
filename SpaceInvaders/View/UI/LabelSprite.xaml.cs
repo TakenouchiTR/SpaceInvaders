@@ -12,9 +12,17 @@ namespace SpaceInvaders.View.UI
             set => this.textBlock.Text = value;
         }
 
-        public double TextWidth => this.textBlock.Width;
+        public double TextWidth 
+        { 
+            get => this.textBlock.Width;
+            set => this.textBlock.Width = value;
+        }
 
-        public double TextHeight => this.textBlock.Height;
+        public double TextHeight
+        {
+            get => this.textBlock.Height;
+            set => this.textBlock.Height = value;
+        }
 
         public Vector2 TextSize => new Vector2(this.TextWidth, this.TextHeight);
 
