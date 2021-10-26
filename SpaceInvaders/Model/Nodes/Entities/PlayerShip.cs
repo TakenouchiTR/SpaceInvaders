@@ -72,7 +72,16 @@ namespace SpaceInvaders.Model.Nodes.Entities
         public int CurrentLives
         {
             get => this.currentLives;
-            set => this.currentLives = Math.Clamp(value, 0, this.maxLives);
+            set
+            {
+                if (value == this.currentLives)
+                {
+                    return;
+                }
+
+                this.currentLives = Math.Clamp(value, 0, this.maxLives);
+                this.CurrentLivesChanged?.Invoke(this, this.currentLives);
+            }
         }
 
         /// <summary>
@@ -137,6 +146,8 @@ namespace SpaceInvaders.Model.Nodes.Entities
         #endregion
 
         #region Methods
+
+        public event EventHandler<int> CurrentLivesChanged;
 
         private void setupCollision()
         {
