@@ -7,7 +7,8 @@ using SpaceInvaders.Model.Nodes.Entities;
 using SpaceInvaders.Model.Nodes.Entities.Enemies;
 using SpaceInvaders.Model.Nodes.UI;
 using SpaceInvaders.View;
-using SpaceInvaders.View.UI;
+using SpaceInvaders.View.Sprites.Entities;
+using SpaceInvaders.View.Sprites.UI;
 
 namespace SpaceInvaders.Model.Nodes.Levels
 {
@@ -21,10 +22,9 @@ namespace SpaceInvaders.Model.Nodes.Levels
         #region Data members
 
         private const int StarCount = 50;
-
         private const int TotalMovementSteps = 19;
         private const int XMoveAmount = 10;
-
+        private const double UiBuffer = 4;
         private const VirtualKey ToggleStarsKey = VirtualKey.S;
 
         private int curMovementStep = 9;
@@ -32,9 +32,11 @@ namespace SpaceInvaders.Model.Nodes.Levels
         private int enemiesRemaining;
         private bool togglePressedLastFrame;
 
+        private PlayerShip player;
         private EnemyGroup enemyGroup;
         private Node backgroundNode;
         private Label scoreLabel;
+        private LifeCounter lifeCounter;
 
         #endregion
 
@@ -60,12 +62,13 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         private void addPlayer()
         {
-            var player = new PlayerShip();
-            player.X = MainPage.ApplicationWidth / 2 - player.Collision.Width / 2;
-            player.Y = MainPage.ApplicationHeight - 64;
-            AttachChild(player);
+            this.player = new PlayerShip();
+            this.player.X = MainPage.ApplicationWidth / 2 - this.player.Collision.Width / 2;
+            this.player.Y = MainPage.ApplicationHeight - 64;
 
-            player.Removed += this.onPlayerRemoved;
+            AttachChild(this.player);
+
+            this.player.Removed += this.onPlayerRemoved;
         }
 
         private void addEnemyHelperNodes()
@@ -82,6 +85,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         private void addEnemies()
         {
             this.enemyGroup.X = MainPage.ApplicationWidth / 2 - this.enemyGroup.Width / 2;
+            this.enemyGroup.Y = 24;
 
             var enemyOrder = this.createEnemyOrder().ToArray();
             var enemies = enemyOrder.Where(enemy => enemy != null).ToArray();
@@ -99,7 +103,15 @@ namespace SpaceInvaders.Model.Nodes.Levels
         private void addUi()
         {
             this.scoreLabel = new Label("Score: 0", RenderLayer.UiTop);
+            this.scoreLabel.Position += new Vector2(UiBuffer);
+            this.player.CurrentLivesChanged += this.onPlayerLivesChanged;
+
+            this.lifeCounter = new LifeCounter(typeof(FullHeartSprite), typeof(EmptyHeartSprite), 3, RenderLayer.UiTop);
+            this.lifeCounter.X = MainPage.ApplicationWidth - this.lifeCounter.Width - UiBuffer;
+            this.lifeCounter.Y += UiBuffer;
+            
             this.AttachChild(this.scoreLabel);
+            this.AttachChild(this.lifeCounter);
         }
 
         private void updateScoreDisplay()
@@ -189,6 +201,11 @@ namespace SpaceInvaders.Model.Nodes.Levels
                     star.Visible = !star.Visible;
                 }
             }
+        }
+
+        private void onPlayerLivesChanged(object sender, int e)
+        {
+            this.lifeCounter.CurrentLives = e;
         }
 
         private void onPlayerRemoved(object sender, EventArgs e)
