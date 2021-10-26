@@ -1,6 +1,5 @@
 ﻿using System;
 using SpaceInvaders.Model.Nodes.Effects;
-using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 {
@@ -10,7 +9,11 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
     /// <seealso cref="SpaceInvaders.Model.Nodes.Entities.Entity" />
     public abstract class Enemy : Entity
     {
+        #region Data members
+
         private static readonly Random EnemyRandom = new Random();
+
+        #endregion
 
         #region Properties
 
@@ -64,7 +67,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         private void onMoved(object sender, Vector2 e)
         {
-            if (this.Sprite is AnimatedSprite animatedSprite)
+            if (Sprite is AnimatedSprite animatedSprite)
             {
                 animatedSprite.Frame++;
             }

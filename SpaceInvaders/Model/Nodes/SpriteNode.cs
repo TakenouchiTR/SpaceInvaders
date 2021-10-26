@@ -1,5 +1,4 @@
-﻿using System;
-using SpaceInvaders.View.Sprites;
+﻿using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Nodes
 {
@@ -16,9 +15,8 @@ namespace SpaceInvaders.Model.Nodes
         ///     Precondition: None<br />
         ///     Postcondition: this.Layer == SpriteNode.DefaultRenderLayer
         /// </summary>
-        public SpriteNode(): this(null, DefaultRenderLayer)
+        public SpriteNode() : this(null, DefaultRenderLayer)
         {
-            
         }
 
         /// <summary>
@@ -56,10 +54,10 @@ namespace SpaceInvaders.Model.Nodes
         /// <param name="newSprite">The new sprite.</param>
         public void ChangeSprite(BaseSprite newSprite)
         {
-            var oldSprite = this.Sprite;
-            this.Sprite = newSprite;
+            var oldSprite = Sprite;
+            Sprite = newSprite;
 
-            if (!this.Visible)
+            if (!Visible)
             {
                 return;
             }
@@ -72,7 +70,7 @@ namespace SpaceInvaders.Model.Nodes
             if (newSprite != null)
             {
                 OnSpriteShown(newSprite);
-                this.Render();
+                Render();
             }
         }
 

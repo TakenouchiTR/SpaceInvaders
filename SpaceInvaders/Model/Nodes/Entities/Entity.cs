@@ -40,12 +40,12 @@ namespace SpaceInvaders.Model.Nodes.Entities
         /// <param name="sprite">The sprite.</param>
         public Entity(BaseSprite sprite)
         {
-            SpriteNode spriteNode = new SpriteNode(sprite);
+            var spriteNode = new SpriteNode(sprite);
             this.initializeChildren(spriteNode);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Entity"/> class.
+        ///     Initializes a new instance of the <see cref="Entity" /> class.
         /// </summary>
         /// <param name="sprite">The sprite.</param>
         public Entity(SpriteNode sprite)

@@ -47,8 +47,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         private static AnimatedSprite createSprite()
         {
-            var sprites = new List<BaseSprite>() 
-            {
+            var sprites = new List<BaseSprite> {
                 new AggressiveEnemySprite1(),
                 new AggressiveEnemySprite2(),
                 new AggressiveEnemySprite3()

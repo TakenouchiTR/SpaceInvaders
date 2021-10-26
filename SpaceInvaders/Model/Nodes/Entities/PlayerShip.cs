@@ -2,7 +2,6 @@
 using Windows.System;
 using SpaceInvaders.Model.Nodes.Effects;
 using SpaceInvaders.View;
-using SpaceInvaders.View.Sprites;
 using SpaceInvaders.View.Sprites.Entities;
 
 namespace SpaceInvaders.Model.Nodes.Entities
@@ -202,7 +201,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
             base.Update(delta);
         }
-        
+
         private void handleMovement(double delta)
         {
             double moveDistance = 0;
@@ -244,7 +243,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
                     Position = Position + this.bulletSpawnLocation
                 };
 
-                var flash = new MuzzleFlash() {
+                var flash = new MuzzleFlash {
                     Position = Position + this.muzzleFlashLocation
                 };
 
@@ -259,10 +258,10 @@ namespace SpaceInvaders.Model.Nodes.Entities
         }
 
         /// <summary>
-        /// Runs cleanup and invokes the Removed event when removed from the game.<br />
-        /// Precondition: None<br />
-        /// Postcondition: Removed event is invoked if emitRemovedEvent == true &amp;&amp;<br />
-        /// All event subscribers are removed
+        ///     Runs cleanup and invokes the Removed event when removed from the game.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: Removed event is invoked if emitRemovedEvent == true &amp;&amp;<br />
+        ///     All event subscribers are removed
         /// </summary>
         /// <param name="emitRemovedEvent">Whether to emit the Removed event</param>
         public override void CompleteRemoval(bool emitRemovedEvent = true)

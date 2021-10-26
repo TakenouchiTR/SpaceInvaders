@@ -1,5 +1,4 @@
-﻿using SpaceInvaders.View.Sprites;
-using SpaceInvaders.View.Sprites.Entities;
+﻿using SpaceInvaders.View.Sprites.Entities;
 
 namespace SpaceInvaders.Model.Nodes.Entities
 {

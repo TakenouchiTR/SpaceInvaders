@@ -47,6 +47,7 @@ namespace SpaceInvaders.Model.Nodes
                 {
                     this.Moved.Invoke(this, new Vector2(moveDistance, 0));
                 }
+
                 this.position.X = value;
             }
         }
@@ -75,6 +76,7 @@ namespace SpaceInvaders.Model.Nodes
                 {
                     this.Moved.Invoke(this, new Vector2(0, moveDistance));
                 }
+
                 this.position.Y = value;
             }
         }
