@@ -219,6 +219,9 @@
     <Compile Include="View\Sprites\UI\FullHeartSprite.xaml.cs">
       <DependentUpon>FullHeartSprite.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\UI\LabelSprite.xaml.cs">
+      <DependentUpon>LabelSprite.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -327,6 +330,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\UI\FullHeartSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UI\LabelSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
