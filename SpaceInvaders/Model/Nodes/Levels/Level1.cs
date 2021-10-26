@@ -5,6 +5,7 @@ using Windows.System;
 using SpaceInvaders.Model.Nodes.Effects;
 using SpaceInvaders.Model.Nodes.Entities;
 using SpaceInvaders.Model.Nodes.Entities.Enemies;
+using SpaceInvaders.Model.Nodes.UI;
 using SpaceInvaders.View;
 using SpaceInvaders.View.UI;
 
@@ -33,7 +34,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         private EnemyGroup enemyGroup;
         private Node backgroundNode;
-        private LabelSprite scoreLabel;
+        private Label scoreLabel;
 
         #endregion
 
@@ -97,10 +98,9 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         private void addUi()
         {
-            this.scoreLabel = new LabelSprite();
-
-            SpriteNode scoreSprite = new SpriteNode(this.scoreLabel, RenderLayer.UiTop);
-            this.AttachChild(scoreSprite);
+            this.scoreLabel = new Label("", RenderLayer.UiTop);
+            this.scoreLabel.Width = 10;
+            this.AttachChild(this.scoreLabel);
 
             this.updateScoreDisplay();
         }
