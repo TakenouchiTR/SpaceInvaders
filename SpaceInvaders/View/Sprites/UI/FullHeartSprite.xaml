@@ -13,6 +13,6 @@
     Width="31">
 
     <Canvas>
-        <Polygon Fill="HotPink" Stroke="MediumVioletRed" Points="16,4 12,0 4,0 0,4 0,16 16,31 31,16 31,4 27,0 21,0"/>
+        <Polygon Fill="HotPink" Stroke="MediumVioletRed" StrokeThickness="4" Points="16,4 12,0 4,0 0,4 0,16 16,31 31,16 31,4 27,0 20,0"/>
     </Canvas>
 </base:BaseSprite>
