@@ -84,7 +84,6 @@ namespace SpaceInvaders.View
         private void setupLevel(LevelBase level)
         {
             this.currentLevel = level;
-            this.currentLevel.ScoreChanged += this.onCurrentLevelScoreChanged;
             this.currentLevel.GameFinished += this.onCurrentLevelGameFinished;
         }
 
@@ -96,19 +95,11 @@ namespace SpaceInvaders.View
             }
 
             this.currentLevel.CleanupLevel();
-
-            this.currentLevel.ScoreChanged -= this.onCurrentLevelScoreChanged;
+            
             this.currentLevel.GameFinished -= this.onCurrentLevelGameFinished;
             this.currentLevel = null;
-
-            this.updateScore(0);
         }
-
-        private void updateScore(int score)
-        {
-            this.scoreText.Text = $"Score: {score}";
-        }
-
+        
         private void onSpriteNodeHidden(object sender, BaseSprite e)
         {
             if (sender is SpriteNode node)
@@ -149,12 +140,7 @@ namespace SpaceInvaders.View
                 CoreApplication.Exit();
             }
         }
-
-        private void onCurrentLevelScoreChanged(object sender, int e)
-        {
-            this.updateScore(e);
-        }
-
+        
         #endregion
     }
 }

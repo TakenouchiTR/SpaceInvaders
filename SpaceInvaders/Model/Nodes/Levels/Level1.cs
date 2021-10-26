@@ -6,6 +6,7 @@ using SpaceInvaders.Model.Nodes.Effects;
 using SpaceInvaders.Model.Nodes.Entities;
 using SpaceInvaders.Model.Nodes.Entities.Enemies;
 using SpaceInvaders.View;
+using SpaceInvaders.View.UI;
 
 namespace SpaceInvaders.Model.Nodes.Levels
 {
@@ -32,6 +33,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         private EnemyGroup enemyGroup;
         private Node backgroundNode;
+        private LabelSprite scoreLabel;
 
         #endregion
 
@@ -48,6 +50,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
             this.addPlayer();
             this.addEnemyHelperNodes();
             this.addEnemies();
+            this.addUi();
         }
 
         #endregion
@@ -90,6 +93,21 @@ namespace SpaceInvaders.Model.Nodes.Levels
             }
 
             this.enemiesRemaining += enemies.Count();
+        }
+
+        private void addUi()
+        {
+            this.scoreLabel = new LabelSprite();
+
+            SpriteNode scoreSprite = new SpriteNode(this.scoreLabel, RenderLayer.UiTop);
+            this.AttachChild(scoreSprite);
+
+            this.updateScoreDisplay();
+        }
+
+        private void updateScoreDisplay()
+        {
+            this.scoreLabel.Text = $"Score: {this.Score}";
         }
 
         private IEnumerable<Enemy> createEnemyOrder()
@@ -186,6 +204,9 @@ namespace SpaceInvaders.Model.Nodes.Levels
             if (sender is Enemy enemy)
             {
                 Score += enemy.Score;
+
+                this.updateScoreDisplay();
+
                 this.enemiesRemaining--;
                 if (this.enemiesRemaining <= 0)
                 {
