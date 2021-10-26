@@ -146,6 +146,7 @@
     <Compile Include="Model\Nodes\Node.cs" />
     <Compile Include="Model\Nodes\Node2D.cs" />
     <Compile Include="Model\Nodes\Levels\LevelBase.cs" />
+    <Compile Include="Model\Nodes\RenderableNode.cs" />
     <Compile Include="Model\Nodes\UI\Label.cs" />
     <Compile Include="Model\PhysicsLayer.cs" />
     <Compile Include="Model\Nodes\SpriteNode.cs" />
