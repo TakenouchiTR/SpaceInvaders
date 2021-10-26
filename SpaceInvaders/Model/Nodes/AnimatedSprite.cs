@@ -49,6 +49,14 @@ namespace SpaceInvaders.Model.Nodes
         }
 
         /// <summary>
+        ///     Gets the number of frames in the animation.
+        /// </summary>
+        /// <value>
+        ///     The frame count.
+        /// </value>
+        public int FrameCount => this.frames.Count;
+
+        /// <summary>
         ///     Gets a value indicating whether the animation is playing
         /// </summary>
         /// <value>
