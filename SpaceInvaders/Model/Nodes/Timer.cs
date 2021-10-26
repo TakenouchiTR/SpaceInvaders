@@ -11,6 +11,7 @@ namespace SpaceInvaders.Model.Nodes
         #region Data members
 
         private double currentTime;
+        private double duration;
 
         #endregion
 
@@ -38,7 +39,15 @@ namespace SpaceInvaders.Model.Nodes
         /// <value>
         ///     The duration in seconds.
         /// </value>
-        public double Duration { get; set; }
+        public double Duration
+        {
+            get => this.duration;
+            set
+            {
+                this.duration = value;
+                this.currentTime = 0;
+            }
+        }
 
         /// <summary>
         ///     Gets the time remaining in seconds.
@@ -177,7 +186,7 @@ namespace SpaceInvaders.Model.Nodes
                 this.Tick?.Invoke(this, EventArgs.Empty);
 
                 var timeQuotient = (int)(this.currentTime / this.Duration);
-                this.currentTime -= (this.Duration * timeQuotient);
+                this.currentTime -= this.Duration * timeQuotient;
 
                 if (!this.Repeat)
                 {
