@@ -202,7 +202,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
             base.Update(delta);
         }
-
+        
         private void handleMovement(double delta)
         {
             double moveDistance = 0;
@@ -255,6 +255,26 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
                 this.activeShots++;
                 this.shotCooldownTimer.Restart();
+            }
+        }
+
+        /// <summary>
+        /// Runs cleanup and invokes the Removed event when removed from the game.<br />
+        /// Precondition: None<br />
+        /// Postcondition: Removed event is invoked if emitRemovedEvent == true &amp;&amp;<br />
+        /// All event subscribers are removed
+        /// </summary>
+        /// <param name="emitRemovedEvent">Whether to emit the Removed event</param>
+        public override void CompleteRemoval(bool emitRemovedEvent = true)
+        {
+            base.CompleteRemoval(emitRemovedEvent);
+
+            if (this.CurrentLivesChanged != null)
+            {
+                foreach (var subscriber in this.CurrentLivesChanged.GetInvocationList())
+                {
+                    this.CurrentLivesChanged -= subscriber as EventHandler<int>;
+                }
             }
         }
 
