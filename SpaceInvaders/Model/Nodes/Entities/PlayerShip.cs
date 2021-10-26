@@ -183,6 +183,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
             this.isAlive = false;
             this.respawnTimer.Restart();
+            this.CurrentLives--;
         }
 
         /// <summary>
@@ -268,7 +269,6 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
         private void onRespawnTimerTick(object sender, EventArgs e)
         {
-            this.CurrentLives--;
             if (this.CurrentLives == 0)
             {
                 QueueForRemoval();
