@@ -13,6 +13,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         #region Data members
 
         private const double MillisecondsInSecond = 1000;
+        private const double UpdateSkipThreshold = 1;
 
         private readonly DispatcherTimer updateTimer;
         private long prevUpdateTime;
@@ -142,7 +143,10 @@ namespace SpaceInvaders.Model.Nodes.Levels
             var delta = timeSinceLastTick / MillisecondsInSecond;
             this.prevUpdateTime = curTime;
 
-            Update(delta);
+            if (delta < UpdateSkipThreshold)
+            {
+                Update(delta);
+            }
         }
 
         /// <summary>
