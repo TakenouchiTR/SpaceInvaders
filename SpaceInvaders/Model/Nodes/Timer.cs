@@ -175,7 +175,9 @@ namespace SpaceInvaders.Model.Nodes
             if (this.currentTime >= this.Duration)
             {
                 this.Tick?.Invoke(this, EventArgs.Empty);
-                this.currentTime = Math.IEEERemainder(this.currentTime, this.Duration);
+
+                var timeQuotient = (int)(this.currentTime / this.Duration);
+                this.currentTime -= (this.Duration * timeQuotient);
 
                 if (!this.Repeat)
                 {
