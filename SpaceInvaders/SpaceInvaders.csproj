@@ -219,6 +219,9 @@
     <Compile Include="View\Sprites\Entities\Enemies\TestBossSprite.xaml.cs">
       <DependentUpon>TestBossSprite.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Sprites\UI\EmptyHeartSprite.xaml.cs">
+      <DependentUpon>EmptyHeartSprite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\UI\FullHeartSprite.xaml.cs">
       <DependentUpon>FullHeartSprite.xaml</DependentUpon>
     </Compile>
@@ -329,6 +332,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\Entities\Enemies\TestBossSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\UI\EmptyHeartSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
