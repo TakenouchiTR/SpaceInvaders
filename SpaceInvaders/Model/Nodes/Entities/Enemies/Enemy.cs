@@ -10,6 +10,8 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
     /// <seealso cref="SpaceInvaders.Model.Nodes.Entities.Entity" />
     public abstract class Enemy : Entity
     {
+        private static readonly Random EnemyRandom = new Random();
+
         #region Properties
 
         /// <summary>
@@ -43,6 +45,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
             sprite.Stop();
             sprite.Visible = true;
+            sprite.Frame = EnemyRandom.Next(sprite.FrameCount);
             Removed += this.onRemoved;
             Moved += this.onMoved;
         }
