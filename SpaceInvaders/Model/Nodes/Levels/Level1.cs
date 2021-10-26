@@ -98,11 +98,8 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         private void addUi()
         {
-            this.scoreLabel = new Label("", RenderLayer.UiTop);
-            this.scoreLabel.Width = 10;
+            this.scoreLabel = new Label("Score: 0", RenderLayer.UiTop);
             this.AttachChild(this.scoreLabel);
-
-            this.updateScoreDisplay();
         }
 
         private void updateScoreDisplay()
