@@ -14,8 +14,8 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
     {
         #region Data members
 
-        private const double MinShotDelay = 2;
-        private const double MaxShotDelay = 4.5;
+        private const double MinShotDelay = 3;
+        private const double MaxShotDelay = 8;
         private static readonly Random ShotDelayGenerator = new Random();
         private static readonly Vector2 BulletSpawnLocation = new Vector2(12, 40);
         private static readonly Vector2 MuzzleFlashLocation = new Vector2(22, 42);
