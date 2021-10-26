@@ -13,7 +13,7 @@
         ///     Precondition: None<br />
         ///     Postcondition: this.Collision.CollisionLayers == PhysicsLayer.EnemyHitbox &amp;&amp;<br />
         ///     this.Collision.CollisionLayers == PhysicsLayer.Player &amp;&amp;<br />
-        ///     this.Velocity.Y == 500
+        ///     this.Velocity.Y == 350
         /// </summary>
         public EnemyBullet()
         {
