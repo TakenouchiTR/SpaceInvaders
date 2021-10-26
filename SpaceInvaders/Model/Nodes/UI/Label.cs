@@ -1,24 +1,45 @@
-﻿using System;
-using SpaceInvaders.View.UI;
+﻿using SpaceInvaders.View.UI;
 
 namespace SpaceInvaders.Model.Nodes.UI
 {
-    public class Label : SpriteNode
+    /// <summary>
+    ///     Draws a label to display some specified text.
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.Model.Nodes.RenderableNode" />
+    public class Label : RenderableNode
     {
-        private LabelSprite labelSprite;
+        private readonly LabelSprite labelSprite;
 
+        /// <summary>
+        ///     Gets the width.
+        /// </summary>
+        /// <value>
+        ///     The width.
+        /// </value>
         public override double Width
         {
             get => this.labelSprite.TextWidth;
             set => this.labelSprite.TextWidth = value;
         }
 
+        /// <summary>
+        ///     Gets the height.
+        /// </summary>
+        /// <value>
+        ///     The height.
+        /// </value>
         public override double Height
         {
             get => this.labelSprite.TextHeight;
             set => this.labelSprite.TextHeight = value;
         }
 
+        /// <summary>
+        ///     Gets or sets the text.
+        /// </summary>
+        /// <value>
+        ///     The text.
+        /// </value>
         public string Text
         {
             get => this.labelSprite.Text;
@@ -27,20 +48,20 @@ namespace SpaceInvaders.Model.Nodes.UI
 
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SpriteNode" /> class without a BaseSprite.<br />
+        ///     Initializes a new instance of the <see cref="Label" /> class with blank text.<br />
         ///     Precondition: None<br />
-        ///     Postcondition: this.Layer == SpriteNode.DefaultRenderLayer
+        ///     Postcondition: this.Layer == RenderableNode.DefaultRenderLayer
         /// </summary>
-        public Label() : this("", DefaultRenderLayer)
+        public Label() : this(string.Empty, DefaultRenderLayer)
         {
 
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SpriteNode" /> class with a specified Sprite.<br />
+        ///     Initializes a new instance of the <see cref="Label" /> class with specified text.<br />
         ///     Precondition: None<br />
         ///     Postcondition: this.Layer == SpriteNode.DefaultRenderLayer &amp;&amp;<br />
-        ///     this.Sprite == sprite &amp;&amp;<br />
+        ///     this.Text == text &amp;&amp;<br />
         ///     this.Visible == true
         /// </summary>
         /// <param name="text">The default text.</param>
@@ -49,10 +70,10 @@ namespace SpaceInvaders.Model.Nodes.UI
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="SpriteNode" /> class with a specified Sprite and RenderLayer.
+        ///     Initializes a new instance of the <see cref="Label" /> class with specified text and RenderLayer.
         ///     Precondition: None<br />
         ///     Postcondition: this.Layer == layer &amp;&amp;<br />
-        ///     this.Sprite == sprite &amp;&amp;<br />
+        ///     this.Text == text &amp;&amp;<br />
         ///     this.Visible == true
         /// </summary>
         /// <param name="text">The default text.</param>
