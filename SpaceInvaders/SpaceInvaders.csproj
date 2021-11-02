@@ -206,6 +206,15 @@
     <Compile Include="View\Sprites\Entities\Enemies\IntermediateEnemySprite1.xaml.cs">
       <DependentUpon>IntermediateEnemySprite1.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Sprites\Entities\Enemies\MasterEnemySprite2.xaml.cs">
+      <DependentUpon>MasterEnemySprite2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\Entities\Enemies\MasterEnemySprite1.xaml.cs">
+      <DependentUpon>MasterEnemySprite1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\Entities\Enemies\MasterEnemySpriteBase.xaml.cs">
+      <DependentUpon>MasterEnemySpriteBase.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\ISpriteRender.cs" />
     <Compile Include="View\Sprites\Entities\PlayerBulletSprite.xaml.cs">
       <DependentUpon>PlayerBulletSprite.xaml</DependentUpon>
@@ -316,6 +325,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Sprites\Entities\Enemies\IntermediateEnemySprite1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\Entities\Enemies\MasterEnemySprite2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Sprites\Entities\Enemies\MasterEnemySprite1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\Entities\Enemies\MasterEnemySpriteBase.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
