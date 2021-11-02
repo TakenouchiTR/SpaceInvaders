@@ -122,7 +122,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         private IEnumerable<Enemy> createEnemyOrder()
         {
             Type[] classOrder = {
-                typeof(AggresiveEnemy),
+                typeof(MasterEnemy),
                 typeof(AggresiveEnemy),
                 typeof(IntermediateEnemy),
                 typeof(BasicEnemy)
