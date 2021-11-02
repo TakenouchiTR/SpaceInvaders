@@ -132,6 +132,7 @@
     <Compile Include="Model\Nodes\Entities\Bullet.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\AggresiveEnemy.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\EnemyGroup.cs" />
+    <Compile Include="Model\Nodes\Entities\Enemies\MasterEnemy.cs" />
     <Compile Include="Model\Nodes\Entities\EnemyBullet.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\IntermediateEnemy.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\BasicEnemy.cs" />
