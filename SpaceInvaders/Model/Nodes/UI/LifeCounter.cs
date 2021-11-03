@@ -11,7 +11,9 @@ namespace SpaceInvaders.Model.Nodes.UI
     /// <seealso cref="SpaceInvaders.Model.Nodes.Node2D" />
     public class LifeCounter: Node2D
     {
-        private const double spritePadding = 8;
+        #region Data members
+
+        private const double SpritePadding = 8;
         private static readonly Type BaseSpriteType = typeof(BaseSprite);
 
         private readonly List<AnimatedSprite> lifeSprites;
@@ -22,6 +24,9 @@ namespace SpaceInvaders.Model.Nodes.UI
         private int maxLives;
         private int currentLives;
 
+        #endregion
+
+        #region Properties
         /// <summary>
         ///     Gets or sets the maximum lives.<br />
         ///     MaxLives will not go below 0.
@@ -70,6 +75,10 @@ namespace SpaceInvaders.Model.Nodes.UI
         /// </value>
         public double Width => this.lifeSprites.Last().Right - this.lifeSprites[0].Left;
 
+        #endregion
+
+        #region Constructors
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="LifeCounter" /> class.<br />
         ///     Precondition: healthySprite must be the type of a class derived from BaseSprite&amp;&amp;<br />
@@ -114,6 +123,10 @@ namespace SpaceInvaders.Model.Nodes.UI
             this.createInitialSprites();
         }
 
+        #endregion
+
+        #region Methods
+
         private void createInitialSprites()
         {
             var currentX = 0.0;
@@ -124,7 +137,7 @@ namespace SpaceInvaders.Model.Nodes.UI
                 sprite.Stop();
 
                 sprite.X = currentX;
-                currentX += sprite.Width + spritePadding;
+                currentX += sprite.Width + SpritePadding;
 
                 this.lifeSprites.Add(sprite);
                 this.AttachChild(sprite);
@@ -155,5 +168,7 @@ namespace SpaceInvaders.Model.Nodes.UI
             var frame = new AnimationFrame(sprite, 1);
             return frame;
         }
+
+        #endregion
     }
 }

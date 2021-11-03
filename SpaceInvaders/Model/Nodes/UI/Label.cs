@@ -8,7 +8,13 @@ namespace SpaceInvaders.Model.Nodes.UI
     /// <seealso cref="SpaceInvaders.Model.Nodes.RenderableNode" />
     public class Label : RenderableNode
     {
+        #region Data members
+
         private readonly LabelSprite labelSprite;
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         ///     Gets the width.
@@ -46,7 +52,9 @@ namespace SpaceInvaders.Model.Nodes.UI
             set => this.labelSprite.Text = value;
         }
 
+        #endregion
 
+        #region Constructors
         /// <summary>
         ///     Initializes a new instance of the <see cref="Label" /> class with blank text.<br />
         ///     Precondition: None<br />
@@ -84,5 +92,6 @@ namespace SpaceInvaders.Model.Nodes.UI
             this.labelSprite.Text = text;
         }
 
+        #endregion
     }
 }
