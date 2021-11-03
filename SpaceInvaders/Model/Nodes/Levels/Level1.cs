@@ -190,6 +190,12 @@ namespace SpaceInvaders.Model.Nodes.Levels
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)
         {
+            this.handleInput();   
+            base.Update(delta * this.gameSpeed);
+        }
+
+        private void handleInput()
+        {
             if (Input.IsKeyPressed(ToggleStarsKey) && !this.togglePressedLastFrame)
             {
                 this.toggleStarVisibility();
@@ -204,8 +210,6 @@ namespace SpaceInvaders.Model.Nodes.Levels
             }
 
             this.togglePressedLastFrame = Input.IsKeyPressed(ToggleStarsKey);
-
-            base.Update(delta * this.gameSpeed);
         }
 
         private void toggleStarVisibility()
