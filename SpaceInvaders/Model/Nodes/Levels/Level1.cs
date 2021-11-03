@@ -142,6 +142,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
             {
                 var currentType = classOrder[i];
 
+                //Pads spaces to the left of the row
                 for (var j = 0; j < i; j++)
                 {
                     enemyOrder.Add(null);
@@ -155,6 +156,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
                     enemyOrder.Add((Enemy) enemy);
                 }
 
+                //Pads spaces to the right of the row
                 for (var j = 0; j < i; j++)
                 {
                     enemyOrder.Add(null);
