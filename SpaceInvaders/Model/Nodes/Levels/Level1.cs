@@ -25,10 +25,14 @@ namespace SpaceInvaders.Model.Nodes.Levels
         private const int TotalMovementSteps = 19;
         private const int XMoveAmount = 10;
         private const double UiBuffer = 4;
+        private const double SpeedChangeAmount = .01;
         private const VirtualKey ToggleStarsKey = VirtualKey.S;
+        private const VirtualKey SpeedUpKey = VirtualKey.Up;
+        private const VirtualKey SpeedDownKey = VirtualKey.Down;
 
-        private int curMovementStep = 9;
-        private int movementFactor = 1;
+        private int curMovementStep;
+        private int movementFactor;
+        private double gameSpeed;
         private int enemiesRemaining;
         private bool togglePressedLastFrame;
 
@@ -49,6 +53,10 @@ namespace SpaceInvaders.Model.Nodes.Levels
         /// </summary>
         public Level1()
         {
+            this.curMovementStep = 9;
+            this.movementFactor = 1;
+            this.gameSpeed = 1;
+
             this.addBackground();
             this.addPlayer();
             this.addEnemyHelperNodes();
@@ -186,10 +194,18 @@ namespace SpaceInvaders.Model.Nodes.Levels
             {
                 this.toggleStarVisibility();
             }
+            if (Input.IsKeyPressed(SpeedUpKey))
+            {
+                this.gameSpeed = Math.Min(this.gameSpeed + SpeedChangeAmount, 2);
+            }
+            if (Input.IsKeyPressed(SpeedDownKey))
+            {
+                this.gameSpeed = Math.Max(this.gameSpeed - SpeedChangeAmount, .5);
+            }
 
             this.togglePressedLastFrame = Input.IsKeyPressed(ToggleStarsKey);
 
-            base.Update(delta);
+            base.Update(delta * this.gameSpeed);
         }
 
         private void toggleStarVisibility()
