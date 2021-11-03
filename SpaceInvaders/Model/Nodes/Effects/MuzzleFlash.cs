@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Numerics;
 using SpaceInvaders.View.Sprites.Effects;
 
 namespace SpaceInvaders.Model.Nodes.Effects
@@ -8,7 +7,12 @@ namespace SpaceInvaders.Model.Nodes.Effects
     {
         public MuzzleFlash() : base(new MuzzleFlashSprite(), RenderLayer.MainTop)
         {
-            Timer removalTimer = new Timer(.1, false);
+            this.setupTimer();
+        }
+
+        private void setupTimer()
+        {
+            var removalTimer = new Timer(.1, false);
             removalTimer.Start();
             removalTimer.Tick += this.onRemovalTimerTick;
             AttachChild(removalTimer);
