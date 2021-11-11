@@ -78,8 +78,8 @@ namespace SpaceInvaders.Model
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Vector2" /> class. <br />
-        ///     Precondition: !double.IsNaN(value) && !double.IsInfinity(value)
-        ///     PostCondition: this.X == value && this.Y == value
+        ///     Precondition: !double.IsNaN(value) &amp;&amp; !double.IsInfinity(value)
+        ///     PostCondition: this.X == value &amp;&amp; this.Y == value
         /// </summary>
         /// <param name="value">The X and Y value.</param>
         /// <exception cref="System.ArgumentException">
@@ -105,9 +105,9 @@ namespace SpaceInvaders.Model
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Vector2" /> class. <br />
-        ///     Precondition: !double.IsNaN(x) && !double.IsInfinity(x) &&
-        ///     !double.IsNaN(y) && !double.IsInfinity(y)
-        ///     PostCondition: this.X == value && this.Y == value
+        ///     Precondition: !double.IsNaN(x) &amp;&amp; !double.IsInfinity(x) &amp;&amp;
+        ///     !double.IsNaN(y) &amp;&amp; !double.IsInfinity(y)
+        ///     PostCondition: this.X == value &amp;&amp; this.Y == value
         /// </summary>
         /// <exception cref="System.ArgumentException">
         ///     x must not be NaN

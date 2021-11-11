@@ -7,6 +7,10 @@ using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Nodes
 {
+    /// <summary>
+    ///     Represents any node that may be rendered.
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.Model.Nodes.Area" />
     public abstract class RenderableNode : Area
     {
         #region Data members

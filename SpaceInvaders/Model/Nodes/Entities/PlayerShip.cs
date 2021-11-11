@@ -146,6 +146,9 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
         #region Methods
 
+        /// <summary>
+        /// Occurs when [current lives changed].
+        /// </summary>
         public event EventHandler<int> CurrentLivesChanged;
 
         private void setupCollision()
