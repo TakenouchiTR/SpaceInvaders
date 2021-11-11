@@ -117,6 +117,12 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             this.stateMachine.ChangeAnimation("normal");
         }
 
+        /// <summary>
+        /// The update loop for the Node.<br />
+        /// Precondition: None<br />
+        /// Postcondition: Node completes its update step
+        /// </summary>
+        /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)
         {
             X += Speed * delta * this.MovementFactor;

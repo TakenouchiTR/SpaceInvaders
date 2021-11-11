@@ -171,6 +171,9 @@ namespace SpaceInvaders.Model.Nodes
             this.removalQueue.Clear();
         }
 
+        /// <summary>
+        /// Removes all children without firing the child's Removed event
+        /// </summary>
         protected void SilentlyRemoveAllChildren()
         {
             foreach (var child in this.children)
@@ -280,7 +283,7 @@ namespace SpaceInvaders.Model.Nodes
         ///     Postcondition: None
         /// </summary>
         /// <returns>A list of all collision areas below the node</returns>
-        public List<CollisionArea> GetCollisionAreas()
+        public IList<CollisionArea> GetCollisionAreas()
         {
             var areas = new List<CollisionArea>();
 
