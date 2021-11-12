@@ -26,7 +26,7 @@ namespace SpaceInvaders.Model.Nodes
         /// <value>
         ///     The children.
         /// </value>
-        public List<Node> Children => this.children.ToList();
+        public IList<Node> Children => this.children.ToList();
 
         /// <summary>
         ///     Gets or sets the node's parent.

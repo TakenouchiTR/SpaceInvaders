@@ -53,7 +53,7 @@ namespace SpaceInvaders.Model.Nodes
         /// <value>
         ///     The animations.
         /// </value>
-        public List<AnimatedSprite> Animations => this.animations.Values.ToList();
+        public IList<AnimatedSprite> Animations => this.animations.Values.ToList();
 
         #endregion
 
