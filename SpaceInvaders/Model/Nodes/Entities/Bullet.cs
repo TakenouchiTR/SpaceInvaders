@@ -6,7 +6,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
     ///     The general class for any projectile fired
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.Nodes.Entities.Entity" />
-    public class Bullet : Entity
+    public abstract class Bullet : Entity
     {
         #region Properties
 
