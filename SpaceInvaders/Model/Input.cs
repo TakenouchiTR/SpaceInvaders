@@ -75,6 +75,18 @@ namespace SpaceInvaders.Model
             return false;
         }
 
+
+        /// <summary>
+        ///     Gets the strength of a specified key press.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns>1 if the key is pressed, otherwise 0.</returns>
+        public static int GetInputStrength(VirtualKey key)
+        {
+            return IsKeyPressed(key) ? 1 : 0;
+        }
+
+
         #endregion
     }
 }

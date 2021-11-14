@@ -209,16 +209,8 @@ namespace SpaceInvaders.Model.Nodes.Entities
         {
             double moveDistance = 0;
 
-            if (Input.IsKeyPressed(LeftKey))
-            {
-                moveDistance -= 1;
-            }
-
-            if (Input.IsKeyPressed(RightKey))
-            {
-                moveDistance += 1;
-            }
-
+            moveDistance = Input.GetInputStrength(RightKey) - Input.GetInputStrength(LeftKey);
+            
             if (moveDistance != 0)
             {
                 moveDistance *= MoveSpeed * delta;
