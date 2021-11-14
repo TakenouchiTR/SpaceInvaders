@@ -193,6 +193,8 @@ namespace SpaceInvaders.Model.Nodes
                     this.Stop();
                 }
             }
+
+            base.Update(delta);
         }
 
         /// <summary>
