@@ -214,6 +214,9 @@
     <Compile Include="View\Sprites\Entities\Enemies\MasterEnemySpriteBase.xaml.cs">
       <DependentUpon>MasterEnemySpriteBase.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Sprites\Entities\ShieldSegmentSprite.xaml.cs">
+      <DependentUpon>ShieldSegmentSprite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\ISpriteRender.cs" />
     <Compile Include="View\Sprites\Entities\PlayerBulletSprite.xaml.cs">
       <DependentUpon>PlayerBulletSprite.xaml</DependentUpon>
@@ -343,6 +346,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\Background\StarSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\Entities\ShieldSegmentSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
