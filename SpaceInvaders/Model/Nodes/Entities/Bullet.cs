@@ -35,6 +35,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
             Collision.Monitoring = true;
             Collision.Monitorable = true;
             Collision.Collided += this.onCollided;
+            Collision.CollisionMasks = PhysicsLayer.World;
         }
 
         #endregion

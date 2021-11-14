@@ -19,7 +19,7 @@
         {
             Velocity = new Vector2(0, 350);
             Collision.CollisionLayers = PhysicsLayer.EnemyHitbox;
-            Collision.CollisionMasks = PhysicsLayer.Player;
+            Collision.CollisionMasks |= PhysicsLayer.Player;
         }
 
         #endregion
