@@ -9,7 +9,7 @@ namespace SpaceInvaders.Model.Nodes.UI
     ///     Draws a life counter
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.Nodes.Node2D" />
-    public class LifeCounter: Node2D
+    public class LifeCounter : Node2D
     {
         #region Data members
 
@@ -27,6 +27,7 @@ namespace SpaceInvaders.Model.Nodes.UI
         #endregion
 
         #region Properties
+
         /// <summary>
         ///     Gets or sets the maximum lives.<br />
         ///     MaxLives will not go below 0.
@@ -36,7 +37,7 @@ namespace SpaceInvaders.Model.Nodes.UI
         /// </value>
         public int MaxLives
         {
-            get => this.maxLives; 
+            get => this.maxLives;
             set => this.maxLives = Math.Max(value, 0);
         }
 
@@ -94,14 +95,17 @@ namespace SpaceInvaders.Model.Nodes.UI
         /// <exception cref="System.ArgumentException">
         ///     healthySprite must either be the type of a class derived from BaseSprite.
         ///     or
-        ///     hurtSprite must either be the type of a class derived from BaseSprite.</exception>
+        ///     hurtSprite must either be the type of a class derived from BaseSprite.
+        /// </exception>
         /// <exception cref="System.ArgumentOutOfRangeException">lives</exception>
         public LifeCounter(Type healthySprite, Type hurtSprite, int lives, RenderLayer layer)
         {
             if (!healthySprite.IsSubclassOf(BaseSpriteType))
             {
-                throw new ArgumentException("healthySprite must either be the type of a class derived from BaseSprite.");
+                throw new ArgumentException(
+                    "healthySprite must either be the type of a class derived from BaseSprite.");
             }
+
             if (!hurtSprite.IsSubclassOf(BaseSpriteType))
             {
                 throw new ArgumentException("hurtSprite must either be the type of a class derived from BaseSprite.");
@@ -140,20 +144,18 @@ namespace SpaceInvaders.Model.Nodes.UI
                 currentX += sprite.Width + SpritePadding;
 
                 this.lifeSprites.Add(sprite);
-                this.AttachChild(sprite);
+                AttachChild(sprite);
             }
         }
 
         private AnimatedSprite createSprite()
         {
-            var frames = new List<AnimationFrame>() 
-            {
+            var frames = new List<AnimationFrame> {
                 createFrame(this.healthySprite),
                 createFrame(this.hurtSprite)
             };
 
-            var sprite = new AnimatedSprite(frames) 
-            {
+            var sprite = new AnimatedSprite(frames) {
                 Layer = this.layer
             };
 
@@ -163,7 +165,7 @@ namespace SpaceInvaders.Model.Nodes.UI
         private static AnimationFrame createFrame(Type frameType)
         {
             var constructor = frameType.GetConstructors()[0];
-            var sprite = (BaseSprite) constructor.Invoke(new object[] {});
+            var sprite = (BaseSprite) constructor.Invoke(new object[] { });
 
             var frame = new AnimationFrame(sprite, 1);
             return frame;

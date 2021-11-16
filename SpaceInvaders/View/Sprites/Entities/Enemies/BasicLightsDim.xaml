@@ -15,7 +15,8 @@
     </UserControl.Resources>
 
     <Canvas>
-        <Rectangle Width="4" Height="8" Fill="{StaticResource LightColor}" Stroke="{StaticResource OutlineColor}"/>
-        <Rectangle Width="4" Height="8" Canvas.Left="8" Fill="{StaticResource LightColor}" Stroke="{StaticResource OutlineColor}"/>
+        <Rectangle Width="4" Height="8" Fill="{StaticResource LightColor}" Stroke="{StaticResource OutlineColor}" />
+        <Rectangle Width="4" Height="8" Canvas.Left="8" Fill="{StaticResource LightColor}"
+                   Stroke="{StaticResource OutlineColor}" />
     </Canvas>
 </base:BaseSprite>

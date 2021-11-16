@@ -2,7 +2,6 @@
     x:Class="SpaceInvaders.View.Sprites.Effects.MuzzleFlashSprite"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:SpaceInvaders.View.Sprites.Effects"
     xmlns:base="using:SpaceInvaders.View.Sprites"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -13,6 +12,6 @@
     Height="12">
 
     <Canvas>
-        <Polygon Points="6,18 10,16 12,13 9,15 11,13 6,0 1,13 3,15 0,13 2 16" Fill="Yellow" Stroke="OrangeRed"/>
+        <Polygon Points="6,18 10,16 12,13 9,15 11,13 6,0 1,13 3,15 0,13 2 16" Fill="Yellow" Stroke="OrangeRed" />
     </Canvas>
 </base:BaseSprite>

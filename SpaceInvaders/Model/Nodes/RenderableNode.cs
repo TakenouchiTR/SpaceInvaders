@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SpaceInvaders.View.Sprites;
 
 namespace SpaceInvaders.Model.Nodes
@@ -245,7 +241,7 @@ namespace SpaceInvaders.Model.Nodes
 
             render?.RenderAt(this.X, this.Y);
         }
-        
+
         #endregion
     }
 }

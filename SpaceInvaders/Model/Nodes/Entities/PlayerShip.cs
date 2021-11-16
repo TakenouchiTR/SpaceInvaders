@@ -147,7 +147,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
         #region Methods
 
         /// <summary>
-        /// Occurs when [current lives changed].
+        ///     Occurs when [current lives changed].
         /// </summary>
         public event EventHandler<int> CurrentLivesChanged;
 
@@ -208,7 +208,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
         private void handleMovement(double delta)
         {
             double moveDistance = Input.GetInputStrength(RightKey) - Input.GetInputStrength(LeftKey);
-            
+
             if (moveDistance != 0)
             {
                 moveDistance *= MoveSpeed * delta;

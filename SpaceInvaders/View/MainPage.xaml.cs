@@ -53,8 +53,8 @@ namespace SpaceInvaders.View
             Window.Current.CoreWindow.KeyDown += Input.OnKeyDown;
             Window.Current.CoreWindow.KeyUp += Input.OnKeyUp;
 
-            SpriteNode.SpriteHidden += this.onSpriteNodeHidden;
-            SpriteNode.SpriteShown += this.onSpriteNodeShown;
+            RenderableNode.SpriteHidden += this.onSpriteNodeHidden;
+            RenderableNode.SpriteShown += this.onSpriteNodeShown;
 
             this.createAndPopulateCanvasLayers();
 
@@ -95,11 +95,11 @@ namespace SpaceInvaders.View
             }
 
             this.currentLevel.CleanupLevel();
-            
+
             this.currentLevel.GameFinished -= this.onCurrentLevelGameFinished;
             this.currentLevel = null;
         }
-        
+
         private void onSpriteNodeHidden(object sender, BaseSprite e)
         {
             if (sender is RenderableNode node && e != null)
@@ -140,7 +140,7 @@ namespace SpaceInvaders.View
                 CoreApplication.Exit();
             }
         }
-        
+
         #endregion
     }
 }

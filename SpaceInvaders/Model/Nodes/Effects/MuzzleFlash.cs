@@ -4,18 +4,24 @@ using SpaceInvaders.View.Sprites.Effects;
 namespace SpaceInvaders.Model.Nodes.Effects
 {
     /// <summary>
-    /// Plays a quick muzzle flash effect
+    ///     Plays a quick muzzle flash effect
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.Nodes.SpriteNode" />
-    public class MuzzleFlash: SpriteNode
+    public class MuzzleFlash : SpriteNode
     {
+        #region Constructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="MuzzleFlash"/> class.
+        ///     Initializes a new instance of the <see cref="MuzzleFlash" /> class.
         /// </summary>
         public MuzzleFlash() : base(new MuzzleFlashSprite(), RenderLayer.MainTop)
         {
             this.setupTimer();
         }
+
+        #endregion
+
+        #region Methods
 
         private void setupTimer()
         {
@@ -29,5 +35,7 @@ namespace SpaceInvaders.Model.Nodes.Effects
         {
             QueueForRemoval();
         }
+
+        #endregion
     }
 }

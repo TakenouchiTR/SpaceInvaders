@@ -1,6 +1,5 @@
 ﻿using System;
 using Windows.UI.Xaml.Media;
-using SpaceInvaders.View.Sprites;
 using SpaceInvaders.View.Sprites.Effects;
 
 namespace SpaceInvaders.Model.Nodes.Effects

@@ -55,6 +55,7 @@ namespace SpaceInvaders.Model.Nodes.UI
         #endregion
 
         #region Constructors
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="Label" /> class with blank text.<br />
         ///     Precondition: None<br />
@@ -62,7 +63,6 @@ namespace SpaceInvaders.Model.Nodes.UI
         /// </summary>
         public Label() : this(string.Empty, DefaultRenderLayer)
         {
-
         }
 
         /// <summary>

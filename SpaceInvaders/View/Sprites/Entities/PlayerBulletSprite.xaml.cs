@@ -8,7 +8,7 @@ namespace SpaceInvaders.View.Sprites.Entities
     /// <seealso cref="SpaceInvaders.View.Sprites.BaseSprite" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector2" />
-public sealed partial class PlayerBulletSprite
+    public sealed partial class PlayerBulletSprite
     {
         #region Constructors
 

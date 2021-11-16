@@ -54,6 +54,7 @@ namespace SpaceInvaders.Model.Nodes
                 {
                     value = this.Parent.CreateValidName(value);
                 }
+
                 this.name = value;
             }
         }
@@ -72,7 +73,7 @@ namespace SpaceInvaders.Model.Nodes
             this.removalQueue = new Queue<Node>();
             this.additionQueue = new Queue<Node>();
             this.children = new Dictionary<string, Node>();
-            this.name = this.GetType().ToString().Split(".").Last();
+            this.name = GetType().ToString().Split(".").Last();
         }
 
         #endregion
@@ -195,7 +196,7 @@ namespace SpaceInvaders.Model.Nodes
         }
 
         /// <summary>
-        /// Removes all children without firing the child's Removed event
+        ///     Removes all children without firing the child's Removed event
         /// </summary>
         protected void SilentlyRemoveAllChildren()
         {
@@ -302,7 +303,7 @@ namespace SpaceInvaders.Model.Nodes
         }
 
         /// <summary>
-        ///     Checks if a specified name is unique to the node's children. <br/>
+        ///     Checks if a specified name is unique to the node's children. <br />
         ///     If it is unique, it will return the name without alterations. If it is not unique, a number will be <br />
         ///     added to the end to create a unique name.
         /// </summary>
@@ -314,6 +315,7 @@ namespace SpaceInvaders.Model.Nodes
             {
                 throw new ArgumentNullException(nameof(nodeName));
             }
+
             if (!this.children.ContainsKey(nodeName))
             {
                 return nodeName;

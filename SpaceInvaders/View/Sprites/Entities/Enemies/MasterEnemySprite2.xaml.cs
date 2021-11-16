@@ -8,12 +8,16 @@ namespace SpaceInvaders.View.Sprites.Entities.Enemies
     /// <seealso cref="SpaceInvaders.View.Sprites.BaseSprite" />
     public sealed partial class MasterEnemySprite2
     {
+        #region Constructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="MasterEnemySprite2"/> class.
+        ///     Initializes a new instance of the <see cref="MasterEnemySprite2" /> class.
         /// </summary>
         public MasterEnemySprite2()
         {
             this.InitializeComponent();
         }
+
+        #endregion
     }
 }

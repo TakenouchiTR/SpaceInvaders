@@ -75,7 +75,6 @@ namespace SpaceInvaders.Model
             return false;
         }
 
-
         /// <summary>
         ///     Gets the strength of a specified key press.
         /// </summary>
@@ -85,7 +84,6 @@ namespace SpaceInvaders.Model
         {
             return IsKeyPressed(key) ? 1 : 0;
         }
-
 
         #endregion
     }

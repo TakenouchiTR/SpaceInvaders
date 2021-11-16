@@ -13,7 +13,7 @@
     Width="27">
 
     <Canvas>
-        <local:BasicEnemySpriteBase/>
-        <local:BasicLightsLit Canvas.Left="8" Canvas.Top="10"/>
+        <local:BasicEnemySpriteBase />
+        <local:BasicLightsLit Canvas.Left="8" Canvas.Top="10" />
     </Canvas>
 </base:BaseSprite>

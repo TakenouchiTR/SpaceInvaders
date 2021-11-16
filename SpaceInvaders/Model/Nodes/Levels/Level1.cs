@@ -7,7 +7,6 @@ using SpaceInvaders.Model.Nodes.Entities;
 using SpaceInvaders.Model.Nodes.Entities.Enemies;
 using SpaceInvaders.Model.Nodes.UI;
 using SpaceInvaders.View;
-using SpaceInvaders.View.Sprites.Entities;
 using SpaceInvaders.View.Sprites.UI;
 
 namespace SpaceInvaders.Model.Nodes.Levels
@@ -117,14 +116,14 @@ namespace SpaceInvaders.Model.Nodes.Levels
             this.lifeCounter = new LifeCounter(typeof(FullHeartSprite), typeof(EmptyHeartSprite), 3, RenderLayer.UiTop);
             this.lifeCounter.X = MainPage.ApplicationWidth - this.lifeCounter.Width - UiBuffer;
             this.lifeCounter.Y += UiBuffer;
-            
-            this.AttachChild(this.scoreLabel);
-            this.AttachChild(this.lifeCounter);
+
+            AttachChild(this.scoreLabel);
+            AttachChild(this.lifeCounter);
         }
 
         private void updateScoreDisplay()
         {
-            this.scoreLabel.Text = $"Score: {this.Score}";
+            this.scoreLabel.Text = $"Score: {Score}";
         }
 
         private IEnumerable<Enemy> createEnemyOrder()
@@ -192,7 +191,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)
         {
-            this.handleInput();   
+            this.handleInput();
             base.Update(delta * this.gameSpeed);
         }
 
@@ -202,10 +201,12 @@ namespace SpaceInvaders.Model.Nodes.Levels
             {
                 this.toggleStarVisibility();
             }
+
             if (Input.IsKeyPressed(SpeedUpKey))
             {
                 this.gameSpeed = Math.Min(this.gameSpeed + SpeedChangeAmount, 2);
             }
+
             if (Input.IsKeyPressed(SpeedDownKey))
             {
                 this.gameSpeed = Math.Max(this.gameSpeed - SpeedChangeAmount, .5);
@@ -259,7 +260,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
             {
                 this.movementFactor *= -1;
             }
-            
+
             this.enemyGroup.X += XMoveAmount * this.movementFactor;
         }
 

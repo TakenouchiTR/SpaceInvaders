@@ -3,17 +3,21 @@
 namespace SpaceInvaders.View.Sprites.UI
 {
     /// <summary>
-    /// Draws a full heart
+    ///     Draws a full heart
     /// </summary>
     /// <seealso cref="Windows.UI.Xaml.Controls.UserControl" />
     public sealed partial class FullHeartSprite
     {
+        #region Constructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="FullHeartSprite"/> class.
+        ///     Initializes a new instance of the <see cref="FullHeartSprite" /> class.
         /// </summary>
         public FullHeartSprite()
         {
             this.InitializeComponent();
         }
+
+        #endregion
     }
 }

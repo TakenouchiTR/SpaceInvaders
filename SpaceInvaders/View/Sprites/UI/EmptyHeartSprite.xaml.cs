@@ -3,19 +3,23 @@
 namespace SpaceInvaders.View.Sprites.UI
 {
     /// <summary>
-    /// Draws an empty heart
+    ///     Draws an empty heart
     /// </summary>
     /// <seealso cref="SpaceInvaders.View.Sprites.BaseSprite" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector2" />
     public sealed partial class EmptyHeartSprite
     {
+        #region Constructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="EmptyHeartSprite"/> class.
+        ///     Initializes a new instance of the <see cref="EmptyHeartSprite" /> class.
         /// </summary>
         public EmptyHeartSprite()
         {
             this.InitializeComponent();
         }
+
+        #endregion
     }
 }
