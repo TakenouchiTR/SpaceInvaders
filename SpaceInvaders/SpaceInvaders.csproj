@@ -147,6 +147,7 @@
     <Compile Include="Model\Nodes\Node2D.cs" />
     <Compile Include="Model\Nodes\Levels\LevelBase.cs" />
     <Compile Include="Model\Nodes\RenderableNode.cs" />
+    <Compile Include="Model\Nodes\SoundPlayer.cs" />
     <Compile Include="Model\Nodes\UI\Label.cs" />
     <Compile Include="Model\Nodes\UI\LifeCounter.cs" />
     <Compile Include="Model\PhysicsLayer.cs" />
