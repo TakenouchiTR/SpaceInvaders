@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SpaceInvaders.Model.Nodes.Entities
 {
     /// <summary>
-    ///   A shield used in a level
+    ///   An arrangement of shield segments for use in a level
     /// </summary>
     class LevelShield : Node2D
     {
@@ -15,27 +15,35 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
         private const int ShieldSegmentBorderThickness = 2;
         private const int ShieldSegmentVerticalPadding = 5;
-        private const int ShieldSegments = 3;
-        private const int Rows = 2;
+        private int ShieldSegments;
+        private int Rows;
 
         #endregion
 
         #region Constructors
 
-        /// <summary>Initializes a new instance of the <see cref="LevelShield" /> class.</summary>
-        public LevelShield()
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="LevelShield" /> class.
+        /// </summary>
+        /// <param name="numberShieldSegments">the maximum number of shield segments in a row</param>
+        /// <param name="numberRows">the number of shield segment rows</param>
+        public LevelShield(int numberShieldSegments, int numberRows)
         {
+            this.ShieldSegments = numberShieldSegments;
+            this.Rows = numberRows;
+
             this.addShieldSegments();
         }
 
         #endregion
 
         #region Methods
+
         private void addShieldSegments()
         {
             for (int row = 0; row < Rows; row++)
             {
-                int numberSegmentsThisRow = this.isRowEven(row) ? ShieldSegments : ShieldSegments - 1;
+                int numberSegmentsThisRow = this.isRowEven(row) ? this.ShieldSegments : this.ShieldSegments - 1;
                 double xpos = this.isRowEven(row) ? 0 : ((new ShieldSegment()).Width - ShieldSegmentBorderThickness) / 2;
                 double ypos = row * (new ShieldSegment()).Height;
 
