@@ -20,6 +20,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
     {
         #region Data members
 
+        private const int ShieldCount = 3;
         private const int StarCount = 50;
         private const int TotalMovementSteps = 19;
         private const int XMoveAmount = 10;
@@ -61,6 +62,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
             this.addEnemyHelperNodes();
             this.addEnemies();
             this.addUi();
+            this.addShields();
         }
 
         #endregion
@@ -262,6 +264,21 @@ namespace SpaceInvaders.Model.Nodes.Levels
             }
 
             this.enemyGroup.X += XMoveAmount * this.movementFactor;
+        }
+
+        private void addShields()
+        {
+            var y = 350;
+            for (int shieldIndex = 1; shieldIndex <= ShieldCount; shieldIndex++)
+            {
+                var x = MainPage.ApplicationWidth / (ShieldCount + 1) * shieldIndex;
+                var currentShield = new LevelShield(3, 2)
+                {
+                    Center = new Vector2(x, y)
+                };
+
+                AttachChild(currentShield);
+            }
         }
 
         #endregion
