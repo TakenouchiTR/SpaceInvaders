@@ -9,7 +9,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
     /// <summary>
     ///   An arrangement of shield segments for use in a level
     /// </summary>
-    class LevelShield : Node2D
+    class LevelShield : Area
     {
         #region Data members
 
@@ -27,11 +27,12 @@ namespace SpaceInvaders.Model.Nodes.Entities
         /// </summary>
         /// <param name="numberShieldSegments">the maximum number of shield segments in a row</param>
         /// <param name="numberRows">the number of shield segment rows</param>
-        public LevelShield(int numberShieldSegments, int numberRows)
+        public LevelShield(int numberShieldSegments, int numberRows) : base(numberShieldSegments * (new ShieldSegment()).Width, numberRows * (new ShieldSegment()).Height)
         {
             this.ShieldSegments = numberShieldSegments;
             this.Rows = numberRows;
 
+            
             this.addShieldSegments();
         }
 
