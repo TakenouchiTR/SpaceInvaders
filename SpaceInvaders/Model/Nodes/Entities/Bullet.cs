@@ -29,12 +29,13 @@ namespace SpaceInvaders.Model.Nodes.Entities
         ///     this.Collision.Monitorable == true &amp;&amp;<br />
         ///     this.Sprite is PlayerBulletSprite
         /// </summary>
-        public Bullet() : base(new PlayerBulletSprite())
+        protected Bullet() : base(new PlayerBulletSprite())
         {
             this.Velocity = new Vector2();
             Collision.Monitoring = true;
             Collision.Monitorable = true;
             Collision.Collided += this.onCollided;
+            Collision.CollisionEnded += this.onCollisionEnded;
             Collision.CollisionMasks = PhysicsLayer.World;
         }
 
@@ -62,6 +63,12 @@ namespace SpaceInvaders.Model.Nodes.Entities
         private void onCollided(object sender, CollisionArea e)
         {
             QueueForRemoval();
+        }
+
+        private void onCollisionEnded(object sender, CollisionArea e)
+        {
+            Collision.Monitoring = false;
+            Collision.Monitorable = false;
         }
 
         #endregion
