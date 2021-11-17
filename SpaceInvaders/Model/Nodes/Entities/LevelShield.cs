@@ -13,6 +13,8 @@ namespace SpaceInvaders.Model.Nodes.Entities
     {
         #region Data members
 
+        private const int ShieldSegmentWidth = 14;
+        private const int ShieldSegmentHeight = 16;
         private const int ShieldSegmentBorderThickness = 2;
         private const int ShieldSegmentVerticalPadding = 5;
         private int ShieldSegments;
@@ -27,7 +29,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
         /// </summary>
         /// <param name="numberShieldSegments">the maximum number of shield segments in a row</param>
         /// <param name="numberRows">the number of shield segment rows</param>
-        public LevelShield(int numberShieldSegments, int numberRows) : base(numberShieldSegments * (new ShieldSegment()).Width, numberRows * (new ShieldSegment()).Height)
+        public LevelShield(int numberShieldSegments, int numberRows) : base(numberShieldSegments * ShieldSegmentWidth, numberRows * ShieldSegmentHeight)
         {
             this.ShieldSegments = numberShieldSegments;
             this.Rows = numberRows;
@@ -45,8 +47,8 @@ namespace SpaceInvaders.Model.Nodes.Entities
             for (int row = 0; row < Rows; row++)
             {
                 int numberSegmentsThisRow = this.isRowEven(row) ? this.ShieldSegments : this.ShieldSegments - 1;
-                double xpos = this.isRowEven(row) ? 0 : ((new ShieldSegment()).Width - ShieldSegmentBorderThickness) / 2;
-                double ypos = row * (new ShieldSegment()).Height;
+                double xpos = this.isRowEven(row) ? 0 : (ShieldSegmentWidth - ShieldSegmentBorderThickness) / 2;
+                double ypos = row * ShieldSegmentHeight;
 
                 if (row > 0)
                 {

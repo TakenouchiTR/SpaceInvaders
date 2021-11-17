@@ -272,7 +272,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
             for (int shieldIndex = 1; shieldIndex <= ShieldCount; shieldIndex++)
             {
                 var x = MainPage.ApplicationWidth / (ShieldCount + 1) * shieldIndex;
-                var currentShield = new LevelShield(3, 2)
+                var currentShield = new LevelShield(5, 3)
                 {
                     Center = new Vector2(x, y)
                 };
