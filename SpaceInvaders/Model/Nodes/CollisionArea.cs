@@ -15,6 +15,11 @@ namespace SpaceInvaders.Model.Nodes
         /// </summary>
         public EventHandler<CollisionArea> Collided;
 
+        /// <summary>
+        ///     Occurs after both this object and the collided object have finished their collision event
+        /// </summary>
+        public EventHandler<CollisionArea> CollisionEnded;
+
         #endregion
 
         #region Properties
@@ -115,9 +120,18 @@ namespace SpaceInvaders.Model.Nodes
         public override void CompleteRemoval(bool emitRemovedEvent = true)
         {
             base.CompleteRemoval(emitRemovedEvent);
+
             if (this.Collided != null)
             {
                 foreach (var subscriber in this.Collided?.GetInvocationList())
+                {
+                    Removed -= subscriber as EventHandler;
+                }
+            }
+
+            if (this.CollisionEnded != null)
+            {
+                foreach (var subscriber in this.CollisionEnded?.GetInvocationList())
                 {
                     Removed -= subscriber as EventHandler;
                 }
@@ -152,6 +166,16 @@ namespace SpaceInvaders.Model.Nodes
             if (target.isMaskingTarget(this))
             {
                 target.Collided?.Invoke(target, this);
+            }
+
+            if (this.isMaskingTarget(target))
+            {
+                this.CollisionEnded?.Invoke(this, target);
+            }
+
+            if (target.isMaskingTarget(this))
+            {
+                target.CollisionEnded?.Invoke(target, this);
             }
         }
 
