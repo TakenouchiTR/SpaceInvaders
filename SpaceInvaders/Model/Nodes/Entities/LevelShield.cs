@@ -56,6 +56,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 for (int shieldSegmentIndex = 0; shieldSegmentIndex < numberSegmentsThisRow; shieldSegmentIndex++)
                 {
                     var shieldSegment = new ShieldSegment();
+                    shieldSegment.Removed += this.onSegmentDestroyed;
                     AttachChild(shieldSegment);
                     shieldSegment.X = xpos;
                     shieldSegment.Y = ypos;
@@ -68,6 +69,14 @@ namespace SpaceInvaders.Model.Nodes.Entities
         private bool isRowEven(int row)
         {
             return row % 2 == 0;
+        }
+
+        private void onSegmentDestroyed(object sender, EventArgs e)
+        {
+            if (this.Children.Count == 0)
+            {
+                QueueForRemoval();
+            }
         }
 
         #endregion
