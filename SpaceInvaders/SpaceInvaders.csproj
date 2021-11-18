@@ -121,6 +121,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\AnimationFrame.cs" />
+    <Compile Include="Model\EnemyType.cs" />
     <Compile Include="Model\Input.cs" />
     <Compile Include="Model\Nodes\AnimatedSprite.cs" />
     <Compile Include="Model\Nodes\AnimationStateMachine.cs" />
