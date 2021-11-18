@@ -57,6 +57,30 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         #region Methods
 
+        /// <summary>
+        ///     Creates the enemy of the specified type
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>An instance of the specified enemy.</returns>
+        /// <exception cref="System.ArgumentOutOfRangeException">type - null</exception>
+        public static Enemy CreateEnemy(EnemyType type)
+        {
+            switch (type)
+            {
+                case EnemyType.BasicEnemy:
+                    return new BasicEnemy();
+                case EnemyType.IntermediateEnemy:
+                    return new IntermediateEnemy();
+                case EnemyType.AggressiveEnemy:
+                    return new AggresiveEnemy();
+                case EnemyType.MasterEnemy:
+                    return new MasterEnemy();
+                case EnemyType.BonusEnemy:
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
+        }
+
         private void onRemoved(object sender, EventArgs e)
         {
             var explosion = new Explosion {
