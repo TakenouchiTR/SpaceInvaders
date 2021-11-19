@@ -80,6 +80,54 @@ namespace SpaceInvaders.Model
         /// </value>
         public double Magnitude => Math.Sqrt(this.X * this.X + this.Y * this.Y);
 
+        /// <summary>
+        ///     Creates a Vector2 pointing up (0, -1).
+        /// </summary>
+        /// <value>
+        ///     A Vector2 pointing up
+        /// </value>
+        public static Vector2 Up => new Vector2(0, -1);
+
+        /// <summary>
+        ///     Creates a Vector2 pointing down (0, 1).
+        /// </summary>
+        /// <value>
+        ///     A Vector2 pointing down
+        /// </value>
+        public static Vector2 Down => new Vector2(0, 1);
+
+        /// <summary>
+        ///     Creates a Vector2 pointing left (-1, 0).
+        /// </summary>
+        /// <value>
+        ///     A Vector2 pointing left
+        /// </value>
+        public static Vector2 Left => new Vector2(-1, 0);
+
+        /// <summary>
+        ///     Creates a Vector2 pointing right (1, 0).
+        /// </summary>
+        /// <value>
+        ///     A Vector2 pointing right
+        /// </value>
+        public static Vector2 Right => new Vector2(1, 0);
+
+        /// <summary>
+        ///     Creates a Vector2 with both components set to 1.
+        /// </summary>
+        /// <value>
+        ///     A Vector2 with both components set to 1
+        /// </value>
+        public static Vector2 One => new Vector2(1);
+
+        /// <summary>
+        ///     Creates a Vector2 with both components set to 0.
+        /// </summary>
+        /// <value>
+        ///     A Vector2 with both components set to 0
+        /// </value>
+        public static Vector2 Zero => new Vector2();
+
         #endregion
 
         #region Constructors
