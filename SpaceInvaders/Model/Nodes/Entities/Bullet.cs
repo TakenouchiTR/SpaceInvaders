@@ -6,7 +6,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
     ///     The general class for any projectile fired
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.Nodes.Entities.Entity" />
-    public abstract class Bullet : Entity
+    public class Bullet : Entity
     {
         #region Properties
 
@@ -29,7 +29,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
         ///     this.Collision.Monitorable == true &amp;&amp;<br />
         ///     this.Sprite is PlayerBulletSprite
         /// </summary>
-        protected Bullet() : base(new PlayerBulletSprite())
+        public Bullet() : base(new PlayerBulletSprite())
         {
             this.Velocity = new Vector2();
             Collision.Monitoring = true;

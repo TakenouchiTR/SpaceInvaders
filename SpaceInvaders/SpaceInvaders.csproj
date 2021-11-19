@@ -136,7 +136,6 @@
     <Compile Include="Model\Nodes\Entities\Enemies\AggresiveEnemy.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\EnemyGroup.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\MasterEnemy.cs" />
-    <Compile Include="Model\Nodes\Entities\EnemyBullet.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\IntermediateEnemy.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\BasicEnemy.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\Enemy.cs" />
@@ -144,7 +143,6 @@
     <Compile Include="Model\Nodes\Entities\Entity.cs" />
     <Compile Include="Model\Nodes\Entities\Gun.cs" />
     <Compile Include="Model\Nodes\Entities\LevelShield.cs" />
-    <Compile Include="Model\Nodes\Entities\PlayerBullet.cs" />
     <Compile Include="Model\Nodes\Entities\PlayerShip.cs" />
     <Compile Include="Model\Nodes\Entities\ShieldSegment.cs" />
     <Compile Include="Model\Nodes\Levels\Level1.cs" />
