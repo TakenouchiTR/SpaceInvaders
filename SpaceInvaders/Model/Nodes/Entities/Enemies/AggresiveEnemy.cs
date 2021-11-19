@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using SpaceInvaders.Model.Nodes.Effects;
 using SpaceInvaders.View.Sprites;
 using SpaceInvaders.View.Sprites.Entities.Enemies;
 
@@ -17,10 +16,8 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         private const double MinShotDelay = 3;
         private const double MaxShotDelay = 8;
         private static readonly Random ShotDelayGenerator = new Random();
-        private static readonly Vector2 BulletSpawnLocation = new Vector2(12, 40);
-        private static readonly Vector2 MuzzleFlashLocation = new Vector2(22, 42);
 
-        private Timer shotTimer;
+        private Gun gun;
 
         #endregion
 
@@ -38,7 +35,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             Collision.Collided += this.onCollided;
             Score = 30;
 
-            this.initializeTimer();
+            this.setupGun();
         }
 
         #endregion
@@ -56,40 +53,40 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             return new AnimatedSprite(1, sprites);
         }
 
-        private void initializeTimer()
+        private void setupGun()
         {
-            this.shotTimer = new Timer {
-                Duration = getShotDelay(),
-                Repeat = true
+            var initialCooldown = getShotDelay();
+
+            this.gun = new EnemyGun {
+                Position = Center,
+                CooldownDuration = initialCooldown
             };
 
-            this.shotTimer.Tick += this.onShotTimerTick;
-            this.shotTimer.Start();
+            this.gun.Shot += this.onGunShot;
 
-            AttachChild(this.shotTimer);
+            AttachChild(this.gun);
         }
 
-        private void onShotTimerTick(object sender, EventArgs e)
+        /// <summary>
+        ///     The update loop for the Node.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: Node completes its update step
+        /// </summary>
+        /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
+        public override void Update(double delta)
         {
-            var bullet = new EnemyBullet {
-                Position = Position + BulletSpawnLocation
-            };
-            var flash = new MuzzleFlash {
-                Position = Position + MuzzleFlashLocation,
-                Sprite = {
-                    Rotation = 180
-                }
-            };
-
-            this.shotTimer.Duration = getShotDelay();
-
-            GetRoot().QueueNodeForAddition(bullet);
-            QueueNodeForAddition(flash);
+            this.gun.Shoot();
+            base.Update(delta);
         }
 
         private void onCollided(object sender, CollisionArea e)
         {
             QueueForRemoval();
+        }
+
+        private void onGunShot(object sender, EventArgs e)
+        {
+            this.gun.CooldownDuration = getShotDelay();
         }
 
         private static double getShotDelay()

@@ -24,12 +24,11 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
         private int maxLives;
         private int currentLives;
-        private int activeShots;
         private bool isAlive;
         private Vector2 velocity;
+        private Gun gun;
         private Timer invulnerabilityTimer;
         private Timer respawnTimer;
-        private Timer shotCooldownTimer;
 
         #endregion
 
@@ -83,36 +82,6 @@ namespace SpaceInvaders.Model.Nodes.Entities
             }
         }
 
-        /// <summary>
-        ///     Gets or sets the maximum shots that can be on the screen at once.
-        /// </summary>
-        /// <value>
-        ///     The maximum shots.
-        /// </value>
-        public int MaxShots { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the delay between each shot fired.
-        /// </summary>
-        /// <value>
-        ///     The duration of the shot cooldown.
-        /// </value>
-        public double ShotCooldownDuration
-        {
-            get => this.shotCooldownTimer.Duration;
-            set => this.shotCooldownTimer.Duration = value;
-        }
-
-        /// <summary>
-        ///     Gets a value indicating whether this instance can shoot.<br />
-        ///     The shot cooldown must not be active and there must be less than the maximum amount of shots active to be able to
-        ///     shoot.
-        /// </summary>
-        /// <value>
-        ///     <c>true</c> if this instance can shoot; otherwise, <c>false</c>.
-        /// </value>
-        private bool CanShoot => this.activeShots < this.MaxShots && !this.shotCooldownTimer.IsActive;
-
         #endregion
 
         #region Constructors
@@ -132,10 +101,10 @@ namespace SpaceInvaders.Model.Nodes.Entities
             this.isAlive = true;
 
             this.MaxLives = 3;
-            this.MaxShots = 3;
 
             this.setupCollision();
             this.setupTimers();
+            this.setupGun();
 
             Collision.Collided += this.onCollision;
             this.respawnTimer.Tick += this.onRespawnTimerTick;
@@ -164,11 +133,24 @@ namespace SpaceInvaders.Model.Nodes.Entities
         {
             this.respawnTimer = new Timer(1.5, false);
             this.invulnerabilityTimer = new Timer(1.5, false);
-            this.shotCooldownTimer = new Timer(.25, false);
 
             AttachChild(this.respawnTimer);
             AttachChild(this.invulnerabilityTimer);
-            AttachChild(this.shotCooldownTimer);
+        }
+
+        private void setupGun()
+        {
+            const PhysicsLayer collisionLayer = PhysicsLayer.PlayerHitbox;
+            const PhysicsLayer collisionMasks = PhysicsLayer.Enemy | PhysicsLayer.World;
+            const double bulletSpeed = 700;
+
+            this.gun = new Gun(collisionLayer, collisionMasks, .25) {
+                Rotation = Vector2.Up.ToAngle(),
+                BulletSpeed = bulletSpeed,
+                Position = Center
+            };
+
+            AttachChild(this.gun);
         }
 
         private void onCollision(object sender, CollisionArea e)
@@ -230,23 +212,9 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
         private void handleShooting()
         {
-            if (this.CanShoot && Input.IsKeyPressed(ShootKey))
+            if (Input.IsKeyPressed(ShootKey))
             {
-                var bullet = new PlayerBullet {
-                    Position = Position + this.bulletSpawnLocation
-                };
-
-                var flash = new MuzzleFlash {
-                    Position = Position + this.muzzleFlashLocation
-                };
-
-                Parent.QueueNodeForAddition(bullet);
-                QueueNodeForAddition(flash);
-
-                bullet.Removed += this.onBulletRemoval;
-
-                this.activeShots++;
-                this.shotCooldownTimer.Restart();
+                this.gun.Shoot();
             }
         }
 
@@ -267,15 +235,6 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 {
                     this.CurrentLivesChanged -= subscriber as EventHandler<int>;
                 }
-            }
-        }
-
-        private void onBulletRemoval(object sender, EventArgs e)
-        {
-            if (sender is Bullet bullet)
-            {
-                this.activeShots--;
-                bullet.Removed -= this.onBulletRemoval;
             }
         }
 

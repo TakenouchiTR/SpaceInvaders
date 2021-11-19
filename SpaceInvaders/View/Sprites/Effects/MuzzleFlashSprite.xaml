@@ -8,10 +8,11 @@
     mc:Ignorable="d"
     d:DesignHeight="18"
     d:DesignWidth="12"
-    Width="18"
-    Height="12">
+    Width="12"
+    Height="18">
 
     <Canvas>
-        <Polygon Points="6,18 10,16 12,13 9,15 11,13 6,0 1,13 3,15 0,13 2 16" Fill="Yellow" Stroke="OrangeRed" />
+        <Polygon Rotation="90" Points="-18,6 -16,10 -13,12 -15,9 -13,11 0,6 -13,1 -15,3 -13,0 -16,2" Fill="Yellow"
+                 Stroke="OrangeRed" Canvas.Left="18" Canvas.Top="-6" />
     </Canvas>
 </base:BaseSprite>
