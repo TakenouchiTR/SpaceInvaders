@@ -23,14 +23,12 @@ namespace SpaceInvaders.View
         /// <summary>
         ///     The application height
         /// </summary>
-        public const double ApplicationHeight = 480;
+        public const double ApplicationHeight = 620;
 
         /// <summary>
         ///     The application width
         /// </summary>
-        public const double ApplicationWidth = 640;
-
-        private const int CanvasLayerCount = 10;
+        public const double ApplicationWidth = 960;
 
         private LevelBase currentLevel;
         private Canvas[] canvasLayers;
@@ -69,7 +67,7 @@ namespace SpaceInvaders.View
         {
             this.canvasLayers = new Canvas[Enum.GetValues(typeof(RenderLayer)).Length];
 
-            for (var i = 0; i < CanvasLayerCount; i++)
+            for (var i = 0; i < this.canvasLayers.Length; i++)
             {
                 var canvas = new Canvas {
                     Width = ApplicationWidth,

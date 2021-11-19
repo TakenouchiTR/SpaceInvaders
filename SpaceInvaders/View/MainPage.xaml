@@ -8,5 +8,5 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 
-    <Canvas x:Name="theCanvas" Width="640" Height="480" Background="Black" />
+    <Canvas x:Name="theCanvas" Width="960" Height="620" Background="Black" />
 </Page>

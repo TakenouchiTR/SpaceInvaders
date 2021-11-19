@@ -22,8 +22,8 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         private const int ShieldCount = 3;
         private const int StarCount = 50;
-        private const int TotalMovementSteps = 19;
-        private const int XMoveAmount = 10;
+        private const int TotalMovementSteps = 20;
+        private const int XMoveAmount = 20;
         private const double UiBuffer = 4;
         private const double SpeedChangeAmount = .01;
         private const VirtualKey ToggleStarsKey = VirtualKey.S;
@@ -87,7 +87,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
             enemyMoveTimer.Tick += this.onEnemyMoveTimerTick;
             AttachChild(enemyMoveTimer);
 
-            this.enemyGroup = new EnemyGroup(new Vector2(55, 64), 8);
+            this.enemyGroup = new EnemyGroup(new Vector2(70, 70), 8);
             AttachChild(this.enemyGroup);
         }
 
@@ -121,6 +121,20 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
             AttachChild(this.scoreLabel);
             AttachChild(this.lifeCounter);
+        }
+
+        private void addShields()
+        {
+            var y = MainPage.ApplicationHeight - 160;
+            for (var shieldIndex = 1; shieldIndex <= ShieldCount; shieldIndex++)
+            {
+                var x = MainPage.ApplicationWidth / (ShieldCount + 1) * shieldIndex;
+                var currentShield = new LevelShield(5, 3) {
+                    Center = new Vector2(x, y)
+                };
+
+                AttachChild(currentShield);
+            }
         }
 
         private void updateScoreDisplay()
@@ -264,21 +278,6 @@ namespace SpaceInvaders.Model.Nodes.Levels
             }
 
             this.enemyGroup.X += XMoveAmount * this.movementFactor;
-        }
-
-        private void addShields()
-        {
-            var y = 350;
-            for (int shieldIndex = 1; shieldIndex <= ShieldCount; shieldIndex++)
-            {
-                var x = MainPage.ApplicationWidth / (ShieldCount + 1) * shieldIndex;
-                var currentShield = new LevelShield(5, 3)
-                {
-                    Center = new Vector2(x, y)
-                };
-
-                AttachChild(currentShield);
-            }
         }
 
         #endregion
