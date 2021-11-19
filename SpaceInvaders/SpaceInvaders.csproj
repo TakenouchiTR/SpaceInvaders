@@ -206,6 +206,9 @@
     <Compile Include="View\Sprites\Entities\Enemies\BasicLightsLit.xaml.cs">
       <DependentUpon>BasicLightsLit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Sprites\Entities\Enemies\BonusEnemySprite.xaml.cs">
+      <DependentUpon>BonusEnemySprite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\Entities\Enemies\IntermediateEnemySprite2.xaml.cs">
       <DependentUpon>IntermediateEnemySprite2.xaml</DependentUpon>
     </Compile>
@@ -321,6 +324,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\Entities\Enemies\BasicLightsLit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\Entities\Enemies\BonusEnemySprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
