@@ -72,6 +72,14 @@ namespace SpaceInvaders.Model
             }
         }
 
+        /// <summary>
+        ///     Gets the magnitude.
+        /// </summary>
+        /// <value>
+        ///     The magnitude.
+        /// </value>
+        public double Magnitude => Math.Sqrt(this.X * this.X + this.Y * this.Y);
+
         #endregion
 
         #region Constructors
@@ -147,6 +155,56 @@ namespace SpaceInvaders.Model
         #endregion
 
         #region Methods
+
+        /// <summary>
+        ///     Calculates the angle to the specified Vector2.
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <returns>The angle to the target Vector2</returns>
+        public double AngleToTarget(Vector2 target)
+        {
+            return Math.Atan2(target.Y - this.Y, target.X - this.X);
+        }
+
+        /// <summary>
+        ///     Normalizeds the direction to.
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <returns></returns>
+        public Vector2 NormalizedVectorTo(Vector2 target)
+        {
+            var angle = this.AngleToTarget(target);
+            return AngleToNormalizedVector(angle);
+        }
+
+        /// <summary>
+        ///     Converts the Vector2 to an angle.
+        /// </summary>
+        /// <returns>An angle pointing the same direction as the Vector2</returns>
+        public double ToAngle()
+        {
+            return Math.Atan2(this.Y, this.X);
+        }
+
+        /// <summary>
+        ///     Creates a normalized version of the Vector2
+        /// </summary>
+        /// <returns>The normalized Vector2</returns>
+        public Vector2 Normalized()
+        {
+            var magnitude = this.Magnitude;
+            return new Vector2(this.X / magnitude, this.Y / magnitude);
+        }
+
+        /// <summary>
+        ///     Converts an angle to a normalized vector
+        /// </summary>
+        /// <param name="angle">The angle.</param>
+        /// <returns>A normalized vector going the same direction as the angle.</returns>
+        public static Vector2 AngleToNormalizedVector(double angle)
+        {
+            return new Vector2(Math.Cos(angle), Math.Sin(angle));
+        }
 
         /// <summary>
         ///     Implements the * operator between a Vector2 and a double.<br />
