@@ -3,16 +3,17 @@
 namespace SpaceInvaders.Model.Nodes.Entities
 {
     /// <summary>
-    ///   An arrangement of shield segments for use in a level
+    ///     An arrangement of shield segments for use in a level
     /// </summary>
-    class LevelShield : Area
+    internal class LevelShield : Area
     {
         #region Data members
+
         private const int ShieldSegmentBorderThickness = 2;
         private const int ShieldSegmentVerticalPadding = 5;
 
-        private int totalShieldSegments;
-        private int rows;
+        private readonly int totalShieldSegments;
+        private readonly int rows;
         private double shieldSegmentWidth;
         private double shieldSegmentHeight;
 
@@ -32,6 +33,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
             {
                 throw new ArgumentException("Must be at least 1 shield segment per row");
             }
+
             if (numberRows <= 0)
             {
                 throw new ArgumentException("Must be at least 1 row");
@@ -44,14 +46,13 @@ namespace SpaceInvaders.Model.Nodes.Entities
             this.setAreaSize();
         }
 
-
         #endregion
 
         #region Methods
 
         private void setupShieldSegments()
         {
-            ShieldSegment[] shieldSegments = this.createShieldSegments();
+            var shieldSegments = this.createShieldSegments();
             this.shieldSegmentWidth = shieldSegments[0].Width;
             this.shieldSegmentHeight = shieldSegments[0].Height;
 
@@ -60,10 +61,10 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
         private ShieldSegment[] createShieldSegments()
         {
-            int totalSegments = this.totalShieldSegments * this.rows - this.rows / 2;
-            ShieldSegment[] shieldSegments = new ShieldSegment[totalSegments];
+            var totalSegments = this.totalShieldSegments * this.rows - this.rows / 2;
+            var shieldSegments = new ShieldSegment[totalSegments];
 
-            for (int index = 0; index < shieldSegments.Length; index++)
+            for (var index = 0; index < shieldSegments.Length; index++)
             {
                 shieldSegments[index] = new ShieldSegment();
             }
@@ -73,18 +74,19 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
         private void positionAndAttachShieldSegments(ShieldSegment[] shieldSegments)
         {
-            for (int row = 0; row < this.rows; row++)
+            for (var row = 0; row < this.rows; row++)
             {
-                int numberSegmentsThisRow = this.isRowEven(row) ? this.totalShieldSegments : this.totalShieldSegments - 1;
-                double xpos = this.isRowEven(row) ? 0 : (this.shieldSegmentWidth - ShieldSegmentBorderThickness) / 2;
-                double ypos = row * this.shieldSegmentHeight;
+                var numberSegmentsThisRow =
+                    this.isRowEven(row) ? this.totalShieldSegments : this.totalShieldSegments - 1;
+                var xpos = this.isRowEven(row) ? 0 : (this.shieldSegmentWidth - ShieldSegmentBorderThickness) / 2;
+                var ypos = row * this.shieldSegmentHeight;
 
                 if (row > 0)
                 {
                     ypos -= row * ShieldSegmentVerticalPadding;
                 }
 
-                for (int shieldSegmentIndex = 0; shieldSegmentIndex < numberSegmentsThisRow; shieldSegmentIndex++)
+                for (var shieldSegmentIndex = 0; shieldSegmentIndex < numberSegmentsThisRow; shieldSegmentIndex++)
                 {
                     var shieldSegment = shieldSegments[shieldSegmentIndex + row * this.totalShieldSegments - row / 2];
                     shieldSegment.Removed += this.onSegmentDestroyed;
@@ -110,6 +112,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 QueueForRemoval();
             }
         }
+
         private void setAreaSize()
         {
             Width = this.totalShieldSegments * this.shieldSegmentWidth;
