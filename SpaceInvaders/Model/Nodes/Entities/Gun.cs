@@ -12,8 +12,9 @@ namespace SpaceInvaders.Model.Nodes.Entities
     {
         #region Data members
 
-        private Timer cooldownTimer;
         private uint activeBullets;
+        private Timer cooldownTimer;
+        private readonly SoundPlayer shotPlayer;
 
         #endregion
 
@@ -93,26 +94,22 @@ namespace SpaceInvaders.Model.Nodes.Entities
         ///     this.MaxBulletsOnScreen == 3 &amp;&amp;<br />
         ///     this.BulletCollisionLayers == collisionLayers &amp;&amp;<br />
         ///     this.BulletCollisionMasks == collisionMasks &amp;&amp;<br />
-        ///     this.CooldownDuration == cooldownDuration
+        ///     this.CooldownDuration == .25&amp;&amp;<br />
+        ///     gunShotFile plays whenever a bullet is fired
         /// </summary>
         /// <param name="collisionLayers">The collision layers.</param>
         /// <param name="collisionMasks">The collision masks.</param>
-        /// <param name="cooldownDuration">Duration of the cooldown.</param>
+        /// <param name="gunShotFile">The filename for the gun shot audio.</param>
         /// <exception cref="System.ArgumentOutOfRangeException">cooldownDuration - cooldownDuration must be positive</exception>
-        public Gun(PhysicsLayer collisionLayers, PhysicsLayer collisionMasks, double cooldownDuration)
+        public Gun(PhysicsLayer collisionLayers, PhysicsLayer collisionMasks, string gunShotFile)
         {
-            if (cooldownDuration <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(cooldownDuration), cooldownDuration,
-                    "cooldownDuration must be positive");
-            }
-
             this.BulletCollisionLayers = collisionLayers;
             this.BulletCollisionMasks = collisionMasks;
             this.BulletSpeed = 500;
             this.MaxBulletsOnScreen = 3;
 
-            this.setupTimer(cooldownDuration);
+            this.setupTimer(.25);
+            this.shotPlayer = new SoundPlayer(gunShotFile);
         }
 
         #endregion
@@ -164,6 +161,8 @@ namespace SpaceInvaders.Model.Nodes.Entities
                     Rotation = (float) this.Rotation.RadianToDegree()
                 }
             };
+
+            this.shotPlayer.Play();
 
             GetRoot().QueueNodeForAddition(bullet);
             QueueNodeForAddition(flash);
