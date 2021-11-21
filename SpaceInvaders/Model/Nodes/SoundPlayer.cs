@@ -16,6 +16,7 @@ namespace SpaceInvaders.Model.Nodes
 
         private readonly MediaPlayer mediaPlayer;
         private string audioFile;
+        private bool previousPlayState;
 
         #endregion
 
@@ -55,6 +56,8 @@ namespace SpaceInvaders.Model.Nodes
             }
         }
 
+        public bool IsPlaying => this.mediaPlayer.PlaybackSession.PlaybackState == MediaPlaybackState.Playing;
+
         #endregion
 
         #region Constructors
@@ -75,6 +78,41 @@ namespace SpaceInvaders.Model.Nodes
         #endregion
 
         #region Methods
+
+        /// <summary>
+        ///     Occurs when [started playing].
+        /// </summary>
+        public event EventHandler StartedPlaying;
+
+        /// <summary>
+        ///     Occurs when [stopped].
+        /// </summary>
+        public event EventHandler Stopped;
+
+        /// <summary>
+        ///     The update loop for the Node.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: Node completes its update step
+        /// </summary>
+        /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
+        public override void Update(double delta)
+        {
+            if (this.IsPlaying != this.previousPlayState)
+            {
+                if (this.IsPlaying)
+                {
+                    this.StartedPlaying?.Invoke(this, EventArgs.Empty);
+                }
+                else
+                {
+                    this.Stopped?.Invoke(this, EventArgs.Empty);
+                }
+            }
+
+            this.previousPlayState = this.IsPlaying;
+
+            base.Update(delta);
+        }
 
         /// <summary>
         ///     Plays the sound effect. If the sound effect is already playing, it will restart it.<br />
