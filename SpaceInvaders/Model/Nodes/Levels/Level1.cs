@@ -250,6 +250,9 @@ namespace SpaceInvaders.Model.Nodes.Levels
         private void onPlayerRemoved(object sender, EventArgs e)
         {
             CompleteGame("Game Over!\nYou have been destroyed!");
+
+            var gameOverSound = new OneShotSoundPlayer("game_over.wav");
+            AttachChild(gameOverSound);
         }
 
         private void onEnemyRemoved(object sender, EventArgs e)
