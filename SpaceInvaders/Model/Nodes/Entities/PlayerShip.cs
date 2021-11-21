@@ -29,6 +29,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
         private Gun gun;
         private Timer invulnerabilityTimer;
         private Timer respawnTimer;
+        private SoundPlayer explosionSound;
 
         #endregion
 
@@ -105,6 +106,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
             this.setupCollision();
             this.setupTimers();
             this.setupGun();
+            this.setupExplosion();
 
             Collision.Collided += this.onCollision;
             this.respawnTimer.Tick += this.onRespawnTimerTick;
@@ -154,23 +156,6 @@ namespace SpaceInvaders.Model.Nodes.Entities
             AttachChild(this.gun);
         }
 
-        private void onCollision(object sender, CollisionArea e)
-        {
-            var explosion = new Explosion {
-                Center = Center
-            };
-            GetRoot().QueueNodeForAddition(explosion);
-
-            Collision.Monitoring = false;
-            Collision.Monitorable = false;
-
-            Sprite.Visible = false;
-
-            this.isAlive = false;
-            this.respawnTimer.Restart();
-            this.CurrentLives--;
-        }
-
         /// <summary>
         ///     The update loop for the Node.<br />
         ///     Precondition: None<br />
@@ -186,6 +171,11 @@ namespace SpaceInvaders.Model.Nodes.Entities
             }
 
             base.Update(delta);
+        }
+
+        private void setupExplosion()
+        {
+            this.explosionSound = new SoundPlayer("player_explosion.wav");
         }
 
         private void handleMovement(double delta)
@@ -237,6 +227,25 @@ namespace SpaceInvaders.Model.Nodes.Entities
                     this.CurrentLivesChanged -= subscriber as EventHandler<int>;
                 }
             }
+        }
+
+        private void onCollision(object sender, CollisionArea e)
+        {
+            this.explosionSound.Play();
+
+            var explosion = new Explosion {
+                Center = Center
+            };
+            GetRoot().QueueNodeForAddition(explosion);
+
+            Collision.Monitoring = false;
+            Collision.Monitorable = false;
+
+            Sprite.Visible = false;
+
+            this.isAlive = false;
+            this.respawnTimer.Restart();
+            this.CurrentLives--;
         }
 
         private void onRespawnTimerTick(object sender, EventArgs e)
