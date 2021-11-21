@@ -86,7 +86,11 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             var explosion = new Explosion {
                 Center = Center
             };
+
+            var explosionSound = new OneShotSoundPlayer("enemy_explosion.wav");
+
             GetRoot().QueueNodeForAddition(explosion);
+            GetRoot().QueueNodeForAddition(explosionSound);
         }
 
         private void onMoved(object sender, Vector2 e)
