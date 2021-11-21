@@ -144,10 +144,11 @@ namespace SpaceInvaders.Model.Nodes.Entities
             const PhysicsLayer collisionMasks = PhysicsLayer.Enemy | PhysicsLayer.World;
             const double bulletSpeed = 700;
 
-            this.gun = new Gun(collisionLayer, collisionMasks, .25) {
+            this.gun = new Gun(collisionLayer, collisionMasks, "player_shot.wav") {
                 Rotation = Vector2.Up.ToAngle(),
                 BulletSpeed = bulletSpeed,
-                Position = Center
+                Position = Center,
+                CooldownDuration = .25
             };
 
             AttachChild(this.gun);

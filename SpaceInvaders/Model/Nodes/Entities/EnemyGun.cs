@@ -19,7 +19,7 @@
         ///     this.CooldownDuration == 1
         /// </summary>
         public EnemyGun()
-            : base(PhysicsLayer.EnemyHitbox, PhysicsLayer.Player | PhysicsLayer.World, 1)
+            : base(PhysicsLayer.EnemyHitbox, PhysicsLayer.Player | PhysicsLayer.World, "enemy_shot.wav")
         {
             Rotation = Vector2.Down.ToAngle();
             BulletSpeed = 350;
