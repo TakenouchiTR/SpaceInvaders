@@ -30,16 +30,20 @@ namespace SpaceInvaders.Model.Nodes
             this.CompleteRemoval(false);
         }
 
+        /// <summary>
+        ///     Invokes the Complete event with the specified eventArgs.
+        /// </summary>
+        /// <param name="type">The type.</param>
         protected void CompleteScreen(Type type)
         {
             this.Complete?.Invoke(this, type);
         }
 
         /// <summary>
-        /// Runs cleanup and invokes the Removed event when removed from the game.<br />
-        /// Precondition: None<br />
-        /// Postcondition: Removed event is invoked if emitRemovedEvent == true &amp;&amp;<br />
-        /// All event subscribers are removed
+        ///     Runs cleanup and invokes the Removed event when removed from the game.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: Removed event is invoked if emitRemovedEvent == true &amp;&amp;<br />
+        ///     All event subscribers are removed
         /// </summary>
         /// <param name="emitRemovedEvent">Whether to emit the Removed event</param>
         public override void CompleteRemoval(bool emitRemovedEvent = true)

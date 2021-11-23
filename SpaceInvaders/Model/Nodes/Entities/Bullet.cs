@@ -8,7 +8,11 @@ namespace SpaceInvaders.Model.Nodes.Entities
     /// <seealso cref="SpaceInvaders.Model.Nodes.Entities.Entity" />
     public class Bullet : Entity
     {
+        #region Data members
+
         private const int MoveSteps = 4;
+
+        #endregion
 
         #region Properties
 
@@ -58,6 +62,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
             {
                 Move(this.Velocity * moveStepDelta);
             }
+
             if (Sprite.IsOffScreen())
             {
                 QueueForRemoval();

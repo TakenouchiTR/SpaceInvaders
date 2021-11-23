@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SpaceInvaders.Model.Nodes.Screens.Levels;
 using SpaceInvaders.Model.Nodes.UI;
 
@@ -15,6 +12,8 @@ namespace SpaceInvaders.Model.Nodes.Screens
     /// <seealso cref="SpaceInvaders.Model.Nodes.Screen" />
     public class MainMenu : Screen
     {
+        #region Data members
+
         private const double ButtonWidth = 256;
 
         private Button playButton;
@@ -24,14 +23,22 @@ namespace SpaceInvaders.Model.Nodes.Screens
         private List<Button> buttons;
         private SoundPlayer buttonSound;
 
+        #endregion
+
+        #region Constructors
+
         /// <summary>
-        ///     Initializes a new instance of the <see cref="MainMenu"/> class.
+        ///     Initializes a new instance of the <see cref="MainMenu" /> class.
         /// </summary>
         public MainMenu()
         {
             this.setupButtons();
             this.setupSoundPlayer();
         }
+
+        #endregion
+
+        #region Methods
 
         private void setupButtons()
         {
@@ -64,7 +71,7 @@ namespace SpaceInvaders.Model.Nodes.Screens
         private void setupSoundPlayer()
         {
             this.buttonSound = new SoundPlayer("change_option_high.wav");
-            this.AttachChild(this.buttonSound);
+            AttachChild(this.buttonSound);
         }
 
         private void onPlayClick(object sender, EventArgs e)
@@ -92,5 +99,6 @@ namespace SpaceInvaders.Model.Nodes.Screens
             this.buttonSound.Play();
         }
 
+        #endregion
     }
 }
