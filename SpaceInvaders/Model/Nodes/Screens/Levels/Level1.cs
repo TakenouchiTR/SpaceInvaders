@@ -9,13 +9,13 @@ using SpaceInvaders.Model.Nodes.UI;
 using SpaceInvaders.View;
 using SpaceInvaders.View.Sprites.UI;
 
-namespace SpaceInvaders.Model.Nodes.Levels
+namespace SpaceInvaders.Model.Nodes.Screens.Levels
 {
     /// <summary>
     ///     The first level of the game.<br />
     ///     Has three layers of four enemies in descending difficulty.
     /// </summary>
-    /// <seealso cref="SpaceInvaders.Model.Nodes.Levels.LevelBase" />
+    /// <seealso cref="SpaceInvaders.Model.Nodes.Screens.Levels.LevelBase" />
     public class Level1 : LevelBase
     {
         #region Data members
@@ -249,10 +249,10 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
         private void onPlayerRemoved(object sender, EventArgs e)
         {
-            CompleteGame("Game Over!\nYou have been destroyed!");
-
             var gameOverSound = new OneShotSoundPlayer("game_over.wav");
-            AttachChild(gameOverSound);
+            QueueNodeForAddition(gameOverSound);
+
+            EndLevel(typeof(MainMenu));
         }
 
         private void onEnemyRemoved(object sender, EventArgs e)
@@ -266,7 +266,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
                 this.enemiesRemaining--;
                 if (this.enemiesRemaining <= 0)
                 {
-                    CompleteGame("You won!\nAll enemies have been defeated!");
+                    EndLevel(typeof(Level1));
                 }
             }
         }

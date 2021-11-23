@@ -1,12 +1,11 @@
 ﻿using System;
-using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model;
 using SpaceInvaders.Model.Nodes;
-using SpaceInvaders.Model.Nodes.Levels;
+using SpaceInvaders.Model.Nodes.Screens;
 using SpaceInvaders.View.Sprites;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -30,7 +29,7 @@ namespace SpaceInvaders.View
         /// </summary>
         public const double ApplicationWidth = 960;
 
-        private LevelBase currentLevel;
+        private Screen currentScreen;
         private Canvas[] canvasLayers;
 
         #endregion
@@ -56,7 +55,7 @@ namespace SpaceInvaders.View
 
             this.createAndPopulateCanvasLayers();
 
-            this.setupLevel(new Level1());
+            this.setupScreen(new MainMenu());
         }
 
         #endregion
@@ -79,23 +78,23 @@ namespace SpaceInvaders.View
             }
         }
 
-        private void setupLevel(LevelBase level)
+        private void setupScreen(Screen screen)
         {
-            this.currentLevel = level;
-            this.currentLevel.GameFinished += this.onCurrentLevelGameFinished;
+            this.currentScreen = screen;
+            this.currentScreen.Complete += this.onCurrentScreenComplete;
         }
 
-        private void cleanupLevel()
+        private void cleanupScreen()
         {
-            if (this.currentLevel == null)
+            if (this.currentScreen == null)
             {
                 return;
             }
 
-            this.currentLevel.CleanupLevel();
+            this.currentScreen.CleanupScreen();
 
-            this.currentLevel.GameFinished -= this.onCurrentLevelGameFinished;
-            this.currentLevel = null;
+            this.currentScreen.Complete -= this.onCurrentScreenComplete;
+            this.currentScreen = null;
         }
 
         private void onSpriteNodeHidden(object sender, BaseSprite e)
@@ -116,27 +115,13 @@ namespace SpaceInvaders.View
             }
         }
 
-        private async void onCurrentLevelGameFinished(object sender, string e)
+        private void onCurrentScreenComplete(object sender, Type e)
         {
-            this.currentLevel.GameFinished -= this.onCurrentLevelGameFinished;
+            this.cleanupScreen();
 
-            var gameOverDialog = new ContentDialog {
-                Title = "Game Finished",
-                Content = e,
-                PrimaryButtonText = "Play Again",
-                SecondaryButtonText = "Exit to Desktop"
-            };
-
-            var dialogResult = await gameOverDialog.ShowAsync();
-            if (dialogResult == ContentDialogResult.Primary)
-            {
-                this.cleanupLevel();
-                this.setupLevel(new Level1());
-            }
-            else
-            {
-                CoreApplication.Exit();
-            }
+            var constructor = e.GetConstructors()[0];
+            var screen = (Screen) constructor.Invoke(new object[] { });
+            this.setupScreen(screen);
         }
 
         #endregion

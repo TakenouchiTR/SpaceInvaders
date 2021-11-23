@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 
-namespace SpaceInvaders.Model.Nodes.Levels
+namespace SpaceInvaders.Model.Nodes.Screens.Levels
 {
     /// <summary>
     ///     The basic structure for other levels.
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.Nodes.Node" />
-    public abstract class LevelBase : Node
+    public abstract class LevelBase : Screen
     {
         #region Data members
 
@@ -18,7 +18,8 @@ namespace SpaceInvaders.Model.Nodes.Levels
         private readonly DispatcherTimer updateTimer;
         private long prevUpdateTime;
         private int score;
-        private bool gameActive;
+        private bool levelComplete;
+        private Type nextScreen;
 
         #endregion
 
@@ -52,7 +53,6 @@ namespace SpaceInvaders.Model.Nodes.Levels
         protected LevelBase()
         {
             this.score = 0;
-            this.gameActive = true;
 
             this.updateTimer = new DispatcherTimer {
                 Interval = TimeSpan.FromMilliseconds(.1)
@@ -73,22 +73,56 @@ namespace SpaceInvaders.Model.Nodes.Levels
         public event EventHandler<int> ScoreChanged;
 
         /// <summary>
-        ///     Occurs when the game is finished.
+        ///     Readies the level to be ended after the current update tick.<br />
+        ///     Precondition: Type != null<br />
+        ///     Postcondition: The level is unloaded after the current update tick
         /// </summary>
-        public event EventHandler<string> GameFinished;
+        /// <param name="screen">The next screen.</param>
+        protected void EndLevel(Type screen)
+        {
+            this.nextScreen = screen;
+            this.levelComplete = true;
+        }
+
+        private void testForCollisions(IEnumerable<CollisionArea> sourceAreas, IList<CollisionArea> targetAreas)
+        {
+            foreach (var sourceArea in sourceAreas)
+            {
+                foreach (var targetArea in targetAreas)
+                {
+                    sourceArea.DetectCollision(targetArea);
+                }
+            }
+        }
 
         /// <summary>
-        ///     Safely removes all children from the node without firing their Removed events, then completes the <br />
-        ///     removal step on itself.<br />
-        ///     Precondition: None <br />
-        ///     Postcondition: this.children.Count == 0 &amp;&amp;
-        ///     All event subscribers are removed
+        ///     The update loop for the Node.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: Node completes its update step
         /// </summary>
-        public void CleanupLevel()
+        /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
+        public override void Update(double delta)
         {
-            SilentlyRemoveAllChildren();
+            base.Update(delta);
+            if (this.levelComplete)
+            {
+                CompleteScreen(this.nextScreen);
+            }
+        }
 
-            this.CompleteRemoval(false);
+        /// <summary>
+        ///     Attaches a new child to the node.<br />
+        ///     Precondition: child != null<br />
+        ///     Postcondition: None
+        /// </summary>
+        /// <param name="child">The child.</param>
+        public override void AttachChild(Node child)
+        {
+            base.AttachChild(child);
+            if (child is Node2D node2D)
+            {
+                node2D.Moved += this.onChildMoved;
+            }
         }
 
         /// <summary>
@@ -111,29 +145,6 @@ namespace SpaceInvaders.Model.Nodes.Levels
                     this.ScoreChanged -= subscriber as EventHandler<int>;
                 }
             }
-
-            if (this.GameFinished != null)
-            {
-                foreach (var subscriber in this.GameFinished.GetInvocationList())
-                {
-                    this.GameFinished -= subscriber as EventHandler<string>;
-                }
-            }
-        }
-
-        /// <summary>
-        ///     Fires the GameFinished event with the specified message.
-        /// </summary>
-        /// <param name="message">The message.</param>
-        protected void CompleteGame(string message)
-        {
-            if (!this.gameActive)
-            {
-                return;
-            }
-
-            this.GameFinished?.Invoke(this, message);
-            this.gameActive = false;
         }
 
         private void onUpdateTimerTick(object sender, object e)
@@ -145,33 +156,7 @@ namespace SpaceInvaders.Model.Nodes.Levels
 
             if (delta < UpdateSkipThreshold)
             {
-                Update(delta);
-            }
-        }
-
-        /// <summary>
-        ///     Attaches a new child to the node.<br />
-        ///     Precondition: child != null<br />
-        ///     Postcondition: None
-        /// </summary>
-        /// <param name="child">The child.</param>
-        public override void AttachChild(Node child)
-        {
-            base.AttachChild(child);
-            if (child is Node2D node2D)
-            {
-                node2D.Moved += this.onChildMoved;
-            }
-        }
-
-        private void testForCollisions(IEnumerable<CollisionArea> sourceAreas, IList<CollisionArea> targetAreas)
-        {
-            foreach (var sourceArea in sourceAreas)
-            {
-                foreach (var targetArea in targetAreas)
-                {
-                    sourceArea.DetectCollision(targetArea);
-                }
+                this.Update(delta);
             }
         }
 
