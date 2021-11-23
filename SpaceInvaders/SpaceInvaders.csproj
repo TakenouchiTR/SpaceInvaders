@@ -152,6 +152,7 @@
     <Compile Include="Model\Nodes\Levels\LevelBase.cs" />
     <Compile Include="Model\Nodes\RenderableNode.cs" />
     <Compile Include="Model\Nodes\SoundPlayer.cs" />
+    <Compile Include="Model\Nodes\UI\Button.cs" />
     <Compile Include="Model\Nodes\UI\Label.cs" />
     <Compile Include="Model\Nodes\UI\LifeCounter.cs" />
     <Compile Include="Model\PhysicsLayer.cs" />
@@ -241,6 +242,9 @@
     </Compile>
     <Compile Include="View\Sprites\UI\FullHeartSprite.xaml.cs">
       <DependentUpon>FullHeartSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UI\ButtonSprite.xaml.cs">
+      <DependentUpon>ButtonSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UI\LabelSprite.xaml.cs">
       <DependentUpon>LabelSprite.xaml</DependentUpon>
@@ -380,6 +384,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UI\ButtonSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UI\LabelSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -390,6 +398,7 @@
       <Version>6.2.10</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
