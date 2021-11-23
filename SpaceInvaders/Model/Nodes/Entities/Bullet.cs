@@ -8,6 +8,8 @@ namespace SpaceInvaders.Model.Nodes.Entities
     /// <seealso cref="SpaceInvaders.Model.Nodes.Entities.Entity" />
     public class Bullet : Entity
     {
+        private const int MoveSteps = 4;
+
         #region Properties
 
         /// <summary>
@@ -51,7 +53,11 @@ namespace SpaceInvaders.Model.Nodes.Entities
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)
         {
-            Move(this.Velocity * delta);
+            var moveStepDelta = delta / MoveSteps;
+            for (var i = 0; i < MoveSteps; i++)
+            {
+                Move(this.Velocity * moveStepDelta);
+            }
             if (Sprite.IsOffScreen())
             {
                 QueueForRemoval();
