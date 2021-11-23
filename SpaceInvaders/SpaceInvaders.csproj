@@ -146,6 +146,7 @@
     <Compile Include="Model\Nodes\Entities\PlayerShip.cs" />
     <Compile Include="Model\Nodes\Entities\ShieldSegment.cs" />
     <Compile Include="Model\Nodes\Levels\Level1.cs" />
+    <Compile Include="Model\Nodes\Screen.cs" />
     <Compile Include="Model\Nodes\OneShotSoundPlayer.cs" />
     <Compile Include="Model\Nodes\Node.cs" />
     <Compile Include="Model\Nodes\Node2D.cs" />
