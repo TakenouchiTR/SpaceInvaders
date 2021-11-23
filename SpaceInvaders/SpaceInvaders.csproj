@@ -252,6 +252,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Audio\change_option_high.wav" />
     <Content Include="Audio\enemy_explosion.wav" />
     <Content Include="Audio\enemy_shot.wav" />
     <Content Include="Audio\game_over.wav" />
