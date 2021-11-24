@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model.Nodes.Effects;
 using SpaceInvaders.Model.Nodes.Entities;
 using SpaceInvaders.Model.Nodes.Entities.Enemies;
@@ -273,12 +275,29 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             this.lifeCounter.CurrentLives = e;
         }
 
-        private void onPlayerRemoved(object sender, EventArgs e)
+        private async void onPlayerRemoved(object sender, EventArgs e)
         {
             var gameOverSound = new OneShotSoundPlayer("game_over.wav");
             QueueNodeForAddition(gameOverSound);
 
-            this.EndLevel(typeof(MainMenu));
+            var quitDialog = new ContentDialog
+            {
+                Title = "Game Over",
+                Content = "You ran out of lives!\nWould you like to restart the level?",
+                PrimaryButtonText = "Restart",
+                SecondaryButtonText = "Return to Menu"
+            };
+
+            var dialogResult = await quitDialog.ShowAsync();
+            if (dialogResult == ContentDialogResult.Primary)
+            {
+                this.EndLevel(this.GetType());
+            }
+            else
+            {
+                this.EndLevel(typeof(MainMenu));
+            }
+            
         }
 
         private void onEnemyRemoved(object sender, EventArgs e)
