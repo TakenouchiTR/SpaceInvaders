@@ -141,6 +141,7 @@
     <Compile Include="Model\Nodes\Entities\Enemies\Enemy.cs" />
     <Compile Include="Model\Nodes\Entities\EnemyGun.cs" />
     <Compile Include="Model\Nodes\Entities\Entity.cs" />
+    <Compile Include="Model\Nodes\Entities\GrazeHitbox.cs" />
     <Compile Include="Model\Nodes\Entities\Gun.cs" />
     <Compile Include="Model\Nodes\Entities\LevelShield.cs" />
     <Compile Include="Model\Nodes\Entities\PlayerShip.cs" />

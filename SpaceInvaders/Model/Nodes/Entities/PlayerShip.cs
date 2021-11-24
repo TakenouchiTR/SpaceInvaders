@@ -107,6 +107,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
             this.setupTimers();
             this.setupGun();
             this.setupExplosion();
+            this.setupGrazeHitbox();
 
             Collision.Collided += this.onCollision;
             this.respawnTimer.Tick += this.onRespawnTimerTick;
@@ -154,6 +155,23 @@ namespace SpaceInvaders.Model.Nodes.Entities
             };
 
             AttachChild(this.gun);
+        }
+
+        private void setupExplosion()
+        {
+            this.explosionSound = new SoundPlayer("player_explosion.wav");
+        }
+
+        private void setupGrazeHitbox()
+        {
+            var grazeHitbox = new GrazeHitbox {
+                Width = Width + 32,
+                Height = Height + 12,
+                Center = Center
+            };
+
+            this.grazeSound = new SoundPlayer("graze.wav");
+            AttachChild(grazeHitbox);
         }
 
         /// <summary>
