@@ -32,7 +32,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         ///     Precondition: None<br />
         ///     Postcondition: this.Children.Count == 4
         /// </summary>
-        public Level1()
+        public Level1() : base(typeof(Level1))
         {
             this.curMovementStep = 9;
             this.movementFactor = 1;

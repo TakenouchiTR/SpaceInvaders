@@ -67,7 +67,15 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
                 this.ScoreChanged?.Invoke(this, this.Score);
             }
         }
-        
+
+        /// <summary>
+        ///     Gets or sets the next level.
+        /// </summary>
+        /// <value>
+        ///     The next level.
+        /// </value>
+        protected Type NextLevel { get; set; }
+
         #endregion
 
         #region Constructors
@@ -77,8 +85,9 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         ///     Precondition: None<br />
         ///     Postcondition: None
         /// </summary>
-        protected LevelBase()
+        protected LevelBase(Type nextLevel)
         {
+            this.NextLevel = nextLevel;
             this.score = 0;
 
             this.updateTimer = new DispatcherTimer {
