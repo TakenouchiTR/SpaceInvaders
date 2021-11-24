@@ -262,6 +262,7 @@
     <Content Include="Audio\enemy_explosion.wav" />
     <Content Include="Audio\enemy_shot.wav" />
     <Content Include="Audio\game_over.wav" />
+    <Content Include="Audio\graze.wav" />
     <Content Include="Audio\player_explosion.wav" />
     <Content Include="Audio\player_shot.wav" />
     <Content Include="Properties\Default.rd.xml" />
