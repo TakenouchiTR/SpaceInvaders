@@ -1,6 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
+using SpaceInvaders.Model.Nodes.Effects;
+using SpaceInvaders.Model.Nodes.Entities;
+using SpaceInvaders.Model.Nodes.Entities.Enemies;
+using SpaceInvaders.Model.Nodes.UI;
+using SpaceInvaders.View;
+using SpaceInvaders.View.Sprites.UI;
 
 namespace SpaceInvaders.Model.Nodes.Screens.Levels
 {
@@ -12,14 +18,35 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
     {
         #region Data members
 
+        /// <summary>
+        ///     The default number of shields.
+        /// </summary>
+        protected const int ShieldCount = 3;
+
+        /// <summary>
+        ///     The background star count.
+        /// </summary>
+        protected const int StarCount = 50;
+
+        /// <summary>
+        ///     The buffer between the edge of the screen and the UI, in pixels.
+        /// </summary>
+        protected const double UiBuffer = 4;
+
         private const double MillisecondsInSecond = 1000;
         private const double UpdateSkipThreshold = 1;
 
         private readonly DispatcherTimer updateTimer;
         private long prevUpdateTime;
         private int score;
+        private int enemiesRemaining;
         private bool levelComplete;
         private Type nextScreen;
+
+        private PlayerShip player;
+        private Node backgroundNode;
+        private Label scoreLabel;
+        private LifeCounter lifeCounter;
 
         #endregion
 
@@ -40,7 +67,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
                 this.ScoreChanged?.Invoke(this, this.Score);
             }
         }
-
+        
         #endregion
 
         #region Constructors
@@ -61,6 +88,11 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             this.updateTimer.Start();
 
             this.prevUpdateTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+
+            this.addPlayer();
+            this.addUi();
+            this.addShields();
+            this.addBackground();
         }
 
         #endregion
@@ -71,6 +103,86 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         ///     Occurs when the score is changed.
         /// </summary>
         public event EventHandler<int> ScoreChanged;
+
+        private void addPlayer()
+        {
+            this.player = new PlayerShip();
+            this.player.X = MainPage.ApplicationWidth / 2 - this.player.Collision.Width / 2;
+            this.player.Y = MainPage.ApplicationHeight - 64;
+
+            this.AttachChild(this.player);
+
+            this.player.Removed += this.onPlayerRemoved;
+        }
+
+        private void addUi()
+        {
+            this.scoreLabel = new Label("Score: 0", RenderLayer.UiTop);
+            this.scoreLabel.Position += new Vector2(UiBuffer);
+            this.player.CurrentLivesChanged += this.onPlayerLivesChanged;
+
+            this.lifeCounter = new LifeCounter(typeof(FullHeartSprite), typeof(EmptyHeartSprite), 3, RenderLayer.UiTop);
+            this.lifeCounter.X = MainPage.ApplicationWidth - this.lifeCounter.Width - UiBuffer;
+            this.lifeCounter.Y += UiBuffer;
+
+            this.AttachChild(this.scoreLabel);
+            this.AttachChild(this.lifeCounter);
+        }
+
+        private void addShields()
+        {
+            var y = MainPage.ApplicationHeight - 160;
+            for (var shieldIndex = 1; shieldIndex <= ShieldCount; shieldIndex++)
+            {
+                var x = MainPage.ApplicationWidth / (ShieldCount + 1) * shieldIndex;
+                var currentShield = new LevelShield(5, 3) {
+                    Center = new Vector2(x, y)
+                };
+
+                this.AttachChild(currentShield);
+            }
+        }
+
+        private void addBackground()
+        {
+            this.backgroundNode = new Node();
+            var starRandom = new Random();
+
+            for (var i = 0; i < StarCount; ++i)
+            {
+                var star = new BackgroundStar {
+                    Y = starRandom.NextDouble() * MainPage.ApplicationHeight
+                };
+                this.backgroundNode.AttachChild(star);
+            }
+
+            this.backgroundNode.AttachChild(new BackgroundPlanet());
+
+            this.AttachChild(this.backgroundNode);
+        }
+
+        /// <summary>
+        ///     Sets the level up to detect when the enemy is destroyed.<br />
+        ///     Precondition: enemy != null<br />
+        ///     Postcondition: Score increases when the enemy is destroyed.
+        /// </summary>
+        /// <param name="enemy">The enemy.</param>
+        /// <exception cref="System.ArgumentNullException">enemy - enemy must not be null</exception>
+        protected void RegisterEnemy(Enemy enemy)
+        {
+            if (enemy == null)
+            {
+                throw new ArgumentNullException(nameof(enemy), "enemy must not be null");
+            }
+
+            enemy.Removed += this.onEnemyRemoved;
+            this.enemiesRemaining += 1;
+        }
+
+        private void updateScoreDisplay()
+        {
+            this.scoreLabel.Text = $"Score: {this.Score}";
+        }
 
         /// <summary>
         ///     Readies the level to be ended after the current update tick.<br />
@@ -143,6 +255,35 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
                 foreach (var subscriber in this.ScoreChanged.GetInvocationList())
                 {
                     this.ScoreChanged -= subscriber as EventHandler<int>;
+                }
+            }
+        }
+
+        private void onPlayerLivesChanged(object sender, int e)
+        {
+            this.lifeCounter.CurrentLives = e;
+        }
+
+        private void onPlayerRemoved(object sender, EventArgs e)
+        {
+            var gameOverSound = new OneShotSoundPlayer("game_over.wav");
+            QueueNodeForAddition(gameOverSound);
+
+            this.EndLevel(typeof(MainMenu));
+        }
+
+        private void onEnemyRemoved(object sender, EventArgs e)
+        {
+            if (sender is Enemy enemy)
+            {
+                this.Score += enemy.Score;
+
+                this.updateScoreDisplay();
+
+                this.enemiesRemaining--;
+                if (this.enemiesRemaining <= 0)
+                {
+                    this.EndLevel(typeof(Level1));
                 }
             }
         }
