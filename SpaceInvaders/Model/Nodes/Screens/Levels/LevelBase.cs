@@ -71,6 +71,14 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         }
 
         /// <summary>
+        ///     Gets or sets the gameplay speed modifier.
+        /// </summary>
+        /// <value>
+        ///     The speed modifier.
+        /// </value>
+        public double SpeedModifier { get; set; }
+
+        /// <summary>
         ///     Gets or sets the next level.
         /// </summary>
         /// <value>
@@ -91,6 +99,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         {
             this.NextLevel = nextLevel;
             this.score = 0;
+            this.SpeedModifier = 1;
 
             this.updateTimer = new DispatcherTimer {
                 Interval = TimeSpan.FromMilliseconds(.1)
@@ -226,7 +235,8 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)
         {
-            base.Update(delta);
+            base.Update(delta * this.SpeedModifier);
+
             if (this.levelComplete)
             {
                 CompleteScreen(this.nextScreen);

@@ -1,6 +1,7 @@
 ﻿using System;
 using Windows.System;
 using SpaceInvaders.Model.Nodes.Effects;
+using SpaceInvaders.Model.Nodes.Screens.Levels;
 using SpaceInvaders.View;
 using SpaceInvaders.View.Sprites.Entities;
 
@@ -15,21 +16,27 @@ namespace SpaceInvaders.Model.Nodes.Entities
         #region Data members
 
         private const int MoveSpeed = 200;
+        private const double GrazeMeterPerBullet = .1;
+        private const double GrazeLostOnDeath = .5;
+        private const double SlowdownDuration = 3;
+
         private const VirtualKey LeftKey = VirtualKey.Left;
         private const VirtualKey RightKey = VirtualKey.Right;
         private const VirtualKey ShootKey = VirtualKey.Space;
+        private const VirtualKey SlowdownKey = VirtualKey.X;
 
-        private readonly Vector2 bulletSpawnLocation = new Vector2(12, -4);
-        private readonly Vector2 muzzleFlashLocation = new Vector2(10, -8);
-
+        private bool isAlive;
+        private bool isSlowingTime;
+        private bool slowdownPrevPressed;
         private int maxLives;
         private int currentLives;
-        private bool isAlive;
+        private double grazeMeter;
         private Vector2 velocity;
         private Gun gun;
         private Timer invulnerabilityTimer;
         private Timer respawnTimer;
         private SoundPlayer explosionSound;
+        private SoundPlayer grazeSound;
 
         #endregion
 
@@ -169,6 +176,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 Height = Height + 12,
                 Center = Center
             };
+            grazeHitbox.BulletGrazed += this.onBulletGrazed;
 
             this.grazeSound = new SoundPlayer("graze.wav");
             AttachChild(grazeHitbox);
@@ -186,14 +194,10 @@ namespace SpaceInvaders.Model.Nodes.Entities
             {
                 this.handleMovement(delta);
                 this.handleShooting();
+                this.handleSlowdown(delta);
             }
 
             base.Update(delta);
-        }
-
-        private void setupExplosion()
-        {
-            this.explosionSound = new SoundPlayer("player_explosion.wav");
         }
 
         private void handleMovement(double delta)
@@ -225,6 +229,48 @@ namespace SpaceInvaders.Model.Nodes.Entities
             {
                 this.gun.Shoot();
             }
+        }
+
+        private void handleSlowdown(double delta)
+        {
+            if (this.isSlowingTime)
+            {
+                this.grazeMeter -= delta / SlowdownDuration;
+
+                if (this.grazeMeter <= 0)
+                {
+                    this.unSlowTime();
+                    this.grazeMeter = 0;
+                }
+            }
+
+            if (!this.slowdownPrevPressed && Input.IsKeyPressed(SlowdownKey))
+            {
+                if (this.isSlowingTime)
+                {
+                    this.unSlowTime();
+                }
+                else if (this.grazeMeter > 0)
+                {
+                    this.slowTime();
+                }
+            }
+
+            this.slowdownPrevPressed = Input.IsKeyPressed(SlowdownKey);
+        }
+
+        private void slowTime()
+        {
+            var level = (LevelBase) GetRoot();
+            level.SpeedModifier = .5;
+            this.isSlowingTime = true;
+        }
+
+        private void unSlowTime()
+        {
+            var level = (LevelBase) GetRoot();
+            level.SpeedModifier = 1;
+            this.isSlowingTime = false;
         }
 
         /// <summary>
@@ -261,9 +307,11 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
             Sprite.Visible = false;
 
+            this.unSlowTime();
             this.isAlive = false;
             this.respawnTimer.Restart();
             this.CurrentLives--;
+            this.grazeMeter = Math.Max(this.grazeMeter - GrazeLostOnDeath, 0);
         }
 
         private void onRespawnTimerTick(object sender, EventArgs e)
@@ -288,6 +336,15 @@ namespace SpaceInvaders.Model.Nodes.Entities
         {
             Sprite.Sprite.Opacity = 1;
             Collision.Monitoring = true;
+        }
+
+        private void onBulletGrazed(object sender, EventArgs e)
+        {
+            if (this.isAlive && !this.isSlowingTime)
+            {
+                this.grazeMeter = Math.Min(this.grazeMeter + GrazeMeterPerBullet, 1);
+                this.grazeSound.Play();
+            }
         }
 
         #endregion
