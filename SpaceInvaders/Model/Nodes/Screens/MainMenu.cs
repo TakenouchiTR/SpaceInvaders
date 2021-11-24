@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model.Nodes.Screens.Levels;
-using SpaceInvaders.Model.Nodes.UI;
+using Button = SpaceInvaders.Model.Nodes.UI.Button;
 
 namespace SpaceInvaders.Model.Nodes.Screens
 {
@@ -89,9 +91,20 @@ namespace SpaceInvaders.Model.Nodes.Screens
             throw new NotImplementedException();
         }
 
-        private void onQuitClick(object sender, EventArgs e)
+        private async void onQuitClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var quitDialog = new ContentDialog {
+                Title = "Quitting game",
+                Content = "Are you sure that you want to quit to desktop?",
+                PrimaryButtonText = "Yes",
+                SecondaryButtonText = "No"
+            };
+
+            var dialogResult = await quitDialog.ShowAsync();
+            if (dialogResult == ContentDialogResult.Primary)
+            {
+                CoreApplication.Exit();
+            }
         }
 
         private void onButtonMouseEntered(object sender, Vector2 e)
