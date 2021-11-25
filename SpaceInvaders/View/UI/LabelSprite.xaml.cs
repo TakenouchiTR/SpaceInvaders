@@ -1,5 +1,8 @@
 ﻿// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 using SpaceInvaders.Model;
 
 namespace SpaceInvaders.View.UI
@@ -48,6 +51,29 @@ namespace SpaceInvaders.View.UI
         {
             get => this.textBlock.Height;
             set => this.textBlock.Height = value;
+        }
+
+        /// <summary>
+        ///     Gets or sets the text alignment.
+        /// </summary>
+        /// <value>
+        ///     The text alignment.
+        /// </value>
+        public TextAlignment Alignment
+        {
+            get => this.textBlock.TextAlignment;
+            set => this.textBlock.TextAlignment = value;
+        }
+
+        /// <summary>
+        ///     Sets the color of the font.
+        /// </summary>
+        /// <value>
+        ///     The color of the font.
+        /// </value>
+        public Color FontColor
+        {
+            set => this.textBlock.Foreground = new SolidColorBrush(value);
         }
 
         /// <summary>

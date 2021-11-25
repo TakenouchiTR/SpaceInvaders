@@ -17,6 +17,34 @@ namespace SpaceInvaders.Model.Nodes.UI
 
         #endregion
 
+        #region Properties
+
+        /// <summary>
+        ///     Gets the button's width.
+        /// </summary>
+        /// <value>
+        ///     The button's width.
+        /// </value>
+        public override double Width
+        {
+            get => this.buttonSprite.ButtonWidth;
+            set => this.buttonSprite.ButtonWidth = value;
+        }
+
+        /// <summary>
+        ///     Gets the button's height.
+        /// </summary>
+        /// <value>
+        ///     The button's height.
+        /// </value>
+        public override double Height
+        {
+            get => this.buttonSprite.ButtonHeight;
+            set => this.buttonSprite.ButtonHeight = value;
+        }
+
+        #endregion
+
         #region Constructors
 
         /// <summary>

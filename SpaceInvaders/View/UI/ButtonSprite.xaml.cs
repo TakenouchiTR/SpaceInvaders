@@ -30,7 +30,12 @@ namespace SpaceInvaders.View.UI
         public double ButtonWidth
         {
             get => this.button.Width;
-            set => this.button.Width = value;
+            set
+            {
+                this.button.Width = value;
+                this.button.MinWidth = value;
+                this.button.MaxWidth = value;
+            }
         }
 
         /// <summary>
@@ -39,7 +44,12 @@ namespace SpaceInvaders.View.UI
         public double ButtonHeight
         {
             get => this.button.Height;
-            set => this.button.Height = value;
+            set
+            {
+                this.button.Height = value;
+                this.button.MinHeight = value;
+                this.button.MaxHeight = value;
+            }
         }
 
         /// <summary>

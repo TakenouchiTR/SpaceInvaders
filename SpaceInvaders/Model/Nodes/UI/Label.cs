@@ -1,4 +1,6 @@
-﻿using SpaceInvaders.View.UI;
+﻿using Windows.UI;
+using Windows.UI.Xaml;
+using SpaceInvaders.View.UI;
 
 namespace SpaceInvaders.Model.Nodes.UI
 {
@@ -50,6 +52,41 @@ namespace SpaceInvaders.Model.Nodes.UI
         {
             get => this.labelSprite.Text;
             set => this.labelSprite.Text = value;
+        }
+
+        /// <summary>
+        ///     Gets or sets the text alignment.
+        /// </summary>
+        /// <value>
+        ///     The alignment.
+        /// </value>
+        public TextAlignment Alignment
+        {
+            get => this.labelSprite.Alignment;
+            set => this.labelSprite.Alignment = value;
+        }
+
+        /// <summary>
+        ///     Sets the color of the font.
+        /// </summary>
+        /// <value>
+        ///     The color of the font.
+        /// </value>
+        public Color FontColor
+        {
+            set => this.labelSprite.FontColor = value;
+        }
+
+        /// <summary>
+        ///     Gets or sets the size of the font.
+        /// </summary>
+        /// <value>
+        ///     The size of the font.
+        /// </value>
+        public double FontSize
+        {
+            get => this.labelSprite.FontSize;
+            set => this.labelSprite.FontSize = value;
         }
 
         #endregion
