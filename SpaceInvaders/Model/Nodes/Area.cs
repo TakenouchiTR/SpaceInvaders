@@ -68,7 +68,7 @@ namespace SpaceInvaders.Model.Nodes
         /// </value>
         public Vector2 Center
         {
-            get => new Vector2(X + this.Width / 2, Y + this.Width / 2);
+            get => new Vector2(X + this.Width / 2, Y + this.Height / 2);
             set
             {
                 X = value.X - this.Width / 2;
