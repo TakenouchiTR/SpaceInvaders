@@ -36,6 +36,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         {
             this.curMovementStep = 9;
             this.movementFactor = 1;
+            NextLevel = typeof(MainMenu);
 
             this.addEnemyHelperNodes();
             this.addEnemies();

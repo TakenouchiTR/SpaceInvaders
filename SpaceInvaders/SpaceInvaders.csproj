@@ -158,7 +158,9 @@
     <Compile Include="Model\Nodes\UI\Button.cs" />
     <Compile Include="Model\Nodes\UI\ColorRectangle.cs" />
     <Compile Include="Model\Nodes\UI\Label.cs" />
+    <Compile Include="Model\Nodes\UI\LevelOverDisplay.cs" />
     <Compile Include="Model\Nodes\UI\LifeCounter.cs" />
+    <Compile Include="Model\Nodes\UI\ScoreBreakdownRow.cs" />
     <Compile Include="Model\PhysicsLayer.cs" />
     <Compile Include="Model\Nodes\SpriteNode.cs" />
     <Compile Include="Model\Nodes\Timer.cs" />

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Windows.ApplicationModel.Core;
+using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model.Nodes.Effects;
@@ -364,7 +364,11 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
 
                 if (this.enemiesRemaining <= 0)
                 {
-                    this.EndLevel(typeof(Level1));
+                    this.canEarnPoints = false;
+                    this.scoreLabel.Visible = false;
+
+                    this.calculateBonusPoints();
+                    this.createLevelOverDisplay();
                 }
             }
         }
@@ -383,6 +387,20 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             this.AddPoints(PointSource.Lives, lifeBonus);
             this.AddPoints(PointSource.Time, timeBonus);
             this.AddPoints(PointSource.Shields, shieldBonus);
+        }
+
+        private void createLevelOverDisplay()
+        {
+            var levelOverDisplay = new LevelOverDisplay(this.scoreBreakdown) {
+                Center = new Vector2(MainPage.ApplicationWidth / 2, MainPage.ApplicationHeight / 2)
+            };
+            levelOverDisplay.ContinueClicked += this.onContinueClicked;
+            QueueNodeForAddition(levelOverDisplay);
+        }
+
+        private void onContinueClicked(object sender, EventArgs e)
+        {
+            this.EndLevel(this.NextLevel);
         }
 
         private void onUpdateTimerTick(object sender, object e)
