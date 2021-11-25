@@ -16,6 +16,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
         #region Data members
 
         private const int MoveSpeed = 200;
+        private const int PointsPerGraze = 10;
         private const double GrazeMeterPerBullet = .1;
         private const double GrazeLostOnDeath = .5;
         private const double SlowdownDuration = 3;
@@ -342,6 +343,9 @@ namespace SpaceInvaders.Model.Nodes.Entities
         {
             if (this.isAlive && !this.isSlowingTime)
             {
+                var root = (LevelBase) GetRoot();
+                root.AddPoints(PointSource.Graze, PointsPerGraze);
+
                 this.grazeMeter = Math.Min(this.grazeMeter + GrazeMeterPerBullet, 1);
                 this.grazeSound.Play();
             }

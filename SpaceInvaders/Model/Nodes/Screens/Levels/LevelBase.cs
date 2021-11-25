@@ -38,15 +38,25 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         private const double MillisecondsInSecond = 1000;
         private const double UpdateSkipThreshold = 1;
 
+        private const int MaxGrazePoints = 150;
+        private const int MaxTimeBonus = 500;
+        private const int PointsPerLife = 100;
+        private const int PointsLostPerSecond = 15;
+        private const int PointsPerShieldSegment = 2;
+
         private readonly DispatcherTimer updateTimer;
+
         private long prevUpdateTime;
-        private int score;
         private int enemiesRemaining;
+        private double timeInLevel;
         private bool levelComplete;
+        private bool canEarnPoints;
         private Type nextScreen;
+        private Dictionary<PointSource, int> scoreBreakdown;
 
         private PlayerShip player;
         private Node backgroundNode;
+        private Node shieldNode;
         private Label scoreLabel;
         private LifeCounter lifeCounter;
 
@@ -60,15 +70,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         /// <value>
         ///     The score.
         /// </value>
-        public int Score
-        {
-            get => this.score;
-            protected set
-            {
-                this.score = value;
-                this.ScoreChanged?.Invoke(this, this.Score);
-            }
-        }
+        public int Score => this.scoreBreakdown.Values.Sum();
 
         /// <summary>
         ///     Gets or sets the gameplay speed modifier.
@@ -98,8 +100,8 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         protected LevelBase(Type nextLevel)
         {
             this.NextLevel = nextLevel;
-            this.score = 0;
             this.SpeedModifier = 1;
+            this.canEarnPoints = true;
 
             this.updateTimer = new DispatcherTimer {
                 Interval = TimeSpan.FromMilliseconds(.1)
@@ -113,6 +115,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             this.addUi();
             this.addShields();
             this.addBackground();
+            this.setupScoreBreakdown();
         }
 
         #endregion
@@ -151,6 +154,8 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
 
         private void addShields()
         {
+            this.shieldNode = new Node();
+
             var y = MainPage.ApplicationHeight - 160;
             for (var shieldIndex = 1; shieldIndex <= ShieldCount; shieldIndex++)
             {
@@ -159,8 +164,10 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
                     Center = new Vector2(x, y)
                 };
 
-                this.AttachChild(currentShield);
+                this.shieldNode.AttachChild(currentShield);
             }
+
+            this.AttachChild(this.shieldNode);
         }
 
         private void addBackground()
@@ -181,6 +188,39 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             this.AttachChild(this.backgroundNode);
         }
 
+        private void setupScoreBreakdown()
+        {
+            this.scoreBreakdown = new Dictionary<PointSource, int>();
+            var sources = (PointSource[]) Enum.GetValues(typeof(PointSource));
+
+            foreach (var source in sources)
+            {
+                this.scoreBreakdown[source] = 0;
+            }
+        }
+
+        /// <summary>
+        ///     Adds points from a given source. Checks to make sure that Graze points do not go over the graze limit.<br />
+        ///     The score for a given category can never go below 0. <br />
+        ///     Precondition: None<br />
+        ///     Postcondition: if source == PointSource.Graze &amp;&amp; the graze limit was reached, this.Score ==
+        ///     this.Score@prev;<br />
+        ///     Otherwise: this.Score == this.Score@prev + amount
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="amount">The amount.</param>
+        public void AddPoints(PointSource source, int amount)
+        {
+            if (source == PointSource.Graze)
+            {
+                amount = Math.Min(amount, MaxGrazePoints - this.scoreBreakdown[PointSource.Graze]);
+            }
+
+            this.scoreBreakdown[source] = Math.Max(this.scoreBreakdown[source] + amount, 0);
+            this.updateScoreDisplay();
+            this.ScoreChanged?.Invoke(this, this.Score);
+        }
+
         /// <summary>
         ///     Sets the level up to detect when the enemy is destroyed.<br />
         ///     Precondition: enemy != null<br />
@@ -199,11 +239,6 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             this.enemiesRemaining += 1;
         }
 
-        private void updateScoreDisplay()
-        {
-            this.scoreLabel.Text = $"Score: {this.Score}";
-        }
-
         /// <summary>
         ///     Readies the level to be ended after the current update tick.<br />
         ///     Precondition: Type != null<br />
@@ -214,6 +249,11 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         {
             this.nextScreen = screen;
             this.levelComplete = true;
+        }
+
+        private void updateScoreDisplay()
+        {
+            this.scoreLabel.Text = $"Score: {this.Score}";
         }
 
         private void testForCollisions(IEnumerable<CollisionArea> sourceAreas, IList<CollisionArea> targetAreas)
@@ -236,6 +276,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         public override void Update(double delta)
         {
             base.Update(delta * this.SpeedModifier);
+            this.timeInLevel += delta * this.SpeedModifier;
 
             if (this.levelComplete)
             {
@@ -287,11 +328,16 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
 
         private async void onPlayerRemoved(object sender, EventArgs e)
         {
+            if (!this.canEarnPoints)
+            {
+                return;
+            }
+
             var gameOverSound = new OneShotSoundPlayer("game_over.wav");
+            this.canEarnPoints = false;
             QueueNodeForAddition(gameOverSound);
 
-            var quitDialog = new ContentDialog
-            {
+            var quitDialog = new ContentDialog {
                 Title = "Game Over",
                 Content = "You ran out of lives!\nWould you like to restart the level?",
                 PrimaryButtonText = "Restart",
@@ -301,29 +347,42 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             var dialogResult = await quitDialog.ShowAsync();
             if (dialogResult == ContentDialogResult.Primary)
             {
-                this.EndLevel(this.GetType());
+                this.EndLevel(GetType());
             }
             else
             {
                 this.EndLevel(typeof(MainMenu));
             }
-            
         }
 
         private void onEnemyRemoved(object sender, EventArgs e)
         {
             if (sender is Enemy enemy)
             {
-                this.Score += enemy.Score;
-
-                this.updateScoreDisplay();
-
+                this.AddPoints(PointSource.Enemy, enemy.Score);
                 this.enemiesRemaining--;
+
                 if (this.enemiesRemaining <= 0)
                 {
                     this.EndLevel(typeof(Level1));
                 }
             }
+        }
+
+        private void calculateBonusPoints()
+        {
+            var lifeBonus = (this.player.CurrentLives - 1) * PointsPerLife;
+            var timeBonus = (int) Math.Max(MaxTimeBonus - this.timeInLevel * PointsLostPerSecond, 0);
+            var shieldBonus = 0;
+
+            foreach (var shield in this.shieldNode.Children)
+            {
+                shieldBonus += shield.Children.Count * PointsPerShieldSegment;
+            }
+
+            this.AddPoints(PointSource.Lives, lifeBonus);
+            this.AddPoints(PointSource.Time, timeBonus);
+            this.AddPoints(PointSource.Shields, shieldBonus);
         }
 
         private void onUpdateTimerTick(object sender, object e)

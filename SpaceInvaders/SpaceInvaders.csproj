@@ -162,6 +162,7 @@
     <Compile Include="Model\Nodes\SpriteNode.cs" />
     <Compile Include="Model\Nodes\Timer.cs" />
     <Compile Include="Model\RenderLayer.cs" />
+    <Compile Include="Model\PointSource.cs" />
     <Compile Include="Model\Vector2.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
