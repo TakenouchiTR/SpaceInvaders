@@ -95,6 +95,7 @@ namespace SpaceInvaders.View
 
             this.currentScreen.Complete -= this.onCurrentScreenComplete;
             this.currentScreen = null;
+            GC.Collect();
         }
 
         private void onSpriteNodeHidden(object sender, BaseSprite e)
