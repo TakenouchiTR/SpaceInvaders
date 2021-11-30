@@ -43,6 +43,8 @@ namespace SpaceInvaders.View
         {
             this.InitializeComponent();
 
+            Application.Current.RequestedTheme = ApplicationTheme.Dark;
+
             ApplicationView.PreferredLaunchViewSize = new Size {Width = ApplicationWidth, Height = ApplicationHeight};
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
             ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(ApplicationWidth, ApplicationHeight));
