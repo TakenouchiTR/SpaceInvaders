@@ -59,6 +59,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         private Node shieldNode;
         private Label scoreLabel;
         private LifeCounter lifeCounter;
+        private GrazeBar grazeBar;
 
         #endregion
 
@@ -148,8 +149,13 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             this.lifeCounter.X = MainPage.ApplicationWidth - this.lifeCounter.Width - UiBuffer;
             this.lifeCounter.Y += UiBuffer;
 
+            this.grazeBar = new GrazeBar(RenderLayer.UiMiddle);
+            this.grazeBar.Y = MainPage.ApplicationHeight / 2 - this.grazeBar.Height / 2;
+            this.player.GrazeMeterChanged += this.onPlayerGrazeMeterChanged;
+
             this.AttachChild(this.scoreLabel);
             this.AttachChild(this.lifeCounter);
+            this.AttachChild(grazeBar);
         }
 
         private void addShields()
@@ -324,6 +330,11 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         private void onPlayerLivesChanged(object sender, int e)
         {
             this.lifeCounter.CurrentLives = e;
+        }
+
+        private void onPlayerGrazeMeterChanged(object sender, double e)
+        {
+            this.grazeBar.BarHeight = e;
         }
 
         private async void onPlayerRemoved(object sender, EventArgs e)
