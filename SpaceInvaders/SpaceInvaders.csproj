@@ -157,6 +157,7 @@
     <Compile Include="Model\Nodes\SoundPlayer.cs" />
     <Compile Include="Model\Nodes\UI\Button.cs" />
     <Compile Include="Model\Nodes\UI\ColorRectangle.cs" />
+    <Compile Include="Model\Nodes\UI\GrazeBar.cs" />
     <Compile Include="Model\Nodes\UI\Label.cs" />
     <Compile Include="Model\Nodes\UI\LevelOverDisplay.cs" />
     <Compile Include="Model\Nodes\UI\LifeCounter.cs" />
@@ -249,6 +250,12 @@
     </Compile>
     <Compile Include="View\Sprites\UI\FullHeartSprite.xaml.cs">
       <DependentUpon>FullHeartSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\UI\GrazeBarFrameSprite.xaml.cs">
+      <DependentUpon>GrazeBarFrameSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\UI\GrazeBarSprite.xaml.cs">
+      <DependentUpon>GrazeBarSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UI\ButtonSprite.xaml.cs">
       <DependentUpon>ButtonSprite.xaml</DependentUpon>
@@ -392,6 +399,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\UI\FullHeartSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\UI\GrazeBarFrameSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\UI\GrazeBarSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
