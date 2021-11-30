@@ -91,6 +91,22 @@ namespace SpaceInvaders.Model.Nodes.Entities
             }
         }
 
+        /// <summary>
+        ///     Gets or sets the graze meter.
+        /// </summary>
+        /// <value>
+        ///     The graze meter.
+        /// </value>
+        public double GrazeMeter
+        {
+            get => this.grazeMeter;
+            set
+            {
+                this.grazeMeter = Math.Clamp(value, 0, 1);
+                this.GrazeMeterChanged?.Invoke(this, this.grazeMeter);
+            }
+        }
+
         #endregion
 
         #region Constructors
@@ -130,6 +146,11 @@ namespace SpaceInvaders.Model.Nodes.Entities
         ///     Occurs when [current lives changed].
         /// </summary>
         public event EventHandler<int> CurrentLivesChanged;
+
+        /// <summary>
+        ///     Occurs when [graze meter changed].
+        /// </summary>
+        public event EventHandler<double> GrazeMeterChanged;
 
         private void setupCollision()
         {
@@ -236,12 +257,11 @@ namespace SpaceInvaders.Model.Nodes.Entities
         {
             if (this.isSlowingTime)
             {
-                this.grazeMeter -= delta / SlowdownDuration;
+                this.GrazeMeter -= delta / SlowdownDuration;
 
-                if (this.grazeMeter <= 0)
+                if (this.grazeMeter == 0)
                 {
                     this.unSlowTime();
-                    this.grazeMeter = 0;
                 }
             }
 
@@ -312,7 +332,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
             this.isAlive = false;
             this.respawnTimer.Restart();
             this.CurrentLives--;
-            this.grazeMeter = Math.Max(this.grazeMeter - GrazeLostOnDeath, 0);
+            this.GrazeMeter -= GrazeLostOnDeath;
         }
 
         private void onRespawnTimerTick(object sender, EventArgs e)
@@ -346,7 +366,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 var root = (LevelBase) GetRoot();
                 root.AddPoints(PointSource.Graze, PointsPerGraze);
 
-                this.grazeMeter = Math.Min(this.grazeMeter + GrazeMeterPerBullet, 1);
+                this.GrazeMeter += GrazeMeterPerBullet;
                 this.grazeSound.Play();
             }
         }
