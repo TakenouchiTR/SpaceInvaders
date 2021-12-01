@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Windows.ApplicationModel.Core;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model.Nodes.Screens.Levels;
+using SpaceInvaders.Model.Nodes.UI;
+using SpaceInvaders.View;
 using Button = SpaceInvaders.Model.Nodes.UI.Button;
 
 namespace SpaceInvaders.Model.Nodes.Screens
@@ -17,6 +20,8 @@ namespace SpaceInvaders.Model.Nodes.Screens
         #region Data members
 
         private const double ButtonWidth = 256;
+        private const double ButtonStartY = 320;
+        private const double ButtonSpacing = 48;
 
         private Button playButton;
         private Button scoreboardButton;
@@ -34,6 +39,7 @@ namespace SpaceInvaders.Model.Nodes.Screens
         /// </summary>
         public MainMenu()
         {
+            this.setupLabels();
             this.setupButtons();
             this.setupSoundPlayer();
         }
@@ -41,6 +47,27 @@ namespace SpaceInvaders.Model.Nodes.Screens
         #endregion
 
         #region Methods
+
+        private void setupLabels()
+        {
+            var title = new Label("Space Invaders") 
+            {
+                FontSize = 128,
+                Y = 32,
+                Width = MainPage.ApplicationWidth,
+                Alignment = TextAlignment.Center
+            };
+
+            var subtitle = new Label("Team C") 
+            {
+                FontSize = 64,
+                Y = 192,
+                Width = MainPage.ApplicationWidth,
+                Alignment = TextAlignment.Center
+            };
+
+            AttachChild(title);
+        }
 
         private void setupButtons()
         {
@@ -58,7 +85,8 @@ namespace SpaceInvaders.Model.Nodes.Screens
 
             for (var i = 0; i < this.buttons.Count; i++)
             {
-                this.buttons[i].Y = i * 48;
+                this.buttons[i].Y = i * ButtonSpacing + ButtonStartY;
+                this.buttons[i].X = MainPage.ApplicationWidth / 2 - ButtonWidth / 2;
                 this.buttons[i].Width = ButtonWidth;
                 this.buttons[i].MouseEntered += this.onButtonMouseEntered;
                 AttachChild(this.buttons[i]);
