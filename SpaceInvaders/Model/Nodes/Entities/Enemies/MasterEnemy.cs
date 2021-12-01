@@ -14,11 +14,18 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         #region Data members
 
         private const double MinShotDelay = 2;
-        private const double MaxShotDelay = 6;
-        private static readonly Random ShotDelayGenerator = new Random();
+        private const double MaxShotDelay = 8;
+        private const double MinChargeDelay = 8;
+        private const double MaxChargeDelay = 18;
+        private const double ChargeMovementSpeed = 300;
+        private const double ReturnStartingYLocation = -300;
+        private static readonly Random MasterShipRandom = new Random();
 
         private MasterEnemyState state;
+        private Vector2 formationLocation;
+        private Vector2 chargeVelocity;
         private Gun gun;
+        private Timer chargeTimer;
 
         #endregion
 
@@ -34,6 +41,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             this.state = MasterEnemyState.InFormation;
 
             this.setupGun();
+            this.setupTimer();
         }
 
         #endregion
@@ -54,6 +62,18 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             AttachChild(this.gun);
         }
 
+        private void setupTimer()
+        {
+            this.chargeTimer = new Timer(getChargeDelay()) {
+                Repeat = false
+            };
+
+            this.chargeTimer.Tick += this.onChargeTimerTick;
+            this.chargeTimer.Start();
+
+            AttachChild(this.chargeTimer);
+        }
+
         private static AnimatedSprite createSprite()
         {
             var sprites = new List<BaseSprite> {
@@ -64,6 +84,16 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             return new AnimatedSprite(1, sprites);
         }
 
+        private static double getShotDelay()
+        {
+            return MasterShipRandom.NextDouble() * (MaxShotDelay - MinShotDelay) + MinShotDelay;
+        }
+
+        private static double getChargeDelay()
+        {
+            return MasterShipRandom.NextDouble() * (MaxChargeDelay - MinChargeDelay) + MinChargeDelay;
+        }
+
         /// <summary>
         ///     The update loop for the Node.<br />
         ///     Precondition: None<br />
@@ -71,6 +101,24 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         /// </summary>
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)
+        {
+            switch (this.state)
+            {
+                case MasterEnemyState.InFormation:
+                    this.updateInFormation();
+                    break;
+                case MasterEnemyState.Charging:
+                    this.updateCharging(delta);
+                    break;
+                case MasterEnemyState.Returning:
+                    this.updateReturning(delta);
+                    break;
+            }
+
+            base.Update(delta);
+        }
+
+        private void updateInFormation()
         {
             var player = (PlayerShip) GetRoot().GetChildByName("PlayerShip");
 
@@ -81,8 +129,38 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
             this.gun.Rotation = Center.AngleToTarget(player.Center);
             this.gun.Shoot();
+        }
 
-            base.Update(delta);
+        private void updateCharging(double delta)
+        {
+            Move(this.chargeVelocity * delta);
+
+            if (IsOffScreen())
+            {
+                this.state = MasterEnemyState.Returning;
+                Y = ReturnStartingYLocation;
+
+                this.chargeVelocity = Center.NormalizedVectorTo(this.formationLocation) * ChargeMovementSpeed;
+            }
+        }
+
+        private void updateReturning(double delta)
+        {
+            var moveDistance = this.chargeVelocity * delta;
+
+            if (Center.DistanceToSquared(this.formationLocation) < moveDistance.MagnitudeSquared)
+            {
+                Center = this.formationLocation;
+                this.state = MasterEnemyState.InFormation;
+                this.gun.ActivateCooldown();
+                this.chargeTimer.Start();
+            }
+            else
+            {
+                Move(moveDistance);
+            }
+        }
+
         /// <summary>
         ///     Moves the with the enemy group.<br />
         ///     Precondition: None
@@ -114,9 +192,15 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             this.gun.CooldownDuration = getShotDelay();
         }
 
-        private static double getShotDelay()
+        private void onChargeTimerTick(object sender, EventArgs e)
         {
-            return ShotDelayGenerator.NextDouble() * (MaxShotDelay - MinShotDelay) + MinShotDelay;
+            var player = (PlayerShip) GetRoot().GetChildByName("PlayerShip");
+
+            this.state = MasterEnemyState.Charging;
+            this.formationLocation = Center;
+
+            this.chargeVelocity = Center.NormalizedVectorTo(player.Center) * ChargeMovementSpeed;
+            this.chargeTimer.Duration = getChargeDelay();
         }
 
         #endregion
