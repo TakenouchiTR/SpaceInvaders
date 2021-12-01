@@ -6,11 +6,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sprites="using:SpaceInvaders.View.Sprites"
     mc:Ignorable="d"
-    d:DesignHeight="28"
-    d:DesignWidth="28">
+    d:DesignHeight="32"
+    d:DesignWidth="32"
+    Height="32"
+    Width="32">
 
     <Canvas>
-        <Image Height="28" Width="28" Source="{x:Bind ImageSource, Mode=OneWay}" />
+        <Ellipse Width="16" Height="12" Fill="#555" Canvas.Left="8" Canvas.Top="16"/>
+        <Ellipse Width="32" Height="8" Fill="#888" Canvas.Top="16"/>
+        <Ellipse Width="16" Height="12" Fill="Aqua" Canvas.Left="8" Canvas.Top="11"/>
     </Canvas>
 
 </sprites:BaseSprite>

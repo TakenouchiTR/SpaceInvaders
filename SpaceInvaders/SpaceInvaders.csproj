@@ -134,6 +134,7 @@
     <Compile Include="Model\Nodes\Effects\MuzzleFlash.cs" />
     <Compile Include="Model\Nodes\Entities\Bullet.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\AggresiveEnemy.cs" />
+    <Compile Include="Model\Nodes\Entities\Enemies\BonusEnemy.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\EnemyGroup.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\MasterEnemy.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\IntermediateEnemy.cs" />

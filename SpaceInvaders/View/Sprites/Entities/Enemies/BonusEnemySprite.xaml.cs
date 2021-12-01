@@ -2,20 +2,22 @@
 
 namespace SpaceInvaders.View.Sprites.Entities.Enemies
 {
+    /// <summary>
+    ///     Draws the BonusEnemy's Sprite
+    /// </summary>
+    /// <seealso cref="SpaceInvaders.View.Sprites.BaseSprite" />
+    /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />
+    /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector2" />
     public sealed partial class BonusEnemySprite
     {
-        #region Data members
-
-        private readonly string ImageSource;
-
-        #endregion
-
         #region Constructors
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="BonusEnemySprite"/> class.
+        /// </summary>
         public BonusEnemySprite()
         {
             this.InitializeComponent();
-            this.ImageSource = @"https://cdn.betterttv.net/emote/60a9075967644f1d67e8ae60/1x";
         }
 
         #endregion

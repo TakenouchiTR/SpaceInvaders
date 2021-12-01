@@ -44,6 +44,8 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         private const int PointsLostPerSecond = 15;
         private const int PointsPerShieldSegment = 2;
 
+        private const int BonusEnemySpawnInterval = 10;
+
         private readonly DispatcherTimer updateTimer;
 
         private long prevUpdateTime;
@@ -60,6 +62,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         private Label scoreLabel;
         private LifeCounter lifeCounter;
         private GrazeBar grazeBar;
+        private Timer bonusShipTimer;
 
         #endregion
 
@@ -89,6 +92,14 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         /// </value>
         protected Type NextLevel { get; set; }
 
+        /// <summary>
+        ///     Gets or sets the remaining bonus enemies.
+        /// </summary>
+        /// <value>
+        ///     The remaining bonus enemies.
+        /// </value>
+        protected int RemainingBonusEnemies { get; set; }
+
         #endregion
 
         #region Constructors
@@ -98,6 +109,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         ///     Precondition: None<br />
         ///     Postcondition: None
         /// </summary>
+        /// <param name="nextLevel">The next level.</param>
         protected LevelBase(Type nextLevel)
         {
             this.NextLevel = nextLevel;
@@ -117,6 +129,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             this.addShields();
             this.addBackground();
             this.setupScoreBreakdown();
+            this.setupBonusEnemies();
         }
 
         #endregion
@@ -205,6 +218,16 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             }
         }
 
+        private void setupBonusEnemies()
+        {
+            this.RemainingBonusEnemies = 3;
+
+            this.bonusShipTimer = new Timer(BonusEnemySpawnInterval);
+            this.bonusShipTimer.Start();
+            this.bonusShipTimer.Tick += this.onBonusEnemyTimerTick;
+            this.AttachChild(this.bonusShipTimer);
+        }
+
         /// <summary>
         ///     Adds points from a given source. Checks to make sure that Graze points do not go over the graze limit.<br />
         ///     The score for a given category can never go below 0. <br />
@@ -261,8 +284,20 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         {
             this.scoreLabel.Text = $"Score: {this.Score}";
         }
+        
+        private void spawnBonusEnemy()
+        {
+            var bonusEnemy = new BonusEnemy();
+            QueueNodeForAddition(bonusEnemy);
+            this.RemainingBonusEnemies -= 1;
 
-        private void testForCollisions(IEnumerable<CollisionArea> sourceAreas, IList<CollisionArea> targetAreas)
+            if (this.RemainingBonusEnemies <= 0)
+            {
+                this.bonusShipTimer.Stop();
+            }
+        }
+        
+        private static void testForCollisions(IEnumerable<CollisionArea> sourceAreas, IList<CollisionArea> targetAreas)
         {
             foreach (var sourceArea in sourceAreas)
             {
@@ -346,6 +381,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
 
             var gameOverSound = new OneShotSoundPlayer("game_over.wav");
             this.canEarnPoints = false;
+            this.bonusShipTimer.Stop();
             QueueNodeForAddition(gameOverSound);
 
             var quitDialog = new ContentDialog {
@@ -377,6 +413,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
                 {
                     this.canEarnPoints = false;
                     this.scoreLabel.Visible = false;
+                    this.bonusShipTimer.Stop();
 
                     this.calculateBonusPoints();
                     this.createLevelOverDisplay();
@@ -445,8 +482,13 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
                 }
 
                 var targetCollisionAreas = child.GetCollisionAreas();
-                this.testForCollisions(sourceCollisionAreas, targetCollisionAreas);
+                testForCollisions(sourceCollisionAreas, targetCollisionAreas);
             }
+        }
+
+        private void onBonusEnemyTimerTick(object sender, EventArgs e)
+        {
+            this.spawnBonusEnemy();
         }
 
         #endregion
