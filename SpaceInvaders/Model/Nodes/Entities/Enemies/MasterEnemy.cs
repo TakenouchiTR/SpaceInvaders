@@ -127,8 +127,11 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
                 return;
             }
 
-            this.gun.Rotation = Center.AngleToTarget(player.Center);
-            this.gun.Shoot();
+            if (this.gun.CanShoot)
+            {
+                this.gun.Rotation = Center.AngleToTarget(player.Center);
+                this.gun.Shoot();
+            }
         }
 
         private void updateCharging(double delta)
