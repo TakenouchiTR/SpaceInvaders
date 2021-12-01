@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SpaceInvaders.Model.Nodes.PowerUps;
 using SpaceInvaders.View.Sprites;
 using SpaceInvaders.View.Sprites.Entities.Enemies;
 
@@ -63,6 +64,12 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         
         private void onCollided(object sender, CollisionArea e)
         {
+            var player = (PlayerShip) GetRoot().GetChildByName("PlayerShip");
+            if (player != null)
+            {
+                var powerUp = new ReflectionShieldPowerUp();
+                powerUp.AttachToPlayer(player);
+            }
             QueueForRemoval();
         }
 
