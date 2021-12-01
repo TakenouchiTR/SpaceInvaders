@@ -195,6 +195,10 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         private void onChargeTimerTick(object sender, EventArgs e)
         {
             var player = (PlayerShip) GetRoot().GetChildByName("PlayerShip");
+            if (player == null)
+            {
+                return;
+            }
 
             this.state = MasterEnemyState.Charging;
             this.formationLocation = Center;
