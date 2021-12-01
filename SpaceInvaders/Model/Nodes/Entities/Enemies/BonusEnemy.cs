@@ -16,8 +16,10 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
     public class BonusEnemy : Enemy
     {
         private const double MoveSpeed = 100;
+        private const double GunCooldown = 2.5;
 
         private readonly int moveFactor;
+        private Gun gun;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="BonusEnemy"/> class.
@@ -30,11 +32,22 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             Collision.Collided += this.onCollided;
 
             this.placeShip();
+            this.setupGun();
         }
 
         private void placeShip()
         {
             this.Position = new Vector2(-Sprite.Width, 0);
+        }
+
+        private void setupGun()
+        {
+            this.gun = new EnemyGun() {
+                CooldownDuration = GunCooldown,
+                Position = Center
+            };
+            this.gun.ActivateCooldown();
+            AttachChild(this.gun);
         }
 
         private static AnimatedSprite createSprite()
@@ -57,9 +70,22 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             Move(Vector2.Right * this.moveFactor * MoveSpeed * delta);
             if (this.IsOffScreen())
             {
+                this.ExplodeOnDeath = false;
                 this.Score = 0;
                 this.QueueForRemoval();
             }
+            else if (this.gun.CanShoot)
+            {
+                var player = (PlayerShip)GetRoot().GetChildByName("PlayerShip");
+                if (player == null)
+                {
+                    return;
+                }
+
+                this.gun.Rotation = this.Center.AngleToTarget(player.Center);
+                this.gun.Shoot();
+            }
+            base.Update(delta);
         }
         
         private void onCollided(object sender, CollisionArea e)
