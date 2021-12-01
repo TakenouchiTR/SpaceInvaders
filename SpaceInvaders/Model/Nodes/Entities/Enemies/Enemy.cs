@@ -25,6 +25,14 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         /// </value>
         public int Score { get; protected set; }
 
+        /// <summary>
+        ///     Gets or sets a value indicating whether [explode on death].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [explode on death]; otherwise, <c>false</c>.
+        /// </value>
+        protected bool ExplodeOnDeath { get; set; }
+
         #endregion
 
         #region Constructors
@@ -49,6 +57,9 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             sprite.Stop();
             sprite.Visible = true;
             sprite.Frame = EnemyRandom.Next(sprite.FrameCount);
+
+            this.ExplodeOnDeath = true;
+
             Removed += this.onRemoved;
             Moved += this.onMoved;
         }
@@ -94,6 +105,11 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         private void onRemoved(object sender, EventArgs e)
         {
+            if (!this.ExplodeOnDeath)
+            {
+                return;
+            }
+
             var explosion = new Explosion {
                 Center = Center
             };
