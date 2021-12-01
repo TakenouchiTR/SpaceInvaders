@@ -20,6 +20,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
         private const double GrazeMeterPerBullet = .1;
         private const double GrazeLostOnDeath = .5;
         private const double SlowdownDuration = 3;
+        private const double CollisionSizeMultiplier = .8;
 
         private const VirtualKey LeftKey = VirtualKey.Left;
         private const VirtualKey RightKey = VirtualKey.Right;
@@ -154,6 +155,10 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
         private void setupCollision()
         {
+            Collision.Width *= CollisionSizeMultiplier;
+            Collision.Height *= CollisionSizeMultiplier;
+            Collision.Center = Center;
+
             Collision.Monitorable = true;
             Collision.Monitoring = true;
 
