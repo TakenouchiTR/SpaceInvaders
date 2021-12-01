@@ -265,6 +265,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             }
 
             enemy.Removed += this.onEnemyRemoved;
+            enemy.Moved += this.onChildMoved;
             this.enemiesRemaining += 1;
         }
 
