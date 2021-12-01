@@ -81,6 +81,14 @@ namespace SpaceInvaders.Model
         public double Magnitude => Math.Sqrt(this.X * this.X + this.Y * this.Y);
 
         /// <summary>
+        ///     Gets the magnitude squared.
+        /// </summary>
+        /// <value>
+        ///     The magnitude squared.
+        /// </value>
+        public double MagnitudeSquared => this.X * this.X + this.Y * this.Y;
+
+        /// <summary>
         ///     Creates a Vector2 pointing up (0, -1).
         /// </summary>
         /// <value>
@@ -223,6 +231,32 @@ namespace SpaceInvaders.Model
         {
             var angle = this.AngleToTarget(target);
             return AngleToNormalizedVector(angle);
+        }
+
+        /// <summary>
+        ///     Gets the distance to a specified Vector2.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: None
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <returns>The distance to the specified Vector2</returns>
+        public double DistanceTo(Vector2 target)
+        {
+            var difference = this - target;
+            return difference.Magnitude;
+        }
+
+        /// <summary>
+        ///     Gets the distance squared to a specified Vector2.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: None
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <returns>The distance squared to the specified Vector2</returns>
+        public double DistanceToSquared(Vector2 target)
+        {
+            var difference = this - target;
+            return difference.MagnitudeSquared;
         }
 
         /// <summary>
