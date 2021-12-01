@@ -44,7 +44,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         private const int PointsLostPerSecond = 15;
         private const int PointsPerShieldSegment = 2;
 
-        private const int BonusEnemySpawnInterval = 10;
+        private const int BonusEnemySpawnInterval = 15;
 
         private readonly DispatcherTimer updateTimer;
 
