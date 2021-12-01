@@ -105,6 +105,23 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             }
         }
 
+        /// <summary>
+        ///     Moves the enemies.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: None
+        /// </summary>
+        /// <param name="distance">The distance.</param>
+        public void MoveEnemies(Vector2 distance)
+        {
+            foreach (var node in Children)
+            {
+                if (node is Enemy enemy)
+                {
+                    enemy.MoveWithGroup(distance);
+                }
+            }
+        }
+
         #endregion
     }
 }

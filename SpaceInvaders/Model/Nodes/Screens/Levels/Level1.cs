@@ -121,7 +121,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
                 this.movementFactor *= -1;
             }
 
-            this.enemyGroup.X += XMoveAmount * this.movementFactor;
+            this.enemyGroup.MoveEnemies(new Vector2(XMoveAmount * this.movementFactor, 0));
         }
 
         #endregion

@@ -17,6 +17,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         private const double MaxShotDelay = 6;
         private static readonly Random ShotDelayGenerator = new Random();
 
+        private MasterEnemyState state;
         private Gun gun;
 
         #endregion
@@ -30,6 +31,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         {
             Score = 40;
             Collision.Collided += this.onCollided;
+            this.state = MasterEnemyState.InFormation;
 
             this.setupGun();
         }
@@ -81,6 +83,25 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             this.gun.Shoot();
 
             base.Update(delta);
+        /// <summary>
+        ///     Moves the with the enemy group.<br />
+        ///     Precondition: None
+        ///     Postcondition: if in formation, this.position == this.position@prev + distance;<br />
+        ///     otherwise None
+        /// </summary>
+        /// <param name="distance">The distance.</param>
+        public override void MoveWithGroup(Vector2 distance)
+        {
+            this.formationLocation += distance;
+
+            if (this.state == MasterEnemyState.InFormation)
+            {
+                Move(distance);
+            }
+            else if (this.state == MasterEnemyState.Returning)
+            {
+                this.chargeVelocity = Center.NormalizedVectorTo(this.formationLocation) * ChargeMovementSpeed;
+            }
         }
 
         private void onCollided(object sender, CollisionArea e)

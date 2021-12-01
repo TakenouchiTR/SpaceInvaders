@@ -81,6 +81,17 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             }
         }
 
+        /// <summary>
+        ///     Moves the with the enemy group.<br />
+        ///     Precondition: None
+        ///     Postcondition: this.position == this.position@prev + distance
+        /// </summary>
+        /// <param name="distance">The distance.</param>
+        public virtual void MoveWithGroup(Vector2 distance)
+        {
+            Move(distance);
+        }
+
         private void onRemoved(object sender, EventArgs e)
         {
             var explosion = new Explosion {
