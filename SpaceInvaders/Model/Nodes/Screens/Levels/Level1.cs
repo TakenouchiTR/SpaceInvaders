@@ -8,20 +8,22 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
 {
     /// <summary>
     ///     The first level of the game.<br />
-    ///     Has three layers of four enemies in descending difficulty.
+    ///     Has two blocks of enemies that move back and forth.
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.Nodes.Screens.Levels.LevelBase" />
     public class Level1 : LevelBase
     {
         #region Data members
 
-        private const int TotalMovementSteps = 20;
-        private const int XMoveAmount = 20;
+        private const int ColumnsPerBlock = 3;
+        private const double EnemyGroupYLocation = 32;
 
-        private int curMovementStep;
+        private const int XMoveAmount = 32;
+
         private int movementFactor;
 
-        private EnemyGroup enemyGroup;
+        private EnemyGroup leftEnemyGroup;
+        private EnemyGroup rightEnemyGroup;
 
         #endregion
 
@@ -32,14 +34,13 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         ///     Precondition: None<br />
         ///     Postcondition: this.Children.Count == 4
         /// </summary>
-        public Level1() : base(typeof(Level1))
+        public Level1() : base(typeof(Level2))
         {
-            this.curMovementStep = 9;
-            this.movementFactor = 1;
-            NextLevel = typeof(MainMenu);
+            this.movementFactor = -1;
 
             this.addEnemyHelperNodes();
-            this.addEnemies();
+            this.addEnemies(this.leftEnemyGroup);
+            this.addEnemies(this.rightEnemyGroup);
         }
 
         #endregion
@@ -51,21 +52,27 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             var enemyMoveTimer = new Timer();
             enemyMoveTimer.Start();
             enemyMoveTimer.Tick += this.onEnemyMoveTimerTick;
-            AttachChild(enemyMoveTimer);
 
-            this.enemyGroup = new EnemyGroup(new Vector2(70, 70), 8);
-            AttachChild(this.enemyGroup);
+            this.leftEnemyGroup = new EnemyGroup(new Vector2(70, 70), ColumnsPerBlock);
+            this.rightEnemyGroup = new EnemyGroup(new Vector2(70, 70), ColumnsPerBlock);
+
+            this.leftEnemyGroup.X = MainPage.ApplicationWidth / 3 - this.leftEnemyGroup.Width / 2 + 24;
+            this.rightEnemyGroup.X = MainPage.ApplicationWidth * 2 / 3 - this.rightEnemyGroup.Width / 2 - 24;
+
+            this.leftEnemyGroup.Y = EnemyGroupYLocation;
+            this.rightEnemyGroup.Y = EnemyGroupYLocation;
+
+            AttachChild(enemyMoveTimer);
+            AttachChild(this.leftEnemyGroup);
+            AttachChild(this.rightEnemyGroup);
         }
 
-        private void addEnemies()
+        private void addEnemies(EnemyGroup enemyGroup)
         {
-            this.enemyGroup.X = MainPage.ApplicationWidth / 2 - this.enemyGroup.Width / 2;
-            this.enemyGroup.Y = 24;
-
             var enemyOrder = this.createEnemyOrder().ToArray();
             var enemies = enemyOrder.Where(enemy => enemy != null).ToArray();
 
-            this.enemyGroup.AddEnemies(enemyOrder);
+            enemyGroup.AddEnemies(enemyOrder);
 
             foreach (var enemy in enemies)
             {
@@ -75,37 +82,18 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
 
         private IEnumerable<Enemy> createEnemyOrder()
         {
-            Type[] classOrder = {
-                typeof(MasterEnemy),
-                typeof(AggresiveEnemy),
-                typeof(IntermediateEnemy),
-                typeof(BasicEnemy)
+            EnemyType[] classOrder = {
+                EnemyType.AggressiveEnemy,
+                EnemyType.IntermediateEnemy,
+                EnemyType.BasicEnemy
             };
             var enemyOrder = new List<Enemy>();
-            var enemiesPerRow = this.enemyGroup.EnemiesPerRow;
 
-            for (var i = 0; i < classOrder.Length && i * 2 < enemiesPerRow; i++)
+            foreach (var type in classOrder)
             {
-                var currentType = classOrder[i];
-
-                //Pads spaces to the left of the row
-                for (var j = 0; j < i; j++)
+                for (var i = 0; i < ColumnsPerBlock; i++)
                 {
-                    enemyOrder.Add(null);
-                }
-
-                for (var j = 0; j < enemiesPerRow - 2 * i; j++)
-                {
-                    //Gets the default constructor for the Type, then invokes it to create a new enemy
-                    var constructor = currentType.GetConstructors()[0];
-                    var enemy = constructor.Invoke(new object[] { });
-                    enemyOrder.Add((Enemy) enemy);
-                }
-
-                //Pads spaces to the right of the row
-                for (var j = 0; j < i; j++)
-                {
-                    enemyOrder.Add(null);
+                    enemyOrder.Add(Enemy.CreateEnemy(type));
                 }
             }
 
@@ -114,14 +102,12 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
 
         private void onEnemyMoveTimerTick(object sender, EventArgs e)
         {
-            this.curMovementStep += this.movementFactor;
+            var moveDistance = Vector2.Right * this.movementFactor * XMoveAmount;
 
-            if (this.curMovementStep >= TotalMovementSteps || this.curMovementStep <= 0)
-            {
-                this.movementFactor *= -1;
-            }
+            this.leftEnemyGroup.MoveEnemies(moveDistance);
+            this.rightEnemyGroup.MoveEnemies(moveDistance * -1);
 
-            this.enemyGroup.MoveEnemies(new Vector2(XMoveAmount * this.movementFactor, 0));
+            this.movementFactor *= -1;
         }
 
         #endregion

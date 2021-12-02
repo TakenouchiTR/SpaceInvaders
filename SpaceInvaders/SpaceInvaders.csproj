@@ -151,6 +151,8 @@
     <Compile Include="Model\Nodes\PowerUps\PowerUp.cs" />
     <Compile Include="Model\Nodes\PowerUps\ReflectionShield.cs" />
     <Compile Include="Model\Nodes\PowerUps\ReflectionShieldPowerUp.cs" />
+    <Compile Include="Model\Nodes\Screens\Levels\Level3.cs" />
+    <Compile Include="Model\Nodes\Screens\Levels\Level2.cs" />
     <Compile Include="Model\Nodes\Screens\Levels\Level1.cs" />
     <Compile Include="Model\Nodes\Screen.cs" />
     <Compile Include="Model\Nodes\OneShotSoundPlayer.cs" />
