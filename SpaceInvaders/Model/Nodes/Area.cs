@@ -147,6 +147,19 @@ namespace SpaceInvaders.Model.Nodes
         }
 
         /// <summary>
+        ///     Checks if a specified point is within the Area.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: None
+        /// </summary>
+        /// <param name="point">The point.</param>
+        /// <returns>Whether the specified point is within the area</returns>
+        public bool ContainsPoint(Vector2 point)
+        {
+            return point.X >= this.Left && point.X <= this.Right &&
+                   point.Y >= this.Top && point.Y <= this.Bottom;
+        }
+
+        /// <summary>
         ///     Determines whether [is off screen].
         /// </summary>
         /// <returns>
