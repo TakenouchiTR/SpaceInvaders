@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SpaceInvaders.Model.Nodes.Entities;
+﻿using SpaceInvaders.Model.Nodes.Entities;
 using SpaceInvaders.View.Sprites.PowerUps;
 
 namespace SpaceInvaders.Model.Nodes.PowerUps
@@ -14,12 +9,21 @@ namespace SpaceInvaders.Model.Nodes.PowerUps
     /// <seealso cref="SpaceInvaders.Model.Nodes.CollisionArea" />
     public class ReflectionShield : Entity
     {
+        #region Constructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="ReflectionShield" /> class.
+        /// </summary>
         public ReflectionShield() : base(new ReflectiveShieldSprite())
         {
             Collision.CollisionMasks = PhysicsLayer.EnemyHitbox;
             Collision.Monitoring = true;
             Collision.Collided += this.onCollided;
         }
+
+        #endregion
+
+        #region Methods
 
         private void onCollided(object sender, CollisionArea e)
         {
@@ -30,5 +34,7 @@ namespace SpaceInvaders.Model.Nodes.PowerUps
                 bullet.Velocity *= -1;
             }
         }
+
+        #endregion
     }
 }

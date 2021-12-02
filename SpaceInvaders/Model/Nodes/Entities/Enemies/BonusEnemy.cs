@@ -24,7 +24,6 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         /// <summary>
         ///     Initializes a new instance of the <see cref="BonusEnemy"/> class.
         /// </summary>
-        /// <param name="sprite">The enemy sprite.</param>
         public BonusEnemy() : base(createSprite())
         {
             this.Score = 100;

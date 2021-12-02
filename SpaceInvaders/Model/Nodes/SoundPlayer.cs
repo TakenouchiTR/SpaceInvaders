@@ -56,6 +56,12 @@ namespace SpaceInvaders.Model.Nodes
             }
         }
 
+        /// <summary>
+        ///     Gets whether this instance is playing.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance is playing; otherwise, <c>false</c>.
+        /// </value>
         public bool IsPlaying => this.mediaPlayer.PlaybackSession.PlaybackState == MediaPlaybackState.Playing;
 
         #endregion
