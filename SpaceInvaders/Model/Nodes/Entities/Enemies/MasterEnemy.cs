@@ -21,11 +21,29 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         private const double ReturnStartingYLocation = -300;
         private static readonly Random MasterShipRandom = new Random();
 
-        private MasterEnemyState state;
-        private Vector2 formationLocation;
         private Vector2 chargeVelocity;
         private Gun gun;
         private Timer chargeTimer;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     Gets the state.
+        /// </summary>
+        /// <value>
+        ///     The state.
+        /// </value>
+        public MasterEnemyState State { get; private set; }
+
+        /// <summary>
+        ///     Gets the formation location.
+        /// </summary>
+        /// <value>
+        ///     T   he formation location.
+        /// </value>
+        public Vector2 FormationLocation { get; private set; }
 
         #endregion
 
@@ -38,7 +56,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         {
             Score = 40;
             Collision.Collided += this.onCollided;
-            this.state = MasterEnemyState.InFormation;
+            this.State = MasterEnemyState.InFormation;
 
             this.setupGun();
             this.setupTimer();
@@ -102,7 +120,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)
         {
-            switch (this.state)
+            switch (this.State)
             {
                 case MasterEnemyState.InFormation:
                     this.updateInFormation();
@@ -140,10 +158,10 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
             if (IsOffScreen())
             {
-                this.state = MasterEnemyState.Returning;
+                this.State = MasterEnemyState.Returning;
                 Y = ReturnStartingYLocation;
 
-                this.chargeVelocity = Center.NormalizedVectorTo(this.formationLocation) * ChargeMovementSpeed;
+                this.chargeVelocity = Center.NormalizedVectorTo(this.FormationLocation) * ChargeMovementSpeed;
             }
         }
 
@@ -151,10 +169,10 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         {
             var moveDistance = this.chargeVelocity * delta;
 
-            if (Center.DistanceToSquared(this.formationLocation) < moveDistance.MagnitudeSquared)
+            if (Center.DistanceToSquared(this.FormationLocation) < moveDistance.MagnitudeSquared)
             {
-                Center = this.formationLocation;
-                this.state = MasterEnemyState.InFormation;
+                Center = this.FormationLocation;
+                this.State = MasterEnemyState.InFormation;
                 this.gun.ActivateCooldown();
                 this.chargeTimer.Start();
             }
@@ -173,15 +191,15 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         /// <param name="distance">The distance.</param>
         public override void MoveWithGroup(Vector2 distance)
         {
-            this.formationLocation += distance;
+            this.FormationLocation += distance;
 
-            if (this.state == MasterEnemyState.InFormation)
+            if (this.State == MasterEnemyState.InFormation)
             {
                 Move(distance);
             }
-            else if (this.state == MasterEnemyState.Returning)
+            else if (this.State == MasterEnemyState.Returning)
             {
-                this.chargeVelocity = Center.NormalizedVectorTo(this.formationLocation) * ChargeMovementSpeed;
+                this.chargeVelocity = Center.NormalizedVectorTo(this.FormationLocation) * ChargeMovementSpeed;
             }
         }
 
@@ -203,8 +221,8 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
                 return;
             }
 
-            this.state = MasterEnemyState.Charging;
-            this.formationLocation = Center;
+            this.State = MasterEnemyState.Charging;
+            this.FormationLocation = Center;
 
             this.chargeVelocity = Center.NormalizedVectorTo(player.Center) * ChargeMovementSpeed;
             this.chargeTimer.Duration = getChargeDelay();
