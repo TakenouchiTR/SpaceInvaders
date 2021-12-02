@@ -50,16 +50,14 @@ namespace SpaceInvaders.Model.Nodes.Screens
 
         private void setupLabels()
         {
-            var title = new Label("Space Invaders") 
-            {
+            var title = new Label("Space Invaders") {
                 FontSize = 128,
                 Y = 32,
                 Width = MainPage.ApplicationWidth,
                 Alignment = TextAlignment.Center
             };
 
-            var subtitle = new Label("Team C") 
-            {
+            var subtitle = new Label("Team C") {
                 FontSize = 64,
                 Y = 192,
                 Width = MainPage.ApplicationWidth,
@@ -67,6 +65,7 @@ namespace SpaceInvaders.Model.Nodes.Screens
             };
 
             AttachChild(title);
+            AttachChild(subtitle);
         }
 
         private void setupButtons()
@@ -106,6 +105,7 @@ namespace SpaceInvaders.Model.Nodes.Screens
 
         private void onPlayClick(object sender, EventArgs e)
         {
+            SessionStats.Reset();
             CompleteScreen(typeof(Level1));
         }
 
