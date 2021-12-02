@@ -34,7 +34,7 @@ namespace SpaceInvaders.Model.Nodes
         ///     Invokes the Complete event with the specified eventArgs.
         /// </summary>
         /// <param name="type">The type.</param>
-        protected void CompleteScreen(Type type)
+        protected virtual void CompleteScreen(Type type)
         {
             this.Complete?.Invoke(this, type);
         }

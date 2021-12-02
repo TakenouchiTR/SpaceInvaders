@@ -168,7 +168,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
 
             this.AttachChild(this.scoreLabel);
             this.AttachChild(this.lifeCounter);
-            this.AttachChild(grazeBar);
+            this.AttachChild(this.grazeBar);
         }
 
         private void addShields()
@@ -216,6 +216,8 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             {
                 this.scoreBreakdown[source] = 0;
             }
+
+            this.AddPoints(PointSource.PreviousLevel, SessionStats.Score);
         }
 
         private void setupBonusEnemies()
@@ -279,17 +281,21 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         {
             this.nextScreen = screen;
             this.levelComplete = true;
+
+            SessionStats.Score = this.Score;
+            SessionStats.PlayTime += this.timeInLevel;
         }
 
         private void updateScoreDisplay()
         {
             this.scoreLabel.Text = $"Score: {this.Score}";
         }
-        
+
         private void spawnBonusEnemy()
         {
             var bonusEnemy = new BonusEnemy();
             QueueNodeForAddition(bonusEnemy);
+            this.RegisterEnemy(bonusEnemy);
             this.RemainingBonusEnemies -= 1;
 
             if (this.RemainingBonusEnemies <= 0)
@@ -297,7 +303,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
                 this.bonusShipTimer.Stop();
             }
         }
-        
+
         private static void testForCollisions(IEnumerable<CollisionArea> sourceAreas, IList<CollisionArea> targetAreas)
         {
             foreach (var sourceArea in sourceAreas)
@@ -395,6 +401,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             var dialogResult = await quitDialog.ShowAsync();
             if (dialogResult == ContentDialogResult.Primary)
             {
+                this.scoreBreakdown.Clear();
                 this.EndLevel(GetType());
             }
             else
@@ -467,8 +474,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
 
         private void onChildMoved(object sender, Vector2 e)
         {
-            var senderNode = sender as Node;
-            if (senderNode == null)
+            if (!(sender is Node senderNode))
             {
                 throw new ArgumentException("sender must be a Node");
             }
