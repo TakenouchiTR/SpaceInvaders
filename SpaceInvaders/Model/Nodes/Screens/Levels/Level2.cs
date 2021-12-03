@@ -16,12 +16,14 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         #region Data members
 
         private const int TotalMovementSteps = 20;
-        private const int XMoveAmount = 20;
+        private const double CellSize = 60;
+        private const double XMoveAmount = CellSize / 3;
 
         private int curMovementStep;
         private int movementFactor;
 
-        private EnemyGroup enemyGroup;
+        private EnemyGroup topEnemyGroup;
+        private EnemyGroup bottomEnemyGroup;
 
         #endregion
 
@@ -52,54 +54,59 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             enemyMoveTimer.Tick += this.onEnemyMoveTimerTick;
             AttachChild(enemyMoveTimer);
 
-            this.enemyGroup = new EnemyGroup(new Vector2(70, 70), 8);
-            AttachChild(this.enemyGroup);
+            this.topEnemyGroup = new EnemyGroup(new Vector2(CellSize, CellSize), 8) 
+            {
+                Y = 24
+            };
+            this.topEnemyGroup.X = MainPage.ApplicationWidth / 2 - this.topEnemyGroup.Width / 2;
+            this.bottomEnemyGroup = new EnemyGroup(new Vector2(CellSize, CellSize), 8)
+            {
+                X = this.topEnemyGroup.X,
+                Y = this.topEnemyGroup.Y + CellSize
+            };
+            AttachChild(this.topEnemyGroup);
+            AttachChild(this.bottomEnemyGroup);
         }
 
         private void addEnemies()
         {
-            this.enemyGroup.X = MainPage.ApplicationWidth / 2 - this.enemyGroup.Width / 2;
-            this.enemyGroup.Y = 24;
+            var topEnemyTypes = new [] {
+                EnemyType.MasterEnemy,
+                EnemyType.IntermediateEnemy
+            };
+            var bottomEnemyTypes = new [] {
+                EnemyType.AggressiveEnemy,
+                EnemyType.BasicEnemy
+            };
 
-            var enemyOrder = this.createEnemyOrder().ToArray();
-            var enemies = enemyOrder.Where(enemy => enemy != null).ToArray();
+            var topEnemies = this.createEnemyOrder(topEnemyTypes).ToArray();
+            var bottomEnemies = this.createEnemyOrder(bottomEnemyTypes).ToArray();
 
-            this.enemyGroup.AddEnemies(enemyOrder);
+            this.topEnemyGroup.AddEnemies(topEnemies);
+            this.bottomEnemyGroup.AddEnemies(bottomEnemies);
 
-            foreach (var enemy in enemies)
+            foreach (var enemy in topEnemies.Where(enemy => enemy != null))
+            {
+                RegisterEnemy(enemy);
+            }
+            foreach (var enemy in bottomEnemies.Where(enemy => enemy != null))
             {
                 RegisterEnemy(enemy);
             }
         }
 
-        private IEnumerable<Enemy> createEnemyOrder()
+        private IEnumerable<Enemy> createEnemyOrder(IReadOnlyList<EnemyType> classOrder)
         {
-            EnemyType[] classOrder = {
-                EnemyType.MasterEnemy,
-                EnemyType.AggressiveEnemy,
-                EnemyType.IntermediateEnemy,
-                EnemyType.BasicEnemy
-            };
             var enemyOrder = new List<Enemy>();
-            var enemiesPerRow = this.enemyGroup.EnemiesPerRow;
+            var enemiesPerRow = this.topEnemyGroup.EnemiesPerRow;
 
-            for (var i = 0; i < classOrder.Length && i * 2 < enemiesPerRow; i++)
+            foreach (var enemyType in classOrder)
             {
-                var currentType = classOrder[i];
-
-                //Pads spaces to the left of the row
-                for (var j = 0; j < i; j++)
+                for (var j = 0; j < enemiesPerRow; j++)
                 {
-                    enemyOrder.Add(null);
+                    enemyOrder.Add(Enemy.CreateEnemy(enemyType));
                 }
-
-                for (var j = 0; j < enemiesPerRow - 2 * i; j++)
-                {
-                    enemyOrder.Add(Enemy.CreateEnemy(currentType));
-                }
-
-                //Pads spaces to the right of the row
-                for (var j = 0; j < i; j++)
+                for (var j = 0; j < enemiesPerRow; j++)
                 {
                     enemyOrder.Add(null);
                 }
@@ -107,7 +114,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
 
             return enemyOrder;
         }
-
+        
         private void onEnemyMoveTimerTick(object sender, EventArgs e)
         {
             this.curMovementStep += this.movementFactor;
@@ -117,7 +124,8 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
                 this.movementFactor *= -1;
             }
 
-            this.enemyGroup.MoveEnemies(new Vector2(XMoveAmount * this.movementFactor, 0));
+            this.topEnemyGroup.MoveEnemies(new Vector2(XMoveAmount * this.movementFactor, 0));
+            this.bottomEnemyGroup.MoveEnemies(new Vector2(XMoveAmount * this.movementFactor * -1, 0));
         }
 
         #endregion

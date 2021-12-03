@@ -18,7 +18,8 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         private const int ColumnsPerBlock = 3;
         private const double EnemyGroupYLocation = 32;
 
-        private const int XMoveAmount = 32;
+        private const double CellSize = 70;
+        private const double XMoveAmount = 32;
 
         private int movementFactor;
 
@@ -53,11 +54,11 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             enemyMoveTimer.Start();
             enemyMoveTimer.Tick += this.onEnemyMoveTimerTick;
 
-            this.leftEnemyGroup = new EnemyGroup(new Vector2(70, 70), ColumnsPerBlock);
-            this.rightEnemyGroup = new EnemyGroup(new Vector2(70, 70), ColumnsPerBlock);
+            this.leftEnemyGroup = new EnemyGroup(new Vector2(CellSize, CellSize), ColumnsPerBlock);
+            this.rightEnemyGroup = new EnemyGroup(new Vector2(CellSize, CellSize), ColumnsPerBlock);
 
-            this.leftEnemyGroup.X = MainPage.ApplicationWidth / 3 - this.leftEnemyGroup.Width / 2 + 24;
-            this.rightEnemyGroup.X = MainPage.ApplicationWidth * 2 / 3 - this.rightEnemyGroup.Width / 2 - 24;
+            this.leftEnemyGroup.X = MainPage.ApplicationWidth / 3 - this.leftEnemyGroup.Width / 2 + CellSize / 1.5;
+            this.rightEnemyGroup.X = MainPage.ApplicationWidth * 2 / 3 - this.rightEnemyGroup.Width / 2 - CellSize / 1.5;
 
             this.leftEnemyGroup.Y = EnemyGroupYLocation;
             this.rightEnemyGroup.Y = EnemyGroupYLocation;
