@@ -135,6 +135,7 @@
     <Compile Include="Model\Nodes\Entities\Bullet.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\AggresiveEnemy.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\BonusEnemy.cs" />
+    <Compile Include="Model\Nodes\Entities\Enemies\BonusEnemyState.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\EnemyGroup.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\MasterEnemy.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\IntermediateEnemy.cs" />
@@ -295,6 +296,7 @@
     <Content Include="Audio\enemy_shot.wav" />
     <Content Include="Audio\game_over.wav" />
     <Content Include="Audio\graze.wav" />
+    <Content Include="Audio\modulating.wav" />
     <Content Include="Audio\player_explosion.wav" />
     <Content Include="Audio\player_shot.wav" />
     <Content Include="Properties\Default.rd.xml" />

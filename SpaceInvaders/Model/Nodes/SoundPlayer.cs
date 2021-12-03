@@ -57,6 +57,18 @@ namespace SpaceInvaders.Model.Nodes
         }
 
         /// <summary>
+        ///     Gets or sets a value indicating whether this <see cref="SoundPlayer" /> is looping.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if looping; otherwise, <c>false</c>.
+        /// </value>
+        public bool Looping
+        {
+            get => this.mediaPlayer.IsLoopingEnabled;
+            set => this.mediaPlayer.IsLoopingEnabled = value;
+        }
+
+        /// <summary>
         ///     Gets whether this instance is playing.
         /// </summary>
         /// <value>
