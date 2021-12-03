@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SpaceInvaders.Model.Nodes.Entities;
+using SpaceInvaders.View.Sprites.PowerUps;
 
 namespace SpaceInvaders.Model.Nodes.PowerUps
 {
@@ -15,7 +16,9 @@ namespace SpaceInvaders.Model.Nodes.PowerUps
     {
         private const double Duration = 4;
 
+        private Timer removalTimer;
         private ReflectionShield shield;
+        private ReflectiveShieldSprite shieldSprite;
 
         /// <summary>
         /// Runs the required code to attach and apply the power up to the player<br />
@@ -31,22 +34,34 @@ namespace SpaceInvaders.Model.Nodes.PowerUps
                 throw new ArgumentNullException(nameof(player));
             }
 
-            var removalTimer = new Timer(Duration) 
+            this.setupTimer();
+            this.setupShield(player);
+            
+            player.Killed += this.onPlayerKilled;
+
+            player.QueueNodeForAddition(this);
+            player.QueueNodeForAddition(this.shield);
+        }
+
+        private void setupTimer()
+        {
+            this.removalTimer = new Timer(Duration)
             {
                 Repeat = false
             };
-            removalTimer.Tick += this.onRemovalTimerTick;
-            removalTimer.Start();
+            this.removalTimer.Tick += this.onRemovalTimerTick;
+            this.removalTimer.Start();
 
-            this.shield = new ReflectionShield {
+            this.AttachChild(this.removalTimer);
+        }
+
+        private void setupShield(PlayerShip player)
+        {
+            this.shield = new ReflectionShield
+            {
                 Center = player.Center
             };
-
-            player.Killed += this.onPlayerKilled;
-
-            this.AttachChild(removalTimer);
-            player.QueueNodeForAddition(this);
-            player.QueueNodeForAddition(this.shield);
+            this.shieldSprite = (ReflectiveShieldSprite) this.shield.Sprite.Sprite;
         }
 
         /// <summary>
@@ -59,15 +74,27 @@ namespace SpaceInvaders.Model.Nodes.PowerUps
             this.shield.QueueForRemoval();
             QueueForRemoval();
         }
-        
+
+        /// <summary>
+        ///     The update loop for the Node.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: Node completes its update step
+        /// </summary>
+        /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
+        public override void Update(double delta)
+        {
+            this.shieldSprite.Opacity = this.removalTimer.TimeRemaining / this.removalTimer.Duration;
+            base.Update(delta);
+        }
+
         private void onRemovalTimerTick(object sender, EventArgs e)
         {
             this.RemoveFromPlayer();
         }
+        
         private void onPlayerKilled(object sender, EventArgs e)
         {
             this.RemoveFromPlayer();
         }
-
     }
 }
