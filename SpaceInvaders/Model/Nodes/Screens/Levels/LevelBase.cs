@@ -57,7 +57,6 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         private Dictionary<PointSource, int> scoreBreakdown;
 
         private PlayerShip player;
-        private Node backgroundNode;
         private Node shieldNode;
         private Label scoreLabel;
         private LifeCounter lifeCounter;
@@ -127,7 +126,6 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             this.addPlayer();
             this.addUi();
             this.addShields();
-            this.addBackground();
             this.setupScoreBreakdown();
             this.setupBonusEnemies();
         }
@@ -187,24 +185,6 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             }
 
             this.AttachChild(this.shieldNode);
-        }
-
-        private void addBackground()
-        {
-            this.backgroundNode = new Node();
-            var starRandom = new Random();
-
-            for (var i = 0; i < StarCount; ++i)
-            {
-                var star = new BackgroundStar {
-                    Y = starRandom.NextDouble() * MainPage.ApplicationHeight
-                };
-                this.backgroundNode.AttachChild(star);
-            }
-
-            this.backgroundNode.AttachChild(new BackgroundPlanet());
-
-            this.AttachChild(this.backgroundNode);
         }
 
         private void setupScoreBreakdown()
