@@ -20,12 +20,11 @@ namespace SpaceInvaders.Model.Nodes.Screens
         #region Data members
 
         private const double ButtonWidth = 256;
-        private const double ButtonStartY = 320;
+        private const double ButtonStartY = 340;
         private const double ButtonSpacing = 48;
 
         private Button playButton;
         private Button scoreboardButton;
-        private Button optionsButton;
         private Button quitButton;
         private List<Button> buttons;
         private SoundPlayer buttonSound;
@@ -39,6 +38,8 @@ namespace SpaceInvaders.Model.Nodes.Screens
         /// </summary>
         public MainMenu()
         {
+            SessionStats.Reset();
+
             this.setupLabels();
             this.setupButtons();
             this.setupSoundPlayer();
@@ -74,12 +75,10 @@ namespace SpaceInvaders.Model.Nodes.Screens
 
             this.playButton = new Button("Play", RenderLayer.UiMiddle);
             this.scoreboardButton = new Button("Scoreboard", RenderLayer.UiMiddle);
-            this.optionsButton = new Button("Options", RenderLayer.UiMiddle);
             this.quitButton = new Button("Quit", RenderLayer.UiMiddle);
 
             this.buttons.Add(this.playButton);
             this.buttons.Add(this.scoreboardButton);
-            this.buttons.Add(this.optionsButton);
             this.buttons.Add(this.quitButton);
 
             for (var i = 0; i < this.buttons.Count; i++)
@@ -93,7 +92,6 @@ namespace SpaceInvaders.Model.Nodes.Screens
 
             this.playButton.Click += this.onPlayClick;
             this.scoreboardButton.Click += this.onScoreboardClick;
-            this.optionsButton.Click += this.onOptionsClick;
             this.quitButton.Click += this.onQuitClick;
         }
 
@@ -105,13 +103,12 @@ namespace SpaceInvaders.Model.Nodes.Screens
 
         private void onPlayClick(object sender, EventArgs e)
         {
-            SessionStats.Reset();
             CompleteScreen(typeof(Level1));
         }
 
         private void onScoreboardClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            CompleteScreen(typeof(HighScoresMenu));
         }
 
         private void onOptionsClick(object sender, EventArgs e)
