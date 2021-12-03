@@ -157,6 +157,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
         ///     Occurs when [killed].
         /// </summary>
         public event EventHandler Killed;
+
         private void setupCollision()
         {
             Collision.Width *= CollisionSizeMultiplier;
@@ -238,6 +239,10 @@ namespace SpaceInvaders.Model.Nodes.Entities
             if (moveDistance != 0)
             {
                 moveDistance *= MoveSpeed * delta;
+                if (GetRoot() is LevelBase screen)
+                {
+                    moveDistance /= screen.SpeedModifier;
+                }
 
                 if (X + moveDistance < 0)
                 {
