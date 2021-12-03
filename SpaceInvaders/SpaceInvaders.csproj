@@ -134,10 +134,18 @@
     <Compile Include="Model\Nodes\Effects\BackgroundStar.cs" />
     <Compile Include="Model\Nodes\Effects\Explosion.cs" />
     <Compile Include="Model\Nodes\Effects\MuzzleFlash.cs" />
+    <Compile Include="Model\Nodes\Entities\BossMachineGunTurret.cs" />
+    <Compile Include="Model\Nodes\Entities\BossNuke.cs" />
+    <Compile Include="Model\Nodes\Entities\BossScatterTurret.cs" />
+    <Compile Include="Model\Nodes\Entities\BossTrackingTurret.cs" />
     <Compile Include="Model\Nodes\Entities\Bullet.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\AggresiveEnemy.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\BonusEnemy.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\BonusEnemyState.cs" />
+    <Compile Include="Model\Nodes\Entities\Enemies\Boss.cs" />
+    <Compile Include="Model\Nodes\Entities\Enemies\BossState.cs" />
+    <Compile Include="Model\Nodes\Entities\BossTurret.cs" />
+    <Compile Include="Model\Nodes\Entities\Enemies\BossWeakPoint.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\EnemyGroup.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\MasterEnemy.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\IntermediateEnemy.cs" />
@@ -149,6 +157,7 @@
     <Compile Include="Model\Nodes\Entities\GrazeHitbox.cs" />
     <Compile Include="Model\Nodes\Entities\Gun.cs" />
     <Compile Include="Model\Nodes\Entities\LevelShield.cs" />
+    <Compile Include="Model\Nodes\Entities\NukeWave.cs" />
     <Compile Include="Model\Nodes\Entities\PlayerShip.cs" />
     <Compile Include="Model\Nodes\Entities\ScatterGun.cs" />
     <Compile Include="Model\Nodes\Entities\ShieldSegment.cs" />
