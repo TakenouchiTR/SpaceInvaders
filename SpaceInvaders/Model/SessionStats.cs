@@ -21,7 +21,7 @@
         /// <value>
         ///     The play time.
         /// </value>
-        public static double PlayTime { get; set; }
+        public static int Level { get; set; }
 
         #endregion
 
@@ -36,7 +36,7 @@
         public static void Reset()
         {
             Score = 0;
-            PlayTime = 0;
+            Level = 0;
         }
 
         #endregion

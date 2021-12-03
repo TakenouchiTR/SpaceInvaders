@@ -151,6 +151,7 @@
     <Compile Include="Model\Nodes\PowerUps\PowerUp.cs" />
     <Compile Include="Model\Nodes\PowerUps\ReflectionShield.cs" />
     <Compile Include="Model\Nodes\PowerUps\ReflectionShieldPowerUp.cs" />
+    <Compile Include="Model\Nodes\Screens\HighScoresMenu.cs" />
     <Compile Include="Model\Nodes\Screens\Levels\Level3.cs" />
     <Compile Include="Model\Nodes\Screens\Levels\Level2.cs" />
     <Compile Include="Model\Nodes\Screens\Levels\Level1.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Model\Nodes\UI\Button.cs" />
     <Compile Include="Model\Nodes\UI\ColorRectangle.cs" />
     <Compile Include="Model\Nodes\UI\GrazeBar.cs" />
+    <Compile Include="Model\Nodes\UI\HighScoreBoard.cs" />
     <Compile Include="Model\Nodes\UI\Label.cs" />
     <Compile Include="Model\Nodes\UI\LevelOverDisplay.cs" />
     <Compile Include="Model\Nodes\UI\LifeCounter.cs" />
@@ -174,6 +176,7 @@
     <Compile Include="Model\Nodes\Timer.cs" />
     <Compile Include="Model\RenderLayer.cs" />
     <Compile Include="Model\PointSource.cs" />
+    <Compile Include="Model\ScoreEntry.cs" />
     <Compile Include="Model\SessionStats.cs" />
     <Compile Include="Model\Vector2.cs" />
     <Compile Include="View\MainPage.xaml.cs">
@@ -273,6 +276,9 @@
     </Compile>
     <Compile Include="View\UI\ColorRectangleSprite.xaml.cs">
       <DependentUpon>ColorRectangleSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UI\HighScoreBoardSprite.xaml.cs">
+      <DependentUpon>HighScoreBoardSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UI\LabelSprite.xaml.cs">
       <DependentUpon>LabelSprite.xaml</DependentUpon>
@@ -433,6 +439,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\UI\HighScoreBoardSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UI\LabelSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -444,6 +454,11 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <None Include="Data\DefaultScores.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
