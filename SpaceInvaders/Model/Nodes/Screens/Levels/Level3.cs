@@ -37,7 +37,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         ///     Precondition: None<br />
         ///     Postcondition: this.Children.Count == 4
         /// </summary>
-        public Level3() : base(typeof(MainMenu))
+        public Level3() : base(typeof(HighScoresMenu))
         {
             this.movementFactor = -1;
 
