@@ -2,32 +2,32 @@
 
 using Windows.UI.Xaml.Shapes;
 
-namespace SpaceInvaders.View.Sprites.PowerUps
+namespace SpaceInvaders.View.Sprites.UI
 {
     /// <summary>
-    ///     Draws a reflective shield
+    ///     Draws the boss' health bar
     /// </summary>
-    /// <seealso cref="SpaceInvaders.View.Sprites.BaseSprite" />
-    public sealed partial class ReflectiveShieldSprite
+    /// <seealso cref="Windows.UI.Xaml.Controls.UserControl" />
+    public sealed partial class BossHealthBarSprite
     {
         #region Properties
 
         /// <summary>
-        ///     Gets the shield shape.
+        ///     Gets the health bar.
         /// </summary>
         /// <value>
-        ///     The shield shape.
+        ///     The health bar.
         /// </value>
-        public Polygon ShieldShape => this.shieldShape;
+        public Rectangle HealthBar => this.healthBar;
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ReflectiveShieldSprite" /> class.
+        ///     Initializes a new instance of the <see cref="BossHealthBarSprite" /> class.
         /// </summary>
-        public ReflectiveShieldSprite()
+        public BossHealthBarSprite()
         {
             this.InitializeComponent();
         }

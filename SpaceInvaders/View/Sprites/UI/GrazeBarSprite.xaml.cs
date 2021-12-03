@@ -8,6 +8,8 @@ namespace SpaceInvaders.View.Sprites.UI
     /// <seealso cref="SpaceInvaders.View.Sprites.BaseSprite" />
     public sealed partial class GrazeBarSprite
     {
+        #region Properties
+
         /// <summary>
         ///     Sets the height of the bar as a percent of the max height.
         /// </summary>
@@ -16,15 +18,21 @@ namespace SpaceInvaders.View.Sprites.UI
         /// </value>
         public double BarHeight
         {
-            set => this.bar.Height = this.Height * value;
+            set => this.bar.Height = Height * value;
         }
 
+        #endregion
+
+        #region Constructors
+
         /// <summary>
-        ///     Initializes a new instance of the <see cref="GrazeBarSprite"/> class.
+        ///     Initializes a new instance of the <see cref="GrazeBarSprite" /> class.
         /// </summary>
         public GrazeBarSprite()
         {
             this.InitializeComponent();
         }
+
+        #endregion
     }
 }

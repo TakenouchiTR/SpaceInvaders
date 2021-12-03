@@ -12,9 +12,9 @@
     Width="32">
 
     <Canvas>
-        <Ellipse Width="16" Height="12" Fill="#555" Canvas.Left="8" Canvas.Top="16"/>
-        <Ellipse Width="32" Height="8" Fill="#888" Canvas.Top="16"/>
-        <Ellipse Width="16" Height="12" Fill="Aqua" Canvas.Left="8" Canvas.Top="11"/>
+        <Ellipse Width="16" Height="12" Fill="#555" Canvas.Left="8" Canvas.Top="16" />
+        <Ellipse Width="32" Height="8" Fill="#888" Canvas.Top="16" />
+        <Ellipse Width="16" Height="12" Fill="Aqua" Canvas.Left="8" Canvas.Top="11" />
     </Canvas>
 
 </sprites:BaseSprite>

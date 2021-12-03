@@ -1,21 +1,21 @@
 ﻿// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
-namespace SpaceInvaders.View.Sprites.Entities.Enemies
+namespace SpaceInvaders.View.Sprites.Entities
 {
     /// <summary>
-    ///     Draws the BonusEnemy's Sprite
+    ///     Draws a bullet sprite
     /// </summary>
     /// <seealso cref="SpaceInvaders.View.Sprites.BaseSprite" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector2" />
-    public sealed partial class BonusEnemySprite
+    public sealed partial class PlayerBulletSprite
     {
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="BonusEnemySprite" /> class.
+        ///     Initializes a new instance of the <see cref="PlayerBulletSprite" /> class.
         /// </summary>
-        public BonusEnemySprite()
+        public PlayerBulletSprite()
         {
             this.InitializeComponent();
         }

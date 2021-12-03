@@ -3,19 +3,17 @@
 namespace SpaceInvaders.View.Sprites.Entities.Enemies
 {
     /// <summary>
-    ///     Draws the BonusEnemy's Sprite
+    ///     Draws a turret for the boss
     /// </summary>
     /// <seealso cref="SpaceInvaders.View.Sprites.BaseSprite" />
-    /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />
-    /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector2" />
-    public sealed partial class BonusEnemySprite
+    public sealed partial class BossTurretSprite
     {
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="BonusEnemySprite" /> class.
+        ///     Initializes a new instance of the <see cref="BossTurretSprite" /> class.
         /// </summary>
-        public BonusEnemySprite()
+        public BossTurretSprite()
         {
             this.InitializeComponent();
         }

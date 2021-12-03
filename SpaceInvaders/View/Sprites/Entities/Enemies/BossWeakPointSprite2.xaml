@@ -1,0 +1,23 @@
+﻿<base:BaseSprite
+    x:Class="SpaceInvaders.View.Sprites.Entities.Enemies.BossWeakPointSprite2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:base="using:SpaceInvaders.View.Sprites"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="64"
+    d:DesignWidth="32"
+    Height="64"
+    Width="32">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="BorderColor" Color="Black" />
+    </UserControl.Resources>
+
+    <Canvas>
+        <Polygon Width="32" Height="64" Fill="#666" Points="12,63.5 8,63 3,61 0,59 0,5 3,3 8,1 12,.5 16,0 20,.5 24,1 29,3 32,5 32,59 29,61 24,63 20,63.5 16,64" 
+                 Stroke="{StaticResource BorderColor}"/>
+        <Ellipse Fill="#dd0" Width="24" Height="7" Canvas.Left="4" Canvas.Top="54" Stroke="{StaticResource BorderColor}"/>
+    </Canvas>
+</base:BaseSprite>
