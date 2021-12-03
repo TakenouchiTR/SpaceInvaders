@@ -150,6 +150,7 @@
     <Compile Include="Model\Nodes\Entities\Gun.cs" />
     <Compile Include="Model\Nodes\Entities\LevelShield.cs" />
     <Compile Include="Model\Nodes\Entities\PlayerShip.cs" />
+    <Compile Include="Model\Nodes\Entities\ScatterGun.cs" />
     <Compile Include="Model\Nodes\Entities\ShieldSegment.cs" />
     <Compile Include="Model\Nodes\PowerUps\PowerUp.cs" />
     <Compile Include="Model\Nodes\PowerUps\ReflectionShield.cs" />

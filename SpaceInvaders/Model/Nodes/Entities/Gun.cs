@@ -10,15 +10,15 @@ namespace SpaceInvaders.Model.Nodes.Entities
     /// <seealso cref="SpaceInvaders.Model.Nodes.Node2D" />
     public class Gun : Node2D
     {
-        #region Data members
-
-        private uint activeBullets;
-        private Timer cooldownTimer;
-        private readonly SoundPlayer shotPlayer;
-
-        #endregion
-
         #region Properties
+
+        /// <summary>
+        ///     Gets or sets the active bullets.
+        /// </summary>
+        /// <value>
+        ///     The active bullets.
+        /// </value>
+        protected uint ActiveBullets { get; set; }
 
         /// <summary>
         ///     Gets or sets the angle that the bullet is fired.
@@ -68,9 +68,25 @@ namespace SpaceInvaders.Model.Nodes.Entities
         /// </value>
         public double CooldownDuration
         {
-            get => this.cooldownTimer.Duration;
-            set => this.cooldownTimer.Duration = value;
+            get => this.CooldownTimer.Duration;
+            set => this.CooldownTimer.Duration = value;
         }
+
+        /// <summary>
+        ///     Gets or sets the cooldown timer.
+        /// </summary>
+        /// <value>
+        ///     The cooldown timer.
+        /// </value>
+        protected Timer CooldownTimer { get; private set; }
+
+        /// <summary>
+        ///     Gets the shot player.
+        /// </summary>
+        /// <value>
+        ///     The shot player.
+        /// </value>
+        protected SoundPlayer ShotPlayer { get; }
 
         /// <summary>
         ///     Gets a value indicating whether this instance can shoot.<br />
@@ -80,7 +96,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
         /// <value>
         ///     <c>true</c> if this instance can shoot; otherwise, <c>false</c>.
         /// </value>
-        public bool CanShoot => this.activeBullets < this.MaxBulletsOnScreen && !this.cooldownTimer.IsActive;
+        public bool CanShoot => this.ActiveBullets < this.MaxBulletsOnScreen && !this.CooldownTimer.IsActive;
 
         #endregion
 
@@ -109,7 +125,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
             this.MaxBulletsOnScreen = 3;
 
             this.setupTimer(.25);
-            this.shotPlayer = new SoundPlayer(gunShotFile);
+            this.ShotPlayer = new SoundPlayer(gunShotFile);
         }
 
         #endregion
@@ -123,11 +139,11 @@ namespace SpaceInvaders.Model.Nodes.Entities
 
         private void setupTimer(double cooldownDuration)
         {
-            this.cooldownTimer = new Timer(cooldownDuration) {
+            this.CooldownTimer = new Timer(cooldownDuration) {
                 Repeat = false
             };
 
-            AttachChild(this.cooldownTimer);
+            AttachChild(this.CooldownTimer);
         }
 
         /// <summary>
@@ -135,17 +151,38 @@ namespace SpaceInvaders.Model.Nodes.Entities
         ///     Precondition: None<br />
         ///     Postcondition: this.CanShoot == false
         /// </summary>
-        public void Shoot()
+        public virtual void Shoot()
         {
             if (!this.CanShoot)
             {
                 return;
             }
 
-            this.cooldownTimer.Start();
-            this.activeBullets++;
+            this.CooldownTimer.Start();
+            this.ActiveBullets++;
 
-            var bulletVelocity = Vector2.AngleToNormalizedVector(this.Rotation) * this.BulletSpeed;
+            var bullet = this.CreateBullet(this.Rotation);
+            var flash = this.CreateMuzzleFlash();
+
+            this.ShotPlayer.Play();
+
+            GetRoot().QueueNodeForAddition(bullet);
+            QueueNodeForAddition(flash);
+
+            bullet.Removed += this.onBulletRemoved;
+            this.Shot?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        ///     Creates the bullet with a specified rotation
+        ///     Precondition: None<br />
+        ///     Postcondition: None
+        /// </summary>
+        /// <param name="rotation">The rotation.</param>
+        /// <returns>A new bullet</returns>
+        protected Bullet CreateBullet(double rotation)
+        {
+            var bulletVelocity = Vector2.AngleToNormalizedVector(rotation) * this.BulletSpeed;
             var bullet = new Bullet {
                 Collision = {
                     CollisionLayers = this.BulletCollisionLayers,
@@ -155,19 +192,33 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 Center = Position
             };
 
+            return bullet;
+        }
+
+        /// <summary>
+        ///     Creates the muzzle flash.
+        ///     Precondition: None<br />
+        ///     Postcondition: None
+        /// </summary>
+        /// <returns>A new Muzzle flash</returns>
+        protected MuzzleFlash CreateMuzzleFlash()
+        {
             var flash = new MuzzleFlash {
                 Position = Position,
                 Sprite = {
                     Rotation = (float) this.Rotation.RadianToDegree()
                 }
             };
+            return flash;
+        }
 
-            this.shotPlayer.Play();
-
-            GetRoot().QueueNodeForAddition(bullet);
-            QueueNodeForAddition(flash);
-
-            bullet.Removed += this.onBulletRemoved;
+        /// <summary>
+        ///     Emits the shot event.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: None
+        /// </summary>
+        protected void EmitShot()
+        {
             this.Shot?.Invoke(this, EventArgs.Empty);
         }
 
@@ -178,7 +229,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
         /// </summary>
         public void ActivateCooldown()
         {
-            this.cooldownTimer.Start();
+            this.CooldownTimer.Start();
         }
 
         /// <summary>
@@ -208,7 +259,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
                 return;
             }
 
-            this.activeBullets--;
+            this.ActiveBullets--;
             bullet.Removed -= this.onBulletRemoved;
         }
 
