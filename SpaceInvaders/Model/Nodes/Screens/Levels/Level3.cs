@@ -138,6 +138,11 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
 
         private void onLeftEdgeCollision(object sender, CollisionArea e)
         {
+            if (e.Parent is BonusEnemy)
+            {
+                return;
+            }
+
             if (e.Parent is MasterEnemy masterEnemy)
             {
                 if (!this.leftEdgeDetector.ContainsPoint(masterEnemy.FormationLocation))
