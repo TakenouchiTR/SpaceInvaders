@@ -120,39 +120,79 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\DoubleExtensions.cs" />
+    <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Model\AnimationFrame.cs" />
+    <Compile Include="Model\EnemyType.cs" />
     <Compile Include="Model\Input.cs" />
     <Compile Include="Model\Nodes\AnimatedSprite.cs" />
     <Compile Include="Model\Nodes\AnimationStateMachine.cs" />
     <Compile Include="Model\Nodes\Area.cs" />
     <Compile Include="Model\Nodes\CollisionArea.cs" />
+    <Compile Include="Model\Nodes\Effects\Background.cs" />
     <Compile Include="Model\Nodes\Effects\BackgroundPlanet.cs" />
     <Compile Include="Model\Nodes\Effects\BackgroundStar.cs" />
     <Compile Include="Model\Nodes\Effects\Explosion.cs" />
     <Compile Include="Model\Nodes\Effects\MuzzleFlash.cs" />
+    <Compile Include="Model\Nodes\Entities\BossMachineGunTurret.cs" />
+    <Compile Include="Model\Nodes\Entities\BossNuke.cs" />
+    <Compile Include="Model\Nodes\Entities\BossScatterTurret.cs" />
+    <Compile Include="Model\Nodes\Entities\BossTrackingTurret.cs" />
     <Compile Include="Model\Nodes\Entities\Bullet.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\AggresiveEnemy.cs" />
+    <Compile Include="Model\Nodes\Entities\Enemies\BonusEnemy.cs" />
+    <Compile Include="Model\Nodes\Entities\Enemies\BonusEnemyState.cs" />
+    <Compile Include="Model\Nodes\Entities\Enemies\Boss.cs" />
+    <Compile Include="Model\Nodes\Entities\Enemies\BossState.cs" />
+    <Compile Include="Model\Nodes\Entities\BossTurret.cs" />
+    <Compile Include="Model\Nodes\Entities\Enemies\BossWeakPoint.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\EnemyGroup.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\MasterEnemy.cs" />
-    <Compile Include="Model\Nodes\Entities\EnemyBullet.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\IntermediateEnemy.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\BasicEnemy.cs" />
     <Compile Include="Model\Nodes\Entities\Enemies\Enemy.cs" />
+    <Compile Include="Model\Nodes\Entities\Enemies\MasterEnemyState.cs" />
+    <Compile Include="Model\Nodes\Entities\EnemyGun.cs" />
     <Compile Include="Model\Nodes\Entities\Entity.cs" />
-    <Compile Include="Model\Nodes\Entities\PlayerBullet.cs" />
+    <Compile Include="Model\Nodes\Entities\GrazeHitbox.cs" />
+    <Compile Include="Model\Nodes\Entities\Gun.cs" />
+    <Compile Include="Model\Nodes\Entities\LevelShield.cs" />
+    <Compile Include="Model\Nodes\Entities\NukeWave.cs" />
     <Compile Include="Model\Nodes\Entities\PlayerShip.cs" />
+    <Compile Include="Model\Nodes\Entities\ScatterGun.cs" />
     <Compile Include="Model\Nodes\Entities\ShieldSegment.cs" />
-    <Compile Include="Model\Nodes\Levels\Level1.cs" />
+    <Compile Include="Model\Nodes\PowerUps\PowerUp.cs" />
+    <Compile Include="Model\Nodes\PowerUps\ReflectionShield.cs" />
+    <Compile Include="Model\Nodes\PowerUps\ReflectionShieldPowerUp.cs" />
+    <Compile Include="Model\Nodes\Screens\HighScoresMenu.cs" />
+    <Compile Include="Model\Nodes\Screens\Levels\Level4.cs" />
+    <Compile Include="Model\Nodes\Screens\Levels\Level3.cs" />
+    <Compile Include="Model\Nodes\Screens\Levels\Level2.cs" />
+    <Compile Include="Model\Nodes\Screens\Levels\Level1.cs" />
+    <Compile Include="Model\Nodes\Screen.cs" />
+    <Compile Include="Model\Nodes\OneShotSoundPlayer.cs" />
     <Compile Include="Model\Nodes\Node.cs" />
     <Compile Include="Model\Nodes\Node2D.cs" />
-    <Compile Include="Model\Nodes\Levels\LevelBase.cs" />
+    <Compile Include="Model\Nodes\Screens\Levels\LevelBase.cs" />
     <Compile Include="Model\Nodes\RenderableNode.cs" />
+    <Compile Include="Model\Nodes\Screens\MainMenu.cs" />
+    <Compile Include="Model\Nodes\SoundPlayer.cs" />
+    <Compile Include="Model\Nodes\UI\BossHealthBar.cs" />
+    <Compile Include="Model\Nodes\UI\Button.cs" />
+    <Compile Include="Model\Nodes\UI\ColorRectangle.cs" />
+    <Compile Include="Model\Nodes\UI\GrazeBar.cs" />
+    <Compile Include="Model\Nodes\UI\HighScoreBoard.cs" />
     <Compile Include="Model\Nodes\UI\Label.cs" />
+    <Compile Include="Model\Nodes\UI\LevelOverDisplay.cs" />
     <Compile Include="Model\Nodes\UI\LifeCounter.cs" />
+    <Compile Include="Model\Nodes\UI\ScoreBreakdownRow.cs" />
     <Compile Include="Model\PhysicsLayer.cs" />
     <Compile Include="Model\Nodes\SpriteNode.cs" />
     <Compile Include="Model\Nodes\Timer.cs" />
     <Compile Include="Model\RenderLayer.cs" />
+    <Compile Include="Model\PointSource.cs" />
+    <Compile Include="Model\ScoreEntry.cs" />
+    <Compile Include="Model\SessionStats.cs" />
     <Compile Include="Model\Vector2.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -160,6 +200,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\Sprites\Background\Planet1Sprite.xaml.cs">
       <DependentUpon>Planet1Sprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\Entities\BossNukeSprite2.xaml.cs">
+      <DependentUpon>BossNukeSprite2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\Entities\BossNukeSprite1.xaml.cs">
+      <DependentUpon>BossNukeSprite1.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\Entities\Enemies\AggresiveEnemySpriteBase.xaml.cs">
       <DependentUpon>AggresiveEnemySpriteBase.xaml</DependentUpon>
@@ -200,6 +246,24 @@
     <Compile Include="View\Sprites\Entities\Enemies\BasicLightsLit.xaml.cs">
       <DependentUpon>BasicLightsLit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Sprites\Entities\Enemies\BonusEnemySprite.xaml.cs">
+      <DependentUpon>BonusEnemySprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\Entities\Enemies\BossSprite.xaml.cs">
+      <DependentUpon>BossSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\Entities\Enemies\BossTurretSprite.xaml.cs">
+      <DependentUpon>BossTurretSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\Entities\Enemies\BossWeakPointSprite3.xaml.cs">
+      <DependentUpon>BossWeakPointSprite3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\Entities\Enemies\BossWeakPointSprite2.xaml.cs">
+      <DependentUpon>BossWeakPointSprite2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\Entities\Enemies\BossWeakPointSprite1.xaml.cs">
+      <DependentUpon>BossWeakPointSprite1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\Entities\Enemies\IntermediateEnemySprite2.xaml.cs">
       <DependentUpon>IntermediateEnemySprite2.xaml</DependentUpon>
     </Compile>
@@ -215,12 +279,15 @@
     <Compile Include="View\Sprites\Entities\Enemies\MasterEnemySpriteBase.xaml.cs">
       <DependentUpon>MasterEnemySpriteBase.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Sprites\Entities\NukeWaveSprite.xaml.cs">
+      <DependentUpon>NukeWaveSprite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\Entities\ShieldSegmentSprite.xaml.cs">
       <DependentUpon>ShieldSegmentSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\ISpriteRender.cs" />
-    <Compile Include="View\Sprites\Entities\PlayerBulletSprite.xaml.cs">
-      <DependentUpon>PlayerBulletSprite.xaml</DependentUpon>
+    <Compile Include="View\Sprites\Entities\PlayerBulletSprite1.xaml.cs">
+      <DependentUpon>PlayerBulletSprite1.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\Entities\PlayerShipSprite.xaml.cs">
       <DependentUpon>PlayerShipSprite.xaml</DependentUpon>
@@ -228,11 +295,32 @@
     <Compile Include="View\Sprites\Background\StarSprite.xaml.cs">
       <DependentUpon>StarSprite.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Sprites\PowerUps\ReflectiveShieldSprite.xaml.cs">
+      <DependentUpon>ReflectiveShieldSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\UI\BossHealthBarSprite.xaml.cs">
+      <DependentUpon>BossHealthBarSprite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Sprites\UI\EmptyHeartSprite.xaml.cs">
       <DependentUpon>EmptyHeartSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Sprites\UI\FullHeartSprite.xaml.cs">
       <DependentUpon>FullHeartSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\UI\GrazeBarFrameSprite.xaml.cs">
+      <DependentUpon>GrazeBarFrameSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sprites\UI\GrazeBarSprite.xaml.cs">
+      <DependentUpon>GrazeBarSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UI\ButtonSprite.xaml.cs">
+      <DependentUpon>ButtonSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UI\ColorRectangleSprite.xaml.cs">
+      <DependentUpon>ColorRectangleSprite.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UI\HighScoreBoardSprite.xaml.cs">
+      <DependentUpon>HighScoreBoardSprite.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UI\LabelSprite.xaml.cs">
       <DependentUpon>LabelSprite.xaml</DependentUpon>
@@ -244,6 +332,17 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Audio\boss_part_added.wav" />
+    <Content Include="Audio\change_option_high.wav" />
+    <Content Include="Audio\enemy_explosion.wav" />
+    <Content Include="Audio\enemy_shot.wav" />
+    <Content Include="Audio\game_over.wav" />
+    <Content Include="Audio\graze.wav" />
+    <Content Include="Audio\modulating.wav" />
+    <Content Include="Audio\nuke_explosion.wav" />
+    <Content Include="Audio\nuke_launch.wav" />
+    <Content Include="Audio\player_explosion.wav" />
+    <Content Include="Audio\player_shot.wav" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -263,6 +362,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Sprites\Background\Planet1Sprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\Entities\BossNukeSprite2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Sprites\Entities\BossNukeSprite1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -318,6 +425,30 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Sprites\Entities\Enemies\BonusEnemySprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\Entities\Enemies\BossSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\Entities\Enemies\BossTurretSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\Entities\Enemies\BossWeakPointSprite3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Sprites\Entities\Enemies\BossWeakPointSprite2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Sprites\Entities\Enemies\BossWeakPointSprite1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Sprites\Entities\Enemies\IntermediateEnemySprite2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -338,7 +469,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Sprites\Entities\PlayerBulletSprite.xaml">
+    <Page Include="View\Sprites\Entities\NukeWaveSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\Entities\PlayerBulletSprite1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -354,11 +489,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Sprites\PowerUps\ReflectiveShieldSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\UI\BossHealthBarSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Sprites\UI\EmptyHeartSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Sprites\UI\FullHeartSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\UI\GrazeBarFrameSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Sprites\UI\GrazeBarSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UI\ButtonSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UI\ColorRectangleSprite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UI\HighScoreBoardSprite.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -373,6 +536,11 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <None Include="Data\DefaultScores.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -18,8 +18,11 @@
     </UserControl.Resources>
 
     <Canvas>
-        <local:MasterEnemySpriteBase/>
-        <Rectangle Width="4" Height="7" Fill="{StaticResource LightColor}" Stroke="{StaticResource BorderColor}" Canvas.Left="25.5" Canvas.Top="16" RenderTransformOrigin="0.5,0.5" RadiusX="1.744" RadiusY="1.744"/>
-        <Rectangle Width="4" Height="7" Fill="{StaticResource ResourceKey=LightColor}" Stroke="{StaticResource BorderColor}" Canvas.Left="1.5" Canvas.Top="16" RenderTransformOrigin="0.5,0.5" RadiusX="1.744" RadiusY="1.744"/>
+        <local:MasterEnemySpriteBase />
+        <Rectangle Width="4" Height="7" Fill="{StaticResource LightColor}" Stroke="{StaticResource BorderColor}"
+                   Canvas.Left="25.5" Canvas.Top="16" RenderTransformOrigin="0.5,0.5" RadiusX="1.744" RadiusY="1.744" />
+        <Rectangle Width="4" Height="7" Fill="{StaticResource ResourceKey=LightColor}"
+                   Stroke="{StaticResource BorderColor}" Canvas.Left="1.5" Canvas.Top="16"
+                   RenderTransformOrigin="0.5,0.5" RadiusX="1.744" RadiusY="1.744" />
     </Canvas>
 </base:BaseSprite>

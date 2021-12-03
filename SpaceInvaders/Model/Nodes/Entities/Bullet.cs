@@ -6,8 +6,14 @@ namespace SpaceInvaders.Model.Nodes.Entities
     ///     The general class for any projectile fired
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.Nodes.Entities.Entity" />
-    public abstract class Bullet : Entity
+    public class Bullet : Entity
     {
+        #region Data members
+
+        private const int MoveSteps = 4;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -35,6 +41,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
             Collision.Monitoring = true;
             Collision.Monitorable = true;
             Collision.Collided += this.onCollided;
+            Collision.CollisionEnded += this.onCollisionEnded;
             Collision.CollisionMasks = PhysicsLayer.World;
         }
 
@@ -50,7 +57,12 @@ namespace SpaceInvaders.Model.Nodes.Entities
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)
         {
-            Move(this.Velocity * delta);
+            var moveStepDelta = delta / MoveSteps;
+            for (var i = 0; i < MoveSteps; i++)
+            {
+                Move(this.Velocity * moveStepDelta);
+            }
+
             if (Sprite.IsOffScreen())
             {
                 QueueForRemoval();
@@ -62,6 +74,12 @@ namespace SpaceInvaders.Model.Nodes.Entities
         private void onCollided(object sender, CollisionArea e)
         {
             QueueForRemoval();
+        }
+
+        private void onCollisionEnded(object sender, CollisionArea e)
+        {
+            Collision.Monitoring = false;
+            Collision.Monitorable = false;
         }
 
         #endregion

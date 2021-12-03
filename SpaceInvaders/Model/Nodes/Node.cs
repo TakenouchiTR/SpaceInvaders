@@ -11,7 +11,8 @@ namespace SpaceInvaders.Model.Nodes
     {
         #region Data members
 
-        private readonly HashSet<Node> children;
+        private string name;
+        private readonly Dictionary<string, Node> children;
         private readonly Queue<Node> removalQueue;
         private readonly Queue<Node> additionQueue;
 
@@ -26,7 +27,7 @@ namespace SpaceInvaders.Model.Nodes
         /// <value>
         ///     The children.
         /// </value>
-        public IList<Node> Children => this.children.ToList();
+        public IList<Node> Children => this.children.Values.ToList();
 
         /// <summary>
         ///     Gets or sets the node's parent.
@@ -35,6 +36,28 @@ namespace SpaceInvaders.Model.Nodes
         ///     The node's parent.
         /// </value>
         public Node Parent { get; protected set; }
+
+        /// <summary>
+        ///     Gets or sets the name.<br />
+        ///     If the node has a parent and the parent already contains a child with the specified name,<br />
+        ///     it will append a number to make it unique to the parent's children.
+        /// </summary>
+        /// <value>
+        ///     The name.
+        /// </value>
+        public string Name
+        {
+            get => this.name;
+            set
+            {
+                if (this.Parent != null)
+                {
+                    value = this.Parent.CreateValidName(value);
+                }
+
+                this.name = value;
+            }
+        }
 
         #endregion
 
@@ -49,7 +72,8 @@ namespace SpaceInvaders.Model.Nodes
         {
             this.removalQueue = new Queue<Node>();
             this.additionQueue = new Queue<Node>();
-            this.children = new HashSet<Node>();
+            this.children = new Dictionary<string, Node>();
+            this.name = GetType().ToString().Split(".").Last();
         }
 
         #endregion
@@ -67,6 +91,11 @@ namespace SpaceInvaders.Model.Nodes
         public event EventHandler Removed;
 
         /// <summary>
+        ///     Occurs when [attached to node].
+        /// </summary>
+        public event EventHandler<Node> AttachedToParent;
+
+        /// <summary>
         ///     The update loop for the Node.<br />
         ///     Precondition: None<br />
         ///     Postcondition: Node completes its update step
@@ -74,7 +103,7 @@ namespace SpaceInvaders.Model.Nodes
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public virtual void Update(double delta)
         {
-            foreach (var child in this.children)
+            foreach (var child in this.children.Values)
             {
                 child.Update(delta);
             }
@@ -92,7 +121,7 @@ namespace SpaceInvaders.Model.Nodes
         /// <param name="emitRemovedEvent">Whether to emit the Removed event</param>
         public virtual void CompleteRemoval(bool emitRemovedEvent = true)
         {
-            foreach (var child in this.children)
+            foreach (var child in this.children.Values)
             {
                 child.CompleteRemoval(emitRemovedEvent);
             }
@@ -139,7 +168,7 @@ namespace SpaceInvaders.Model.Nodes
         public void QueueForRemoval()
         {
             this.Parent?.queueNodeForRemoval(this);
-            foreach (var child in this.children)
+            foreach (var child in this.children.Values)
             {
                 child.QueueForRemoval();
             }
@@ -161,9 +190,9 @@ namespace SpaceInvaders.Model.Nodes
             {
                 var node = this.removalQueue.Dequeue();
 
-                if (this.children.Contains(node))
+                if (this.children.ContainsKey(node.Name))
                 {
-                    this.children.Remove(node);
+                    this.children.Remove(node.Name);
                     node.CompleteRemoval();
                 }
             }
@@ -172,11 +201,11 @@ namespace SpaceInvaders.Model.Nodes
         }
 
         /// <summary>
-        /// Removes all children without firing the child's Removed event
+        ///     Removes all children without firing the child's Removed event
         /// </summary>
         protected void SilentlyRemoveAllChildren()
         {
-            foreach (var child in this.children)
+            foreach (var child in this.children.Values)
             {
                 if (child.Removed != null)
                 {
@@ -235,10 +264,12 @@ namespace SpaceInvaders.Model.Nodes
                 throw new ArgumentException("child must not be null");
             }
 
-            this.children.Add(child);
+            child.Name = this.CreateValidName(child.Name);
+            this.children[child.name] = child;
             child.Parent = this;
 
             this.ChildAdded?.Invoke(this, child);
+            child.AttachedToParent?.Invoke(child, this);
         }
 
         /// <summary>
@@ -255,9 +286,9 @@ namespace SpaceInvaders.Model.Nodes
                 throw new ArgumentException("child must not be null");
             }
 
-            if (this.children.Contains(child))
+            if (this.children.ContainsKey(child.Name))
             {
-                this.children.Remove(child);
+                this.children.Remove(child.Name);
                 child.Parent = null;
             }
         }
@@ -278,6 +309,46 @@ namespace SpaceInvaders.Model.Nodes
         }
 
         /// <summary>
+        ///     Checks if a specified name is unique to the node's children. <br />
+        ///     If it is unique, it will return the name without alterations. If it is not unique, a number will be <br />
+        ///     added to the end to create a unique name.
+        /// </summary>
+        /// <param name="nodeName">The name.</param>
+        /// <returns>A name that is unique to the node's children.</returns>
+        protected string CreateValidName(string nodeName)
+        {
+            if (nodeName == null)
+            {
+                throw new ArgumentNullException(nameof(nodeName));
+            }
+
+            if (!this.children.ContainsKey(nodeName))
+            {
+                return nodeName;
+            }
+
+            var num = 1;
+            var numberedName = nodeName + num;
+            while (this.children.ContainsKey(numberedName))
+            {
+                num += 1;
+                numberedName = nodeName + num;
+            }
+
+            return numberedName;
+        }
+
+        /// <summary>
+        ///     Retrieves a node by its name.
+        /// </summary>
+        /// <param name="nodeName">Name of the node.</param>
+        /// <returns>The node with the matching name if one exists, otherwise null</returns>
+        public Node GetChildByName(string nodeName)
+        {
+            return this.children.ContainsKey(nodeName) ? this.children[nodeName] : null;
+        }
+
+        /// <summary>
         ///     Gets all collision areas below the node, including the node itself.<br />
         ///     Precondition: None<br />
         ///     Postcondition: None
@@ -292,7 +363,7 @@ namespace SpaceInvaders.Model.Nodes
                 areas.Add(this as CollisionArea);
             }
 
-            foreach (var child in this.children)
+            foreach (var child in this.children.Values)
             {
                 areas.AddRange(child.GetCollisionAreas());
             }

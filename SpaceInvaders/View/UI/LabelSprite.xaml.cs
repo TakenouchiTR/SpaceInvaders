@@ -1,22 +1,27 @@
 ﻿// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
+using Windows.UI;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 using SpaceInvaders.Model;
 
 namespace SpaceInvaders.View.UI
 {
     /// <summary>
-    /// Draws text at a given location
+    ///     Draws text at a given location
     /// </summary>
     /// <seealso cref="SpaceInvaders.View.Sprites.BaseSprite" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector" />
     /// <seealso cref="Windows.UI.Xaml.Markup.IComponentConnector2" />
     public sealed partial class LabelSprite
     {
+        #region Properties
+
         /// <summary>
-        /// Gets or sets the text.
+        ///     Gets or sets the text.
         /// </summary>
         /// <value>
-        /// The text.
+        ///     The text.
         /// </value>
         public string Text
         {
@@ -25,22 +30,22 @@ namespace SpaceInvaders.View.UI
         }
 
         /// <summary>
-        /// Gets or sets the width of the render area of the text.
+        ///     Gets or sets the width of the render area of the text.
         /// </summary>
         /// <value>
-        /// The width of the render area of the text.
+        ///     The width of the render area of the text.
         /// </value>
-        public double TextWidth 
-        { 
+        public double TextWidth
+        {
             get => this.textBlock.Width;
             set => this.textBlock.Width = value;
         }
 
         /// <summary>
-        /// Gets or sets the height of the render area of the text.
+        ///     Gets or sets the height of the render area of the text.
         /// </summary>
         /// <value>
-        /// The height of the render area of the text.
+        ///     The height of the render area of the text.
         /// </value>
         public double TextHeight
         {
@@ -49,19 +54,48 @@ namespace SpaceInvaders.View.UI
         }
 
         /// <summary>
-        /// Gets the size of the render area of the text.
+        ///     Gets or sets the text alignment.
         /// </summary>
         /// <value>
-        /// The size of the render area of the text.
+        ///     The text alignment.
+        /// </value>
+        public TextAlignment Alignment
+        {
+            get => this.textBlock.TextAlignment;
+            set => this.textBlock.TextAlignment = value;
+        }
+
+        /// <summary>
+        ///     Sets the color of the font.
+        /// </summary>
+        /// <value>
+        ///     The color of the font.
+        /// </value>
+        public Color FontColor
+        {
+            set => this.textBlock.Foreground = new SolidColorBrush(value);
+        }
+
+        /// <summary>
+        ///     Gets the size of the render area of the text.
+        /// </summary>
+        /// <value>
+        ///     The size of the render area of the text.
         /// </value>
         public Vector2 TextSize => new Vector2(this.TextWidth, this.TextHeight);
 
+        #endregion
+
+        #region Constructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="LabelSprite"/> class.
+        ///     Initializes a new instance of the <see cref="LabelSprite" /> class.
         /// </summary>
         public LabelSprite()
         {
             this.InitializeComponent();
         }
+
+        #endregion
     }
 }

@@ -8,8 +8,10 @@ namespace SpaceInvaders.Model.Nodes.Entities
     /// <seealso cref="SpaceInvaders.Model.Nodes.Entities.Entity" />
     public class ShieldSegment : Entity
     {
+        #region Constructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="ShieldSegment"/> class.
+        ///     Initializes a new instance of the <see cref="ShieldSegment" /> class.
         /// </summary>
         public ShieldSegment() : base(new ShieldSegmentSprite())
         {
@@ -21,9 +23,15 @@ namespace SpaceInvaders.Model.Nodes.Entities
             Collision.Collided += this.onCollision;
         }
 
+        #endregion
+
+        #region Methods
+
         private void onCollision(object sender, CollisionArea e)
         {
             QueueForRemoval();
         }
+
+        #endregion
     }
 }

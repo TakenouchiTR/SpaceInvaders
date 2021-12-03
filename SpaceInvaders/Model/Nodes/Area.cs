@@ -68,7 +68,7 @@ namespace SpaceInvaders.Model.Nodes
         /// </value>
         public Vector2 Center
         {
-            get => new Vector2(X + this.Width / 2, Y + this.Width / 2);
+            get => new Vector2(X + this.Width / 2, Y + this.Height / 2);
             set
             {
                 X = value.X - this.Width / 2;
@@ -144,6 +144,19 @@ namespace SpaceInvaders.Model.Nodes
         {
             this.Width = width;
             this.Height = height;
+        }
+
+        /// <summary>
+        ///     Checks if a specified point is within the Area.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: None
+        /// </summary>
+        /// <param name="point">The point.</param>
+        /// <returns>Whether the specified point is within the area</returns>
+        public bool ContainsPoint(Vector2 point)
+        {
+            return point.X >= this.Left && point.X <= this.Right &&
+                   point.Y >= this.Top && point.Y <= this.Bottom;
         }
 
         /// <summary>

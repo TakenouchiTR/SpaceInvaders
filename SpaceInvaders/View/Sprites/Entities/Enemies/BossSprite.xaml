@@ -1,0 +1,28 @@
+﻿<base:BaseSprite
+    x:Class="SpaceInvaders.View.Sprites.Entities.Enemies.BossSprite"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:base="using:SpaceInvaders.View.Sprites"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="104
+    "
+    d:DesignWidth="256"
+    Height="104"
+    Width="256">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="BorderColor" Color="Black" />
+    </UserControl.Resources>
+
+    <Canvas>
+        <Ellipse Width="16" Height="16" Fill="#333" Canvas.Left="119" Canvas.Top="20" />
+        <Ellipse Width="110" Height="75" Fill="Aquamarine" Canvas.Left="72" Opacity=".3" />
+        <Ellipse Width="110" Height="75" Canvas.Left="72" Stroke="{StaticResource BorderColor}" />
+        <Ellipse Width="124" Height="52" Fill="Aqua" Canvas.Left="65" Canvas.Top="52"
+                 Stroke="{StaticResource BorderColor}" Opacity=".75" />
+        <Polygon Points="0,64 48,40 208,40 256,64" Fill="#aaa" Stroke="{StaticResource BorderColor}" Canvas.Top="-7" />
+        <Polygon Points="0,49 48,72 208,72 256,49" Fill="#444" Stroke="{StaticResource BorderColor}" Canvas.Top="9" />
+    </Canvas>
+</base:BaseSprite>

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using SpaceInvaders.Model.Nodes.Effects;
+using SpaceInvaders.Extensions;
 using SpaceInvaders.View.Sprites;
 using SpaceInvaders.View.Sprites.Entities.Enemies;
 
@@ -15,12 +15,36 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         #region Data members
 
         private const double MinShotDelay = 2;
-        private const double MaxShotDelay = 6;
-        private static readonly Random ShotDelayGenerator = new Random();
-        private static readonly Vector2 BulletSpawnLocation = new Vector2(11, 44);
-        private static readonly Vector2 MuzzleFlashLocation = new Vector2(21, 44);
+        private const double MaxShotDelay = 8;
+        private const double MinChargeDelay = 8;
+        private const double MaxChargeDelay = 18;
+        private const double ChargeMovementSpeed = 300;
+        private const double ReturnStartingYLocation = -300;
+        private static readonly Random MasterShipRandom = new Random();
 
-        private Timer shotTimer;
+        private Vector2 chargeVelocity;
+        private Gun gun;
+        private Timer chargeTimer;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     Gets the state.
+        /// </summary>
+        /// <value>
+        ///     The state.
+        /// </value>
+        public MasterEnemyState State { get; private set; }
+
+        /// <summary>
+        ///     Gets the formation location.
+        /// </summary>
+        /// <value>
+        ///     T   he formation location.
+        /// </value>
+        public Vector2 FormationLocation { get; private set; }
 
         #endregion
 
@@ -33,25 +57,40 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         {
             Score = 40;
             Collision.Collided += this.onCollided;
+            this.State = MasterEnemyState.InFormation;
 
-            this.initializeTimer();
+            this.setupGun();
+            this.setupTimer();
         }
 
         #endregion
 
         #region Methods
 
-        private void initializeTimer()
+        private void setupGun()
         {
-            this.shotTimer = new Timer {
-                Duration = getShotDelay(),
-                Repeat = true
+            var initialCooldown = MasterShipRandom.NextDouble(MinShotDelay, MaxShotDelay);
+
+            this.gun = new EnemyGun {
+                Position = Center,
+                CooldownDuration = initialCooldown
             };
 
-            this.shotTimer.Tick += this.onShotTimerTick;
-            this.shotTimer.Start();
+            this.gun.Shot += this.onGunShot;
 
-            AttachChild(this.shotTimer);
+            AttachChild(this.gun);
+        }
+
+        private void setupTimer()
+        {
+            this.chargeTimer = new Timer(MasterShipRandom.NextDouble(MinChargeDelay, MaxChargeDelay)) {
+                Repeat = false
+            };
+
+            this.chargeTimer.Tick += this.onChargeTimerTick;
+            this.chargeTimer.Start();
+
+            AttachChild(this.chargeTimer);
         }
 
         private static AnimatedSprite createSprite()
@@ -64,32 +103,120 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             return new AnimatedSprite(1, sprites);
         }
 
+        /// <summary>
+        ///     The update loop for the Node.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: Node completes its update step
+        /// </summary>
+        /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
+        public override void Update(double delta)
+        {
+            switch (this.State)
+            {
+                case MasterEnemyState.InFormation:
+                    this.updateInFormation();
+                    break;
+                case MasterEnemyState.Charging:
+                    this.updateCharging(delta);
+                    break;
+                case MasterEnemyState.Returning:
+                    this.updateReturning(delta);
+                    break;
+            }
+
+            base.Update(delta);
+        }
+
+        private void updateInFormation()
+        {
+            var player = (PlayerShip) GetRoot().GetChildByName("PlayerShip");
+
+            if (player == null)
+            {
+                return;
+            }
+
+            if (this.gun.CanShoot)
+            {
+                this.gun.Rotation = Center.AngleToTarget(player.Center);
+                this.gun.Shoot();
+            }
+        }
+
+        private void updateCharging(double delta)
+        {
+            Move(this.chargeVelocity * delta);
+
+            if (IsOffScreen())
+            {
+                this.State = MasterEnemyState.Returning;
+                Y = ReturnStartingYLocation;
+
+                this.chargeVelocity = Center.NormalizedVectorTo(this.FormationLocation) * ChargeMovementSpeed;
+            }
+        }
+
+        private void updateReturning(double delta)
+        {
+            var moveDistance = this.chargeVelocity * delta;
+
+            if (Center.DistanceToSquared(this.FormationLocation) < moveDistance.MagnitudeSquared)
+            {
+                Center = this.FormationLocation;
+                this.State = MasterEnemyState.InFormation;
+                this.gun.ActivateCooldown();
+                this.chargeTimer.Start();
+            }
+            else
+            {
+                Move(moveDistance);
+            }
+        }
+
+        /// <summary>
+        ///     Moves the with the enemy group.<br />
+        ///     Precondition: None
+        ///     Postcondition: if in formation, this.position == this.position@prev + distance;<br />
+        ///     otherwise None
+        /// </summary>
+        /// <param name="distance">The distance.</param>
+        public override void MoveWithGroup(Vector2 distance)
+        {
+            this.FormationLocation += distance;
+
+            if (this.State == MasterEnemyState.InFormation)
+            {
+                Move(distance);
+            }
+            else if (this.State == MasterEnemyState.Returning)
+            {
+                this.chargeVelocity = Center.NormalizedVectorTo(this.FormationLocation) * ChargeMovementSpeed;
+            }
+        }
+
         private void onCollided(object sender, CollisionArea e)
         {
             QueueForRemoval();
         }
 
-        private void onShotTimerTick(object sender, EventArgs e)
+        private void onGunShot(object sender, EventArgs e)
         {
-            var bullet = new EnemyBullet {
-                Position = Position + BulletSpawnLocation
-            };
-            var flash = new MuzzleFlash {
-                Position = Position + MuzzleFlashLocation,
-                Sprite = {
-                    Rotation = 180
-                }
-            };
-
-            this.shotTimer.Duration = getShotDelay();
-
-            GetRoot().QueueNodeForAddition(bullet);
-            QueueNodeForAddition(flash);
+            this.gun.CooldownDuration = MasterShipRandom.NextDouble(MinShotDelay, MaxShotDelay);
         }
 
-        private static double getShotDelay()
+        private void onChargeTimerTick(object sender, EventArgs e)
         {
-            return ShotDelayGenerator.NextDouble() * (MaxShotDelay - MinShotDelay) + MinShotDelay;
+            var player = (PlayerShip) GetRoot().GetChildByName("PlayerShip");
+            if (player == null)
+            {
+                return;
+            }
+
+            this.State = MasterEnemyState.Charging;
+            this.FormationLocation = Center;
+
+            this.chargeVelocity = Center.NormalizedVectorTo(player.Center) * ChargeMovementSpeed;
+            this.chargeTimer.Duration = MasterShipRandom.NextDouble(MinChargeDelay, MaxChargeDelay);
         }
 
         #endregion

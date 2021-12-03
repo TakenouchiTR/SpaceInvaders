@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Windows.System;
 using Windows.UI.Core;
+using Windows.UI.Xaml;
 
 namespace SpaceInvaders.Model
 {
@@ -12,6 +13,28 @@ namespace SpaceInvaders.Model
         #region Data members
 
         private static readonly Dictionary<VirtualKey, bool> KeyStates = new Dictionary<VirtualKey, bool>();
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///     Gets the mouse position relative to the top-left corner of the window.
+        /// </summary>
+        /// <value>
+        ///     The mouse position.
+        /// </value>
+        public static Vector2 MousePosition
+        {
+            get
+            {
+                var screenPosition = CoreWindow.GetForCurrentThread().PointerPosition;
+                var windowX = screenPosition.X - Window.Current.Bounds.X;
+                var windowY = screenPosition.Y - Window.Current.Bounds.Y;
+
+                return new Vector2(windowX, windowY);
+            }
+        }
 
         #endregion
 
@@ -75,7 +98,6 @@ namespace SpaceInvaders.Model
             return false;
         }
 
-
         /// <summary>
         ///     Gets the strength of a specified key press.
         /// </summary>
@@ -85,7 +107,6 @@ namespace SpaceInvaders.Model
         {
             return IsKeyPressed(key) ? 1 : 0;
         }
-
 
         #endregion
     }

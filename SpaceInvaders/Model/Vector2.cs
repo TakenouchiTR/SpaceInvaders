@@ -72,6 +72,70 @@ namespace SpaceInvaders.Model
             }
         }
 
+        /// <summary>
+        ///     Gets the magnitude.
+        /// </summary>
+        /// <value>
+        ///     The magnitude.
+        /// </value>
+        public double Magnitude => Math.Sqrt(this.X * this.X + this.Y * this.Y);
+
+        /// <summary>
+        ///     Gets the magnitude squared.
+        /// </summary>
+        /// <value>
+        ///     The magnitude squared.
+        /// </value>
+        public double MagnitudeSquared => this.X * this.X + this.Y * this.Y;
+
+        /// <summary>
+        ///     Creates a Vector2 pointing up (0, -1).
+        /// </summary>
+        /// <value>
+        ///     A Vector2 pointing up
+        /// </value>
+        public static Vector2 Up => new Vector2(0, -1);
+
+        /// <summary>
+        ///     Creates a Vector2 pointing down (0, 1).
+        /// </summary>
+        /// <value>
+        ///     A Vector2 pointing down
+        /// </value>
+        public static Vector2 Down => new Vector2(0, 1);
+
+        /// <summary>
+        ///     Creates a Vector2 pointing left (-1, 0).
+        /// </summary>
+        /// <value>
+        ///     A Vector2 pointing left
+        /// </value>
+        public static Vector2 Left => new Vector2(-1, 0);
+
+        /// <summary>
+        ///     Creates a Vector2 pointing right (1, 0).
+        /// </summary>
+        /// <value>
+        ///     A Vector2 pointing right
+        /// </value>
+        public static Vector2 Right => new Vector2(1, 0);
+
+        /// <summary>
+        ///     Creates a Vector2 with both components set to 1.
+        /// </summary>
+        /// <value>
+        ///     A Vector2 with both components set to 1
+        /// </value>
+        public static Vector2 One => new Vector2(1);
+
+        /// <summary>
+        ///     Creates a Vector2 with both components set to 0.
+        /// </summary>
+        /// <value>
+        ///     A Vector2 with both components set to 0
+        /// </value>
+        public static Vector2 Zero => new Vector2();
+
         #endregion
 
         #region Constructors
@@ -147,6 +211,82 @@ namespace SpaceInvaders.Model
         #endregion
 
         #region Methods
+
+        /// <summary>
+        ///     Calculates the angle to the specified Vector2.
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <returns>The angle to the target Vector2</returns>
+        public double AngleToTarget(Vector2 target)
+        {
+            return Math.Atan2(target.Y - this.Y, target.X - this.X);
+        }
+
+        /// <summary>
+        ///     Normalizeds the direction to.
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <returns></returns>
+        public Vector2 NormalizedVectorTo(Vector2 target)
+        {
+            var angle = this.AngleToTarget(target);
+            return AngleToNormalizedVector(angle);
+        }
+
+        /// <summary>
+        ///     Gets the distance to a specified Vector2.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: None
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <returns>The distance to the specified Vector2</returns>
+        public double DistanceTo(Vector2 target)
+        {
+            var difference = this - target;
+            return difference.Magnitude;
+        }
+
+        /// <summary>
+        ///     Gets the distance squared to a specified Vector2.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: None
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <returns>The distance squared to the specified Vector2</returns>
+        public double DistanceToSquared(Vector2 target)
+        {
+            var difference = this - target;
+            return difference.MagnitudeSquared;
+        }
+
+        /// <summary>
+        ///     Converts the Vector2 to an angle.
+        /// </summary>
+        /// <returns>An angle pointing the same direction as the Vector2</returns>
+        public double ToAngle()
+        {
+            return Math.Atan2(this.Y, this.X);
+        }
+
+        /// <summary>
+        ///     Creates a normalized version of the Vector2
+        /// </summary>
+        /// <returns>The normalized Vector2</returns>
+        public Vector2 Normalized()
+        {
+            var magnitude = this.Magnitude;
+            return new Vector2(this.X / magnitude, this.Y / magnitude);
+        }
+
+        /// <summary>
+        ///     Converts an angle to a normalized vector
+        /// </summary>
+        /// <param name="angle">The angle.</param>
+        /// <returns>A normalized vector going the same direction as the angle.</returns>
+        public static Vector2 AngleToNormalizedVector(double angle)
+        {
+            return new Vector2(Math.Cos(angle), Math.Sin(angle));
+        }
 
         /// <summary>
         ///     Implements the * operator between a Vector2 and a double.<br />

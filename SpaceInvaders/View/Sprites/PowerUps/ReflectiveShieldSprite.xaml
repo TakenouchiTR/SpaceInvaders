@@ -1,0 +1,18 @@
+﻿<base:BaseSprite
+    x:Class="SpaceInvaders.View.Sprites.PowerUps.ReflectiveShieldSprite"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:base="using:SpaceInvaders.View.Sprites"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="64"
+    d:DesignWidth="64"
+    Height="64"
+    Width="64">
+
+    <Canvas>
+        <Polygon x:Name="shieldShape" Canvas.Top="-6" Fill="Aqua" Stroke="CadetBlue"
+                 Points="32,14 22,16 8,25 5,30 5,40 10,50 18,61 8,53 2,43 0,33 2,21 8,11 18,3 32,0 32,0 46,3 56,11 62,21 64,33 62,43 56,53 46,61 54,50 59,40 59,30 56,25 42,16 32,14" />
+    </Canvas>
+</base:BaseSprite>

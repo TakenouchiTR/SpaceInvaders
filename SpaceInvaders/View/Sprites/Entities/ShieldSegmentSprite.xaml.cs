@@ -8,12 +8,16 @@ namespace SpaceInvaders.View.Sprites.Entities
     /// <seealso cref="SpaceInvaders.View.Sprites.BaseSprite" />
     public sealed partial class ShieldSegmentSprite
     {
+        #region Constructors
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="ShieldSegmentSprite"/> class.
+        ///     Initializes a new instance of the <see cref="ShieldSegmentSprite" /> class.
         /// </summary>
         public ShieldSegmentSprite()
         {
             this.InitializeComponent();
         }
+
+        #endregion
     }
 }

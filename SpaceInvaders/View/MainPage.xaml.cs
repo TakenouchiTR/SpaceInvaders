@@ -1,12 +1,11 @@
 ﻿using System;
-using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using SpaceInvaders.Model;
 using SpaceInvaders.Model.Nodes;
-using SpaceInvaders.Model.Nodes.Levels;
+using SpaceInvaders.Model.Nodes.Screens;
 using SpaceInvaders.View.Sprites;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -23,16 +22,14 @@ namespace SpaceInvaders.View
         /// <summary>
         ///     The application height
         /// </summary>
-        public const double ApplicationHeight = 480;
+        public const double ApplicationHeight = 620;
 
         /// <summary>
         ///     The application width
         /// </summary>
-        public const double ApplicationWidth = 640;
+        public const double ApplicationWidth = 960;
 
-        private const int CanvasLayerCount = 10;
-
-        private LevelBase currentLevel;
+        private Screen currentScreen;
         private Canvas[] canvasLayers;
 
         #endregion
@@ -53,12 +50,12 @@ namespace SpaceInvaders.View
             Window.Current.CoreWindow.KeyDown += Input.OnKeyDown;
             Window.Current.CoreWindow.KeyUp += Input.OnKeyUp;
 
-            SpriteNode.SpriteHidden += this.onSpriteNodeHidden;
-            SpriteNode.SpriteShown += this.onSpriteNodeShown;
+            RenderableNode.SpriteHidden += this.onSpriteNodeHidden;
+            RenderableNode.SpriteShown += this.onSpriteNodeShown;
 
             this.createAndPopulateCanvasLayers();
 
-            this.setupLevel(new Level1());
+            this.setupScreen(new MainMenu());
         }
 
         #endregion
@@ -69,7 +66,7 @@ namespace SpaceInvaders.View
         {
             this.canvasLayers = new Canvas[Enum.GetValues(typeof(RenderLayer)).Length];
 
-            for (var i = 0; i < CanvasLayerCount; i++)
+            for (var i = 0; i < this.canvasLayers.Length; i++)
             {
                 var canvas = new Canvas {
                     Width = ApplicationWidth,
@@ -81,25 +78,26 @@ namespace SpaceInvaders.View
             }
         }
 
-        private void setupLevel(LevelBase level)
+        private void setupScreen(Screen screen)
         {
-            this.currentLevel = level;
-            this.currentLevel.GameFinished += this.onCurrentLevelGameFinished;
+            this.currentScreen = screen;
+            this.currentScreen.Complete += this.onCurrentScreenComplete;
         }
 
-        private void cleanupLevel()
+        private void cleanupScreen()
         {
-            if (this.currentLevel == null)
+            if (this.currentScreen == null)
             {
                 return;
             }
 
-            this.currentLevel.CleanupLevel();
-            
-            this.currentLevel.GameFinished -= this.onCurrentLevelGameFinished;
-            this.currentLevel = null;
+            this.currentScreen.CleanupScreen();
+
+            this.currentScreen.Complete -= this.onCurrentScreenComplete;
+            this.currentScreen = null;
+            GC.Collect();
         }
-        
+
         private void onSpriteNodeHidden(object sender, BaseSprite e)
         {
             if (sender is RenderableNode node && e != null)
@@ -118,29 +116,15 @@ namespace SpaceInvaders.View
             }
         }
 
-        private async void onCurrentLevelGameFinished(object sender, string e)
+        private void onCurrentScreenComplete(object sender, Type e)
         {
-            this.currentLevel.GameFinished -= this.onCurrentLevelGameFinished;
+            this.cleanupScreen();
 
-            var gameOverDialog = new ContentDialog {
-                Title = "Game Finished",
-                Content = e,
-                PrimaryButtonText = "Play Again",
-                SecondaryButtonText = "Exit to Desktop"
-            };
-
-            var dialogResult = await gameOverDialog.ShowAsync();
-            if (dialogResult == ContentDialogResult.Primary)
-            {
-                this.cleanupLevel();
-                this.setupLevel(new Level1());
-            }
-            else
-            {
-                CoreApplication.Exit();
-            }
+            var constructor = e.GetConstructors()[0];
+            var screen = (Screen) constructor.Invoke(new object[] { });
+            this.setupScreen(screen);
         }
-        
+
         #endregion
     }
 }

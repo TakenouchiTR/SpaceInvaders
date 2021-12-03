@@ -2,7 +2,6 @@
     x:Class="SpaceInvaders.View.Sprites.UI.EmptyHeartSprite"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:SpaceInvaders.View.Sprites.UI"
     xmlns:base="using:SpaceInvaders.View.Sprites"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -13,6 +12,7 @@
     Width="31">
 
     <Canvas>
-        <Polygon Fill="DarkRed" Stroke="#550000" StrokeThickness="3" Points="16,8 12,4 8,4 4,8 4,16 16,27 28,16 28,8 24,4 20,4"/>
+        <Polygon Opacity=".7" Fill="DarkRed" Stroke="#550000" StrokeThickness="3"
+                 Points="16,8 12,4 8,4 4,8 4,16 16,27 28,16 28,8 24,4 20,4" />
     </Canvas>
 </base:BaseSprite>
