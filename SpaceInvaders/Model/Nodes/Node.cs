@@ -91,6 +91,11 @@ namespace SpaceInvaders.Model.Nodes
         public event EventHandler Removed;
 
         /// <summary>
+        ///     Occurs when [attached to node].
+        /// </summary>
+        public event EventHandler<Node> AttachedToParent;
+
+        /// <summary>
         ///     The update loop for the Node.<br />
         ///     Precondition: None<br />
         ///     Postcondition: Node completes its update step
@@ -264,6 +269,7 @@ namespace SpaceInvaders.Model.Nodes
             child.Parent = this;
 
             this.ChildAdded?.Invoke(this, child);
+            child.AttachedToParent?.Invoke(child, this);
         }
 
         /// <summary>

@@ -19,11 +19,20 @@ namespace SpaceInvaders.Model.Nodes.PowerUps
             Collision.CollisionMasks = PhysicsLayer.EnemyHitbox;
             Collision.Monitoring = true;
             Collision.Collided += this.onCollided;
+            AttachedToParent += this.onAttachedToParent;
         }
 
         #endregion
 
         #region Methods
+
+        private void onAttachedToParent(object sender, Node e)
+        {
+            if (e is Area area)
+            {
+                Center = area.Center;
+            }
+        }
 
         private void onCollided(object sender, CollisionArea e)
         {
