@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SpaceInvaders.Extensions;
 using SpaceInvaders.View.Sprites;
 using SpaceInvaders.View.Sprites.Entities.Enemies;
 
@@ -55,7 +56,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         private void setupGun()
         {
-            var initialCooldown = getShotDelay();
+            var initialCooldown = ShotDelayGenerator.NextDouble(MinShotDelay, MaxShotDelay);
 
             this.gun = new EnemyGun {
                 Position = Center,
@@ -86,12 +87,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         private void onGunShot(object sender, EventArgs e)
         {
-            this.gun.CooldownDuration = getShotDelay();
-        }
-
-        private static double getShotDelay()
-        {
-            return ShotDelayGenerator.NextDouble() * (MaxShotDelay - MinShotDelay) + MinShotDelay;
+            this.gun.CooldownDuration = ShotDelayGenerator.NextDouble(MinShotDelay, MaxShotDelay);
         }
 
         #endregion

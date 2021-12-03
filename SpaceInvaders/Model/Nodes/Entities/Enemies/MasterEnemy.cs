@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SpaceInvaders.Extensions;
 using SpaceInvaders.View.Sprites;
 using SpaceInvaders.View.Sprites.Entities.Enemies;
 
@@ -68,7 +69,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         private void setupGun()
         {
-            var initialCooldown = getShotDelay();
+            var initialCooldown = MasterShipRandom.NextDouble(MinShotDelay, MaxShotDelay);
 
             this.gun = new EnemyGun {
                 Position = Center,
@@ -82,7 +83,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         private void setupTimer()
         {
-            this.chargeTimer = new Timer(getChargeDelay()) {
+            this.chargeTimer = new Timer(MasterShipRandom.NextDouble(MinChargeDelay, MaxChargeDelay)) {
                 Repeat = false
             };
 
@@ -100,16 +101,6 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             };
 
             return new AnimatedSprite(1, sprites);
-        }
-
-        private static double getShotDelay()
-        {
-            return MasterShipRandom.NextDouble() * (MaxShotDelay - MinShotDelay) + MinShotDelay;
-        }
-
-        private static double getChargeDelay()
-        {
-            return MasterShipRandom.NextDouble() * (MaxChargeDelay - MinChargeDelay) + MinChargeDelay;
         }
 
         /// <summary>
@@ -210,7 +201,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         private void onGunShot(object sender, EventArgs e)
         {
-            this.gun.CooldownDuration = getShotDelay();
+            this.gun.CooldownDuration = MasterShipRandom.NextDouble(MinShotDelay, MaxShotDelay);
         }
 
         private void onChargeTimerTick(object sender, EventArgs e)
@@ -225,7 +216,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             this.FormationLocation = Center;
 
             this.chargeVelocity = Center.NormalizedVectorTo(player.Center) * ChargeMovementSpeed;
-            this.chargeTimer.Duration = getChargeDelay();
+            this.chargeTimer.Duration = MasterShipRandom.NextDouble(MinChargeDelay, MaxChargeDelay);
         }
 
         #endregion

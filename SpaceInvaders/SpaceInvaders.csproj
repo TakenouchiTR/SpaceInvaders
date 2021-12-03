@@ -121,6 +121,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions\DoubleExtensions.cs" />
+    <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Model\AnimationFrame.cs" />
     <Compile Include="Model\EnemyType.cs" />
     <Compile Include="Model\Input.cs" />
