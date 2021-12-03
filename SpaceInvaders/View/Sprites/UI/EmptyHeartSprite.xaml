@@ -12,7 +12,7 @@
     Width="31">
 
     <Canvas>
-        <Polygon Fill="DarkRed" Stroke="#550000" StrokeThickness="3"
+        <Polygon Opacity=".7" Fill="DarkRed" Stroke="#550000" StrokeThickness="3"
                  Points="16,8 12,4 8,4 4,8 4,16 16,27 28,16 28,8 24,4 20,4" />
     </Canvas>
 </base:BaseSprite>
