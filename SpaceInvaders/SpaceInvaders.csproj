@@ -129,6 +129,7 @@
     <Compile Include="Model\Nodes\AnimationStateMachine.cs" />
     <Compile Include="Model\Nodes\Area.cs" />
     <Compile Include="Model\Nodes\CollisionArea.cs" />
+    <Compile Include="Model\Nodes\Effects\Background.cs" />
     <Compile Include="Model\Nodes\Effects\BackgroundPlanet.cs" />
     <Compile Include="Model\Nodes\Effects\BackgroundStar.cs" />
     <Compile Include="Model\Nodes\Effects\Explosion.cs" />
