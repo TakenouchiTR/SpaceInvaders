@@ -1,4 +1,6 @@
 ﻿using System;
+using Windows.UI.Xaml;
+using SpaceInvaders.Model.Nodes.Effects;
 
 namespace SpaceInvaders.Model.Nodes
 {
@@ -8,7 +10,46 @@ namespace SpaceInvaders.Model.Nodes
     /// <seealso cref="SpaceInvaders.Model.Nodes.Node" />
     public abstract class Screen : Node
     {
+        #region Data members
+
+        private const double MillisecondsInSecond = 1000;
+        private const double UpdateSkipThreshold = 1;
+
+        private long prevUpdateTime;
+        private DispatcherTimer updateTimer;
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Screen" /> class.
+        /// </summary>
+        protected Screen()
+        {
+            this.setupTimer();
+            this.addBackground();
+        }
+
+        #endregion
+
         #region Methods
+
+        private void setupTimer()
+        {
+            this.prevUpdateTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+
+            this.updateTimer = new DispatcherTimer {
+                Interval = TimeSpan.FromMilliseconds(.1)
+            };
+            this.updateTimer.Tick += this.onUpdateTimerTick;
+            this.updateTimer.Start();
+        }
+
+        private void addBackground()
+        {
+            AttachChild(new Background());
+        }
 
         /// <summary>
         ///     Occurs when the screen is [complete].
@@ -48,13 +89,30 @@ namespace SpaceInvaders.Model.Nodes
         /// <param name="emitRemovedEvent">Whether to emit the Removed event</param>
         public override void CompleteRemoval(bool emitRemovedEvent = true)
         {
-            base.CompleteRemoval(emitRemovedEvent);
+            base.CompleteRemoval(false);
+
+            this.updateTimer.Stop();
+            this.updateTimer.Tick -= this.onUpdateTimerTick;
+
             if (this.Complete != null)
             {
                 foreach (var subscriber in this.Complete.GetInvocationList())
                 {
                     this.Complete -= subscriber as EventHandler<Type>;
                 }
+            }
+        }
+
+        private void onUpdateTimerTick(object sender, object e)
+        {
+            var curTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+            var timeSinceLastTick = curTime - this.prevUpdateTime;
+            var delta = timeSinceLastTick / MillisecondsInSecond;
+            this.prevUpdateTime = curTime;
+
+            if (delta < UpdateSkipThreshold)
+            {
+                Update(delta);
             }
         }
 

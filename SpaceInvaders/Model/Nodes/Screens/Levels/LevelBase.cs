@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using SpaceInvaders.Model.Nodes.Effects;
+using SpaceInvaders.Extensions;
 using SpaceInvaders.Model.Nodes.Entities;
 using SpaceInvaders.Model.Nodes.Entities.Enemies;
 using SpaceInvaders.Model.Nodes.UI;
@@ -26,17 +25,9 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         protected const int ShieldCount = 3;
 
         /// <summary>
-        ///     The background star count.
-        /// </summary>
-        protected const int StarCount = 50;
-
-        /// <summary>
         ///     The buffer between the edge of the screen and the UI, in pixels.
         /// </summary>
         protected const double UiBuffer = 4;
-
-        private const double MillisecondsInSecond = 1000;
-        private const double UpdateSkipThreshold = 1;
 
         private const int MaxGrazePoints = 150;
         private const int MaxTimeBonus = 500;
@@ -44,11 +35,11 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         private const int PointsLostPerSecond = 15;
         private const int PointsPerShieldSegment = 2;
 
-        private const int BonusEnemySpawnInterval = 15;
+        private const int MinBonusEnemyInterval = 5;
+        private const int MaxBonusEnemyInterval = 10;
 
-        private readonly DispatcherTimer updateTimer;
+        private static readonly Random BonusEnemyRandom = new Random();
 
-        private long prevUpdateTime;
         private int enemiesRemaining;
         private double timeInLevel;
         private bool levelComplete;
@@ -112,16 +103,9 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         protected LevelBase(Type nextLevel)
         {
             this.NextLevel = nextLevel;
+            SessionStats.Level++;
             this.SpeedModifier = 1;
             this.canEarnPoints = true;
-
-            this.updateTimer = new DispatcherTimer {
-                Interval = TimeSpan.FromMilliseconds(.1)
-            };
-            this.updateTimer.Tick += this.onUpdateTimerTick;
-            this.updateTimer.Start();
-
-            this.prevUpdateTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
 
             this.addPlayer();
             this.addUi();
@@ -204,7 +188,9 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         {
             this.RemainingBonusEnemies = 3;
 
-            this.bonusShipTimer = new Timer(BonusEnemySpawnInterval);
+            this.bonusShipTimer = new Timer(BonusEnemyRandom.NextDouble(MinBonusEnemyInterval, MaxBonusEnemyInterval)) {
+                Repeat = false
+            };
             this.bonusShipTimer.Start();
             this.bonusShipTimer.Tick += this.onBonusEnemyTimerTick;
             this.AttachChild(this.bonusShipTimer);
@@ -263,7 +249,6 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             this.levelComplete = true;
 
             SessionStats.Score = this.Score;
-            SessionStats.PlayTime += this.timeInLevel;
         }
 
         private void updateScoreDisplay()
@@ -274,13 +259,13 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         private void spawnBonusEnemy()
         {
             var bonusEnemy = new BonusEnemy();
-            QueueNodeForAddition(bonusEnemy);
             this.RegisterEnemy(bonusEnemy);
             this.RemainingBonusEnemies -= 1;
+            QueueNodeForAddition(bonusEnemy);
 
-            if (this.RemainingBonusEnemies <= 0)
+            if (this.RemainingBonusEnemies > 0)
             {
-                this.bonusShipTimer.Stop();
+                bonusEnemy.Removed += this.onBonusEnemyRemoved;
             }
         }
 
@@ -337,9 +322,6 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         public override void CompleteRemoval(bool emitRemovedEvent = true)
         {
             base.CompleteRemoval(false);
-            this.updateTimer.Stop();
-            this.updateTimer.Tick -= this.onUpdateTimerTick;
-
             if (this.ScoreChanged != null)
             {
                 foreach (var subscriber in this.ScoreChanged.GetInvocationList())
@@ -381,12 +363,13 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             var dialogResult = await quitDialog.ShowAsync();
             if (dialogResult == ContentDialogResult.Primary)
             {
+                SessionStats.Level -= 1;
                 this.scoreBreakdown.Clear();
                 this.EndLevel(GetType());
             }
             else
             {
-                this.EndLevel(typeof(MainMenu));
+                this.EndLevel(typeof(HighScoresMenu));
             }
         }
 
@@ -439,19 +422,6 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             this.EndLevel(this.NextLevel);
         }
 
-        private void onUpdateTimerTick(object sender, object e)
-        {
-            var curTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-            var timeSinceLastTick = curTime - this.prevUpdateTime;
-            var delta = timeSinceLastTick / MillisecondsInSecond;
-            this.prevUpdateTime = curTime;
-
-            if (delta < UpdateSkipThreshold)
-            {
-                this.Update(delta);
-            }
-        }
-
         private void onChildMoved(object sender, Vector2 e)
         {
             if (!(sender is Node senderNode))
@@ -476,6 +446,12 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         private void onBonusEnemyTimerTick(object sender, EventArgs e)
         {
             this.spawnBonusEnemy();
+        }
+
+        private void onBonusEnemyRemoved(object sender, EventArgs e)
+        {
+            this.bonusShipTimer.Duration = BonusEnemyRandom.NextDouble(MinBonusEnemyInterval, MaxBonusEnemyInterval);
+            this.bonusShipTimer.Start();
         }
 
         #endregion
