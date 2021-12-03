@@ -165,6 +165,7 @@
     <Compile Include="Model\Nodes\PowerUps\ReflectionShield.cs" />
     <Compile Include="Model\Nodes\PowerUps\ReflectionShieldPowerUp.cs" />
     <Compile Include="Model\Nodes\Screens\HighScoresMenu.cs" />
+    <Compile Include="Model\Nodes\Screens\Levels\Level4.cs" />
     <Compile Include="Model\Nodes\Screens\Levels\Level3.cs" />
     <Compile Include="Model\Nodes\Screens\Levels\Level2.cs" />
     <Compile Include="Model\Nodes\Screens\Levels\Level1.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Model\Nodes\RenderableNode.cs" />
     <Compile Include="Model\Nodes\Screens\MainMenu.cs" />
     <Compile Include="Model\Nodes\SoundPlayer.cs" />
+    <Compile Include="Model\Nodes\UI\BossHealthBar.cs" />
     <Compile Include="Model\Nodes\UI\Button.cs" />
     <Compile Include="Model\Nodes\UI\ColorRectangle.cs" />
     <Compile Include="Model\Nodes\UI\GrazeBar.cs" />
