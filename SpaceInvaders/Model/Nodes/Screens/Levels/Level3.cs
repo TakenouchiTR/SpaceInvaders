@@ -8,7 +8,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
 {
     /// <summary>
     ///     The third level of the game.<br />
-    ///     Has three layers of four enemies in descending difficulty.
+    ///     Four layers of enemies that slowly approach the player.
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.Nodes.Screens.Levels.LevelBase" />
     public class Level3 : LevelBase
@@ -37,7 +37,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         ///     Precondition: None<br />
         ///     Postcondition: this.Children.Count == 4
         /// </summary>
-        public Level3() : base(typeof(HighScoresMenu))
+        public Level3() : base(typeof(Level4))
         {
             this.movementFactor = -1;
 

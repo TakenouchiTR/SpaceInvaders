@@ -58,7 +58,8 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             this.rightEnemyGroup = new EnemyGroup(new Vector2(CellSize, CellSize), ColumnsPerBlock);
 
             this.leftEnemyGroup.X = MainPage.ApplicationWidth / 3 - this.leftEnemyGroup.Width / 2 + CellSize / 1.5;
-            this.rightEnemyGroup.X = MainPage.ApplicationWidth * 2 / 3 - this.rightEnemyGroup.Width / 2 - CellSize / 1.5;
+            this.rightEnemyGroup.X =
+                MainPage.ApplicationWidth * 2 / 3 - this.rightEnemyGroup.Width / 2 - CellSize / 1.5;
 
             this.leftEnemyGroup.Y = EnemyGroupYLocation;
             this.rightEnemyGroup.Y = EnemyGroupYLocation;

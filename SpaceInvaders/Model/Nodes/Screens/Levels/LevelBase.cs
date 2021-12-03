@@ -88,7 +88,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         /// <value>
         ///     The remaining bonus enemies.
         /// </value>
-        protected int RemainingBonusEnemies { get; set; }
+        public int RemainingBonusEnemies { get; set; }
 
         #endregion
 
@@ -355,7 +355,9 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
 
             var quitDialog = new ContentDialog {
                 Title = "Game Over",
-                Content = "You ran out of lives!\nWould you like to restart the level?",
+                Content = "You ran out of lives!\n" +
+                          "Would you like to restart the level?\n" +
+                          "You may restart as many times as you'd like, but your score will be reset to 0.",
                 PrimaryButtonText = "Restart",
                 SecondaryButtonText = "Return to Menu"
             };
@@ -445,7 +447,10 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
 
         private void onBonusEnemyTimerTick(object sender, EventArgs e)
         {
-            this.spawnBonusEnemy();
+            if (this.RemainingBonusEnemies > 0)
+            {
+                this.spawnBonusEnemy();
+            }
         }
 
         private void onBonusEnemyRemoved(object sender, EventArgs e)

@@ -29,7 +29,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         ///     Gets or sets a value indicating whether [explode on death].
         /// </summary>
         /// <value>
-        ///   <c>true</c> if [explode on death]; otherwise, <c>false</c>.
+        ///     <c>true</c> if [explode on death]; otherwise, <c>false</c>.
         /// </value>
         protected bool ExplodeOnDeath { get; set; }
 

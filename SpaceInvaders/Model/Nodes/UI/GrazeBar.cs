@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Notifications;
-using SpaceInvaders.View.Sprites.UI;
+﻿using SpaceInvaders.View.Sprites.UI;
 
 namespace SpaceInvaders.Model.Nodes.UI
 {
@@ -15,7 +8,13 @@ namespace SpaceInvaders.Model.Nodes.UI
     /// <seealso cref="SpaceInvaders.Model.Nodes.RenderableNode" />
     public class GrazeBar : RenderableNode
     {
+        #region Data members
+
         private readonly GrazeBarFrameSprite barSprite;
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         ///     Sets the height of the bar as a percent of the max height.
@@ -28,18 +27,21 @@ namespace SpaceInvaders.Model.Nodes.UI
             set => this.barSprite.BarHeight = value;
         }
 
+        #endregion
+
+        #region Constructors
+
         /// <summary>
-        ///     Initializes a new instance of the <see cref="GrazeBar"/> class.<br />
+        ///     Initializes a new instance of the <see cref="GrazeBar" /> class.<br />
         ///     Precondition: None<br />
         ///     Postcondition: this.Layer == RenderableNode.DefaultRenderLayer
         /// </summary>
         public GrazeBar() : this(DefaultRenderLayer)
         {
-
         }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="GrazeBar"/> class.<br />
+        ///     Initializes a new instance of the <see cref="GrazeBar" /> class.<br />
         ///     Precondition: None<br />
         ///     Postcondition: this.Layer == layer
         /// </summary>
@@ -48,5 +50,7 @@ namespace SpaceInvaders.Model.Nodes.UI
         {
             this.barSprite = (GrazeBarFrameSprite) Sprite;
         }
+
+        #endregion
     }
 }

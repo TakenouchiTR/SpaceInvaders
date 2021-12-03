@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SpaceInvaders.Model.Nodes.Entities;
+﻿using SpaceInvaders.Model.Nodes.Entities;
 
 namespace SpaceInvaders.Model.Nodes.PowerUps
 {
@@ -13,6 +8,8 @@ namespace SpaceInvaders.Model.Nodes.PowerUps
     /// <seealso cref="SpaceInvaders.Model.Nodes.Node" />
     public abstract class PowerUp : Node
     {
+        #region Methods
+
         /// <summary>
         ///     Runs the required code to attach and apply the power up to the player<br />
         ///     Precondition: player != null<br />
@@ -27,5 +24,7 @@ namespace SpaceInvaders.Model.Nodes.PowerUps
         ///     Postcondition: The power up is removed
         /// </summary>
         public abstract void RemoveFromPlayer();
+
+        #endregion
     }
 }

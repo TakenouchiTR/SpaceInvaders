@@ -8,7 +8,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
 {
     /// <summary>
     ///     The second level of the game.<br />
-    ///     Has three layers of four enemies in descending difficulty.
+    ///     Has a dense block of enemies that moves in two different patterns.
     /// </summary>
     /// <seealso cref="SpaceInvaders.Model.Nodes.Screens.Levels.LevelBase" />
     public class Level2 : LevelBase
@@ -54,13 +54,11 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             enemyMoveTimer.Tick += this.onEnemyMoveTimerTick;
             AttachChild(enemyMoveTimer);
 
-            this.topEnemyGroup = new EnemyGroup(new Vector2(CellSize, CellSize), 8) 
-            {
+            this.topEnemyGroup = new EnemyGroup(new Vector2(CellSize, CellSize), 8) {
                 Y = 24
             };
             this.topEnemyGroup.X = MainPage.ApplicationWidth / 2 - this.topEnemyGroup.Width / 2;
-            this.bottomEnemyGroup = new EnemyGroup(new Vector2(CellSize, CellSize), 8)
-            {
+            this.bottomEnemyGroup = new EnemyGroup(new Vector2(CellSize, CellSize), 8) {
                 X = this.topEnemyGroup.X,
                 Y = this.topEnemyGroup.Y + CellSize
             };
@@ -70,11 +68,11 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
 
         private void addEnemies()
         {
-            var topEnemyTypes = new [] {
+            var topEnemyTypes = new[] {
                 EnemyType.MasterEnemy,
                 EnemyType.IntermediateEnemy
             };
-            var bottomEnemyTypes = new [] {
+            var bottomEnemyTypes = new[] {
                 EnemyType.AggressiveEnemy,
                 EnemyType.BasicEnemy
             };
@@ -89,6 +87,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             {
                 RegisterEnemy(enemy);
             }
+
             foreach (var enemy in bottomEnemies.Where(enemy => enemy != null))
             {
                 RegisterEnemy(enemy);
@@ -106,6 +105,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
                 {
                     enemyOrder.Add(Enemy.CreateEnemy(enemyType));
                 }
+
                 for (var j = 0; j < enemiesPerRow; j++)
                 {
                     enemyOrder.Add(null);
@@ -114,7 +114,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
 
             return enemyOrder;
         }
-        
+
         private void onEnemyMoveTimerTick(object sender, EventArgs e)
         {
             this.curMovementStep += this.movementFactor;

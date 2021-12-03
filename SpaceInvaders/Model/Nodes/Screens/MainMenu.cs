@@ -92,7 +92,7 @@ namespace SpaceInvaders.Model.Nodes.Screens
 
             this.playButton.Click += this.onPlayClick;
             this.scoreboardButton.Click += this.onScoreboardClick;
-            this.quitButton.Click += this.onQuitClick;
+            this.quitButton.Click += onQuitClick;
         }
 
         private void setupSoundPlayer()
@@ -103,7 +103,7 @@ namespace SpaceInvaders.Model.Nodes.Screens
 
         private void onPlayClick(object sender, EventArgs e)
         {
-            CompleteScreen(typeof(Level1));
+            CompleteScreen(typeof(Level4));
         }
 
         private void onScoreboardClick(object sender, EventArgs e)
@@ -111,12 +111,7 @@ namespace SpaceInvaders.Model.Nodes.Screens
             CompleteScreen(typeof(HighScoresMenu));
         }
 
-        private void onOptionsClick(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private async void onQuitClick(object sender, EventArgs e)
+        private static async void onQuitClick(object sender, EventArgs e)
         {
             var quitDialog = new ContentDialog {
                 Title = "Quitting game",

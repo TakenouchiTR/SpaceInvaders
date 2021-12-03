@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SpaceInvaders.Model.Nodes.Entities;
 using SpaceInvaders.View.Sprites.PowerUps;
 
@@ -14,16 +10,22 @@ namespace SpaceInvaders.Model.Nodes.PowerUps
     /// <seealso cref="SpaceInvaders.Model.Nodes.PowerUps.PowerUp" />
     public class ReflectionShieldPowerUp : PowerUp
     {
+        #region Data members
+
         private const double Duration = 4;
 
         private Timer removalTimer;
         private ReflectionShield shield;
         private ReflectiveShieldSprite shieldSprite;
 
+        #endregion
+
+        #region Methods
+
         /// <summary>
-        /// Runs the required code to attach and apply the power up to the player<br />
-        /// Precondition: player != null<br />
-        /// Postcondition: player has the power up applied
+        ///     Runs the required code to attach and apply the power up to the player<br />
+        ///     Precondition: player != null<br />
+        ///     Postcondition: player has the power up applied
         /// </summary>
         /// <param name="player">The player.</param>
         /// <exception cref="System.ArgumentNullException">player</exception>
@@ -36,7 +38,7 @@ namespace SpaceInvaders.Model.Nodes.PowerUps
 
             this.setupTimer();
             this.setupShield(player);
-            
+
             player.Killed += this.onPlayerKilled;
 
             player.QueueNodeForAddition(this);
@@ -45,29 +47,27 @@ namespace SpaceInvaders.Model.Nodes.PowerUps
 
         private void setupTimer()
         {
-            this.removalTimer = new Timer(Duration)
-            {
+            this.removalTimer = new Timer(Duration) {
                 Repeat = false
             };
             this.removalTimer.Tick += this.onRemovalTimerTick;
             this.removalTimer.Start();
 
-            this.AttachChild(this.removalTimer);
+            AttachChild(this.removalTimer);
         }
 
         private void setupShield(PlayerShip player)
         {
-            this.shield = new ReflectionShield
-            {
+            this.shield = new ReflectionShield {
                 Center = player.Center
             };
             this.shieldSprite = (ReflectiveShieldSprite) this.shield.Sprite.Sprite;
         }
 
         /// <summary>
-        /// Removes the power up from player.<br />
-        /// Precondition: None<br />
-        /// Postcondition: The power up is removed
+        ///     Removes the power up from player.<br />
+        ///     Precondition: None<br />
+        ///     Postcondition: The power up is removed
         /// </summary>
         public override void RemoveFromPlayer()
         {
@@ -91,10 +91,12 @@ namespace SpaceInvaders.Model.Nodes.PowerUps
         {
             this.RemoveFromPlayer();
         }
-        
+
         private void onPlayerKilled(object sender, EventArgs e)
         {
             this.RemoveFromPlayer();
         }
+
+        #endregion
     }
 }
