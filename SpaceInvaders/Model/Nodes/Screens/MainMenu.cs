@@ -103,7 +103,7 @@ namespace SpaceInvaders.Model.Nodes.Screens
 
         private void onPlayClick(object sender, EventArgs e)
         {
-            CompleteScreen(typeof(Level4));
+            CompleteScreen(typeof(Level1));
         }
 
         private void onScoreboardClick(object sender, EventArgs e)

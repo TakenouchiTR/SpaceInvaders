@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Windows.UI.Notifications;
+using SpaceInvaders.Model.Nodes.Effects;
 using SpaceInvaders.View.Sprites;
 using SpaceInvaders.View.Sprites.Entities.Enemies;
 
@@ -87,7 +88,9 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             Collision.CollisionMasks = PhysicsLayer.PlayerHitbox;
             Collision.Monitoring = true;
             Collision.Monitorable = true;
+
             Collision.Collided += this.onCollided;
+            Removed += this.onRemoved;
 
             this.setupGun();
         }
@@ -159,6 +162,19 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             {
                 QueueForRemoval();
             }
+        }
+
+        private void onRemoved(object sender, EventArgs e)
+        {
+            var explosion = new Explosion
+            {
+                Center = Center
+            };
+
+            var explosionSound = new OneShotSoundPlayer("enemy_explosion.wav");
+
+            GetRoot().QueueNodeForAddition(explosion);
+            GetRoot().QueueNodeForAddition(explosionSound);
         }
 
         #endregion

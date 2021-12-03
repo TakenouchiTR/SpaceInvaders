@@ -351,6 +351,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
             var gameOverSound = new OneShotSoundPlayer("game_over.wav");
             this.canEarnPoints = false;
             this.bonusShipTimer.Stop();
+            this.RemainingBonusEnemies = 0;
             QueueNodeForAddition(gameOverSound);
 
             var quitDialog = new ContentDialog {
@@ -387,6 +388,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
                     this.canEarnPoints = false;
                     this.scoreLabel.Visible = false;
                     this.bonusShipTimer.Stop();
+                    this.RemainingBonusEnemies = 0;
 
                     this.calculateBonusPoints();
                     this.createLevelOverDisplay();
