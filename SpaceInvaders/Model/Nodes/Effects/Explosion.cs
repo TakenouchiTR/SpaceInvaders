@@ -20,6 +20,7 @@ namespace SpaceInvaders.Model.Nodes.Effects
         /// </summary>
         public Explosion() : base(new ExplosionSprite())
         {
+            Layer = RenderLayer.MainTop;
             this.addTimers();
         }
 
