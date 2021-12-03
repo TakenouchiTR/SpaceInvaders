@@ -153,6 +153,10 @@ namespace SpaceInvaders.Model.Nodes.Entities
         /// </summary>
         public event EventHandler<double> GrazeMeterChanged;
 
+        /// <summary>
+        ///     Occurs when [killed].
+        /// </summary>
+        public event EventHandler Killed;
         private void setupCollision()
         {
             Collision.Width *= CollisionSizeMultiplier;
@@ -338,6 +342,8 @@ namespace SpaceInvaders.Model.Nodes.Entities
             this.respawnTimer.Restart();
             this.CurrentLives--;
             this.GrazeMeter -= GrazeLostOnDeath;
+
+            this.Killed?.Invoke(this, EventArgs.Empty);
         }
 
         private void onRespawnTimerTick(object sender, EventArgs e)

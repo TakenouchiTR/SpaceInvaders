@@ -42,11 +42,12 @@ namespace SpaceInvaders.Model.Nodes.PowerUps
                 Center = player.Center
             };
 
+            player.Killed += this.onPlayerKilled;
+
             this.AttachChild(removalTimer);
             player.QueueNodeForAddition(this);
             player.QueueNodeForAddition(this.shield);
         }
-
 
         /// <summary>
         /// Removes the power up from player.<br />
@@ -63,5 +64,10 @@ namespace SpaceInvaders.Model.Nodes.PowerUps
         {
             this.RemoveFromPlayer();
         }
+        private void onPlayerKilled(object sender, EventArgs e)
+        {
+            this.RemoveFromPlayer();
+        }
+
     }
 }
