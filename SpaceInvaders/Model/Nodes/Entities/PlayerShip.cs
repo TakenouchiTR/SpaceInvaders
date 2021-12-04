@@ -25,7 +25,7 @@ namespace SpaceInvaders.Model.Nodes.Entities
         private const VirtualKey LeftKey = VirtualKey.Left;
         private const VirtualKey RightKey = VirtualKey.Right;
         private const VirtualKey ShootKey = VirtualKey.Space;
-        private const VirtualKey SlowdownKey = VirtualKey.LeftShift;
+        private const VirtualKey SlowdownKey = VirtualKey.X;
         private const VirtualKey CheatKey = VirtualKey.P;
 
         private bool isAlive;
