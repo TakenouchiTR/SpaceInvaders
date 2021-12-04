@@ -25,7 +25,8 @@ namespace SpaceInvaders.Model.Nodes.Entities
         private const VirtualKey LeftKey = VirtualKey.Left;
         private const VirtualKey RightKey = VirtualKey.Right;
         private const VirtualKey ShootKey = VirtualKey.Space;
-        private const VirtualKey SlowdownKey = VirtualKey.X;
+        private const VirtualKey SlowdownKey = VirtualKey.LeftShift;
+        private const VirtualKey CheatKey = VirtualKey.P;
 
         private bool isAlive;
         private bool isSlowingTime;
@@ -222,6 +223,11 @@ namespace SpaceInvaders.Model.Nodes.Entities
         /// <param name="delta">The amount of time (in seconds) since the last update tick.</param>
         public override void Update(double delta)
         {
+            if (Input.IsKeyPressed(CheatKey))
+            {
+                Collision.Monitoring = false;
+            }
+
             if (this.isAlive)
             {
                 this.handleMovement(delta);
