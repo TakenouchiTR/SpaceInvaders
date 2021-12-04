@@ -32,7 +32,7 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
         private const int MaxGrazePoints = 150;
         private const int MaxTimeBonus = 500;
         private const int PointsPerLife = 100;
-        private const int PointsLostPerSecond = 15;
+        private const int PointsLostPerSecond = 5;
         private const int PointsPerShieldSegment = 2;
 
         private const int MinBonusEnemyInterval = 5;
