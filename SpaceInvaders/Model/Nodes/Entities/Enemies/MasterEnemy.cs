@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using SpaceInvaders.Extensions;
+using SpaceInvaders.View;
 using SpaceInvaders.View.Sprites;
 using SpaceInvaders.View.Sprites.Entities.Enemies;
 
@@ -18,6 +19,8 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         private const double MaxShotDelay = 8;
         private const double MinChargeDelay = 8;
         private const double MaxChargeDelay = 18;
+        private const double ChargingShotCutoff = 200;
+        private const double ChargingShotCooldownMultiplier = .1;
         private const double ChargeMovementSpeed = 300;
         private const double ReturnStartingYLocation = -300;
         private static readonly Random MasterShipRandom = new Random();
@@ -129,23 +132,20 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
         private void updateInFormation()
         {
-            var player = (PlayerShip) GetRoot().GetChildByName("PlayerShip");
-
-            if (player == null)
-            {
-                return;
-            }
-
             if (this.gun.CanShoot)
             {
-                this.gun.Rotation = Center.AngleToTarget(player.Center);
-                this.gun.Shoot();
+                this.aimAndShoot();
             }
         }
 
         private void updateCharging(double delta)
         {
             Move(this.chargeVelocity * delta);
+
+            if (this.Y < MainPage.ApplicationHeight - ChargingShotCutoff &&  this.gun.CanShoot)
+            {
+                this.aimAndShoot();
+            }
 
             if (IsOffScreen())
             {
@@ -171,6 +171,19 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
             {
                 Move(moveDistance);
             }
+        }
+
+        private void aimAndShoot()
+        {
+            var player = (PlayerShip)GetRoot().GetChildByName("PlayerShip");
+            
+            if (player == null)
+            {
+                return;
+            }
+            
+            this.gun.Rotation = Center.AngleToTarget(player.Center);
+            this.gun.Shoot();
         }
 
         /// <summary>
@@ -202,6 +215,10 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
         private void onGunShot(object sender, EventArgs e)
         {
             this.gun.CooldownDuration = MasterShipRandom.NextDouble(MinShotDelay, MaxShotDelay);
+            if (this.State == MasterEnemyState.Charging)
+            {
+                this.gun.CooldownDuration *= ChargingShotCooldownMultiplier;
+            }
         }
 
         private void onChargeTimerTick(object sender, EventArgs e)
@@ -214,6 +231,7 @@ namespace SpaceInvaders.Model.Nodes.Entities.Enemies
 
             this.State = MasterEnemyState.Charging;
             this.FormationLocation = Center;
+            this.gun.CooldownDuration *= ChargingShotCooldownMultiplier;
 
             this.chargeVelocity = Center.NormalizedVectorTo(player.Center) * ChargeMovementSpeed;
             this.chargeTimer.Duration = MasterShipRandom.NextDouble(MinChargeDelay, MaxChargeDelay);
