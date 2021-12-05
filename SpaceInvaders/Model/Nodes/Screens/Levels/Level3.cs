@@ -145,7 +145,8 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
 
             if (e.Parent is MasterEnemy masterEnemy)
             {
-                if (!this.leftEdgeDetector.ContainsPoint(masterEnemy.FormationLocation))
+                if (masterEnemy.State != MasterEnemyState.InFormation &&
+                    !this.leftEdgeDetector.ContainsPoint(masterEnemy.FormationLocation))
                 {
                     return;
                 }
@@ -166,7 +167,8 @@ namespace SpaceInvaders.Model.Nodes.Screens.Levels
 
             if (e.Parent is MasterEnemy masterEnemy)
             {
-                if (!this.leftEdgeDetector.ContainsPoint(masterEnemy.FormationLocation))
+                if (masterEnemy.State != MasterEnemyState.InFormation &&
+                    !this.leftEdgeDetector.ContainsPoint(masterEnemy.FormationLocation))
                 {
                     return;
                 }
